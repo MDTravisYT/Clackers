@@ -1,0 +1,272 @@
+; ===========================================================================
+; Various RAM adresses
+; ===========================================================================
+
+; Object SST
+
+	04 - 05			=	??? Render flags
+		bit F		=	???
+		bit E		=	???
+		bit D		=	???
+		bit C		=	???
+		bit B		=	???
+		bit A		=	???
+		bit 9		=	???
+		bit 8		=	???
+		bit 7		=	show sprite flag (0 = don't show/1 = show)
+		bit 6		=	Onscreen flag (0 = on screen/1 = off screen)
+		bit 5		=	???
+		bit 4		=	???
+		bit 3		=	???
+		bit 2		=	???
+		bit 1		=	???
+		bit 0		=	???
+	06			=	Object ID (0000 Sonic/0008 Tails, etc)
+	07			=	???
+	08 - 09			=	X position
+	0C - 0D			=	Y position
+	10 - 13			=	Location of mapping data to use
+	14 - 15			=	??? sprite X position
+	16 - 17			=	??? sprite Y position
+	18 - 19			=	X speed
+	1C - 1D			=	Y speed
+	20 - 21			=	V-Ram location read
+	22			=	Width of object
+	23			=	Height of object
+	24 - 25			=	Next Object Address
+	26 - 27			=	Animation ID
+	28			=	??? Render flags/Sub-type
+
+; ---------------------------------------------------------------------------
+; Large Data areas
+
+	($00FF0200).l	--->	($00FF05FF).l	= Collision Path 1 block data
+	($00FF0600).l	--->	($00FF09FF).l	= Collision Path 2 block data
+	($00FFAD08).l	--->	($00FFBD08).l	= object ram (40 objects)
+	($FFFFCA5E).w	--->	($FFFFCDDD).w	= scroll table buffer (380 bytes)
+	($FFFFD164).w	--->	($FFFFD3E3).w	= sprite table buffer for SEGA screen and menus (levels too?)
+	($FFFFD3E4).w	--->	($FFFFD464).w	= palette table buffer
+	($FFFFD4F8).w	--->	($FFFFD59A).w	= DMA cue table (for 10 entires of A bytes each, first word is counter)
+	($FFFFD9F2).w	--->	($????????).?	= Sprite table buffer (For hud stuff?)
+	($FFFFF9C0).w	--->	($FFFFFFBF).w	= ??? Something to do with animated tiles
+
+; ---------------------------------------------------------------------------
+; FG buffers
+
+	($00FF0A00).l	w			= V-Ram FG plane map draw address (For horizontal lines)
+	($00FF0A02).l	--->	($????????).?	= horizontal FG Map plane buffer
+
+	($00FF0B02).l	w			= V-Ram FG plane map draw address (For vertical lines)
+	($00FF0B04).l	--->	($????????).?	= vertical FG Map plane buffer
+
+; BG buffers
+
+	($00FF0B84).l	w			= V-Ram BG plane map draw address (For horizontal lines)
+	($00FF0B86).l	--->	($????????).?	= horizontal BG Map plane buffer
+
+	($00FF0C86).l	w			= V-Ram BG plane map draw address (For vertical lines)
+	($00FF0C88).l	--->	($????????).?	= vertical BG Map plane buffer
+
+; ---------------------------------------------------------------------------
+; Machine code ram ($FFFFC800 to $FFFFC835)
+
+	($FFFFC800).w	w+l			= Jump location rts (unknown use)
+	($FFFFC806).w	w+l			= Jump location rts (unknown use)
+	($FFFFC80C).w	w+l			= Jump location rts (unknown use)
+	($FFFFC812).w	w+l			= Jump location rte (unknown use)
+	($FFFFC818).w	w+l			= Jump location rte (unknown use)
+	($FFFFC81E).w	w+l			= Jump location rte (unknown use)
+	($FFFFC824).w	w+l			= Jump location rte (unknown use)
+	($FFFFC82A).w	w+l			= Jump location rte (unknown use)
+	($FFFFC830).w	w+l			= Jump location rte (V-Blank routine to be run)
+
+; ---------------------------------------------------------------------------
+; General
+
+	($FFFFC93C).w	b			= Player 1 Menu Controls (Held)
+	($FFFFC93D).w	b			= Player 1 Menu Controls (Pressed)
+	($FFFFC940).w	w			= Menu selection data (Used for all menus differently depending on the menu)
+	($FFFFC942).w	w			= ''
+	($FFFFC944).w	w			= ''
+	($FFFFC946).w	w			= ''
+	($FFFFC9B8).w	w			= VDP register 00 storage data
+	($FFFFC9BA).w	w			= VDP register 01 storage data
+	($FFFFC9BC).w	w			= VDP register 02 storage data
+	($FFFFC9BE).w	w			= VDP register 03 storage data
+	($FFFFC9C0).w	w			= VDP register 04 storage data
+	($FFFFC9C2).w	w			= VDP register 05 storage data
+	($FFFFC9C4).w	w			= VDP register 06 storage data
+	($FFFFC9C6).w	w			= VDP register 07 storage data
+	($FFFFC9C8).w	w			= VDP register 08 storage data
+	($FFFFC9CA).w	w			= VDP register 09 storage data
+	($FFFFC9CC).w	w			= VDP register 0A storage data
+	($FFFFC9CE).w	w			= VDP register 0B storage data
+	($FFFFC9D0).w	w			= VDP register 0C storage data
+	($FFFFC9D2).w	w			= VDP register 0D storage data
+	($FFFFC9D4).w	w			= VDP register 0E storage data
+	($FFFFC9D6).w	w			= VDP register 0F storage data
+	($FFFFC9D8).w	w			= VDP register 10 storage data
+	($FFFFC9DA).w	w			= VDP register 11 storage data
+	($FFFFC9DC).w	w			= VDP register 12 storage data
+; ---------------------------------------------------------------------------
+	($FFFFC9DE).w	--->	($FFFFCA1D).w	= FG positions and sizes
+
+	($FFFFC9DE).w	w			= Screen's X FG position
+	($FFFFC9E0).w	w			= Screen's last frame X FG position
+	($FFFFC9E2).w	b			= ???
+	($FFFFC9E3).w	b			= ???
+	($FFFFC9E4).w	b			= Y 80 multiplier
+	($FFFFC9E5).w	b			= X draw position from right side (divide by 4)
+	($FFFFC9E6).w	w			= X start position
+	($FFFFC9E8).w	w			= ??? Another X start position
+	($FFFFC9EA).w	w			= Y start position
+	($FFFFC9EC).w	w			= ??? Another Y start position
+	($FFFFC9EE).w	w			= Screen's Y FG position
+	($FFFFC9F0).w	w			= Screen's last frame Y FG position
+	($FFFFC9F2).w	b			= ???
+	($FFFFC9F3).w	b			= ???
+	($FFFFC9F4).w	b			= ??? (Contains those bit values from 00 to 07)
+	($FFFFC9F5).w	b			= Y draw position from bottom side (divided by 100)
+	($FFFFC9F6).w	l			= FG V-Ram address where art is to be written to
+	($FFFFC9FA).w	w			= ???
+	($FFFFC9FC).w	w			= ??? Something to do with Title card/camera position (0104 is loaded to it for SSZ and TTZ)
+	($FFFFC9FE).w	l			= Location storage of level's layout
+	($FFFFCA02).w	l			= Location storage of level's 128x128 chunks
+	($FFFFCA06).w	l			= Location storage of level's 16x16 blocks
+; ---------------------------------------------------------------------------
+	($FFFFCA1E).w	--->	($FFFFCA5D).w	= BG positions and sizes
+
+	($FFFFCA1E).w	w			= Screen's X BG position
+	($FFFFCA20).w	w			= Screen's last frame X BG position
+	($FFFFCA22).w	b			= ???
+	($FFFFCA23).w	b			= ???
+	($FFFFCA24).w	b			= Y 80 multiplier
+	($FFFFCA25).w	b			= X draw position from right side (divide by 4)
+	($FFFFCA26).w	w			= X start position
+	($FFFFCA28).w	w			= ??? Another X start position
+	($FFFFCA2A).w	w			= Y start position
+	($FFFFCA2C).w	w			= ??? Another Y start position
+	($FFFFCA2E).w	w			= Screen's Y BG position
+	($FFFFCA30).w	w			= Screen's last frame Y BG position
+	($FFFFCA32).w	b			= ???
+	($FFFFCA33).w	b			= ???
+	($FFFFCA34).w	b			= ??? (Contains those bit values from 00 to 07)
+	($FFFFCA35).w	b			= Y draw position from bottom side (divided by 100)
+	($FFFFCA36).w	l			= BG V-Ram address where art is to be written to
+	($FFFFCA3A).w	w			= ???
+	($FFFFCA3C).w	w			= ??? Something to do with Title card/camera position (0104 is loaded to it for SSZ and TTZ)
+	($FFFFCA3E).w	l			= Location storage of level's layout
+	($FFFFCA42).w	l			= Location storage of level's 128x128 chunks
+	($FFFFCA46).w	l			= Location storage of level's 16x16 blocks
+; ---------------------------------------------------------------------------
+	($FFFFCA5E).w	w			= FG X scroll position
+	($FFFFCA60).w	w			= BG X scroll position
+	($FFFFCDDE).w	w			= FG Y scroll position
+	($FFFFCDE0).w	w			= BG Y scroll position
+	($FFFFD4E4).w	b			= Palette Fade Black - Overall Time Delay
+	($FFFFD4E5).w	b			= Palette Fade Black - Frame Counter (number of frames to fade for)
+	($FFFFD4E6).w	b			= Palette Fade Black - Current Frame Time Delay
+	($FFFFD4E7).w	b			= (Unused) Palette Fade White - Overall Time Delay
+	($FFFFD4E8).w	b			= (Unused) Palette Fade White - Frame Counter (number of frames to fade for)
+	($FFFFD4E9).w	b			= (Unused) Palette Fade White - Current Frame Time Delay
+	($FFFFD816).w	w			= V-Ram plane A location storage
+	($FFFFD818).w	w			= V-Ram plane B location storage
+	($FFFFD81A).w	w			= V-Ram sprite table location storage
+	($FFFFD81C).w	w			= V-Ram horizontal scroll table location storage
+	($FFFFD81E).w	w			= V-Ram window location storage
+	($FFFFD820).w	w			= Value used to increase to a next map line (While mapping sreens)
+	($FFFFD822).w	w			= Screen/Game modes
+	($FFFFD824).w	w			= Routine counter used for Menus
+	($FFFFD826).w	w			= Main Menu Selection
+	($FFFFD82A).w	w			= Sound ID that's mapped to screen (Options Sound Test)
+	($FFFFD82C).w	w			= Level Event counter
+	($FFFFD830).w	w			= Screen's New FG X position
+	($FFFFD832).w	w			= Screen's New FG Y position
+	($FFFFD834).w	w			= Zone/World ID
+	($FFFFD836).w	w			= Level/Act/Field ID
+	($FFFFD83A).w	w			= Level time of day value (from 00 to 03)
+	($FFFFD83C).w	w			= Object Ram Cue 1 (04) number of objects
+	($FFFFD840).w	w			= Object Ram Cue 2 (08) number of objects
+	($FFFFD844).w	w			= Object Ram Cue 3 (0C) number of objects
+	($FFFFD848).w	w			= Object Ram Cue 4 (10) number of objects
+	($FFFFD84C).w	w			= Object Ram Cue 1 (04) start address
+	($FFFFD850).w	w			= Object Ram Cue 2 (08) start address
+	($FFFFD854).w	w			= Object Ram Cue 3 (0C) start address
+	($FFFFD858).w	w			= Object Ram Cue 4 (10) start address
+	($FFFFD862).w	w			= Sonic's ram location storage
+	($FFFFD864).w	w			= Tails's ram location storage
+	($FFFFD866).w	w			= Player 1 Character Selection (0000 Sonic/0004 Tails/0008 Blank/000C Blank/0010 Blank/0014 Blank/0018 Blank/001C Blank)
+	($FFFFD868).w	w			= Player 2 Character Selection (0000 Sonic/0004 Tails/0008 Blank/000C Blank/0010 Blank/0014 Blank/0018 Blank/001C Blank)
+	($FFFFD87A).w	b			= Character display bits (broken into 8 bits, if the bit is set, the character is processed, if cleared, it is not processed)
+	($FFFFD87B).w	b			= ??? Null, Unused?
+	($FFFFD87C).w	l			= Character 1 PLC address/location slot
+	($FFFFD880).w	l			= Character 2 PLC address/location slot
+	($FFFFD884).w	l			= Character 3 PLC address/location slot
+	($FFFFD888).w	l			= Character 4 PLC address/location slot
+	($FFFFD88C).w	l			= Character 5 PLC address/location slot
+	($FFFFD890).w	l			= Character 6 PLC address/location slot
+	($FFFFD894).w	l			= Character 7 PLC address/location slot
+	($FFFFD898).w	l			= Character 8 PLC address/location slot
+; ---------------------------------------------------------------------------
+; Player 1 info
+
+	($FFFFD89C).w	b			= Player 1 Control Mode (00 = Port 1 User/10 = Port 2 User/FF = CPU)
+	($FFFFD89E).w	b			= Player 1 Level Controls (Held)
+	($FFFFD89F).w	b			= Player 1 Level Controls (Pressed)
+	($FFFFD8A4).w	w			= Pause main X speed control (Controls the X position of both characters when game is paused)
+	($FFFFD8A6).w	w			= Pause main Y speed control (Controls the Y position of both characters when game is paused)
+
+; ---------------------------------------------------------------------------
+; Player 2 info
+
+	($FFFFD8AC).w	b			= Player 2 Control Mode (00 = Port 1 User/10 = Port 2 User/FF = CPU)
+
+; ---------------------------------------------------------------------------
+
+	($FFFFD8DC).w	w			= Object Position Screen Area (Far Left Position Allowed)
+	($FFFFD8DE).w	w			= Object Position Screen Area (Far Top Position Allowed)
+	($FFFFD8E0).w	w			= Object Position Screen Area (Far Right Position Allowed)
+	($FFFFD8E2).w	w			= Object Position Screen Area (Far Bottom Position Allowed)
+	($FFFFD8E4).w	w			= X Centre position of screen (X pos + 00A0)
+	($FFFFD8E6).w	w			= Y Centre position of screen (Y pos + 0070)
+	($FFFFD8E8).w	w			= Maximum level X size to allow objects to be loaded
+	($FFFFD8EA).w	w			= Maximum level Y size to allow objects to be loaded
+	($FFFFD8EC).w	l			= Object Position List address
+	($FFFFD8F2).w	l			= Object Load Record List (Remembers what objects are already loaded on screen)
+
+; ---------------------------------------------------------------------------
+; Timer (NOTE: These just control the time to be displayed, not the "real" time)
+
+	($FFFFDA0E).w	w			= X:00:00 (minutes)
+	($FFFFDA1E).w	w			= 0:X0:00 (first digit of seconds)
+	($FFFFDA26).w	w			= 0:0X:00 (second digit of seconds)
+	($FFFFDA36).w	w			= 0:00:X0 (first digit of centi-seconds)
+	($FFFFDA3E).w	w			= 0:00:0X (second digit of centi-seconds)
+
+; ---------------------------------------------------------------------------
+; Misc data
+
+	($FFFFFAC4).w	w			= SEGA effect counter (for individual steps within the effects)
+	($FFFFFAC6).w	w			= Used for delaying the Sega effects a bit slower
+	($FFFFFAC8).w	w			= SEGA effect number (0 = Main effect/4 = Scroll effect)
+	($FFFFFAEA).w	w			= Fields - Palette Cycle timer/counter 1
+	($FFFFFAEC).w	w			= Fields - Palette Cycle timer/counter 2
+	($FFFFFAEE).w	w			= Fields - Deformation slice counter 1
+	($FFFFFAF0).w	w			= Fields - Deformation slice counter 2
+	($FFFFFDC1).w	b			= Pause Window HUD slide counter
+	($FFFFFDC2).w	b			= Title Card HUD slide trigger
+	($FFFFFDC4).w	w			= Title Card routine counter
+	($FFFFFDC6).w	w			= Title Card "Main Board" Y draw size
+	($FFFFFDC8).w	w			= Title Card "Top Board" X draw address
+	($FFFFFDCA).w	w			= Title Card "White Board" Y draw counter
+	($FFFFFDCC).w	w			= Title Card "Corner Board" position counter
+	($FFFFFDCE).w	w			= Title Card "Red Board" X draw address
+	($FFFFFFC0).w	l			= 'SEGA' letters, this tells the engine that the misc stuff has already been cleared
+	($FFFFFFC4).w	w			= Random number (Used for the SEGA logo effect)
+	($FFFFFFC9).w	b			= V-Blank frame delay (This is used for delaying the program for a single frame)
+						  (which is done by clearing/setting the 7th bit)
+
+
+
+
+
