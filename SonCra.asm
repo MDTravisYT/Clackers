@@ -7688,6 +7688,7 @@ LLPal_SSZ:						; Offset: 00008CE2
 ; ---------------------------------------------------------------------------
 
 LLPal_TTZ:						; Offset: 00008CE4
+		rts
 		moveq	#$00,d0					; clear d0
 		move.w	($FFFFD83A).w,d0			; load "Level time of day value"
 		andi.w	#$0003,d0				; get only time of days from 0 to 3
@@ -9144,7 +9145,7 @@ TTZ_ArtLocs:						; Offset: 00009CA8
 
 TTZ_FG_StartLocCam:					; Offset: 00009CB0
 		dc.w	$0015					; X starting location
-		dc.w	$01E0					; Y starting location
+		dc.w	$0100					; Y starting location
 		dc.b	$40					; Level Size - MDT
 		dc.b	$10					; Level Size - MDT
 		dc.b	$80
@@ -9152,7 +9153,7 @@ TTZ_FG_StartLocCam:					; Offset: 00009CB0
 		dc.w	($0800/$20)				; V-Ram address to write the level art to
 		dc.w	$2000					; Maximum X display area
 		dc.w	$0000
-		dc.w	$2000					; Maximum Y display area
+		dc.w	$0700					; Maximum Y display area
 		dc.w	$0000
 
 ; ---------------------------------------------------------------------------
