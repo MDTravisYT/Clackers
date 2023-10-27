@@ -9145,10 +9145,10 @@ TTZ_ArtLocs:						; Offset: 00009CA8
 TTZ_FG_StartLocCam:					; Offset: 00009CB0
 		dc.w	$0015					; X starting location
 		dc.w	$0DE0					; Y starting location
-		dc.b	$10					; Y80 multiplier (see "LoadLevelPositionAndSize" for more information)
-		dc.b	$20
+		dc.b	$52					; Level Size - MDT
+		dc.b	$10					; Level Size - MDT
+		dc.b	$52
 		dc.b	$10
-		dc.b	$20
 		dc.w	($0800/$20)				; V-Ram address to write the level art to
 		dc.w	$06C0					; Maximum X display area
 		dc.w	$0000
@@ -9164,6 +9164,7 @@ TTZ_MapFGLocs:						; Offset: 00009CC2
 		dc.l	MAPENI_TTZ128x128_FG
 		dc.l	MAPENI_TTZLayout_FG
 		dc.l	COL_TTZPrimary
+		dc.l	COL_TTZSecondary
 
 ; ---------------------------------------------------------------------------
 ; Starting locations and display area of the camera.
@@ -19791,7 +19792,7 @@ MAPENI_TTZ128x128_FG:
 	even
 ; ---------------------------------------------------------------------------
 MAPENI_TTZLayout_FG:
-	incbin  EnigmaComp\MapeniTTZLayoutFG.bin		; Layout for TTZ FG
+	incbin  EnigmaComp\MapeniTTZLayoutFG.eni		; Layout for TTZ FG
 	even
 ; ---------------------------------------------------------------------------
 COL_TTZPrimary:	
