@@ -14602,6 +14602,8 @@ SBR_MultiSkip:						; Offset: 0000CCB8
 		dbf	d7,SBR_Loop				; repeat for all 20 rings
 
 SBR_Return:						; Offset: 0000CCC8
+		move.b	#$A5,d0
+		jsr		Play_Sound
 		rts						; return
 
 ; ===========================================================================
@@ -15225,7 +15227,7 @@ Obj00_ChkAni:
 Obj00_ChkSprite:
 		bsr.w	SpriteScreenCheck			; check if sprite is within the screen areas
 		bcc.s	Obj00_SpriteOK				; if so, branch
-		bsr.w	sub_F286				; remove sprite from table (I think)
+		bsr.w	DeleteObject				; remove sprite from table (I think)
 
 Obj00_SpriteOK:
 		rts						; return
@@ -15263,6 +15265,8 @@ loc_D3C2:				; CODE XREF: ROM:0000D39Aj
 
 loc_D3F4:				; CODE XREF: ROM:0000D3EAj
 					; ROM:0000D3F0j
+		move.b	#$A8,d0
+		jsr		Play_Sound
 		ori.w	#1,$2A(a6)
 		move.l	#$F0000,d0
 		neg.l	d0
@@ -15310,7 +15314,7 @@ loc_D452:				; CODE XREF: ROM:0000D418j
 loc_D478:
 		bsr.w	SpriteScreenCheck
 		bcc.s	locret_D482
-		bsr.w	sub_F286
+		bsr.w	DeleteObject
 
 locret_D482:
 		rts
@@ -15346,6 +15350,8 @@ loc_D4B2:				; CODE XREF: ROM:0000D48Aj
 
 loc_D4E4:				; CODE XREF: ROM:0000D4DAj
 					; ROM:0000D4E0j
+		move.b	#$A8,d0
+		jsr		Play_Sound
 		ori.w	#1,$2A(a6)
 		move.l	#$F0000,d1
 		neg.l	d1
@@ -15394,7 +15400,7 @@ loc_D568:				; CODE XREF: ROM:0000D54Aj
 					; ROM:0000D560j
 		bsr.w	SpriteScreenCheck
 		bcc.s	locret_D572
-		bsr.w	sub_F286
+		bsr.w	DeleteObject
 
 locret_D572:				; CODE XREF: ROM:0000D56Cj
 		rts
@@ -15430,6 +15436,8 @@ loc_D5A2:				; CODE XREF: ROM:0000D57Aj
 
 loc_D5D4:				; CODE XREF: ROM:0000D5CAj
 					; ROM:0000D5D0j
+		move.b	#$A8,d0
+		jsr		Play_Sound
 		ori.w	#1,$2A(a6)
 		move.l	#$F0000,d1
 		moveq	#0,d0
@@ -15475,7 +15483,7 @@ loc_D654:				; CODE XREF: ROM:0000D636j
 					; ROM:0000D64Cj
 		bsr.w	SpriteScreenCheck
 		bcc.s	locret_D65E
-		bsr.w	sub_F286
+		bsr.w	DeleteObject
 
 locret_D65E:				; CODE XREF: ROM:0000D658j
 		rts
@@ -15515,6 +15523,8 @@ loc_D68E:				; CODE XREF: ROM:0000D666j
 
 loc_D6CC:				; CODE XREF: ROM:0000D6B6j
 					; ROM:0000D6BCj ...
+		move.b	#$A8,d0
+		jsr		Play_Sound
 		ori.w	#1,$2A(a6)
 		move.l	#$A8F98,d0
 		move.l	#$A8F98,d1
@@ -15567,7 +15577,7 @@ loc_D764:				; CODE XREF: ROM:0000D746j
 					; ROM:0000D75Cj
 		bsr.w	SpriteScreenCheck
 		bcc.s	locret_D76E
-		bsr.w	sub_F286
+		bsr.w	DeleteObject
 
 locret_D76E:				; CODE XREF: ROM:0000D768j
 		rts
@@ -15607,6 +15617,8 @@ loc_D79E:				; CODE XREF: ROM:0000D776j
 
 loc_D7DC:				; CODE XREF: ROM:0000D7C6j
 					; ROM:0000D7CCj ...
+		move.b	#$A8,d0
+		jsr		Play_Sound
 		ori.w	#1,$2A(a6)
 		move.l	#$A8F98,d0
 		move.l	#$A8F98,d1
@@ -15661,7 +15673,7 @@ loc_D878:				; CODE XREF: ROM:0000D85Aj
 					; ROM:0000D870j
 		bsr.w	SpriteScreenCheck
 		bcc.s	locret_D882
-		bsr.w	sub_F286
+		bsr.w	DeleteObject
 
 locret_D882:				; CODE XREF: ROM:0000D87Cj
 		rts
@@ -15701,6 +15713,8 @@ loc_D8B2:				; CODE XREF: ROM:0000D88Aj
 
 loc_D8F0:				; CODE XREF: ROM:0000D8DAj
 					; ROM:0000D8E0j ...
+		move.b	#$A8,d0
+		jsr		Play_Sound
 		ori.w	#1,$2A(a6)
 		move.l	#$A8F98,d0
 		move.l	#$A8F98,d1
@@ -15751,7 +15765,7 @@ loc_D984:				; CODE XREF: ROM:0000D966j
 					; ROM:0000D97Cj
 		bsr.w	SpriteScreenCheck
 		bcc.s	locret_D98E
-		bsr.w	sub_F286
+		bsr.w	DeleteObject
 
 locret_D98E:				; CODE XREF: ROM:0000D988j
 		rts
@@ -15791,6 +15805,8 @@ loc_D9BE:				; CODE XREF: ROM:0000D996j
 
 loc_D9FC:				; CODE XREF: ROM:0000D9E6j
 					; ROM:0000D9ECj ...
+		move.b	#$A8,d0
+		jsr		Play_Sound
 		ori.w	#1,$2A(a6)
 		move.l	#$A8F98,d0
 		move.l	#$A8F98,d1
@@ -15843,7 +15859,7 @@ loc_DA94:				; CODE XREF: ROM:0000DA76j
 					; ROM:0000DA8Cj
 		bsr.w	SpriteScreenCheck
 		bcc.s	locret_DA9E
-		bsr.w	sub_F286
+		bsr.w	DeleteObject
 
 locret_DA9E:				; CODE XREF: ROM:0000DA98j
 		rts
@@ -15925,7 +15941,7 @@ loc_DB80:				; CODE XREF: ROM:0000DB62j
 					; ROM:0000DB78j
 		bsr.w	SpriteScreenCheck
 		bcc.s	locret_DB8A
-		bsr.w	sub_F286
+		bsr.w	DeleteObject
 
 locret_DB8A:				; CODE XREF: ROM:0000DB84j
 		rts
@@ -16010,7 +16026,7 @@ loc_DC70:				; CODE XREF: ROM:0000DC52j
 					; ROM:0000DC68j
 		bsr.w	SpriteScreenCheck
 		bcc.s	locret_DC7A
-		bsr.w	sub_F286
+		bsr.w	DeleteObject
 
 locret_DC7A:				; CODE XREF: ROM:0000DC74j
 		rts
@@ -16094,7 +16110,7 @@ loc_DD60:				; CODE XREF: ROM:0000DD42j
 					; ROM:0000DD58j
 		bsr.w	SpriteScreenCheck
 		bcc.s	locret_DD6A
-		bsr.w	sub_F286
+		bsr.w	DeleteObject
 
 locret_DD6A:				; CODE XREF: ROM:0000DD64j
 		rts
@@ -16176,7 +16192,7 @@ loc_DE4C:				; CODE XREF: ROM:0000DE2Ej
 					; ROM:0000DE44j
 		bsr.w	SpriteScreenCheck
 		bcc.s	locret_DE56
-		bsr.w	sub_F286
+		bsr.w	DeleteObject
 
 locret_DE56:				; CODE XREF: ROM:0000DE50j
 		rts
@@ -16216,6 +16232,8 @@ loc_DE86:				; CODE XREF: ROM:0000DE5Ej
 
 loc_DEC4:				; CODE XREF: ROM:0000DEAEj
 					; ROM:0000DEB4j ...
+		move.b	#$A8,d0
+		jsr		Play_Sound
 		ori.w	#1,$2A(a6)
 		move.l	#$32985,d0
 		move.l	#$32985,d1
@@ -16268,7 +16286,7 @@ loc_DF5C:				; CODE XREF: ROM:0000DF3Ej
 					; ROM:0000DF54j
 		bsr.w	SpriteScreenCheck
 		bcc.s	locret_DF66
-		bsr.w	sub_F286
+		bsr.w	DeleteObject
 
 locret_DF66:				; CODE XREF: ROM:0000DF60j
 		rts
@@ -16308,6 +16326,8 @@ loc_DF96:				; CODE XREF: ROM:0000DF6Ej
 
 loc_DFD4:				; CODE XREF: ROM:0000DFBEj
 					; ROM:0000DFC4j ...
+		move.b	#$A8,d0
+		jsr		Play_Sound
 		ori.w	#1,$2A(a6)
 		move.l	#$32985,d0
 		move.l	#$32985,d1
@@ -16362,7 +16382,7 @@ loc_E070:				; CODE XREF: ROM:0000E052j
 					; ROM:0000E068j
 		bsr.w	SpriteScreenCheck
 		bcc.s	locret_E07A
-		bsr.w	sub_F286
+		bsr.w	DeleteObject
 
 locret_E07A:				; CODE XREF: ROM:0000E074j
 		rts
@@ -16402,6 +16422,8 @@ loc_E0AA:				; CODE XREF: ROM:0000E082j
 
 loc_E0E8:				; CODE XREF: ROM:0000E0D2j
 					; ROM:0000E0D8j ...
+		move.b	#$A8,d0
+		jsr		Play_Sound
 		ori.w	#1,$2A(a6)
 		move.l	#$32985,d0
 		move.l	#$32985,d1
@@ -16452,7 +16474,7 @@ loc_E17C:				; CODE XREF: ROM:0000E15Ej
 					; ROM:0000E174j
 		bsr.w	SpriteScreenCheck
 		bcc.s	locret_E186
-		bsr.w	sub_F286
+		bsr.w	DeleteObject
 
 locret_E186:				; CODE XREF: ROM:0000E180j
 		rts
@@ -16492,6 +16514,8 @@ loc_E1B6:				; CODE XREF: ROM:0000E18Ej
 
 loc_E1F4:				; CODE XREF: ROM:0000E1DEj
 					; ROM:0000E1E4j ...
+		move.b	#$A8,d0
+		jsr		Play_Sound
 		ori.w	#1,$2A(a6)
 		move.l	#$32985,d0
 		move.l	#$32985,d1
@@ -16544,7 +16568,7 @@ loc_E28C:				; CODE XREF: ROM:0000E26Ej
 					; ROM:0000E284j
 		bsr.w	SpriteScreenCheck
 		bcc.s	locret_E296
-		bsr.w	sub_F286
+		bsr.w	DeleteObject
 
 locret_E296:				; CODE XREF: ROM:0000E290j
 		rts
@@ -16660,7 +16684,7 @@ loc_E37C:				; CODE XREF: ROM:0000E35Aj
 					; ROM:0000E374j
 		jsr	SpriteScreenCheck
 		bcc.s	loc_E38A
-		jmp	sub_F286
+		jmp	DeleteObject
 ; ---------------------------------------------------------------------------
 
 loc_E38A:				; CODE XREF: ROM:0000E382j
@@ -16808,7 +16832,7 @@ loc_E480:				; CODE XREF: ROM:0000E45Ej
 					; ROM:0000E478j
 		jsr	SpriteScreenCheck
 		bcc.s	loc_E48E
-		jmp	sub_F286
+		jmp	DeleteObject
 ; ---------------------------------------------------------------------------
 
 loc_E48E:				; CODE XREF: ROM:0000E486j
@@ -16947,7 +16971,7 @@ loc_E59A:				; CODE XREF: ROM:0000E56Ej
 					; ROM:0000E590j
 		bsr.w	SpriteScreenCheck
 		bcc.s	locret_E5A4
-		bsr.w	sub_F286
+		bsr.w	DeleteObject
 
 locret_E5A4:				; CODE XREF: ROM:0000E59Ej
 		rts
@@ -17012,7 +17036,7 @@ loc_E642:				; CODE XREF: ROM:0000E616j
 					; ROM:0000E638j
 		bsr.w	SpriteScreenCheck
 		bcc.s	locret_E64C
-		bsr.w	sub_F286
+		bsr.w	DeleteObject
 
 locret_E64C:				; CODE XREF: ROM:0000E646j
 		rts
@@ -17077,7 +17101,7 @@ loc_E6EA:				; CODE XREF: ROM:0000E6BEj
 					; ROM:0000E6E0j
 		bsr.w	SpriteScreenCheck
 		bcc.s	locret_E6F4
-		bsr.w	sub_F286
+		bsr.w	DeleteObject
 
 locret_E6F4:				; CODE XREF: ROM:0000E6EEj
 		rts
@@ -17142,7 +17166,7 @@ loc_E792:				; CODE XREF: ROM:0000E766j
 					; ROM:0000E788j
 		bsr.w	SpriteScreenCheck
 		bcc.s	locret_E79C
-		bsr.w	sub_F286
+		bsr.w	DeleteObject
 
 locret_E79C:				; CODE XREF: ROM:0000E796j
 		rts
@@ -17207,7 +17231,7 @@ loc_E83A:				; CODE XREF: ROM:0000E80Ej
 					; ROM:0000E830j
 		bsr.w	SpriteScreenCheck
 		bcc.s	locret_E844
-		bsr.w	sub_F286
+		bsr.w	DeleteObject
 
 locret_E844:				; CODE XREF: ROM:0000E83Ej
 		rts
@@ -17272,7 +17296,7 @@ loc_E8E2:				; CODE XREF: ROM:0000E8B6j
 					; ROM:0000E8D8j
 		bsr.w	SpriteScreenCheck
 		bcc.s	locret_E8EC
-		bsr.w	sub_F286
+		bsr.w	DeleteObject
 
 locret_E8EC:				; CODE XREF: ROM:0000E8E6j
 		rts
@@ -17337,7 +17361,7 @@ loc_E98A:				; CODE XREF: ROM:0000E95Ej
 					; ROM:0000E980j
 		bsr.w	SpriteScreenCheck
 		bcc.s	locret_E994
-		bsr.w	sub_F286
+		bsr.w	DeleteObject
 
 locret_E994:				; CODE XREF: ROM:0000E98Ej
 		rts
@@ -17402,7 +17426,7 @@ loc_EA32:				; CODE XREF: ROM:0000EA06j
 					; ROM:0000EA28j
 		bsr.w	SpriteScreenCheck
 		bcc.s	locret_EA3C
-		bsr.w	sub_F286
+		bsr.w	DeleteObject
 
 locret_EA3C:				; CODE XREF: ROM:0000EA36j
 		rts
@@ -18468,14 +18492,14 @@ CSRL_SetupFinished:					; Offset: 0000F284
 ; =============== S U B	R O U T	I N E =======================================
 
 
-sub_F286:				; CODE XREF: ROM:0000D38Ep
+DeleteObject:				; CODE XREF: ROM:0000D38Ep
 					; ROM:0000D47Ep ...
 		move.w	$24(a6),d0
 		lea	($FFFFD8F2).w,a0
 		move.b	#2,(a0,d0.w)
 		jsr	sub_1980
 		rts
-; End of function sub_F286
+; End of function DeleteObject
 
 
 ; =============== S U B	R O U T	I N E =======================================
