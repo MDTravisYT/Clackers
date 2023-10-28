@@ -9916,6 +9916,8 @@ locret_A282:
 		clr.l	$18(a6)
 		clr.l	$1C(a6)
 		cmpi.w	#$1A,$26(a6)
+	;	move.b	#$A2,d0
+	;	bsr.w	Play_Sound
 		beq.w	loc_A4B4
 		tst.b	(a5)
 		bpl.s	loc_A2CC
