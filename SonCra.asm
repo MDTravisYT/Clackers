@@ -3762,10 +3762,10 @@ loc_1E0C:
 ; ===========================================================================
 ; ---------------------------------------------------------------------------
 CollisionArrayNorm:
-		incbin	Collision\CollisionArray_Normal.bin
+		incbin	Collision\CollisionArray_Rotated.bin
 		even
 CollisionArrayRota:
-		incbin	Collision\CollisionArray_Rotated.bin
+		incbin	Collision\CollisionArray_Normal.bin
 		even
 CurveResistMappings:
 		incbin	Collision\CurveAndResistanceMappings.bin
