@@ -4628,6 +4628,51 @@ PM_WaitZ80:						; Offset: 0000640A
 		move.w	#0,($A11100).l				; start the Z80
 		rts						; return
 
+Play_Sound:
+		move.w	#$100,($A11100).l
+
+loc_15EA:
+		btst	#0,($A11100).l
+		bne.s	loc_15EA
+		move.b	d0,($A00000+$1C0A).l
+		move.w	#0,($A11100).l
+		rts
+; End of function Play_Sound
+
+; ---------------------------------------------------------------------------
+
+Play_Sound_Local:
+		tst.b	4(a0)
+		bpl.s	locret_164A
+
+; =============== S U B R O U T I N E =======================================
+
+
+Play_Sound_2:
+		move.w	#$100,($A11100).l
+
+loc_1612:
+		btst	#0,($A11100).l
+		bne.s	loc_1612
+		cmp.b	($A00000+$1C0B).l,d0
+		beq.s	loc_1642
+		tst.b	($A00000+$1C0B).l
+		bne.s	loc_163C
+		move.b	d0,($A00000+$1C0B).l
+		move.w	#0,($A11100).l
+		rts
+; ---------------------------------------------------------------------------
+
+loc_163C:
+		move.b	d0,($A00000+$1C0C).l
+
+loc_1642:
+		move.w	#0,($A11100).l
+
+locret_164A:
+		rts
+; End of function Play_Sound_2
+
 ; ===========================================================================
 ; ---------------------------------------------------------------------------
 ; Sega Screen (Mode: 00)
