@@ -6248,6 +6248,8 @@ TSS_Not1P2P:						; Offset: 00007552
 		rts						; return
 
 TSS_NotOptions:						; Offset: 00007562
+		move.b	#$A2,d0
+		bsr.w	Play_Sound_Local
 		move.b	#$00,($FFFFD89C).w			; set player 1 user mode
 		move.b	#$FF,($FFFFD8AC).w			; set player 2 CPU mode
 		move.w	#$0030,($FFFFD822).w			; set Screen/Game mode to Select (Level Select)

@@ -1223,7 +1223,7 @@ loc_61F:				; CODE XREF: sub_507+14j
 loc_63A:				; CODE XREF: sub_507+Fj	;	playsfx
 		ex	af, af'
 		ld	hl, 6000h
-		xor	a
+		nop
 		ld	e, 1
 		ld	(hl), e
 		ld	(hl), e
@@ -3410,35 +3410,35 @@ BGMTable:	dw	08000h					; Music 81 - AKA Electoria (Chaotix Featuring Knuckles)
 ; SFX (Pointers are incorrectly aligned with the data)
 ; ---------------------------------------------------------------------------
 
-SFXTable:	dw	0C000h+08000h					; Sound 00 - Jump SFX (Same as Sonic CD FM NO.02)
-			dw	0C033h+08000h					; Sound 01 - Cash Machine SFX (Same as Sonic 1 SFX C5)
-			dw	0C09Ah+08000h					; Sound 02 - strange noise (it has modulation of "01 01 28 00") (this MAY be a "get hit by spikes" SFX)
-			dw	0C0C7h+08000h					; Sound 03 - Bomb explode SFX (Same as Sonic 1 SFX C4)
-			dw	0C0EFh+08000h					; Sound 04 - Skidding SFX (Same as Sonic 1 SFX A4)
-			dw	0C124h+08000h					; Sound 05 - Ring Loss SFX (Same as Sonic 1 SFX C6)
-			dw	0C165h+08000h					; Sound 06 - Ring Collect SFX (Same as Sonic 1 SFX B5) (Plays on Right Speaker, may very well be the "right to left to right" speaker thing)
-			dw	0C193h+08000h					; Sound 07 - Destroy Badnik/Monitor SFX (Same a Sonic 3 SFX 3D)
-			dw	0C1E4h+08000h					; Sound 08 - Spring SFX (Same as Sonic 3 SFX B1)
-			dw	0C23Fh+08000h					; Sound 09 - Check Point SFX (Same as Sonic 1 SFX A1)
+SFXTable:	dw	0C000h					; Sound 00 - Jump SFX (Same as Sonic CD FM NO.02)
+		dw	0C033h					; Sound 01 - Cash Machine SFX (Same as Sonic 1 SFX C5)
+		dw	0C09Ah					; Sound 02 - strange noise (it has modulation of "01 01 28 00") (this MAY be a "get hit by spikes" SFX)
+		dw	0C0C7h					; Sound 03 - Bomb explode SFX (Same as Sonic 1 SFX C4)
+		dw	0C0EFh					; Sound 04 - Skidding SFX (Same as Sonic 1 SFX A4)
+		dw	0C124h					; Sound 05 - Ring Loss SFX (Same as Sonic 1 SFX C6)
+		dw	0C165h					; Sound 06 - Ring Collect SFX (Same as Sonic 1 SFX B5) (Plays on Right Speaker, may very well be the "right to left to right" speaker thing)
+		dw	0C193h					; Sound 07 - Destroy Badnik/Monitor SFX (Same a Sonic 3 SFX 3D)
+		dw	0C1E4h					; Sound 08 - Spring SFX (Same as Sonic 3 SFX B1)
+		dw	0C23Fh					; Sound 09 - Check Point SFX (Same as Sonic 1 SFX A1)
 
 ; ---------------------------------------------------------------------------
 ; Null SFX (Pointers are incorrectly aligned with the data)
 ; ---------------------------------------------------------------------------
 
-		dw	0C269h+08000h					; Sound 0A
-		dw	0C28Dh+08000h					; Sound 0B
-		dw	0C2B1h+08000h					; Sound 0C
-		dw	0C2D5h+08000h					; Sound 0D
-		dw	0C2F9h+08000h					; Sound 0E
-		dw	0C31Dh+08000h					; Sound 0F
+		dw	0C269h					; Sound 0A
+		dw	0C28Dh					; Sound 0B
+		dw	0C2B1h					; Sound 0C
+		dw	0C2D5h					; Sound 0D
+		dw	0C2F9h					; Sound 0E
+		dw	0C31Dh					; Sound 0F
 
 ; ---------------------------------------------------------------------------
 ; Not sure why, but there's a repeated pattern of SFX data here
 ; ---------------------------------------------------------------------------
 
-SFXTable_Unk:	dw	0C000h+08000h					; Sound 00 - Jump SFX (Same as Sonic CD FM NO.02)
-		dw	0C033h+08000h					; Sound 01 - Cash Machine SFX (Same as Sonic 1 SFX C5)
-		dw	0C0C7h+08000h					; Sound 03 - Bomb explode SFX (Same as Sonic 1 SFX C4)
+SFXTable_Unk:	dw	0C000h					; Sound 00 - Jump SFX (Same as Sonic CD FM NO.02)
+		dw	0C033h					; Sound 01 - Cash Machine SFX (Same as Sonic 1 SFX C5)
+		dw	0C0C7h					; Sound 03 - Bomb explode SFX (Same as Sonic 1 SFX C4)
 
 ; ---------------------------------------------------------------------------
 ; ===========================================================================
