@@ -15,6 +15,8 @@
 ; Includes
 ; ---------------------------------------------------------------------------
 
+Combi	=	1
+
 		include	"SonCraMacro.asm"
 
 ; ===========================================================================
@@ -6263,7 +6265,11 @@ MAPUNC_TitleMenu_1:					; Offset: 000078E8
 		incbin  Uncompressed\MapuncTitleMenu01.bin	; Uncompressed mappings	for the	title screen banner
 		even			
 MAPUNC_TitleMenu_2:					; Offset: 00007DA8
+	if	Combi	=	1
+		incbin  Uncompressed\MapuncTitleMenu02_C.bin	; Uncompressed mappings	for the	title menu selection
+	else
 		incbin  Uncompressed\MapuncTitleMenu02.bin	; Uncompressed mappings	for the	title menu selection
+	endif
 		even
 MAPUNC_TitleMenu_3:					; Offset: 00007DE8
 		incbin  Uncompressed\MapuncTitleMenu03.bin	; Uncompressed mappings	for the	title menu (1ST	ROM 19940401)
@@ -7248,12 +7254,17 @@ CD_NextCopyByte:					; Offset: 00008882
 ; Level Zones (Mode: 18)
 ; ---------------------------------------------------------------------------
 
+	if	Combi	=	1
+	else
+
 Cool1:
 		jsr	Levels_LoadPlayers			; load Player/Character objects
 		jsr	LevelLoadRet
 Cool2:
 		jsr	Levels_LoadPlayersTail			; load Player/Character objects
 		jsr	LevelLoadRet
+		
+	endif
 
 Levels:							; Offset: 00008896
 		pea	(a0)					; send a0 data to the stack
@@ -7293,13 +7304,18 @@ LV_DumpPalette:						; Offset: 000088D2
 		move.w	#$003F,($FFFFD844).w
 		move.w	#$003F,($FFFFD848).w
 		
+	if	Combi	=	1
+		jsr	Levels_LoadPlayers			; load Player/Character objects
+		jsr	Combi_LoadStars				; load combi star objects
+	else
+		
 		cmpi.b	#$FF,	($FFFFD8AC).w
 		beq.w	Cool1
 		bra.w	Cool2
 		
+	endif
+		
 LevelLoadRet:
-
-	;	jsr	Combi_LoadStars				; load combi star objects
 		jsr	Levels_LoadHudArtSprites		; load hud and pause art/sprite data
 		jsr	Levels_LoadEssentialArt			; load the essential art (springs/spikes)
 		move	#$2300,sr				; set the status register (enable interrupts)
@@ -12854,13 +12870,20 @@ loc_BE66:				; CODE XREF: ROM:0000BE58j
 ; ---------------------------------------------------------------------------
 
 Levels_LoadPlayers:					; Offset: 0000BE72
-		move.w	#$0000,($FFFFD866).w			; set Player 1's character as Sonic
+		move.w	#$0000,($FFFFD866).w			; set Player 1's character as Sonic	
+
+	if	Combi	=	1
+	else
+	
 		move.w	#$0000,($FFFFD868).w			; set Player 2's character as Tails
 		jmp		LLLLLCont
 		nop
 		
 Levels_LoadPlayersTail:					; Offset: 0000BE72
 		move.w	#$0004,($FFFFD866).w			; set Player 1's character as Sonic
+	
+	endif
+		
 		move.w	#$0004,($FFFFD868).w			; set Player 2's character as Tails
 		jmp		LLLLLCont
 
@@ -12916,6 +12939,16 @@ LLP_NoChar1:						; Offset: 0000BEE0
 ; ---------------------------------------------------------------------------
 
 LLP_NoChar1Piece:					; Offset: 0000BF00
+	if	Combi	=	1
+		moveq	#$04,d0					; set to read the 1st Object Ram section
+		jsr	Objects_FindFreeSlot			; find free object space
+		bmi.s	LLP_NoChar2Arm				; if there is no space, branch
+		move.w	#$0080,$04(a0)
+		move.w	#$0C00,$06(a0)
+		move.w	#$0021,$20(a0)				; set V-Ram location read
+		move.w	a0,($FFFFD864).w
+	else
+	endif
 
 
 ; ---------------------------------------------------------------------------
@@ -12923,14 +12956,41 @@ LLP_NoChar1Piece:					; Offset: 0000BF00
 ; ---------------------------------------------------------------------------
 
 LLP_NoChar2Arm:						; Offset: 0000BF1E
-
+	if	Combi	=	1
+		moveq	#$04,d0					; set to read the 1st Object Ram section
+		jsr	Objects_FindFreeSlot			; find free object space
+		bmi.s	LLP_NoChar2				; if there is no space, branch
+		move.w	#$0080,$04(a0)
+		move.w	#$0402,$06(a0)
+		move.w	($FFFFC9DE).w,d0			; load screen's X position
+		addi.w	#$0088,d0				; add 88 (just under half the size)
+		move.w	d0,$08(a0)				; set X position
+		move.w	($FFFFC9EE).w,d0			; load screen's Y position
+		addi.w	#$0070,d0				; add 70 (half the size)
+		move.w	d0,$0C(a0)				; set Y position
+		move.w	#$0021,$20(a0)				; set V-Ram location read
+		movea.w	($FFFFD864).w,a6			; load last object's address
+		move.w	a0,($FFFFD864).w			; save new object's address
+		move.w	a0,$24(a6)				; store new object's address to last object
+		move.w	#$0010,$32(a0)
+	else
+	endif
 
 ; ---------------------------------------------------------------------------
 ; Loading Player 2's Additional Object (A Tail, A Body Piece, etc)
 ; ---------------------------------------------------------------------------
 
 LLP_NoChar2:						; Offset: 0000BF62
-
+	if	Combi	=	1
+		moveq	#$04,d0					; set to read the 1st Object Ram section
+		jsr	Objects_FindFreeSlot			; find free object space
+		bmi.s	LLP_NoChar2Piece			; if there is no space, branch
+		move.w	#$0080,$04(a0)
+		move.w	#$1400,$06(a0)
+		move.w	#$0021,$20(a0)				; set V-Ram location read
+		move.w	($FFFFD864).w,$24(a0)
+	else
+	endif
 
 LLP_NoChar2Piece:					; Offset: 0000BF82
 		rts						; return
@@ -14511,16 +14571,22 @@ Control_Combi:
 		ext.l	d0					; set as signed word
 		move.w	$08(a1),d1				; load Tails's X position to d1
 		ext.l	d1					; set as signed word
-	;	add.l	d1,d0					; add both X positions together
-	;	lsr.l	#$01,d0					; divide by 2
+	if	Combi	=	1
+		add.l	d1,d0					; add both X positions together
+		lsr.l	#$01,d0					; divide by 2
+	else
+	endif
 		subi.w	#$00A0,d0				; decrease by half the screen's X size
 		move.w	d0,($FFFFD830).w			; save to Screen's X position
 		move.w	$0C(a0),d0				; load Sonic's Y position to d0
 		ext.l	d0					; set as signed word
 		move.w	$0C(a1),d1				; load Tails's Y position to d1
 		ext.l	d1					; set as signed word
-	;	add.l	d1,d0					; add both Y positions together
-	;	lsr.l	#$01,d0					; divide by 2
+	if	Combi	=	1
+		add.l	d1,d0					; add both Y positions together
+		lsr.l	#$01,d0					; divide by 2
+	else
+	endif
 		subi.w	#$0070,d0				; decrease by half the screen's Y size
 		move.w	d0,($FFFFD832).w			; save to Screen's new Y position
 		lea	Combi_StrainData(pc),a2			; load strain data table to a2
@@ -14851,6 +14917,25 @@ loc_CF90:	dc.w	$5C2		; DATA XREF: Control_Combi+268o
 ; ---------------------------------------------------------------------------
 
 Combi_StrainData:
+	if	Combi	=	1
+		dc.w	$0080,$007F
+		dc.b	$00,$02,$04,$06,$08,$0A,$0C,$0E
+		dc.b	$10,$12,$14,$16,$18,$1A,$1C,$1E
+		dc.b	$20,$22,$24,$26,$28,$2A,$2C,$2E
+		dc.b	$30,$32,$34,$36,$38,$3A,$3C,$3E
+		dc.b	$40,$42,$44,$46,$48,$4A,$4C,$4E
+		dc.b	$50,$52,$54,$56,$58,$5A,$5C,$5E
+		dc.b	$60,$62,$64,$66,$68,$6A,$6C,$6E
+		dc.b	$70,$72,$74,$76,$78,$7A,$7C,$7E
+		dc.b	$80,$82,$84,$86,$88,$8A,$8C,$8E
+		dc.b	$90,$92,$94,$96,$98,$9A,$9C,$9E
+		dc.b	$A0,$A2,$A4,$A6,$A8,$AA,$AC,$AE
+		dc.b	$B0,$B2,$B4,$B6,$B8,$BA,$BC,$BE
+		dc.b	$C0,$C2,$C4,$C6,$C8,$CA,$CC,$CE
+		dc.b	$D0,$D2,$D4,$D6,$D8,$DA,$DC,$DE
+		dc.b	$E0,$E2,$E4,$E6,$E8,$EA,$EC,$EE
+		dc.b	$F0,$F2,$F4,$F6,$F8,$FA,$FC,$FE
+	else
 		dc.w	$0080,$0000
 		dc.b	$00,$00,$00,$00,$00,$00,$00,$00
 		dc.b	$00,$00,$00,$00,$00,$00,$00,$00
@@ -14868,6 +14953,7 @@ Combi_StrainData:
 		dc.b	$00,$00,$00,$00,$00,$00,$00,$00
 		dc.b	$00,$00,$00,$00,$00,$00,$00,$00
 		dc.b	$00,$00,$00,$00,$00,$00,$00,$00
+	endif
 		even
 ; ---------------------------------------------------------------------------
 ; For some reason, this data is repeated 4 times even though it doesn't
@@ -17569,9 +17655,12 @@ GameTimeOver:						; Offset: 0000EBE0
 		movea.w	($FFFFD862).w,a0			; load Sonic's object RAM into a0
 		cmpi.w	#$8F,$C(a0)				; is Sonic at position $8F or below on Y-axis?
 		bcc.s	GTO_CheckTime			; if yes, branch
-	;	movea.w	($FFFFD864).w,a0			; load Tails' object RAM into a0
-	;	cmpi.w	#$8F,$C(a0)				; is Tails at position $8F or below on Y-axis?
-	;	bcc.s	GTO_CheckTime				; if not, branch
+	if	Combi	=	1
+		movea.w	($FFFFD864).w,a0			; load Tails' object RAM into a0
+		cmpi.w	#$8F,$C(a0)				; is Tails at position $8F or below on Y-axis?
+		bcc.s	GTO_CheckTime				; if not, branch
+	else
+	endif
 
 GTO_GoToGameOver:					; Offset: 0000EBFE
 		bra.w	GTO_GameOver				; go to game over
