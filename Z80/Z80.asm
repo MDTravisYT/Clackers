@@ -1223,7 +1223,7 @@ loc_61F:				; CODE XREF: sub_507+14j
 loc_63A:				; CODE XREF: sub_507+Fj
 		ex	af, af'
 		ld	hl, 6000h
-		nop
+		xor	a
 		ld	e, 1
 		ld	(hl), e
 		ld	(hl), e
@@ -1402,11 +1402,54 @@ loc_728:				; CODE XREF: sub_71D+Ej
 ; End of function sub_71D
 
 ; ---------------------------------------------------------------------------
-SpcSFXChnPtrs:	dw  1F70h, 1F70h, 1F70h, 1F70h,	1F70h, 1F70h, 1F70h, 1F70h
-					; DATA XREF: GetSFXChnPtrs+32o
-SFXChnPtrs:	dw  1E20h, 1E50h, 1E80h, 1EB0h,	1EE0h, 1F10h, 1F40h, 1F40h
-					; DATA XREF: GetSFXChnPtrs+29o
-BGMChnPtrs:	dw  1CD0h, 1D00h, 1D30h, 1D60h,	1D90h, 1DC0h, 1DF0h, 1DF0h
+		db  70h	; p
+		db  1Fh
+		db  70h	; p
+		db  1Fh
+		db  70h	; p
+		db  1Fh
+		db  70h	; p
+		db  1Fh
+		db  70h	; p
+		db  1Fh
+		db  70h	; p
+		db  1Fh
+		db  70h	; p
+		db  1Fh
+		db  70h	; p
+		db  1Fh
+		db  20h
+		db  1Eh
+		db  50h	; P
+		db  1Eh
+		db  80h	; Ä
+		db  1Eh
+		db 0B0h	; ∞
+		db  1Eh
+		db 0E0h	; ‡
+		db  1Eh
+		db  10h
+		db  1Fh
+		db  40h	; @
+		db  1Fh
+		db  40h	; @
+		db  1Fh
+		db 0D0h	; –
+		db  1Ch
+		db    0
+		db  1Dh
+		db  30h	; 0
+		db  1Dh
+		db  60h	; `
+		db  1Dh
+		db  90h	; ê
+		db  1Dh
+		db 0C0h	; ¿
+		db  1Dh
+		db 0F0h	; 
+		db  1Dh
+		db 0F0h	; 
+		db  1Dh
 
 ; =============== S U B	R O U T	I N E =======================================
 
