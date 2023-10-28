@@ -10173,7 +10173,7 @@ loc_A506:				; DATA XREF: ROM:0000A296o
 		tst.b	(a5)
 		bmi.s	loc_A530
 		bsr.w	sub_AA76
-		bsr.w	sub_AAA4
+		bsr.w	ObjSonic_Jump
 		bra.s	loc_A530
 ; ---------------------------------------------------------------------------
 
@@ -10658,6 +10658,8 @@ loc_A9C0:				; CODE XREF: ROM:0000A9B0j
 		jsr	sub_CBC0
 		rts
 ; ---------------------------------------------------------------------------
+		move.b	#$A2,d0
+		bsr.w	Play_Sound
 		move.w	#$100,$30(a6)
 		btst	#0,$25(a6)
 		bne.w	loc_AA08
@@ -10747,7 +10749,7 @@ locret_AAA2:				; CODE XREF: sub_AA76+8j sub_AA76+12j
 ; =============== S U B	R O U T	I N E =======================================
 
 
-sub_AAA4:				; CODE XREF: ROM:0000A518p
+ObjSonic_Jump:				; CODE XREF: ROM:0000A518p
 		move.b	3(a5),d0
 		andi.b	#$70,d0	; 'p'
 		beq.s	locret_AAF6
@@ -10762,7 +10764,7 @@ sub_AAA4:				; CODE XREF: ROM:0000A518p
 		beq.s	loc_AAD4
 		neg.w	d0
 
-loc_AAD4:				; CODE XREF: sub_AAA4+2Cj
+loc_AAD4:				; CODE XREF: ObjSonic_Jump+2Cj
 		move.w	$2C(a6),d2
 		muls.w	d2,d0
 		muls.w	d2,d1
@@ -10780,9 +10782,9 @@ loc_AAD4:				; CODE XREF: sub_AAA4+2Cj
 		rts
 ; ---------------------------------------------------------------------------
 
-locret_AAF6:				; CODE XREF: sub_AAA4+8j
+locret_AAF6:				; CODE XREF: ObjSonic_Jump+8j
 		rts
-; End of function sub_AAA4
+; End of function ObjSonic_Jump
 
 
 ; =============== S U B	R O U T	I N E =======================================
@@ -10790,7 +10792,7 @@ locret_AAF6:				; CODE XREF: sub_AAA4+8j
 
 nullsub_2:				; CODE XREF: ROM:loc_A530p
 					; ROM:loc_A928p
-		rts
+	;	rts
 ; End of function nullsub_2
 
 ; ---------------------------------------------------------------------------

@@ -19,32 +19,32 @@
 ; ---------------------------------------------------------------------------
 ; ===========================================================================
 ; ---------------------------------------------------------------------------
-		dc.w	AniSon_Normal-ANI_Sonic		; Stand, Look up, Look down
-		dc.w	AniSon_Walk000-ANI_Sonic	; Walking (000* 180*)
-		dc.w	AniSon_Walk045-ANI_Sonic	; Walking (045* 225*)
-		dc.w	AniSon_Walk090-ANI_Sonic	; Walking (090* 270*)
-		dc.w	AniSon_Walk135-ANI_Sonic	; Walking (135* 315*)
-		dc.w	AniSon_Run000-ANI_Sonic		; Running (000* 180*)
-		dc.w	AniSon_Run045-ANI_Sonic		; Running (045* 225*)
-		dc.w	AniSon_Run090-ANI_Sonic		; Running (090* 270*)
-		dc.w	AniSon_Run135-ANI_Sonic		; Running (135* 315*)
-		dc.w	AniSon_Roll-ANI_Sonic		; Rolling (Somersault)
-		dc.w	AniSon_Wait-ANI_Sonic		; Waiting
-		dc.w	AniSon_Balnce1-ANI_Sonic	; Balancing (Facing inwards)
-		dc.w	AniSon_Balnce2-ANI_Sonic	; Balancing (Facing outwards)
-		dc.w	AniSon_Skid-ANI_Sonic		; Skiddings
-		dc.w	AniSon_Normal-ANI_Sonic		; Stand, Look up, Look down
-		dc.w	AniSon_Walk000-ANI_Sonic	; Walking (000* 180*)
-		dc.w	AniSon_Walk045-ANI_Sonic	; Walking (045* 225*)
-		dc.w	AniSon_Walk090-ANI_Sonic	; Walking (090* 270*)
-		dc.w	AniSon_Walk135-ANI_Sonic	; Walking (135* 315*)
-		dc.w	AniSon_Run000-ANI_Sonic		; Running (000* 180*)
-		dc.w	AniSon_Run045-ANI_Sonic		; Running (045* 225*)
-		dc.w	AniSon_Run090-ANI_Sonic		; Running (090* 270*)
-		dc.w	AniSon_Run135-ANI_Sonic		; Running (135* 315*)
-		dc.w	AniSon_Spindsh-ANI_Sonic	; Spindashing
-		dc.w	AniSon_Hurt-ANI_Sonic		; Hurt
-		dc.w	AniSon_Dizzy-ANI_Sonic		; fast spinning where sonic looks dizzy
+		dc.w	AniSon_Normal-ANI_Sonic		; 00 Stand, Look up, Look down
+		dc.w	AniSon_Walk000-ANI_Sonic	; 02 Walking (000* 180*)
+		dc.w	AniSon_Walk045-ANI_Sonic	; 04 Walking (045* 225*)
+		dc.w	AniSon_Walk090-ANI_Sonic	; 06 Walking (090* 270*)
+		dc.w	AniSon_Walk135-ANI_Sonic	; 08 Walking (135* 315*)
+		dc.w	AniSon_Run000-ANI_Sonic		; 0A Running (000* 180*)
+		dc.w	AniSon_Run045-ANI_Sonic		; 0C Running (045* 225*)
+		dc.w	AniSon_Run090-ANI_Sonic		; 0E Running (090* 270*)
+		dc.w	AniSon_Run135-ANI_Sonic		; 10 Running (135* 315*)
+		dc.w	AniSon_Roll-ANI_Sonic		; 12 Rolling (Somersault)
+		dc.w	AniSon_Wait-ANI_Sonic		; 14 Waiting
+		dc.w	AniSon_Balnce1-ANI_Sonic	; 16 Balancing (Facing inwards)
+		dc.w	AniSon_Balnce2-ANI_Sonic	; 18 Balancing (Facing outwards)
+		dc.w	AniSon_Skid-ANI_Sonic		; 1A Skiddings
+		dc.w	AniSon_Normal-ANI_Sonic		; 1C Stand, Look up, Look down
+		dc.w	AniSon_Walk000-ANI_Sonic	; 1E Walking (000* 180*)
+		dc.w	AniSon_Walk045-ANI_Sonic	; 20 Walking (045* 225*)
+		dc.w	AniSon_Walk090-ANI_Sonic	; 22 Walking (090* 270*)
+		dc.w	AniSon_Walk135-ANI_Sonic	; 24 Walking (135* 315*)
+		dc.w	AniSon_Run000-ANI_Sonic		; 26 Running (000* 180*)
+		dc.w	AniSon_Run045-ANI_Sonic		; 28 Running (045* 225*)
+		dc.w	AniSon_Run090-ANI_Sonic		; 2A Running (090* 270*)
+		dc.w	AniSon_Run135-ANI_Sonic		; 2C Running (135* 315*)
+		dc.w	AniSon_Spindsh-ANI_Sonic	; 2E Spindashing
+		dc.w	AniSon_Hurt-ANI_Sonic		; 30 Hurt
+		dc.w	AniSon_Dizzy-ANI_Sonic		; 32 fast spinning where sonic looks dizzy
 ; ---------------------------------------------------------------------------
 AniSon_Normal:	dc.b	$01,$02,$00
 		dc.b	$00,$01,$02
