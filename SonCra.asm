@@ -10640,15 +10640,22 @@ loc_A988:				; CODE XREF: ROM:0000A954j
 ; ---------------------------------------------------------------------------
 		rts
 ; ---------------------------------------------------------------------------
+		cmpi.b	#1,($FFFFFFFF)
+		beq.s	@cont
+		move.b	#$A2,d0
+		bsr.w	Play_Sound
+	@cont:
 		bclr	#4,$25(a6)
 		move.w	#$2E,$26(a6) ; '.'
 		addq.b	#1,$28(a6)
+		move.b	#1,($FFFFFFFF)
 		tst.l	$2C(a6)
 		bne.s	loc_A9B2
 		btst	#1,2(a5)
 		bne.s	loc_A9C0
 
 loc_A9B2:				; CODE XREF: ROM:0000A9A8j
+		move.b	#0,($FFFFFFFF)
 		move.w	#$800,$2C(a6)
 		move.b	#6,7(a6)
 		rts
@@ -10658,8 +10665,6 @@ loc_A9C0:				; CODE XREF: ROM:0000A9B0j
 		jsr	sub_CBC0
 		rts
 ; ---------------------------------------------------------------------------
-		move.b	#$A2,d0
-		bsr.w	Play_Sound
 		move.w	#$100,$30(a6)
 		btst	#0,$25(a6)
 		bne.w	loc_AA08
