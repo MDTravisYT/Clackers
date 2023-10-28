@@ -19472,7 +19472,7 @@ DLHA_Data:						; Offset: 0000FA6A
 ; Data Location (0000FB82 - 0000FDAF)
 ; Striped out
 ; UnkData_0000FB82:
-		incbin	"UnknownCodes\UnknownData_0000FB82.bin"	; DXI
+	;	incbin	"UnknownCodes\UnknownData_0000FB82.bin"	; DXI
 		even						; DXI
 ; ---------------------------------------------------------------------------
 ; ===========================================================================
@@ -19482,7 +19482,7 @@ DLHA_Data:						; Offset: 0000FA6A
 ; Data Location (0000FDB0 - 0000FFFF)
 ; Striped out
 ; UnkData_0000FDB0:
-		incbin	"UnknownCodes\UnknownData_0000FDB0.bin"	; DXI
+	;	incbin	"UnknownCodes\UnknownData_0000FDB0.bin"	; DXI
 		even						; DXI
 ; ===========================================================================
 ; ---------------------------------------------------------------------------
