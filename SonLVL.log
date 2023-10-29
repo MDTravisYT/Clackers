@@ -1,0 +1,23 @@
+Operating system: Microsoft Windows NT 6.2.9200.0
+Opening INI file "C:\Users\MineC\Downloads\Sonic-Without-Clackers\SonPLN - Copy.ini"...
+Game type is S1.
+Loading SEGA Logo...
+Loading plane mappings from file "Uncompressed/MapuncTitleMenu01.bin", using compression Uncompressed...
+Loading palette file "Palettes/PalMainMenus.bin"...
+Source: 0 Destination: 0 Length: 64
+Loading 8x8 tiles from file "NemesisComp/ArtnemMainMenusText.bin", using compression Nemesis...
+Load completed.
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at SonicRetro.SonLVL.PatternIndexSearchControl.UpdateStuff() in E:\Programs\SonLVL\SonPLN\PatternIndexSearchControl.cs:line 22
+   at SonicRetro.SonLVL.ReplaceTilesDialog.ReplaceBlockTilesDialog_VisibleChanged(Object sender, EventArgs e) in E:\Programs\SonLVL\SonPLN\ReplaceTilesDialog.cs:line 17
+   at System.Windows.Forms.Control.OnVisibleChanged(EventArgs e)
+   at System.Windows.Forms.ScrollableControl.OnVisibleChanged(EventArgs e)
+   at System.Windows.Forms.Form.OnVisibleChanged(EventArgs e)
+   at System.Windows.Forms.Control.WmShowWindow(Message& m)
+   at System.Windows.Forms.Control.WndProc(Message& m)
+   at System.Windows.Forms.ScrollableControl.WndProc(Message& m)
+   at System.Windows.Forms.Form.WmShowWindow(Message& m)
+   at System.Windows.Forms.Form.WndProc(Message& m)
+   at System.Windows.Forms.Control.ControlNativeWindow.OnMessage(Message& m)
+   at System.Windows.Forms.Control.ControlNativeWindow.WndProc(Message& m)
+   at System.Windows.Forms.NativeWindow.Callback(IntPtr hWnd, Int32 msg, IntPtr wparam, IntPtr lparam)

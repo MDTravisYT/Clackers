@@ -6234,7 +6234,7 @@ TSS_1P2PStart:						; Offset: 00007526
 		move.b	#$00,($FFFFD89C).w			; set player 1 user mode
 		tst.w	d0					; is the selection "1P START"?
 		bne.s	TSS_2PStart				; if not, branch
-		move.b	#$FF,($FFFFD8AC).w			; set player 2 CPU mode
+		move.b	#%11111111,($FFFFD8AC).w			; set player 2 CPU mode
 		rts						; return
 
 TSS_2PStart:						; Offset: 0000754A
