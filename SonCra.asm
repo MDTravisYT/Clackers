@@ -11746,10 +11746,7 @@ locret_B3DA:				; CODE XREF: sub_B388+8j
 
 nullsub_3:				; CODE XREF: ROM:loc_ADE2p
 					; ROM:loc_B1D6p
-		rts
-; End of function nullsub_3
 
-; ---------------------------------------------------------------------------
 		tst.w	$2C(a6)
 		bne.s	loc_B3E6
 
@@ -17803,7 +17800,7 @@ GTO_LagLoop:						; Offset: 0000EC34
 		andi.w	#1,d0					; and it by 1
 		move.w	d0,($FFFFD834).w			; put the result back
 		clr.w	($FFFFD836).w				; clear a "Press Start" releated flag
-		move.w	#$10,($FFFFD822).w			; set game mode to $10 (field)
+		move.w	#$08,($FFFFD822).w			; set game mode to $10 (field)
 		movea.l	($00000000).w,sp			; set stack pointer to location 00000000			; do...
 		jmp	MainProg_Loop				; jump to Main game array
 
