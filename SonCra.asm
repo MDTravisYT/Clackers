@@ -9899,17 +9899,26 @@ loc_A26A:				; DATA XREF: ROM:off_A1CEo
 		moveq	#0,d0
 		move.b	7(a6),d0
 		pea	loc_C746(pc)
-		move.w	locret_A282(pc,d0.w),d0
-		jmp	locret_A282(pc,d0.w)
+                move.w  SonicIndex(pc,d0.w),d0
+                jmp     SonicIndex(pc,d0.w)
 ; ---------------------------------------------------------------------------
 
-locret_A282:
-		rts
+SonicIndex:                           ; DATA XREF: ROM:0000A27E↑o
+                                        ; ROM:0000A284↓o ...
+                rts
 ; ---------------------------------------------------------------------------
-		dc.w	$0014,$0306 ;[ori.b	#$06,(a4)]
-		bset	d1,$3FA(a4)
-		subi.l	#$7100712,$746(a4)
-		bset	d3,d4
+                dc.w loc_A296-SonicIndex
+                dc.w loc_A588-SonicIndex
+                dc.w loc_A66E-SonicIndex
+                dc.w loc_A67C-SonicIndex
+                dc.w loc_A72E-SonicIndex
+                dc.w locret_A992-SonicIndex
+                dc.w loc_A994-SonicIndex
+                dc.w loc_A9C8-SonicIndex
+                dc.w loc_AA46-SonicIndex
+; ---------------------------------------------------------------------------
+
+loc_A296:                               ; DATA XREF: ROM:0000A284↑o
 		pea	loc_A506(pc)
 		bset	#0,$25(a6)
 		bclr	#4,$25(a6)
@@ -10166,6 +10175,8 @@ loc_A4F0:				; CODE XREF: ROM:0000A4DAj
 		move.w	d0,$2C(a6)
 		move.w	#$1A,$26(a6)
 		andi.b	#3,$28(a6)
+		move.b	#$A4,d0
+		bsr.w	Play_Sound_2
 		rts
 ; ---------------------------------------------------------------------------
 
@@ -10219,6 +10230,7 @@ loc_A56C:				; CODE XREF: ROM:0000A566j
 		moveq	#0,d0
 		rts
 ; ---------------------------------------------------------------------------
+loc_A588:  
 		btst	#0,$25(a6)
 		bne.w	loc_A63E
 		pea	loc_A61A(pc)
@@ -10316,10 +10328,12 @@ loc_A658:				; CODE XREF: ROM:0000A64Cj
 		move.l	#0,$26(a6)
 		rts
 ; ---------------------------------------------------------------------------
+loc_A66E:
 		move.b	#2,7(a6)
 		bset	#4,$25(a6)
 		rts
 ; ---------------------------------------------------------------------------
+loc_A67C:
 		pea	loc_A6E8(pc)
 		addi.l	#$3800,$1C(a6)
 		bclr	#0,$25(a6)
@@ -10394,6 +10408,7 @@ loc_A718:				; CODE XREF: ROM:0000A70Cj
 locret_A72C:				; CODE XREF: ROM:0000A6FCj
 		rts
 ; ---------------------------------------------------------------------------
+loc_A72E: 
 		btst	#4,$25(a6)
 		beq.s	loc_A738
 		rts
@@ -10640,8 +10655,10 @@ loc_A988:				; CODE XREF: ROM:0000A954j
 		addi.l	#$3800,$1C(a6)
 		rts
 ; ---------------------------------------------------------------------------
+locret_A992:
 		rts
 ; ---------------------------------------------------------------------------
+loc_A994:
 		cmpi.b	#1,($FFFFFFFF)
 		beq.s	@cont
 		move.b	#$A2,d0
@@ -10667,6 +10684,7 @@ loc_A9C0:				; CODE XREF: ROM:0000A9B0j
 		jsr	sub_CBC0
 		rts
 ; ---------------------------------------------------------------------------
+loc_A9C8:
 		move.w	#$100,$30(a6)
 		btst	#0,$25(a6)
 		bne.w	loc_AA08
@@ -10713,6 +10731,7 @@ loc_AA3E:				; CODE XREF: ROM:0000AA2Cj
 		move.b	#$12,7(a6)
 		rts
 ; ---------------------------------------------------------------------------
+loc_AA46:
 		andi.b	#8,$20(a6)
 		moveq	#0,d0
 		move.w	d0,$2C(a6)
@@ -10785,7 +10804,7 @@ loc_AAD4:				; CODE XREF: ObjSonic_Jump+2Cj
 		move.l	d0,$18(a6)
 		move.l	d1,$1C(a6)
 		move.b	#$A0,d0
-		bsr.w	Play_Sound
+		bsr.w	Play_Sound_2
 		rts
 ; ---------------------------------------------------------------------------
 
