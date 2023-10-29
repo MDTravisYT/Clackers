@@ -15212,6 +15212,8 @@ Obj00_SonicChk:
 		bra.s	Obj00_TailsChk				; continue to check tails
 
 Obj00_SonSetAni:
+		move.b	#$A8,d0
+		jsr		Play_Sound
 		ori.w	#$01,$2A(a6)				; set flag to animate spring
 		move.l	#$000F0000,d0				; set the power of the spring
 		moveq	#$00,d1					; clear d1
