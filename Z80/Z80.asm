@@ -3399,7 +3399,7 @@ LocB_0A:	db	000h,000h,000h,000h,001h,001h,001h,001h,002h,002h,001h,001h,001h,000
 ; Music/BGM
 ; ---------------------------------------------------------------------------
 
-BGMTable:	dw	08000h					; Music 81 - AKA Electoria (Chaotix Featuring Knuckles)
+BGMTable:	dw	09C66h					; Music 81 - AKA This Horizon (Chaotix Featuring Knuckles)
 		dw	0888Ch					; Music 82 - AKA Walkin' (Chaotix Featuring Knuckles)
 		dw	08BDAh					; Music 83 - AKA Hyper-Hyper (Chaotix Featuring Knuckles)
 		dw	09210h					; Music 84 - AKA Evening Star (Chaotix Featuring Knuckles)

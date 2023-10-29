@@ -10592,6 +10592,8 @@ loc_A8D6:				; DATA XREF: ROM:0000A75Eo
 		bne.s	loc_A928
 
 	; tossing player
+		move.b	#$A7,d0
+		bsr.w	Play_Sound
 
 		move.b	5(a5),d2
 		andi.b	#$F,d1
@@ -19690,6 +19692,7 @@ Music83:	incbin	Music\Music83.bin			; AKA Hyper-Hyper (Chaotix Featuring Knuckle
 Music84:	incbin	Music\Music84.bin			; AKA Evening Star (Chaotix Featuring Knuckles)
 Music85:	incbin	Music\Music85.bin			; AKA Moonrise (ChaotiX Featuring Knuckles)
 Music86:	incbin	Music\Music86.bin			; AKA Game Over (Sonic The Hedgehog)
+Music87:	incbin	Music\Music87.bin			; AKA Game Over (Sonic The Hedgehog)
 ; ---------------------------------------------------------------------------
 ; ===========================================================================
 ; ---------------------------------------------------------------------------
