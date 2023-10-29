@@ -19688,7 +19688,7 @@ Music82:	incbin	Music\Music82.bin 			; AKA Walkin' (Chaotix Featuring Knuckles)
 Music83:	incbin	Music\Music83.bin			; AKA Hyper-Hyper (Chaotix Featuring Knuckles)
 Music84:	incbin	Music\Music84.bin			; AKA Evening Star (Chaotix Featuring Knuckles)
 Music85:	incbin	Music\Music85.bin			; AKA Moonrise (ChaotiX Featuring Knuckles)
-Music86:	incbin	Music\Music86.bin			; AKA Game Over (Sonic The Hedgehog)
+;Music86:	incbin	Music\Music86.bin			; AKA Game Over (Sonic The Hedgehog)
 Music87:	incbin	Music\Music87.bin			; AKA Game Over (Sonic The Hedgehog)
 ; ---------------------------------------------------------------------------
 ; ===========================================================================
