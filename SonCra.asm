@@ -14617,7 +14617,10 @@ Control_Combi:
 		bmi.w	CC_SkipInStrain				; if negative, branch (Sonic and Tails are too close to each other)
 		cmp.w	$02(a2),d3				; are Sonic and Tails too far appart? (comparing with "out" distance)
 		bcs.s	CC_SkipOutStrain			; if not, branch
+	if	Combi	=	1
+	else
 		rts
+	endif
 ; ---------------------------------------------------------------------------
 ; Out strain (Stopping Sonic and Tails from moving further than a set line)
 ; ---------------------------------------------------------------------------
