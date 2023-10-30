@@ -7976,6 +7976,8 @@ OST_Routines:						; Offset: 000093D4
 ; ---------------------------------------------------------------------------
 
 OST_StartUp:						; Offset: 000093DC
+		move.b	#$FF,d0					; set music $86 to d0 (Game Over music)
+		jsr	(PlayMusic).l				; play song
 		pea	(a0)					; send a0 data to the stack
 		lea	VB_OptionsSoundTest(pc),a0		; load location V-Blank routine to run
 		move.l	a0,($FFFFC832).w			; set to run it during Sound Test
