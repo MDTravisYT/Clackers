@@ -15,7 +15,7 @@
 ; Includes
 ; ---------------------------------------------------------------------------
 
-Combi	=	0
+Combi	=	1
 
 		include	"SonCraMacro.asm"
 
@@ -9070,7 +9070,7 @@ TTZ_FG_StartLocCam:					; Offset: 00009CB0
 		dc.b	$10
 		dc.b	$20
 		dc.w	($0800/$20)				; V-Ram address to write the level art to
-		dc.w	$2000					; Maximum X display area
+		dc.w	$7FFF					; Maximum X display area
 		dc.w	$0000
 		dc.w	$2000					; Maximum Y display area
 		dc.w	$0000
@@ -17821,6 +17821,7 @@ LLPCO_SSZ:						; Offset: 0000ED34
 ; ---------------------------------------------------------------------------
 
 LLPCO_TTZ:						; Offset: 0000ED36
+		rts
 		moveq	#$10,d0					; set to read the 4th Object Ram section
 		jsr	Objects_FindFreeSlot
 		bmi.w	loc_ED5E
@@ -19283,7 +19284,7 @@ sub_F954:				; CODE XREF: ROM:00008A26p
 
 ; ---------------------------------------------------------------------------
 loc_F964:	dc.w	loc_FA0A-loc_F964
-		dc.w	loc_FA0C-loc_F964
+		dc.w	loc_FA0A-loc_F964
 		dc.w	loc_FA0A-loc_F964
 		dc.w	loc_FA0A-loc_F964
 		dc.w	loc_FA0A-loc_F964
