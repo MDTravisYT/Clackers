@@ -7318,7 +7318,7 @@ Levels:							; Offset: 00008896
 		movem.l	(sp)+,a0				; reload a0 data from stack
 		lea	Levels_VDPRegData(pc),a0		; load VDP register setup values
 		jsr	StoreVDPRegisters			; save VDP register data to ram spaces
-		move.b	#$81,d0					; load BGM 81
+		move.b	#$83,d0					; load BGM 81
 		tst.w	($FFFFD834).w				; is level SSZ?
 		beq.s	LV_PlayMusic				; if yes, branch
 		move.w	($FFFFD83A).w,d0			; load Level time of day value
@@ -17781,6 +17781,11 @@ GTO_CheckTime:						; Offset: 0000EC02
 		bls.s	GTO_UpdateTime				; if not branch, branch
 
 GTO_GameOver:						; Offset: 0000EC20
+		lea	OST_MapTiles(pc),a1			; load location of "OPTION" letter to a1
+		moveq	#$05,d1					; set number of columns to dump (6 letters)
+		moveq	#$00,d2					; set number of rows to dump
+		move.w	#$0000,d3				; set to use palette line 0 (and to map behind object plane)
+		jsr	MapScreen				; map to screen planes
 		move.b	#$86,d0					; set music $86 to d0 (Game Over music)
 		jsr	(PlayMusic).l				; play song
 		move.w	#$300,d0				; set delay time to $300

@@ -3401,7 +3401,7 @@ LocB_0A:	db	000h,000h,000h,000h,001h,001h,001h,001h,002h,002h,001h,001h,001h,000
 
 BGMTable:	dw	09CC3h					; Music 81 - AKA This Horizon (Chaotix Featuring Knuckles)
 		dw	08000h					; Music 82 - AKA Walkin' (Chaotix Featuring Knuckles)
-		dw	08BDAh					; Music 83 - AKA Hyper-Hyper (Chaotix Featuring Knuckles)
+		dw	0A299h					; Music 83 - AKA Hyper-Hyper (Chaotix Featuring Knuckles)
 		dw	09210h					; Music 84 - AKA Evening Star (Chaotix Featuring Knuckles)
 		dw	0972Bh					; Music 85 - AKA Moonrise (ChaotiX Featuring Knuckles)
 		dw	09B1Eh					; Music 86 - AKA Game Over (Sonic The Hedgehog)
