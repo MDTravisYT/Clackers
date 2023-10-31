@@ -12802,7 +12802,7 @@ loc_BE66:				; CODE XREF: ROM:0000BE58j
 ; ---------------------------------------------------------------------------
 
 Levels_LoadPlayers:					; Offset: 0000BE72
-		move.w	#$0004,($FFFFD866).w			; set Player 1's character as Sonic	
+		move.w	#$0000,($FFFFD866).w			; set Player 1's character as Sonic	
 
 	if	Combi	=	1
 	else
@@ -18135,23 +18135,24 @@ loc_F00A:						; Offset: 0000F00A
 ; ---------------------------------------------------------------------------
 
 loc_F00E:						; Offset: 0000F00E
-		dc.w	$0090,$0D01,$A514,$0098			; "TIME"
-		dc.w	$0090,$0D02,$A528,$00C0			; "ATTA"
-		dc.w	$0090,$0503,$A530,$00E0			; "CK"
-		dc.w	$0090,$0104,$A500,$00F8			; "0" 01 Minute Digit
-		dc.w	$0090,$0005,$A54A,$0100			; "'"
-		dc.w	$0090,$0106,$A500,$0108			; "0" 10 Second Digit
-		dc.w	$0090,$0107,$A500,$0110			; "0" 01 Second Digit
-		dc.w	$0090,$0008,$A54B,$0118			; "''"
-		dc.w	$0090,$0109,$A500,$0120			; "0" 10 Centi-seconds Digit
-		dc.w	$0090,$010A,$A500,$0128			; "0" 01 Centi-seconds Digit
-		dc.w	$00A0,$0D0B,$A534,$0098			; "RING"
-		dc.w	$00A0,$010C,$A53C,$00B8			; "S"
-		dc.w	$00A0,$010D,$A500,$00D8			; "0"
-		dc.w	$00A0,$010E,$A570,$00E4			; "/"
-		dc.w	$00A0,$010F,$A502,$00F0			; "1"
-		dc.w	$00A0,$0110,$A500,$00F8			; "0"
-		dc.w	$00A0,$0100,$A500,$0100			; "0"
+		;		 YYYY  SSPP  VVVV  XXXX
+		dc.w	$00A0,$0D01,$A514,$0098			; "TIME"
+		dc.w	$0090,$0D02,$A53E,$0098			; "ATTA"
+		dc.w	$0090,$0503,$A546,$00B8			; "CK"
+		dc.w	$00A0,$0104,$A500,$00F8-40		; "0" 01 Minute Digit
+		dc.w	$00A0,$0005,$A54A,$0100-40		; "'"
+		dc.w	$00A0,$0106,$A500,$0108-40		; "0" 10 Second Digit
+		dc.w	$00A0,$0107,$A500,$0110-40		; "0" 01 Second Digit
+		dc.w	$00A0,$0008,$A54B,$0118-40		; "''"
+		dc.w	$00A0,$0109,$A500,$0120-40		; "0" 10 Centi-seconds Digit
+		dc.w	$00A0,$010A,$A500,$0128-40		; "0" 01 Centi-seconds Digit
+		dc.w	$00B0,$0D0B,$A534,$0098			; "RING"
+		dc.w	$00B0,$010C,$A53C,$00B8			; "S"
+		dc.w	$00B0,$010D,$A500,$00D8			; "0"
+		dc.w	$00B0,$010E,$A570,$00E4			; "/"
+		dc.w	$00B0,$010F,$A502,$00F0			; "1"
+		dc.w	$00B0,$0110,$A500,$00F8			; "0"
+		dc.w	$00B0,$0100,$A500,$0100			; "0"
 
 	; The last sprite priority above is set to 00, setting the VDP to NOT
 	; display the sprites below, unless it's set to 11 (which it might do
