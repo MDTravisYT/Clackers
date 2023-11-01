@@ -7640,6 +7640,59 @@ PAL_TechnoTowerZone_Day4:				; Offset: 00008DC8
 ; ---------------------------------------------------------------------------
 
 SpecialStage:						; Offset: 00008E06
+		move.b	#$FF,d0					; set music $86 to d0 (Game Over music)
+		jsr	(PlayMusic).l				; play song
+		pea	(a0)					; send a0 data to the stack
+		lea	VB_OptionsSoundTest(pc),a0		; load location V-Blank routine to run
+		move.l	a0,($FFFFC832).w			; set to run it during Sound Test
+		movem.l	(sp)+,a0				; reload a0 data from stack
+		move	#$2700,sr				; set the status register (disable interrupts)
+		moveq	#$3F,d0					; set number of columns to dump
+		moveq	#$3F,d1					; set number of rows to dump
+		moveq	#$00,d2					; set value to dump
+		move.w	#$C000,d3				; set V-Ram location to dump to
+		jsr	MapScreenSingle				; dump the value to V-Ram (Clears screen)
+		moveq	#$3F,d0					; set number of columns to dump
+		moveq	#$3F,d1					; set number of rows to dump
+		move.w	#$E000,d3				; set V-Ram location to dump to
+		jsr	MapScreenSingle				; dump the value to V-Ram (Clears screen)
+		move.l	#$45180003,d0				; set V-Ram location to dump to
+		lea	SorryNothing(pc),a1			; load location of "OPTION" letter to a1
+		moveq	#$0D,d1					; set number of columns to dump (6 letters)
+		moveq	#$00,d2					; set number of rows to dump
+		move.w	#$0000,d3				; set to use palette line 0 (and to map behind object plane)
+		jsr	MapScreen				; map to screen planes
+		
+		move.l	#$78000003,($C00004).l			; set VRam location (sprite table)
+		move.l	#$00000000,($C00000).l			; clear the arrow sprite
+		move.l	#$00000000,($C00000).l			; ''
+		move.w	#$0080,($FFFFD82A).w			; set Sound Test ID to start with
+		move	#$2300,sr				; set the status register (enable interrupts)
+		addq.w	#$04,($FFFFD824).w			; increase routine counter
+		
+SSLoop:
+		bra.s	SSLoop
+		rts						; return
+
+; ===========================================================================
+; ---------------------------------------------------------------------------
+; Tile map ID's that spell "OPTION"
+; ---------------------------------------------------------------------------
+SorryNothing:						; Offset: 00009440
+		dc.w	$0033
+		dc.w	$002F
+		dc.w	$0032
+		dc.w	$0032
+		dc.w	$0039
+		dc.w	$0000
+		dc.w	$002E
+		dc.w	$002F
+		dc.w	$0034
+		dc.w	$0028
+		dc.w	$0029
+		dc.w	$002E
+		dc.w	$0027
+		even
 		rts						; return
 
 ; ===========================================================================
