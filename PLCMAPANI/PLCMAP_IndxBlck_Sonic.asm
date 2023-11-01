@@ -103,5 +103,6 @@
 		dc.w	MAPSon_Spindash4-Map_Sonic,		PLCSon_Spindash4-PLC_Sonic
 		dc.w	MAPSon_Spindash5-Map_Sonic,		PLCSon_Spindash5-PLC_Sonic
 		dc.w	MAPSon_Spindash6-Map_Sonic,		PLCSon_Spindash6-PLC_Sonic
+		dc.w	MAPSon_Spring-Map_Sonic,		PLCSon_Spring-PLC_Sonic
 ; ---------------------------------------------------------------------------
 ; ===========================================================================

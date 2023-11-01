@@ -45,6 +45,7 @@
 		dc.w	AniSon_Spindsh-ANI_Sonic	; 2E Spindashing
 		dc.w	AniSon_Hurt-ANI_Sonic		; 30 Hurt
 		dc.w	AniSon_Dizzy-ANI_Sonic		; 32 fast spinning where sonic looks dizzy
+		dc.w	AniSon_Spring-ANI_Sonic		; 34 Spring
 ; ---------------------------------------------------------------------------
 AniSon_Normal:	dc.b	$01,$02,$00
 		dc.b	$00,$01,$02
@@ -80,6 +81,8 @@ AniSon_Hurt:	dc.b	$00,$00,$00
 		dc.b	$03
 AniSon_Dizzy:	dc.b	$10,$05,$00
 		dc.b	$41,$42,$43,$44,$45,$46,$00
+AniSon_Spring:	dc.b	$01,$02,$00
+		dc.b	$5B,$5B,$5B
 		even
 ; ---------------------------------------------------------------------------
 ; ===========================================================================

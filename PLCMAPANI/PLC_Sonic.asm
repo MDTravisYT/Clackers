@@ -117,6 +117,7 @@ PLCSon_Spindash3:	PLC	$0200,ARTUNC_Sonic+$B8A0,$D380,$FFFF
 PLCSon_Spindash4:	PLC	$0200,ARTUNC_Sonic+$BAA0,$D380,$FFFF
 PLCSon_Spindash5:	PLC	$0200,ARTUNC_Sonic+$BCA0,$D380,$FFFF
 PLCSon_Spindash6:	PLC	$0200,ARTUNC_Sonic+$BEA0,$D380,$FFFF
+PLCSon_Spring:		PLC	$0200,ARTUNC_Sonic+$C0A0,$D380,$FFFF
 			even
 ; ---------------------------------------------------------------------------
 ; ===========================================================================
