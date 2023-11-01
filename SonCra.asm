@@ -7640,7 +7640,15 @@ PAL_TechnoTowerZone_Day4:				; Offset: 00008DC8
 ; ---------------------------------------------------------------------------
 
 SpecialStage:						; Offset: 00008E06
-		move.b	#$FF,d0					; set music $86 to d0 (Game Over music)
+		move.w	($FFFFD824).w,d0			; load routine counter
+		jmp	Special_Routines(pc,d0.w)			; jump to correct routine based on counter
+		
+Special_Routines:
+		bra.w	SpecialStartup
+		bra.w	SSLoop
+
+SpecialStartup
+		move.b	#$86,d0					; set music $86 to d0 (Game Over music)
 		jsr	(PlayMusic).l				; play song
 		pea	(a0)					; send a0 data to the stack
 		lea	VB_OptionsSoundTest(pc),a0		; load location V-Blank routine to run
@@ -7670,8 +7678,21 @@ SpecialStage:						; Offset: 00008E06
 		move	#$2300,sr				; set the status register (enable interrupts)
 		addq.w	#$04,($FFFFD824).w			; increase routine counter
 		
+		clr.w	($FFFF0000)
+		
+		rts
+				
 SSLoop:
-		bra.s	SSLoop
+		bclr	#$07,($FFFFFFC9).w			; set to not run this routine til V-Blank has run
+
+SSWait:
+		tst.b	($FFFFFFC9).w				; is the routine ready to continue?
+		bpl.s	SSWait				; if not, loop and recheck
+		add.w	#1,	($FFFF0000)
+		cmpi.w	#$150,	($FFFF0000)
+		blo.s	SSLoop
+		move.w	#$0008,($FFFFD822).w			; set Screen/Game mode to title screen
+		clr.l	($FFFFD824).w				; reset routine counter to 0
 		rts						; return
 
 ; ===========================================================================
