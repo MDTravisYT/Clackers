@@ -8838,12 +8838,12 @@ U2Z_Act01:						; Offset: 00009BE8
 UZ01_Events:
 		bra.w	UZ01_StartUp				; 00
 		bra.w	TTZ01_StartLevel			; 04
-		bra.w	TTZ01_RunLevel				; 08
+		bra.w	UZ01_RunLevel				; 08
 		
 UZ01_StartUp:
 		move	#$2700,sr				; set the status register (disable interrupts)
 		lea	($FFFFC9DE).w,a1			; load address of positions and sizes ram (FG)
-		lea	PAL_TechnoTowerZoneUnused(pc),a0	; load TTZ palette
+		lea	PAL_IsolatedIsland(pc),a0	; load TTZ palette
 		lea	($FFFFD424).w,a2			; load palette buffer address to a2
 		bsr.w	LoadHalfPalette				; dump the palette to the buffer
 		lea	UZ01_FG_StartLocCam(pc),a0		; load level FG setup data address to a0
@@ -8862,18 +8862,37 @@ UZ01_StartUp:
 		lea	($FFFFCA1E).w,a1			; load address of positions and sizes ram (BG)
 		move.w	#$104,$1E(a1)
 		lea	($FFFFD818).w,a2			; load address of V-Ram plane B storage
-		bsr.w	LoadLevelPositionAndSize		; save the positions and sizes of the level
-		movea.l	a1,a0					; copy address of positions and sizes ram to a0
-		lea	TTZ_MapBGLocs(pc),a2			; load level map/collision data address to a2
-		bsr.w	EniLevelMapLoad				; decompress and dump mappings
-		move.l	a1,($FFFFFBC0).w			; ??? stores the end address of the BG layout, but for what reason?
-		movea.l	a0,a1					; copy address of positions and sizes ram back to a0
-		lea	($00FF0B84).l,a3			; load BG horizontal map plane buffer address
-		lea	($00FF0C86).l,a4			; load BG vertical map plane buffer address
+	;	bsr.w	LoadLevelPositionAndSize		; save the positions and sizes of the level
+	;	movea.l	a1,a0					; copy address of positions and sizes ram to a0
+	;	lea	TTZ_MapBGLocs(pc),a2			; load level map/collision data address to a2
+	;	bsr.w	EniLevelMapLoad				; decompress and dump mappings
+	;	move.l	a1,($FFFFFBC0).w			; ??? stores the end address of the BG layout, but for what reason?
+	;	movea.l	a0,a1					; copy address of positions and sizes ram back to a0
+	;	lea	($00FF0B84).l,a3			; load BG horizontal map plane buffer address
+	;	lea	($00FF0C86).l,a4			; load BG vertical map plane buffer address
 		bsr.w	DrawScreen_Full				; draw the entire screen/planes (For BG only)
 		move	#$2300,sr				; set the status register (enable interrupts)
 		addq.w	#$04,($FFFFD82C).w			; increase level event counter
 		rts						; return
+
+
+UZ01_RunLevel:						; Offset: 00009928
+		movea.w	($FFFFD862).w,a0			; load Sonic's ram address to a0
+		lea	($FFFFC9DE).w,a1			; load FG positions and sizes ram to a1
+		lea	($00FF0A00).l,a3			; load FG horizontal map plane buffer address
+		lea	($00FF0B02).l,a4			; load FG vertical map plane buffer address
+		bsr.w	Control_ScreenPosX			; keep X position clean
+		bsr.w	Control_ScreenPosY			; keep Y position clean
+		bsr.w	DrawScreen_Void				; draw FG void sides
+		movea.w	($FFFFD862).w,a0			; load Sonic's ram address to a0
+		lea	($FFFFCA1E).w,a1			; load BG positions and sizes ram to a1
+		lea	($00FF0B84).l,a3			; load BG horizontal map plane buffer address
+		lea	($00FF0C86).l,a4			; load BG vertical map plane buffer address
+	;	bsr.s	ControlTTZ_BGScreenPos			; control TTZ's BG screen position
+	;	bsr.w	Control_ScreenPosY			; keep Y position clean
+	;	jsr	DrawScreen_Void				; draw BG void sides
+		rts						; return
+
 
 UZ01_FG_StartLocCam:					; Offset: 00009CB0
 		dc.w	$0015					; X starting location
@@ -8898,6 +8917,10 @@ UZ01_MapFGLocs:						; Offset: 00009CC2
 		dc.l	MAPENI_IIZLayout_FG
 		dc.l	COL_IIZPrimary
 		dc.l	COL_IIZSecondary
+
+PAL_IsolatedIsland:				; Offset: 00009CF0
+		incbin  Palettes\PalIsolatedIsland.bin
+		even
 
 ; ===========================================================================
 ; ---------------------------------------------------------------------------
