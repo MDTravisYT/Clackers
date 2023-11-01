@@ -8832,7 +8832,72 @@ TTZ_Act05:						; Offset: 00009BE6
 ; ---------------------------------------------------------------------------
 
 U2Z_Act01:						; Offset: 00009BE8
-		rts
+		move.w	($FFFFD82C).w,d0			; load level event counter
+		jmp	UZ01_Events(pc,d0.w)			; jump to correct event routine
+		
+UZ01_Events:
+		bra.w	UZ01_StartUp				; 00
+		bra.w	TTZ01_StartLevel			; 04
+		bra.w	TTZ01_RunLevel				; 08
+		
+UZ01_StartUp:
+		move	#$2700,sr				; set the status register (disable interrupts)
+		lea	($FFFFC9DE).w,a1			; load address of positions and sizes ram (FG)
+		lea	PAL_TechnoTowerZoneUnused(pc),a0	; load TTZ palette
+		lea	($FFFFD424).w,a2			; load palette buffer address to a2
+		bsr.w	LoadHalfPalette				; dump the palette to the buffer
+		lea	UZ01_FG_StartLocCam(pc),a0		; load level FG setup data address to a0
+		lea	($FFFFD816).w,a2			; load address of V-Ram plane A storage
+		bsr.w	LoadLevelPositionAndSize		; save the positions and sizes of the level
+		movea.l	a1,a0					; copy address of positions and sizes ram to a0
+		lea	UZ01_ArtLocs(pc),a2			; load address of level compressed art locations
+		bsr.w	DMA_NemLevelArtLoad			; decompress and DMA transfer art
+		lea	($FFFFC9DE).w,a0			; load address of positions and sizes ram
+		move.l	#$00FF0D08,$28(a0)			; set ram address to decompress the map data to
+		lea	UZ01_MapFGLocs(pc),a2			; load level map/collision data address to a2
+		bsr.w	EniLevelMapLoad				; decompress and dump mappings
+		move.l	a1,($FFFFCA46).w			; ??? stores the end address of the FG layout, but for what reason?
+		bsr.w	LoadCollisionPaths			; load collision data
+		lea	TTZ_BG_StartLocCam(pc),a0		; load level BG setup data address to a0
+		lea	($FFFFCA1E).w,a1			; load address of positions and sizes ram (BG)
+		move.w	#$104,$1E(a1)
+		lea	($FFFFD818).w,a2			; load address of V-Ram plane B storage
+		bsr.w	LoadLevelPositionAndSize		; save the positions and sizes of the level
+		movea.l	a1,a0					; copy address of positions and sizes ram to a0
+		lea	TTZ_MapBGLocs(pc),a2			; load level map/collision data address to a2
+		bsr.w	EniLevelMapLoad				; decompress and dump mappings
+		move.l	a1,($FFFFFBC0).w			; ??? stores the end address of the BG layout, but for what reason?
+		movea.l	a0,a1					; copy address of positions and sizes ram back to a0
+		lea	($00FF0B84).l,a3			; load BG horizontal map plane buffer address
+		lea	($00FF0C86).l,a4			; load BG vertical map plane buffer address
+		bsr.w	DrawScreen_Full				; draw the entire screen/planes (For BG only)
+		move	#$2300,sr				; set the status register (enable interrupts)
+		addq.w	#$04,($FFFFD82C).w			; increase level event counter
+		rts						; return
+
+UZ01_FG_StartLocCam:					; Offset: 00009CB0
+		dc.w	$0015					; X starting location
+		dc.w	$01E0					; Y starting location
+		dc.b	$40					; Level Size - MDT
+		dc.b	$20					; Level Size - MDT
+		dc.b	$10
+		dc.b	$20
+		dc.w	($0800/$20)				; V-Ram address to write the level art to
+		dc.w	$7FFF					; Maximum X display area
+		dc.w	$0000
+		dc.w	$2000					; Maximum Y display area
+		dc.w	$0000
+
+UZ01_ArtLocs:						; Offset: 00009CA8
+		dc.l	ARTNEM_IIZ8x8_FG
+		dc.l	ARTNEM_IIZ8x8_BG
+		
+UZ01_MapFGLocs:						; Offset: 00009CC2
+		dc.l	MAPENI_IIZ16x16_FG
+		dc.l	MAPENI_IIZ128x128_FG
+		dc.l	MAPENI_IIZLayout_FG
+		dc.l	COL_IIZPrimary
+		dc.l	COL_IIZSecondary
 
 ; ===========================================================================
 ; ---------------------------------------------------------------------------
@@ -17685,6 +17750,7 @@ loc_EBC8:
 ; ---------------------------------------------------------------------------
 
 GameTimeOver:						; Offset: 0000EBE0
+		rts
 		tst.w	($FFFFD834).w				; check if level is not Techno Tower
 		beq.s	GTO_CheckTime				; if so, branch
 		movea.w	($FFFFD862).w,a0			; load Sonic's object RAM into a0
@@ -19836,6 +19902,33 @@ MAPENI_TTZLayout_BG:
 	incbin  EnigmaComp\MapeniTTZLayoutBG.bin		; Layout for TTZ BG
 	even
 ; ---------------------------------------------------------------------------
+ARTNEM_IIZ8x8_FG:
+	incbin	 NemesisComp\ArtnemIIZ8x8FG.bin			; 8x8 tiles for TTZ FG
+	even
+; ---------------------------------------------------------------------------
+ARTNEM_IIZ8x8_BG:
+	incbin	 NemesisComp\ArtnemIIZ8x8BG.bin			; 8x8 tiles for TTZ FG
+	even
+; ---------------------------------------------------------------------------
+COL_IIZPrimary:	
+	incbin	Collision\ColIIZPrimary.bin			; Primary Collisions for TTZ
+	even
+; ---------------------------------------------------------------------------
+COL_IIZSecondary:
+	incbin	 Collision\ColIIZSecondary.bin			; Secondary Collisions for TTZ
+	even
+; ---------------------------------------------------------------------------
+MAPENI_IIZLayout_FG:
+	incbin  EnigmaComp\MapeniIIZLayoutFG.eni		; Layout for TTZ FG
+	even
+; ---------------------------------------------------------------------------
+MAPENI_IIZ16x16_FG:
+	incbin  EnigmaComp\MapeniIIZ16x16FG.bin			; 16x16 blocks for TTZ BG
+	even
+; ---------------------------------------------------------------------------
+MAPENI_IIZ128x128_FG:
+	incbin  EnigmaComp\MapeniIIZ128x128FG.bin		; 128x128 chunks for TTZ FG
+	even
 ; ===========================================================================
 ; ---------------------------------------------------------------------------
 ; Title Card and Pause Bar Patterns
@@ -20253,17 +20346,6 @@ MAPUNC_ElectricFieldBG:
 	incbin  Uncompressed\MapuncElectricFieldBG_03.bin	; Screen Map Codes for Electric Field BG (Entry 02)
 	even
 ; ---------------------------------------------------------------------------
-; ===========================================================================
-; ---------------------------------------------------------------------------
-; Unknown Data
-; ---------------------------------------------------------------------------
-; Large Section of Data, has 2 padded sections, and something that looks like
-; uncompressed Tails mini art (May wanna look into this in the near future)
-; ---------------------------------------------------------------------------
-; Data Location (00054460 - 00025A3FF)
-; Striped out
-; UnkData_00054460:
-		incbin	"UnknownCodes\UnknownData_00054460.bin"
 ; ---------------------------------------------------------------------------
 ; ===========================================================================
 ; ---------------------------------------------------------------------------
