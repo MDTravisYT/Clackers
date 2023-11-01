@@ -19340,11 +19340,91 @@ SIR_RedBoard:						; Offset: 0000F884
 
 SIR_RB_NoFinish:					; Offset: 0000F8B0
 		move.l	#$44100003,d0				; set V-Ram location to dump to
-		lea	SorryNothing(pc),a1			; load location of "OPTION" letter to a1
-		moveq	#$0D,d1					; set number of columns to dump (6 letters)
+		
+		cmpi.w	#$0000,($FFFFD834).w	;	i need to find a better way to do this
+		beq.s	@LoadSS_Text		
+		cmpi.w	#$0001,($FFFFD834).w
+		beq.s	@LoadTT_Text		
+		cmpi.w	#$0002,($FFFFD834).w
+		beq.s	@LoadII_Text
+		
+		lea	SorryNothing(pc),a1			; fallback if nothing's valid
+		
+	@cont:
+		moveq	#$0F,d1					; set number of columns to dump (maximum 16)
 		moveq	#$00,d2					; set number of rows to dump
 		move.w	#$0000,d3				; set to use palette line 0 (and to map behind object plane)
 		jsr	MapScreen				; map to screen planes
+		rts						; return
+		
+	@LoadTT_Text:
+		lea	TT_Text(pc),a1			; load location of "OPTION" letter to a1
+		bra.s	@cont
+	@LoadSS_Text:
+		lea	SS_Text(pc),a1			; load location of "OPTION" letter to a1
+		bra.s	@cont
+	@LoadII_Text:
+		lea	II_Text(pc),a1			; load location of "OPTION" letter to a1
+		bra.s	@cont
+		
+TT_Text:						; Offset: 00009440
+		dc.w	$0032
+		dc.w	$0025
+		dc.w	$0033
+		dc.w	$002F
+		dc.w	$0032
+		dc.w	$0034
+		dc.w	$0000
+		dc.w	$0028
+		dc.w	$002F
+		dc.w	$0034
+		dc.w	$0025
+		dc.w	$002C
+		dc.w	$0000
+		dc.w	$0000
+		dc.w	$0000
+		dc.w	$0000
+		even
+		rts						; return
+
+SS_Text:						; Offset: 00009440
+		dc.w	$0021
+		dc.w	$002D
+		dc.w	$0035
+		dc.w	$0033
+		dc.w	$0025
+		dc.w	$002D
+		dc.w	$0025
+		dc.w	$002E
+		dc.w	$0034
+		dc.w	$0000
+		dc.w	$0030
+		dc.w	$0021
+		dc.w	$0032
+		dc.w	$002B
+		dc.w	$0000
+		dc.w	$0000
+		even
+		rts						; return
+		
+II_Text:						; Offset: 00009440
+		dc.w	$0029
+		dc.w	$0033
+		dc.w	$002F
+		dc.w	$002C
+		dc.w	$0021
+		dc.w	$0034
+		dc.w	$0025
+		dc.w	$0024
+		dc.w	$0000
+		dc.w	$0029
+		dc.w	$0033
+		dc.w	$002C
+		dc.w	$0021
+		dc.w	$002E
+		dc.w	$0024
+		dc.w	$0000
+		even
 		rts						; return
 
 ; ===========================================================================
