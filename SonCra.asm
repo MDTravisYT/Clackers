@@ -19348,6 +19348,12 @@ SIR_RedBoard:						; Offset: 0000F884
 		addq.w	#$04,($FFFFFDC4).w			; increase title card counter
 
 SIR_RB_NoFinish:					; Offset: 0000F8B0
+		move.l	#$44100003,d0				; set V-Ram location to dump to
+		lea	SorryNothing(pc),a1			; load location of "OPTION" letter to a1
+		moveq	#$0D,d1					; set number of columns to dump (6 letters)
+		moveq	#$00,d2					; set number of rows to dump
+		move.w	#$0000,d3				; set to use palette line 0 (and to map behind object plane)
+		jsr	MapScreen				; map to screen planes
 		rts						; return
 
 ; ===========================================================================
