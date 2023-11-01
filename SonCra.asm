@@ -18270,15 +18270,6 @@ Levels_LoadHudArtSprites:				; Offset: 0000EFD4
 loc_EFF8:						; Offset: 0000EFF8
 		move.w	(a1)+,(a2)+				; dump sprites
 		dbf	d0,loc_EFF8				; repeat til all sprites are dumped
-
-; ---------------------------------------------------------------------------
-; The black bar that appears on the left side when pausing, only disappears
-; when unpaused and the leve is SSZ, this routine below makes sure of it so
-; it's intentional, but not sure "why".
-; ---------------------------------------------------------------------------
-
-		tst.w	($FFFFD834).w				; is World/Zone ID SSZ?
-		bne.s	loc_F00A				; if not, branch
 		move.b	#$00,($FFFFDA85).w			; remove the left Black bar block
 
 loc_F00A:						; Offset: 0000F00A
