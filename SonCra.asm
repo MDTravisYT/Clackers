@@ -10144,7 +10144,7 @@ loc_A45A:				; CODE XREF: ROM:0000A448j
 		sne	d1
 		andi.w	#6,d0
 		add.w	d2,d0
-		move.w	d0,$26(a6)
+		move.w	d0,$26(a6)	;	handles sonic's movement animation when going right
 		andi.b	#$18,d1
 		move.b	d1,$20(a6)
 		rts
@@ -10160,7 +10160,7 @@ loc_A488:				; CODE XREF: ROM:0000A464j
 		sne	d1
 		andi.w	#6,d0
 		add.w	d2,d0
-		move.w	d0,$26(a6)
+		move.w	d0,$26(a6)	;	handles sonic's movement animation when going left
 		andi.b	#$18,d1
 		eori.b	#$10,d1
 		move.b	d1,$20(a6)
