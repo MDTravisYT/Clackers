@@ -10206,7 +10206,7 @@ loc_A506:				; DATA XREF: ROM:0000A296o
 		beq.s	loc_A51E
 		tst.b	(a5)
 		bmi.s	loc_A530
-		bsr.w	sub_AA76
+		bsr.w	ObjSonic_ThrowPartner
 		bsr.w	ObjSonic_Jump
 		bra.s	loc_A530
 ; ---------------------------------------------------------------------------
@@ -10311,7 +10311,7 @@ locret_A618:				; CODE XREF: ROM:0000A604j
 
 loc_A61A:				; DATA XREF: ROM:0000A592o
 		bsr.w	sub_CBC0
-		bsr.w	sub_AA76
+		bsr.w	ObjSonic_ThrowPartner
 		jsr	sub_C49A
 		jsr	sub_C636
 		bne.s	loc_A632
@@ -10401,7 +10401,7 @@ loc_A6DC:				; CODE XREF: ROM:0000A6CCj
 
 loc_A6E8:				; DATA XREF: ROM:0000A67Co
 		bsr.w	sub_CBC0
-		bsr.w	sub_AA76
+		bsr.w	ObjSonic_ThrowPartner
 		jsr	sub_C49A
 		jsr	sub_C636
 		beq.s	locret_A72C
@@ -10774,7 +10774,7 @@ loc_AA6E:				; CODE XREF: ROM:0000AA5Ej
 ; =============== S U B	R O U T	I N E =======================================
 
 
-sub_AA76:				; CODE XREF: ROM:0000A514p
+ObjSonic_ThrowPartner:				; CODE XREF: ROM:0000A514p
 					; ROM:0000A61Ep ...
 		move.b	3(a5),d0
 		andi.b	#$70,d0	; 'p'
@@ -10790,9 +10790,9 @@ sub_AA76:				; CODE XREF: ROM:0000A514p
 		andi.b	#$F,2(a5)
 		andi.b	#$F,3(a5)
 
-locret_AAA2:				; CODE XREF: sub_AA76+8j sub_AA76+12j
+locret_AAA2:				; CODE XREF: ObjSonic_ThrowPartner+8j ObjSonic_ThrowPartner+12j
 		rts
-; End of function sub_AA76
+; End of function ObjSonic_ThrowPartner
 
 
 ; =============== S U B	R O U T	I N E =======================================
