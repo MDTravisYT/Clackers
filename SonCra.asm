@@ -11714,8 +11714,8 @@ locret_B386:				; CODE XREF: sub_B35A+8j sub_B35A+12j
 
 
 sub_B388:				; CODE XREF: ROM:0000ADCAp
-		move.b	3(a5),d0
-		andi.b	#$70,d0	; 'p'
+		move.b	$FFFFC93D,d0
+		andi.b	#$20,d0	; 'p'
 		beq.s	locret_B3DA
 		move.b	#4,7(a6)
 		clr.w	$28(a6)
@@ -11741,6 +11741,8 @@ loc_B3B8:				; CODE XREF: sub_B388+2Cj
 		asr.l	#6,d1
 		move.l	d0,$18(a6)
 		move.l	d1,$1C(a6)
+		move.b	#$A0,d0
+		bsr.w	Play_Sound_2
 		rts
 ; ---------------------------------------------------------------------------
 
