@@ -15,7 +15,7 @@
 ; Includes
 ; ---------------------------------------------------------------------------
 
-Combi	=	0
+Combi	=	1
 
 		include	"SonCraMacro.asm"
 
@@ -9856,7 +9856,7 @@ loc_A1BC:				; CODE XREF: ROM:0000A196j
 ; ---------------------------------------------------------------------------
 off_A1CE:	dc.l	loc_A26A			; something to do with stopping reflexes
 		dc.l	loc_AB30
-		dc.l	locret_B414
+		dc.l	loc_A26A
 		dc.l	locret_B416
 		dc.l	locret_B418
 		dc.l	locret_B41A
@@ -14184,7 +14184,7 @@ loc_C832:				; CODE XREF: ROM:0000C826j
 ; ---------------------------------------------------------------------------
 off_C84A:	dc.l	ANI_Sonic
 		dc.l	ANI_Tails
-		dc.l	0
+		dc.l	ANI_Sonic
 		dc.l	0
 		dc.l	0
 		dc.l	0
@@ -14192,7 +14192,7 @@ off_C84A:	dc.l	ANI_Sonic
 		dc.l	0
 		dc.l	PLCMAP_Sonic_MainIndex
 		dc.l	PLCMAP_Tails_MainIndex
-		dc.l	0
+		dc.l	PLCMAP_Sonic2_MainIndex
 		dc.l	0
 		dc.l	0
 		dc.l	0
@@ -14200,7 +14200,7 @@ off_C84A:	dc.l	ANI_Sonic
 		dc.l	0
 		dc.l	PLC_Sonic
 		dc.l	PLC_Tails
-		dc.l	0
+		dc.l	PLC_Sonic
 		dc.l	0
 		dc.l	0
 		dc.l	0
@@ -14208,7 +14208,7 @@ off_C84A:	dc.l	ANI_Sonic
 		dc.l	0
 		dc.l	MAP_Sonic
 		dc.l	MAP_Tails
-		dc.l	0
+		dc.l	MAP_Sonic2
 		dc.l	0
 		dc.l	0
 		dc.l	0
@@ -20490,11 +20490,17 @@ ANI_Sonic:
 PLCMAP_Sonic_MainIndex:
 	include	"PLCMAPANI\PLCMAP_IndxBlck_Sonic.asm"
 ; ---------------------------------------------------------------------------
+PLCMAP_Sonic2_MainIndex:
+	include	"PLCMAPANI\PLCMAP_IndxBlck_Sonic2.asm"
+; ---------------------------------------------------------------------------
 PLC_Sonic:
 	include	"PLCMAPANI\PLC_Sonic.asm"
 ; ---------------------------------------------------------------------------
 MAP_Sonic:
 	include	"PLCMAPANI\MAP_Sonic.asm"
+; ---------------------------------------------------------------------------
+MAP_Sonic2:
+	include	"PLCMAPANI\MAP_Sonic2.asm"
 ; ---------------------------------------------------------------------------
 ; ===========================================================================
 ; ---------------------------------------------------------------------------
