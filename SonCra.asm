@@ -1025,56 +1025,31 @@ CI_WaitZ80:						; Offset: 00000946
 ; ---------------------------------------------------------------------------
 
 GetControls:						; Offset: 0000096E
-		lea	($FFFFC938).w,a1
-		lea	($A10003).l,a0
-		lea	($FFFFC936).w,a2
-		bsr.w	sub_9D4
-		lea	($A10005).l,a0
-		lea	($FFFFC937).w,a2
-		bsr.w	sub_9D4
-		bsr.s	sub_992
-		rts
+		lea	($FFFFC93C).w,a0 ; address where joypad states are written
+		lea	($A10003).l,a1	; first	joypad port
+		bsr.s	@read		; do the first joypad
+		addq.w	#2,a1		; do the second	joypad
 
-sub_992:
-		moveq	#7,d0
-		cmpi.b	#7,($FFFFC936).w
-		bne.s	loc_9A0
-		subq.w	#4,d0
-		bra.s	loc_9A2
-
-loc_9A0:
-		subq.w	#1,d0
-
-loc_9A2:
-		cmpi.b	#7,($FFFFC937).w
-		bne.s	loc_9B0
-		subq.w	#4,d0
-		bcs.s	locret_9D2
-		bra.s	loc_9B2
-
-loc_9B0:
-		subq.w	#1,d0
-
-loc_9B2:
-		move.b	#$F,(a1)
-		clr.b	1(a1)
-		clr.w	2(a1)
-		clr.l	4(a1)
-		clr.l	8(a1)
-		clr.l	$C(a1)
-		lea	$10(a1),a1
-		dbf	d0,loc_9B2
-
-locret_9D2:
-		rts
-
-sub_9D4:
-		bsr.w	sub_A06
-		move.b	d0,(a2)
-		andi.w	#$E,d0
-		add.w	d0,d0
-		jsr	loc_9E6(pc,d0.w)
-		rts
+	@read:
+		move.b	#0,(a1)
+		nop	
+		nop	
+		move.b	(a1),d0
+		lsl.b	#2,d0
+		andi.b	#$C0,d0
+		move.b	#$40,(a1)
+		nop	
+		nop	
+		move.b	(a1),d1
+		andi.b	#$3F,d1
+		or.b	d1,d0
+		not.b	d0
+		move.b	(a0),d1
+		eor.b	d0,d1
+		move.b	d0,(a0)+
+		and.b	d0,d1
+		move.b	d1,(a0)+
+		rts	
 
 ; ===========================================================================
 ; ---------------------------------------------------------------------------
@@ -9951,8 +9926,8 @@ loc_A296:                               ; DATA XREF: ROM:0000A284↑o
 		beq.w	loc_A4B4
 		tst.b	(a5)
 		bpl.s	loc_A2CC
-		move.b	($FFFFD89E).w,d0	; Sonic's holding a b c
-		andi.b	#$70,d0	; 'p'
+		move.b	($FFFFC93C).w,d0	; Sonic's holding a b c
+		andi.b	#$50,d0	; 'p'
 		beq.s	loc_A2CC
 		clr.w	$2C(a6)
 		bra.s	loc_A2D4
@@ -10776,8 +10751,8 @@ loc_AA6E:				; CODE XREF: ROM:0000AA5Ej
 
 ObjSonic_ThrowPartner:				; CODE XREF: ROM:0000A514p
 					; ROM:0000A61Ep ...
-		move.b	3(a5),d0
-		andi.b	#$70,d0	; 'p'
+		move.b	$FFFFC93D,d0
+		andi.b	#$50,d0	; 'p'
 		beq.s	locret_AAA2
 
 	; Sonic Jump (start)
@@ -10799,8 +10774,8 @@ locret_AAA2:				; CODE XREF: ObjSonic_ThrowPartner+8j ObjSonic_ThrowPartner+12
 
 
 ObjSonic_Jump:				; CODE XREF: ROM:0000A518p
-		move.b	3(a5),d0
-		andi.b	#$70,d0	; 'p'
+		move.b	$FFFFC93D,d0
+		andi.b	#$20,d0	; 'p'
 		beq.s	locret_AAF6
 		move.b	#4,7(a6)
 		clr.w	$28(a6)
@@ -10900,8 +10875,8 @@ locret_AB48:
 		beq.w	loc_AD66
 		tst.b	(a5)
 		bpl.s	loc_AB92
-		move.b	($FFFFD89E).w,d0	; Tails' holding a b c
-		andi.b	#$70,d0	; 'p'
+		move.b	($FFFFC93C).w,d0	; Tails' holding a b c
+		andi.b	#$50,d0	; 'p'
 		beq.s	loc_AB92
 		clr.w	$2C(a6)
 		bra.s	loc_AB9A
