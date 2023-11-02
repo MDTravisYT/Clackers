@@ -10853,20 +10853,20 @@ loc_AB30:				; DATA XREF: ROM:0000A1D2o
 		moveq	#0,d0
 		move.b	7(a6),d0
 		pea	loc_C746(pc)
-        move.w  off_AB48(pc,d0.w),d0
-        jmp     off_AB48(pc,d0.w)
+        move.w  TailsIndex(pc,d0.w),d0
+        jmp     TailsIndex(pc,d0.w)
 ; ---------------------------------------------------------------------------
-off_AB48:       rts         ; DATA XREF: ROM:0000AB44↑o
+TailsIndex:       rts         ; DATA XREF: ROM:0000AB44↑o
                                         ; ROM:0000AB4A↓o ...
-                dc.w loc_AB5C-off_AB48
-                dc.w loc_AE3A-off_AB48
-                dc.w loc_AF20-off_AB48
-                dc.w loc_AF2E-off_AB48
-                dc.w loc_AFE0-off_AB48
-                dc.w loc_B240-off_AB48
-                dc.w loc_B274-off_AB48
-                dc.w loc_B2A8-off_AB48
-                dc.w loc_B32A-off_AB48
+                dc.w loc_AB5C-TailsIndex
+                dc.w loc_AE3A-TailsIndex
+                dc.w loc_AF20-TailsIndex
+                dc.w loc_AF2E-TailsIndex
+                dc.w loc_AFE0-TailsIndex
+                dc.w loc_B240-TailsIndex
+                dc.w loc_B274-TailsIndex
+                dc.w loc_B2A8-TailsIndex
+                dc.w loc_B32A-TailsIndex
 ; ---------------------------------------------------------------------------
 
 loc_AB5C:                               ; DATA XREF: ROM:0000AB4A↑o
@@ -11120,10 +11120,10 @@ loc_ADA2:				; CODE XREF: ROM:0000AD8Cj
 loc_ADB8:				; DATA XREF: ROM:0000AB5Co
 		cmpi.l	#$200,$26(a6)
 		beq.s	loc_ADD0
-		tst.b	(a5)
-		bmi.s	loc_ADE2
+	;	tst.b	(a5)
+	;	bmi.s	loc_ADE2
 		bsr.w	sub_B35A
-		bsr.w	sub_B388
+		bsr.w	ObjTails_Jump
 		bra.s	loc_ADE2
 ; ---------------------------------------------------------------------------
 
@@ -11713,9 +11713,9 @@ locret_B386:				; CODE XREF: sub_B35A+8j sub_B35A+12j
 ; =============== S U B	R O U T	I N E =======================================
 
 
-sub_B388:				; CODE XREF: ROM:0000ADCAp
+ObjTails_Jump:				; CODE XREF: ROM:0000ADCAp
 		move.b	3(a5),d0
-		andi.b	#$70,d0	; 'p'
+		andi.b	#$20,d0	; 'p'
 		beq.s	locret_B3DA
 		move.b	#4,7(a6)
 		clr.w	$28(a6)
@@ -11728,7 +11728,7 @@ sub_B388:				; CODE XREF: ROM:0000ADCAp
 		beq.s	loc_B3B8
 		neg.w	d0
 
-loc_B3B8:				; CODE XREF: sub_B388+2Cj
+loc_B3B8:				; CODE XREF: ObjTails_Jump+2Cj
 		move.w	$2C(a6),d2
 		muls.w	d2,d0
 		muls.w	d2,d1
@@ -11741,12 +11741,14 @@ loc_B3B8:				; CODE XREF: sub_B388+2Cj
 		asr.l	#6,d1
 		move.l	d0,$18(a6)
 		move.l	d1,$1C(a6)
+		move.b	#$A0,d0
+		bsr.w	Play_Sound_2
 		rts
 ; ---------------------------------------------------------------------------
 
-locret_B3DA:				; CODE XREF: sub_B388+8j
+locret_B3DA:				; CODE XREF: ObjTails_Jump+8j
 		rts
-; End of function sub_B388
+; End of function ObjTails_Jump
 
 
 ; =============== S U B	R O U T	I N E =======================================
