@@ -428,7 +428,7 @@ ThisHorizon_Call06:
 
 ; PSG1 Data
 ThisHorizon_PSG1:
-	smpsPSGvoice        sTone_06
+	smpsPSGvoice        sTone_04
 	smpsPSGAlterVol     $02
 	dc.b	nRst, $30, nC4, $06, nG3, nC3, nC4, nG3, nC3, nC4, nG3
 	smpsPSGAlterVol     $FE
@@ -441,7 +441,7 @@ horizon_Loop08:
 
 ; PSG2 Data
 ThisHorizon_PSG2:
-	smpsPSGvoice        sTone_06
+	smpsPSGvoice        sTone_04
 	smpsPSGAlterVol     $05
 	dc.b	nRst, $01
 	smpsAlterNote       $02
