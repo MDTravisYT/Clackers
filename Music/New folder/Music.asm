@@ -21,3 +21,8 @@ use_sk_samples			= 1
 	align	$8000
 
 		include		"Music/Electoria.asm"
+		include		"Music/Walkin.asm"
+		include		"Music/HyperHyper.asm"
+		include		"Music/EveningStar.asm"
+		include		"Music/Moonrise.asm"
+		include		"Music/GameOver.asm"

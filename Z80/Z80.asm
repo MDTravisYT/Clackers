@@ -2947,7 +2947,13 @@ byte_1139:	db    0,   0,	0,   0,	  1,   1,   1,	 1,   2,   2,	1
 		db    1,   1,	0,   0,	  0
 		db  84h, 01h, 82h, 04h
 MusicBanks:	db 02h,	02h, 02h, 02h, 02h, 02h, 02h, 02h, 02h, 02h, 02h	; DATA XREF: PlaySoundID+59o
-MusicPtrs:	dw 8000h, 888Ch, 8BDAh,	9210h, 972Bh, 9B10h, 9B10h, 9B10h, 9B10h, 9B10h, 9B10h ; DATA XREF: PlaySoundID+7Co
+MusicPtrs:	
+	dw 8000h 
+	dw 8873h 
+	dw 8BC0h	
+	dw 91F5h 
+	dw 96DCh 
+	dw 9AC0h
 					; SetInsFromSong+6o
 SFXPtrs:	dw 0C000h, 0C033h, 0C09Ah, 0C0C7h, 0C0EFh, 0C124h, 0C165h
 					; DATA XREF: PlaySoundID+148o
