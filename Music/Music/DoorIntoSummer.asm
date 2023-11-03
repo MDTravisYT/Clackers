@@ -1074,76 +1074,93 @@ DoorIntoSummer_Call0F:
 	dc.b	$0C, $0C, $0C, $0C, $0C, $06, $06, nRst, $30
 	smpsReturn
 
-; PWM1 Data
-DoorIntoSummer_PWM1:
-	smpsCall            DoorIntoSummer_Call02
-	dc.b	dCrackerKick, $18, nRst, $06, dCrackerKick, nRst, dCrackerKick, nRst, $18, dCrackerKick
-
-DoorIntoSummer_Jump02:
-	smpsCall            DoorIntoSummer_Call02
-	dc.b	dCrackerKick, $18, nRst, $12, dCrackerKick, $06, nRst, dCrackerKick, dCrackerKick, nRst, nRst, $18
-	smpsCall            DoorIntoSummer_Call02
-	dc.b	dCrackerKick, $18, nRst, $06, dCrackerKick, nRst, dCrackerKick, nRst, $30
-
-DoorIntoSummer_Loop08:
-	dc.b	nRst, $0C, dCrackerKick, nRst, $06, dCrackerKick, nRst, dCrackerKick, nRst, $30, dCrackerKick, $18
-	dc.b	nRst, $0C, dCrackerKick, nRst, dCrackerKick, nRst, $06, dCrackerKick, nRst, dCrackerKick
-	smpsLoop            $00, $03, DoorIntoSummer_Loop08
-	dc.b	nRst, $0C, dCrackerKick, nRst, $06, dCrackerKick, nRst, dCrackerKick, nRst, $18, dCrackerTimpaniLow, $0C
-	dc.b	dCrackerTimpaniLow, dCrackerKick, $18, nRst, $0C, dCrackerKick, nRst, dCrackerKick, dCrackerKick, $18
-
-DoorIntoSummer_Loop09:
-	smpsCall            DoorIntoSummer_Call02
-	dc.b	dCrackerKick, $18, nRst, $12, dCrackerKick, $06, nRst, dCrackerKick, dCrackerKick, nRst, nRst, $18
-	smpsLoop            $00, $04, DoorIntoSummer_Loop09
-	smpsCall            DoorIntoSummer_Call02
-	dc.b	dCrackerKick, $18, nRst, $06, dCrackerKick, nRst, dCrackerKick, nRst, $18, dCrackerKick
-	smpsJump            DoorIntoSummer_Jump02
-
-DoorIntoSummer_Call02:
-	dc.b	dCrackerKick, $18, nRst, $12, dCrackerKick, $06, nRst, dCrackerKick, dCrackerKick, nRst, nRst, $0C
-	dc.b	dCrackerKick, dCrackerKick, $18, nRst, $12, dCrackerKick, $06, nRst, dCrackerKick, dCrackerKick, nRst, nRst
-	dc.b	$18, dCrackerKick, $18, nRst, $12, dCrackerKick, $06, nRst, dCrackerKick, dCrackerKick, nRst, nRst
-	dc.b	$0C, dCrackerKick
-	smpsReturn
-
 ; PWM2 Data
 DoorIntoSummer_PWM2:
-	dc.b	nRst, $18, dCrackerSnare, nRst, dCrackerSnare, nRst, dCrackerSnare, nRst, dCrackerSnare, nRst, dCrackerSnare, nRst
-	dc.b	dCrackerSnare, nRst, dCrackerSnare, nRst, dCrackerSnare
-
-DoorIntoSummer_Jump01:
-	smpsCall            DoorIntoSummer_Call01
-	smpsCall            DoorIntoSummer_Call01
-	dc.b	nRst, $48, dCrackerSnare, $18, nRst, dCrackerSnare, nRst, dCrackerSnare, nRst, $48, dCrackerSnare, $18
-	dc.b	nRst, dCrackerSnare, nRst, dCrackerSnare, $06
-	smpsFMAlterVol      $F9
-	dc.b	dCrackerTimpaniHi
-	smpsFMAlterVol      $07
-	dc.b	dCrackerTimpaniMid
-	smpsFMAlterVol      $90
-	dc.b	dCrackerTimpaniLow
-	smpsFMAlterVol      $70
-	dc.b	nRst, $48, dCrackerSnare, $18, nRst, $0C, dCrackerSnare, dCrackerSnare, $18, nRst, dCrackerSnare, nRst
-	dc.b	$3C
-	smpsFMAlterVol      $90
-	dc.b	dCrackerTimpaniLow, $04, dCrackerTimpaniLow, dCrackerTimpaniLow
-	smpsFMAlterVol      $70
-	dc.b	dCrackerSnare, $0C, dCrackerSnare, nRst, $48, dCrackerSnare, $06, dCrackerSnare, dCrackerSnare, dCrackerSnare
-
-DoorIntoSummer_Loop06:
-	smpsCall            DoorIntoSummer_Call01
-	smpsLoop            $01, $04, DoorIntoSummer_Loop06
-
-DoorIntoSummer_Loop07:
-	dc.b	nRst, $18, dCrackerSnare
-	smpsLoop            $00, $08, DoorIntoSummer_Loop07
-	smpsJump            DoorIntoSummer_Jump01
-
-DoorIntoSummer_Call01:
-	dc.b	nRst, $18, dCrackerSnare
-	smpsLoop            $00, $07, DoorIntoSummer_Call01
-	dc.b	nRst, $0C, dCrackerSnare, dCrackerSnare, $06, dCrackerSnare, dCrackerTimpaniMid, $0C
+	dc.b	nC0,	$0C*2,	nCs0,	$09*2,	nC0,	$06*2,	nC0,	$03*2,	nC0,	$06*2,	nCs0,	$06*2
+	dc.b	nC0,	$06*2,	nC0,	$0C*2,	nCs0,	$09*2,	nC0,	$06*2,	nC0,	$03*2,	nC0,	$06*2
+	dc.b	nCs0,	$0C*2,	nC0,	$0C*2,	nCs0,	$09*2,	nC0,	$06*2,	nC0,	$03*2,	nC0,	$06*2
+	dc.b	nCs0,	$06*2,	nC0,	$06*2,	nC0,	$0C*2,	nCs0,	$03*2,	nC0,	$06*2,	nC0,	$0F*2
+	dc.b	nC0,	$0C*2,	nC0,	$0C*2,	nCs0,	$09*2,	nC0,	$06*2,	nC0,	$03*2,	nC0,	$06*2
+	dc.b	nCs0,	$06*2,	nC0,	$06*2,	nC0,	$0C*2,	nCs0,	$09*2,	nC0,	$06*2,	nC0,	$03*2
+	dc.b	nC0,	$06*2,	nCs0,	$0C*2,	nC0,	$0C*2,	nCs0,	$09*2,	nC0,	$06*2,	nC0,	$03*2
+	dc.b	nC0,	$06*2,	nCs0,	$06*2,	nC0,	$06*2,	nC0,	$0C*2,	nCs0,	$09*2,	nC0,	$06*2
+	dc.b	nC0,	$03*2,	nC0,	$06*2,	nCs0,	$03*2,	nCs0,	$03*2,	nEb0,	$06*2,	nC0,	$0C*2
+	dc.b	nCs0,	$09*2,	nC0,	$06*2,	nC0,	$03*2,	nC0,	$06*2,	nCs0,	$06*2,	nC0,	$06*2
+	dc.b	nC0,	$0C*2,	nCs0,	$09*2,	nC0,	$06*2,	nC0,	$03*2,	nC0,	$06*2,	nCs0,	$0C*2
+	dc.b	nC0,	$0C*2,	nCs0,	$09*2,	nC0,	$06*2,	nC0,	$03*2,	nC0,	$06*2,	nCs0,	$06*2
+	dc.b	nC0,	$06*2,	nC0,	$0C*2,	nCs0,	$03*2,	nC0,	$06*2,	nC0,	$09*2,	nCs0,	$06*2
+	dc.b	nCs0,	$03*2,	nCs0,	$03*2,	nEb0,	$0C*2,	nC0,	$09*2,	nC0,	$06*2,	nC0,	$0F*2
+	dc.b	nCs0,	$0C*2,	nC0,	$0C*2,	nCs0,	$06*2,	nC0,	$0C*2,	nC0,	$06*2,	nCs0,	$03*2
+	dc.b	nC0,	$06*2,	nC0,	$09*2,	nC0,	$09*2,	nC0,	$06*2,	nC0,	$0F*2,	nCs0,	$0C*2
+	dc.b	nC0,	$0C*2,	nCs0,	$06*2,	nC0,	$0C*2,	nC0,	$06*2,	nCs0,	$03*2,	nC0,	$03*2
+	dc.b	nEb0,	$03*2,	nE0,	$09*2,	nC0,	$09*2,	nC0,	$06*2,	nC0,	$0F*2,	nCs0,	$0C*2
+	dc.b	nC0,	$06*2,	nCs0,	$06*2,	nCs0,	$06*2,	nC0,	$0C*2,	nC0,	$06*2,	nCs0,	$03*2
+	dc.b	nC0,	$06*2,	nC0,	$09*2,	nC0,	$09*2,	nC0,	$06*2,	nC0,	$09*2,	nE0,	$02*2
+	dc.b	nE0,	$02*2,	nE0,	$02*2,	nCs0,	$06*2,	nCs0,	$06*2,	nC0,	$12*2,	nC0,	$0C*2
+	dc.b	nC0,	$06*2,	nCs0,	$03*2,	nCs0,	$03*2,	nCs0,	$03*2,	nCs0,	$03*2,	nC0,	$0C*2
+	dc.b	nCs0,	$09*2,	nC0,	$06*2,	nC0,	$03*2,	nC0,	$06*2,	nCs0,	$06*2,	nC0,	$06*2
+	dc.b	nC0,	$0C*2,	nCs0,	$09*2,	nC0,	$06*2,	nC0,	$03*2,	nC0,	$06*2,	nCs0,	$0C*2
+	dc.b	nC0,	$0C*2,	nCs0,	$09*2,	nC0,	$06*2,	nC0,	$03*2,	nC0,	$06*2,	nCs0,	$06*2
+	dc.b	nC0,	$06*2,	nC0,	$0C*2,	nCs0,	$09*2,	nC0,	$06*2,	nC0,	$03*2,	nC0,	$06*2
+	dc.b	nCs0,	$03*2,	nCs0,	$03*2,	nEb0,	$06*2,	nC0,	$0C*2,	nCs0,	$09*2,	nC0,	$06*2
+	dc.b	nC0,	$03*2,	nC0,	$06*2,	nCs0,	$06*2,	nC0,	$06*2,	nC0,	$0C*2,	nCs0,	$09*2
+	dc.b	nC0,	$06*2,	nC0,	$03*2,	nC0,	$06*2,	nCs0,	$0C*2,	nC0,	$0C*2,	nCs0,	$09*2
+	dc.b	nC0,	$06*2,	nC0,	$03*2,	nC0,	$06*2,	nCs0,	$06*2,	nC0,	$06*2,	nC0,	$0C*2
+	dc.b	nCs0,	$09*2,	nC0,	$06*2,	nC0,	$03*2,	nC0,	$06*2,	nCs0,	$03*2,	nCs0,	$03*2
+	dc.b	nEb0,	$06*2,	nC0,	$0C*2,	nCs0,	$09*2,	nC0,	$06*2,	nC0,	$03*2,	nC0,	$06*2
+	dc.b	nCs0,	$06*2,	nC0,	$06*2,	nC0,	$0C*2,	nCs0,	$09*2,	nC0,	$06*2,	nC0,	$03*2
+	dc.b	nC0,	$06*2,	nCs0,	$0C*2,	nC0,	$0C*2,	nCs0,	$09*2,	nC0,	$06*2,	nC0,	$03*2
+	dc.b	nC0,	$06*2,	nCs0,	$06*2,	nC0,	$06*2,	nC0,	$0C*2,	nCs0,	$09*2,	nC0,	$06*2
+	dc.b	nC0,	$03*2,	nC0,	$06*2,	nCs0,	$03*2,	nCs0,	$03*2,	nEb0,	$06*2,	nC0,	$0C*2
+	dc.b	nCs0,	$09*2,	nC0,	$06*2,	nC0,	$03*2,	nC0,	$06*2,	nCs0,	$06*2,	nC0,	$06*2
+	dc.b	nC0,	$0C*2,	nCs0,	$09*2,	nC0,	$06*2,	nC0,	$03*2,	nC0,	$06*2,	nCs0,	$0C*2
+	dc.b	nC0,	$0C*2,	nCs0,	$09*2,	nC0,	$06*2,	nC0,	$03*2,	nC0,	$06*2,	nCs0,	$06*2
+	dc.b	nC0,	$06*2,	nC0,	$0C*2,	nCs0,	$09*2,	nC0,	$06*2,	nC0,	$03*2,	nC0,	$06*2
+	dc.b	nCs0,	$03*2,	nCs0,	$03*2,	nEb0,	$06*2,	nC0,	$0C*2,	nCs0,	$09*2,	nC0,	$06*2
+	dc.b	nC0,	$03*2,	nC0,	$06*2,	nCs0,	$06*2,	nC0,	$06*2,	nC0,	$0C*2,	nCs0,	$09*2
+	dc.b	nC0,	$06*2,	nC0,	$03*2,	nC0,	$06*2,	nCs0,	$0C*2,	nC0,	$0C*2,	nCs0,	$09*2
+	dc.b	nC0,	$06*2,	nC0,	$03*2,	nC0,	$06*2,	nCs0,	$06*2,	nC0,	$06*2,	nC0,	$0C*2
+	dc.b	nCs0,	$03*2,	nC0,	$06*2,	nC0,	$0F*2,	nC0,	$0C*2,	nC0,	$0C*2,	nCs0,	$09*2
+	dc.b	nC0,	$06*2,	nC0,	$03*2,	nC0,	$06*2,	nCs0,	$06*2,	nC0,	$06*2,	nC0,	$0C*2
+	dc.b	nCs0,	$09*2,	nC0,	$06*2,	nC0,	$03*2,	nC0,	$06*2,	nCs0,	$0C*2,	nC0,	$0C*2
+	dc.b	nCs0,	$09*2,	nC0,	$06*2,	nC0,	$03*2,	nC0,	$06*2,	nCs0,	$06*2,	nC0,	$06*2
+	dc.b	nC0,	$0C*2,	nCs0,	$09*2,	nC0,	$06*2,	nC0,	$03*2,	nC0,	$06*2,	nCs0,	$03*2
+	dc.b	nCs0,	$03*2,	nEb0,	$06*2,	nC0,	$0C*2,	nCs0,	$09*2,	nC0,	$06*2,	nC0,	$03*2
+	dc.b	nC0,	$06*2,	nCs0,	$06*2,	nC0,	$06*2,	nC0,	$0C*2,	nCs0,	$09*2,	nC0,	$06*2
+	dc.b	nC0,	$03*2,	nC0,	$06*2,	nCs0,	$0C*2,	nC0,	$0C*2,	nCs0,	$09*2,	nC0,	$06*2
+	dc.b	nC0,	$03*2,	nC0,	$06*2,	nCs0,	$06*2,	nC0,	$06*2,	nC0,	$0C*2,	nCs0,	$03*2
+	dc.b	nC0,	$06*2,	nC0,	$09*2,	nCs0,	$06*2,	nCs0,	$03*2,	nCs0,	$03*2,	nEb0,	$0C*2
+	dc.b	nC0,	$09*2,	nC0,	$06*2,	nC0,	$0F*2,	nCs0,	$0C*2,	nC0,	$0C*2,	nCs0,	$06*2
+	dc.b	nC0,	$0C*2,	nC0,	$06*2,	nCs0,	$03*2,	nC0,	$06*2,	nC0,	$09*2,	nC0,	$09*2
+	dc.b	nC0,	$06*2,	nC0,	$0F*2,	nCs0,	$0C*2,	nC0,	$0C*2,	nCs0,	$06*2,	nC0,	$0C*2
+	dc.b	nC0,	$06*2,	nCs0,	$03*2,	nC0,	$03*2,	nEb0,	$03*2,	nE0,	$09*2,	nC0,	$09*2
+	dc.b	nC0,	$06*2,	nC0,	$0F*2,	nCs0,	$0C*2,	nC0,	$06*2,	nCs0,	$06*2,	nCs0,	$06*2
+	dc.b	nC0,	$0C*2,	nC0,	$06*2,	nCs0,	$03*2,	nC0,	$06*2,	nC0,	$09*2,	nC0,	$09*2
+	dc.b	nC0,	$06*2,	nC0,	$09*2,	nE0,	$02*2,	nE0,	$02*2,	nE0,	$02*2,	nCs0,	$06*2
+	dc.b	nCs0,	$06*2,	nC0,	$12*2,	nC0,	$0C*2,	nC0,	$06*2,	nC0,	$03*2,	nCs0,	$03*2
+	dc.b	nCs0,	$03*2,	nCs0,	$03*2,	nC0,	$0C*2,	nCs0,	$09*2,	nC0,	$06*2,	nC0,	$03*2
+	dc.b	nC0,	$06*2,	nCs0,	$06*2,	nC0,	$06*2,	nC0,	$0C*2,	nCs0,	$09*2,	nC0,	$06*2
+	dc.b	nC0,	$03*2,	nC0,	$06*2,	nCs0,	$0C*2,	nC0,	$0C*2,	nCs0,	$09*2,	nC0,	$06*2
+	dc.b	nC0,	$03*2,	nC0,	$06*2,	nCs0,	$06*2,	nC0,	$06*2,	nC0,	$0C*2,	nCs0,	$09*2
+	dc.b	nC0,	$06*2,	nC0,	$03*2,	nC0,	$06*2,	nCs0,	$03*2,	nCs0,	$03*2,	nEb0,	$06*2
+	dc.b	nC0,	$0C*2,	nCs0,	$09*2,	nC0,	$06*2,	nC0,	$03*2,	nC0,	$06*2,	nCs0,	$06*2
+	dc.b	nC0,	$06*2,	nC0,	$0C*2,	nCs0,	$09*2,	nC0,	$06*2,	nC0,	$03*2,	nC0,	$06*2
+	dc.b	nCs0,	$0C*2,	nC0,	$0C*2,	nCs0,	$09*2,	nC0,	$06*2,	nC0,	$03*2,	nC0,	$06*2
+	dc.b	nCs0,	$06*2,	nC0,	$06*2,	nC0,	$0C*2,	nCs0,	$09*2,	nC0,	$06*2,	nC0,	$03*2
+	dc.b	nC0,	$06*2,	nCs0,	$03*2,	nCs0,	$03*2,	nEb0,	$06*2,	nC0,	$0C*2,	nCs0,	$09*2
+	dc.b	nC0,	$06*2,	nC0,	$03*2,	nC0,	$06*2,	nCs0,	$06*2,	nC0,	$06*2,	nC0,	$0C*2
+	dc.b	nCs0,	$09*2,	nC0,	$06*2,	nC0,	$03*2,	nC0,	$06*2,	nCs0,	$0C*2,	nC0,	$0C*2
+	dc.b	nCs0,	$09*2,	nC0,	$06*2,	nC0,	$03*2,	nC0,	$06*2,	nCs0,	$06*2,	nC0,	$06*2
+	dc.b	nC0,	$0C*2,	nCs0,	$09*2,	nC0,	$06*2,	nC0,	$03*2,	nC0,	$06*2,	nCs0,	$03*2
+	dc.b	nCs0,	$03*2,	nEb0,	$06*2,	nC0,	$0C*2,	nCs0,	$09*2,	nC0,	$06*2,	nC0,	$03*2
+	dc.b	nC0,	$06*2,	nCs0,	$06*2,	nC0,	$06*2,	nC0,	$0C*2,	nCs0,	$09*2,	nC0,	$06*2
+	dc.b	nC0,	$03*2,	nC0,	$06*2,	nCs0,	$0C*2,	nC0,	$0C*2,	nCs0,	$09*2,	nC0,	$06*2
+	dc.b	nC0,	$03*2,	nC0,	$06*2,	nCs0,	$06*2,	nC0,	$06*2,	nC0,	$0C*2,	nCs0,	$09*2
+	dc.b	nC0,	$06*2,	nC0,	$03*2,	nC0,	$06*2,	nCs0,	$03*2,	nCs0,	$03*2,	nEb0,	$06*2
+	dc.b	nC0,	$0C*2,	nCs0,	$09*2,	nC0,	$06*2,	nC0,	$03*2,	nC0,	$06*2,	nCs0,	$06*2
+	dc.b	nC0,	$06*2,	nC0,	$0C*2,	nCs0,	$09*2,	nC0,	$06*2,	nC0,	$03*2,	nC0,	$06*2
+	dc.b	nCs0,	$0C*2,	nC0,	$0C*2,	nCs0,	$09*2,	nC0,	$06*2,	nC0,	$03*2,	nC0,	$06*2
+	dc.b	nCs0,	$06*2,	nC0,	$06*2,	nC0,	$0C*2,	nCs0,	$03*2,	nC0,	$06*2,	nC0,	$0F*2
 	smpsReturn
 
 

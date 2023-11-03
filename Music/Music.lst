@@ -1,4 +1,4 @@
- AS V1.42 Beta [Bld 251] - Source File Music.asm - Page 1 - 11/3/2023 0:6:8
+ AS V1.42 Beta [Bld 251] - Source File Music.asm - Page 1 - 11/3/2023 0:38:46
 
 
     1/       0 :                        z80_ptr function x,(x)<<8&$FF00|(x)>>8&$7F|$80
@@ -12190,7 +12190,7 @@
 (1)    2/    AA48 :                     
 (1)    2/    AA48 :                     
 (1)    3/    AA48 : (MACRO)             	smpsHeaderVoice     DoorIntoSummer_Voices
-(1)    3/    AA48 : EDB5                                dc.w    z80_ptr(DOORINTOSUMMER_VOICES)
+(1)    3/    AA48 : D0B8                                dc.w    z80_ptr(DOORINTOSUMMER_VOICES)
 (1)    4/    AA4A : (MACRO)             	smpsHeaderChan      $06, $03
 (1)    4/    AA4A : 0603                        dc.b    $06,$03
 (1)    5/    AA4C : (MACRO)             	smpsHeaderTempo     $01, $25
@@ -12200,7 +12200,7 @@
 (1)    6/    AA4E :                     
 (1)    7/    AA4E : (MACRO)             	smpsHeaderDAC       DoorIntoSummer_PWM2
 (1)    7/    AA4E :  (MACRO-2)                  CheckedChannelPointer DOORINTOSUMMER_PWM2
-(1)    7/    AA4E : 77B5                                dc.w    z80_ptr(DOORINTOSUMMER_PWM2)
+(1)    7/    AA4E : D3B4                                dc.w    z80_ptr(DOORINTOSUMMER_PWM2)
 (1)    7/    AA50 : 0000                                dc.w    $00
 (1)    8/    AA52 : (MACRO)             	smpsHeaderFM        DoorIntoSummer_FM1,	$00, $09
 (1)    8/    AA52 :  (MACRO-2)                  CheckedChannelPointer DOORINTOSUMMER_FM1
@@ -14220,541 +14220,585 @@
 (1) 1075/    B4D2 : (MACRO)             	smpsReturn
 (1) 1075/    B4D2 : F9                                  dc.b    $F9
 (1) 1076/    B4D3 :                     
-(1) 1077/    B4D3 :                     ; PWM1 Data
-(1) 1078/    B4D3 :                     DoorIntoSummer_PWM1:
-(1) 1079/    B4D3 : (MACRO)             	smpsCall            DoorIntoSummer_Call02
-(1) 1079/    B4D3 : F8                          dc.b    $F8
-(1) 1079/    B4D4 : 50B5                                dc.w    z80_ptr(DOORINTOSUMMER_CALL02)
-(1) 1080/    B4D6 : 8118 8006 8180 8180 	dc.b	dCrackerKick, $18, nRst, $06, dCrackerKick, nRst, dCrackerKick, nRst, $18, dCrackerKick
-             B4DE : 1881               
-(1) 1081/    B4E0 :                     
-(1) 1082/    B4E0 :                     DoorIntoSummer_Jump02:
-(1) 1083/    B4E0 : (MACRO)             	smpsCall            DoorIntoSummer_Call02
-(1) 1083/    B4E0 : F8                          dc.b    $F8
-(1) 1083/    B4E1 : 50B5                                dc.w    z80_ptr(DOORINTOSUMMER_CALL02)
-(1) 1084/    B4E3 : 8118 8012 8106 8081 	dc.b	dCrackerKick, $18, nRst, $12, dCrackerKick, $06, nRst, dCrackerKick, dCrackerKick, nRst, nRst, $18
-             B4EB : 8180 8018         
-(1) 1085/    B4EF : (MACRO)             	smpsCall            DoorIntoSummer_Call02
-(1) 1085/    B4EF : F8                          dc.b    $F8
-(1) 1085/    B4F0 : 50B5                                dc.w    z80_ptr(DOORINTOSUMMER_CALL02)
-(1) 1086/    B4F2 : 8118 8006 8180 8180 	dc.b	dCrackerKick, $18, nRst, $06, dCrackerKick, nRst, dCrackerKick, nRst, $30
-             B4FA : 30               
-(1) 1087/    B4FB :                     
-(1) 1088/    B4FB :                     DoorIntoSummer_Loop08:
-(1) 1089/    B4FB : 800C 8180 0681 8081 	dc.b	nRst, $0C, dCrackerKick, nRst, $06, dCrackerKick, nRst, dCrackerKick, nRst, $30, dCrackerKick, $18
-             B503 : 8030 8118         
-(1) 1090/    B507 : 800C 8180 8180 0681 	dc.b	nRst, $0C, dCrackerKick, nRst, dCrackerKick, nRst, $06, dCrackerKick, nRst, dCrackerKick
-             B50F : 8081               
-(1) 1091/    B511 : (MACRO)             	smpsLoop            $00, $03, DoorIntoSummer_Loop08
-(1) 1091/    B511 : F7                          dc.b    $F7
-(1) 1091/    B512 : 0003                        dc.b    $00,$03
-(1) 1091/    B514 : FBB4                                dc.w    z80_ptr(DOORINTOSUMMER_LOOP08)
-(1) 1092/    B516 : 800C 8180 0681 8081 	dc.b	nRst, $0C, dCrackerKick, nRst, $06, dCrackerKick, nRst, dCrackerKick, nRst, $18, dCrackerTimpaniLow, $0C
-             B51E : 8018 850C         
-(1) 1093/    B522 : 8581 1880 0C81 8081 	dc.b	dCrackerTimpaniLow, dCrackerKick, $18, nRst, $0C, dCrackerKick, nRst, dCrackerKick, dCrackerKick, $18
-             B52A : 8118               
-(1) 1094/    B52C :                     
-(1) 1095/    B52C :                     DoorIntoSummer_Loop09:
-(1) 1096/    B52C : (MACRO)             	smpsCall            DoorIntoSummer_Call02
-(1) 1096/    B52C : F8                          dc.b    $F8
-(1) 1096/    B52D : 50B5                                dc.w    z80_ptr(DOORINTOSUMMER_CALL02)
-(1) 1097/    B52F : 8118 8012 8106 8081 	dc.b	dCrackerKick, $18, nRst, $12, dCrackerKick, $06, nRst, dCrackerKick, dCrackerKick, nRst, nRst, $18
-             B537 : 8180 8018         
-(1) 1098/    B53B : (MACRO)             	smpsLoop            $00, $04, DoorIntoSummer_Loop09
-(1) 1098/    B53B : F7                          dc.b    $F7
-(1) 1098/    B53C : 0004                        dc.b    $00,$04
-(1) 1098/    B53E : 2CB5                                dc.w    z80_ptr(DOORINTOSUMMER_LOOP09)
-(1) 1099/    B540 : (MACRO)             	smpsCall            DoorIntoSummer_Call02
-(1) 1099/    B540 : F8                          dc.b    $F8
-(1) 1099/    B541 : 50B5                                dc.w    z80_ptr(DOORINTOSUMMER_CALL02)
-(1) 1100/    B543 : 8118 8006 8180 8180 	dc.b	dCrackerKick, $18, nRst, $06, dCrackerKick, nRst, dCrackerKick, nRst, $18, dCrackerKick
-             B54B : 1881               
-(1) 1101/    B54D : (MACRO)             	smpsJump            DoorIntoSummer_Jump02
-(1) 1101/    B54D : F6                          dc.b    $F6
-(1) 1101/    B54E : E0B4                                dc.w    z80_ptr(DOORINTOSUMMER_JUMP02)
-(1) 1102/    B550 :                     
-(1) 1103/    B550 :                     DoorIntoSummer_Call02:
-(1) 1104/    B550 : 8118 8012 8106 8081 	dc.b	dCrackerKick, $18, nRst, $12, dCrackerKick, $06, nRst, dCrackerKick, dCrackerKick, nRst, nRst, $0C
-             B558 : 8180 800C         
-(1) 1105/    B55C : 8181 1880 1281 0680 	dc.b	dCrackerKick, dCrackerKick, $18, nRst, $12, dCrackerKick, $06, nRst, dCrackerKick, dCrackerKick, nRst, nRst
-             B564 : 8181 8080         
-(1) 1106/    B568 : 1881 1880 1281 0680 	dc.b	$18, dCrackerKick, $18, nRst, $12, dCrackerKick, $06, nRst, dCrackerKick, dCrackerKick, nRst, nRst
-             B570 : 8181 8080         
-(1) 1107/    B574 : 0C81                	dc.b	$0C, dCrackerKick
-(1) 1108/    B576 : (MACRO)             	smpsReturn
-(1) 1108/    B576 : F9                                  dc.b    $F9
-(1) 1109/    B577 :                     
-(1) 1110/    B577 :                     ; PWM2 Data
-(1) 1111/    B577 :                     DoorIntoSummer_PWM2:
-(1) 1112/    B577 : 8018 8280 8280 8280 	dc.b	nRst, $18, dCrackerSnare, nRst, dCrackerSnare, nRst, dCrackerSnare, nRst, dCrackerSnare, nRst, dCrackerSnare, nRst
-             B57F : 8280 8280         
-(1) 1113/    B583 : 8280 8280 82        	dc.b	dCrackerSnare, nRst, dCrackerSnare, nRst, dCrackerSnare
-(1) 1114/    B588 :                     
-(1) 1115/    B588 :                     DoorIntoSummer_Jump01:
-(1) 1116/    B588 : (MACRO)             	smpsCall            DoorIntoSummer_Call01
-(1) 1116/    B588 : F8                          dc.b    $F8
-(1) 1116/    B589 : DCB5                                dc.w    z80_ptr(DOORINTOSUMMER_CALL01)
-(1) 1117/    B58B : (MACRO)             	smpsCall            DoorIntoSummer_Call01
-(1) 1117/    B58B : F8                          dc.b    $F8
-(1) 1117/    B58C : DCB5                                dc.w    z80_ptr(DOORINTOSUMMER_CALL01)
-(1) 1118/    B58E : 8048 8218 8082 8082 	dc.b	nRst, $48, dCrackerSnare, $18, nRst, dCrackerSnare, nRst, dCrackerSnare, nRst, $48, dCrackerSnare, $18
-             B596 : 8048 8218         
-(1) 1119/    B59A : 8082 8082 06        	dc.b	nRst, dCrackerSnare, nRst, dCrackerSnare, $06
-(1) 1120/    B59F : (MACRO)             	smpsFMAlterVol      $F9
-(1) 1120/    B59F : E6F9                                dc.b    $E6,$F9
-(1) 1121/    B5A1 : 83                  	dc.b	dCrackerTimpaniHi
-(1) 1122/    B5A2 : (MACRO)             	smpsFMAlterVol      $07
-(1) 1122/    B5A2 : E607                                dc.b    $E6,$07
-(1) 1123/    B5A4 : 84                  	dc.b	dCrackerTimpaniMid
-(1) 1124/    B5A5 : (MACRO)             	smpsFMAlterVol      $90
-(1) 1124/    B5A5 : E690                                dc.b    $E6,$90
-(1) 1125/    B5A7 : 85                  	dc.b	dCrackerTimpaniLow
-(1) 1126/    B5A8 : (MACRO)             	smpsFMAlterVol      $70
-(1) 1126/    B5A8 : E670                                dc.b    $E6,$70
-(1) 1127/    B5AA : 8048 8218 800C 8282 	dc.b	nRst, $48, dCrackerSnare, $18, nRst, $0C, dCrackerSnare, dCrackerSnare, $18, nRst, dCrackerSnare, nRst
-             B5B2 : 1880 8280         
-(1) 1128/    B5B6 : 3C                  	dc.b	$3C
-(1) 1129/    B5B7 : (MACRO)             	smpsFMAlterVol      $90
-(1) 1129/    B5B7 : E690                                dc.b    $E6,$90
-(1) 1130/    B5B9 : 8504 8585           	dc.b	dCrackerTimpaniLow, $04, dCrackerTimpaniLow, dCrackerTimpaniLow
-(1) 1131/    B5BD : (MACRO)             	smpsFMAlterVol      $70
-(1) 1131/    B5BD : E670                                dc.b    $E6,$70
-(1) 1132/    B5BF : 820C 8280 4882 0682 	dc.b	dCrackerSnare, $0C, dCrackerSnare, nRst, $48, dCrackerSnare, $06, dCrackerSnare, dCrackerSnare, dCrackerSnare
-             B5C7 : 8282               
-(1) 1133/    B5C9 :                     
-(1) 1134/    B5C9 :                     DoorIntoSummer_Loop06:
-(1) 1135/    B5C9 : (MACRO)             	smpsCall            DoorIntoSummer_Call01
-(1) 1135/    B5C9 : F8                          dc.b    $F8
-(1) 1135/    B5CA : DCB5                                dc.w    z80_ptr(DOORINTOSUMMER_CALL01)
-(1) 1136/    B5CC : (MACRO)             	smpsLoop            $01, $04, DoorIntoSummer_Loop06
-(1) 1136/    B5CC : F7                          dc.b    $F7
-(1) 1136/    B5CD : 0104                        dc.b    $01,$04
-(1) 1136/    B5CF : C9B5                                dc.w    z80_ptr(DOORINTOSUMMER_LOOP06)
-(1) 1137/    B5D1 :                     
-(1) 1138/    B5D1 :                     DoorIntoSummer_Loop07:
-(1) 1139/    B5D1 : 8018 82             	dc.b	nRst, $18, dCrackerSnare
-(1) 1140/    B5D4 : (MACRO)             	smpsLoop            $00, $08, DoorIntoSummer_Loop07
-(1) 1140/    B5D4 : F7                          dc.b    $F7
-(1) 1140/    B5D5 : 0008                        dc.b    $00,$08
-(1) 1140/    B5D7 : D1B5                                dc.w    z80_ptr(DOORINTOSUMMER_LOOP07)
-(1) 1141/    B5D9 : (MACRO)             	smpsJump            DoorIntoSummer_Jump01
-(1) 1141/    B5D9 : F6                          dc.b    $F6
-(1) 1141/    B5DA : 88B5                                dc.w    z80_ptr(DOORINTOSUMMER_JUMP01)
-(1) 1142/    B5DC :                     
-(1) 1143/    B5DC :                     DoorIntoSummer_Call01:
-(1) 1144/    B5DC : 8018 82             	dc.b	nRst, $18, dCrackerSnare
-(1) 1145/    B5DF : (MACRO)             	smpsLoop            $00, $07, DoorIntoSummer_Call01
-(1) 1145/    B5DF : F7                          dc.b    $F7
-(1) 1145/    B5E0 : 0007                        dc.b    $00,$07
-(1) 1145/    B5E2 : DCB5                                dc.w    z80_ptr(DOORINTOSUMMER_CALL01)
-(1) 1146/    B5E4 : 800C 8282 0682 840C 	dc.b	nRst, $0C, dCrackerSnare, dCrackerSnare, $06, dCrackerSnare, dCrackerTimpaniMid, $0C
-(1) 1147/    B5EC : (MACRO)             	smpsReturn
-(1) 1147/    B5EC : F9                                  dc.b    $F9
-(1) 1148/    B5ED :                     
-(1) 1149/    B5ED :                     
-(1) 1150/    B5ED :                     DoorIntoSummer_Voices:
-(1) 1151/    B5ED :                     ;	Voice $00
-(1) 1152/    B5ED :                     ;	$3A
-(1) 1153/    B5ED :                     ;	$01, $05, $32, $71, 	$CF, $95, $1F, $1F, 	$0E, $0F, $05, $0C
-(1) 1154/    B5ED :                     ;	$17, $06, $06, $07, 	$8F, $4F, $4F, $4F, 	$21, $13, $24, $80
-(1) 1155/    B5ED : (MACRO)             	smpsVcAlgorithm     $02
-(1) 1155/    B5ED : =$2                 vcAlgorithm set $02
-(1) 1156/    B5ED : (MACRO)             	smpsVcFeedback      $07
-(1) 1156/    B5ED : =$7                 vcFeedback set $07
-(1) 1157/    B5ED : (MACRO)             	smpsVcUnusedBits    $00
-(1) 1157/    B5ED : =$0                 vcUnusedBits set $00
-(1) 1157/    B5ED : =$0                 vcD1R1Unk set 0
-(1) 1157/    B5ED : =$0                 vcD1R2Unk set 0
-(1) 1157/    B5ED : =$0                 vcD1R3Unk set 0
-(1) 1157/    B5ED : =$0                 vcD1R4Unk set 0
-(1) 1158/    B5ED : (MACRO)             	smpsVcDetune        $07, $03, $00, $00
-(1) 1158/    B5ED : =$7                 vcDT1 set $07
-(1) 1158/    B5ED : =$3                 vcDT2 set $03
-(1) 1158/    B5ED : =$0                 vcDT3 set $00
-(1) 1158/    B5ED : =$0                 vcDT4 set $00
-(1) 1159/    B5ED : (MACRO)             	smpsVcCoarseFreq    $01, $02, $05, $01
-(1) 1159/    B5ED : =$1                 vcCF1 set $01
-(1) 1159/    B5ED : =$2                 vcCF2 set $02
-(1) 1159/    B5ED : =$5                 vcCF3 set $05
-(1) 1159/    B5ED : =$1                 vcCF4 set $01
-(1) 1160/    B5ED : (MACRO)             	smpsVcRateScale     $00, $00, $02, $03
-(1) 1160/    B5ED : =$0                 vcRS1 set $00
-(1) 1160/    B5ED : =$0                 vcRS2 set $00
-(1) 1160/    B5ED : =$2                 vcRS3 set $02
-(1) 1160/    B5ED : =$3                 vcRS4 set $03
-(1) 1161/    B5ED : (MACRO)             	smpsVcAttackRate    $1F, $1F, $15, $0F
-(1) 1161/    B5ED : =$1F                vcAR1 set $1F
-(1) 1161/    B5ED : =$1F                vcAR2 set $1F
-(1) 1161/    B5ED : =$15                vcAR3 set $15
-(1) 1161/    B5ED : =$F                 vcAR4 set $0F
-(1) 1162/    B5ED : (MACRO)             	smpsVcAmpMod        $00, $00, $00, $00
-(1) 1162/    B5ED : =$0                 vcAM1 set $00<<5
-(1) 1162/    B5ED : =$0                 vcAM2 set $00<<5
-(1) 1162/    B5ED : =$0                 vcAM3 set $00<<5
-(1) 1162/    B5ED : =$0                 vcAM4 set $00<<5
-(1) 1163/    B5ED : (MACRO)             	smpsVcDecayRate1    $0C, $05, $0F, $0E
-(1) 1163/    B5ED : =$C                 vcD1R1 set $0C
-(1) 1163/    B5ED : =$5                 vcD1R2 set $05
-(1) 1163/    B5ED : =$F                 vcD1R3 set $0F
-(1) 1163/    B5ED : =$E                 vcD1R4 set $0E
-(1) 1164/    B5ED : (MACRO)             	smpsVcDecayRate2    $07, $06, $06, $17
-(1) 1164/    B5ED : =$7                 vcD2R1 set $07
-(1) 1164/    B5ED : =$6                 vcD2R2 set $06
-(1) 1164/    B5ED : =$6                 vcD2R3 set $06
-(1) 1164/    B5ED : =$17                vcD2R4 set $17
-(1) 1165/    B5ED : (MACRO)             	smpsVcDecayLevel    $04, $04, $04, $08
-(1) 1165/    B5ED : =$4                 vcDL1 set $04
-(1) 1165/    B5ED : =$4                 vcDL2 set $04
-(1) 1165/    B5ED : =$4                 vcDL3 set $04
-(1) 1165/    B5ED : =$8                 vcDL4 set $08
-(1) 1166/    B5ED : (MACRO)             	smpsVcReleaseRate   $0F, $0F, $0F, $0F
-(1) 1166/    B5ED : =$F                 vcRR1 set $0F
-(1) 1166/    B5ED : =$F                 vcRR2 set $0F
-(1) 1166/    B5ED : =$F                 vcRR3 set $0F
-(1) 1166/    B5ED : =$F                 vcRR4 set $0F
-(1) 1167/    B5ED : (MACRO)             	smpsVcTotalLevel    $00, $24, $13, $21
-(1) 1167/    B5ED : =$0                 vcTL1 set $00
-(1) 1167/    B5ED : =$24                vcTL2 set $24
-(1) 1167/    B5ED : =$13                vcTL3 set $13
-(1) 1167/    B5ED : =$21                vcTL4 set $21
-(1) 1167/    B5ED : 3A                          dc.b    (vcUnusedBits<<6)+(vcFeedback<<3)+vcAlgorithm
-(1) 1167/    B5EE :                     ;   0     1     2     3     4     5     6     7
-(1) 1167/    B5EE :                     ;%1000,%1000,%1000,%1000,%1010,%1110,%1110,%1111
-(1) 1167/    B5EE : =$0                 vcTLMask4 set ((vcAlgorithm==7)<<7)
-(1) 1167/    B5EE : =$0                 vcTLMask3 set ((vcAlgorithm>=4)<<7)
-(1) 1167/    B5EE : =$0                 vcTLMask2 set ((vcAlgorithm>=5)<<7)
-(1) 1167/    B5EE : =$80                vcTLMask1 set $80
-(1) 1167/    B5EE :                     
-(1) 1167/    B5EE :                     
-(1) 1167/    B5EE : 0105 3271                           dc.b    (vcDT4<<4)+vcCF4       ,(vcDT3<<4)+vcCF3       ,(vcDT2<<4)+vcCF2       ,(vcDT1<<4)+vcCF1
-(1) 1167/    B5F2 : CF95 1F1F                           dc.b    (vcRS4<<6)+vcAR4       ,(vcRS3<<6)+vcAR3       ,(vcRS2<<6)+vcAR2       ,(vcRS1<<6)+vcAR1
-(1) 1167/    B5F6 : 0E0F 050C                           dc.b    vcAM4|vcD1R4|vcD1R4Unk ,vcAM3|vcD1R3|vcD1R3Unk ,vcAM2|vcD1R2|vcD1R2Unk ,vcAM1|vcD1R1|vcD1R1Unk
-(1) 1167/    B5FA : 1706 0607                           dc.b    vcD2R4                 ,vcD2R3                 ,vcD2R2                 ,vcD2R1
-(1) 1167/    B5FE : 8F4F 4F4F                           dc.b    (vcDL4<<4)+vcRR4       ,(vcDL3<<4)+vcRR3       ,(vcDL2<<4)+vcRR2       ,(vcDL1<<4)+vcRR1
-(1) 1167/    B602 : 2113 2480                           dc.b    vcTL4|vcTLMask4        ,vcTL3|vcTLMask3        ,vcTL2|vcTLMask2        ,vcTL1|vcTLMask1
-(1) 1168/    B606 :                     
-(1) 1169/    B606 :                     ;	Voice $01
-(1) 1170/    B606 :                     ;	$1C
-(1) 1171/    B606 :                     ;	$32, $02, $04, $34, 	$5F, $FF, $5F, $FF, 	$05, $05, $05, $07
-(1) 1172/    B606 :                     ;	$15, $10, $21, $13, 	$9F, $3F, $5F, $AF, 	$30, $80, $02, $84
-(1) 1173/    B606 : (MACRO)             	smpsVcAlgorithm     $04
-(1) 1173/    B606 : =$4                 vcAlgorithm set $04
-(1) 1174/    B606 : (MACRO)             	smpsVcFeedback      $03
-(1) 1174/    B606 : =$3                 vcFeedback set $03
-(1) 1175/    B606 : (MACRO)             	smpsVcUnusedBits    $00
-(1) 1175/    B606 : =$0                 vcUnusedBits set $00
-(1) 1175/    B606 : =$0                 vcD1R1Unk set 0
-(1) 1175/    B606 : =$0                 vcD1R2Unk set 0
-(1) 1175/    B606 : =$0                 vcD1R3Unk set 0
-(1) 1175/    B606 : =$0                 vcD1R4Unk set 0
-(1) 1176/    B606 : (MACRO)             	smpsVcDetune        $03, $00, $00, $03
-(1) 1176/    B606 : =$3                 vcDT1 set $03
-(1) 1176/    B606 : =$0                 vcDT2 set $00
-(1) 1176/    B606 : =$0                 vcDT3 set $00
-(1) 1176/    B606 : =$3                 vcDT4 set $03
-(1) 1177/    B606 : (MACRO)             	smpsVcCoarseFreq    $04, $04, $02, $02
-(1) 1177/    B606 : =$4                 vcCF1 set $04
-(1) 1177/    B606 : =$4                 vcCF2 set $04
-(1) 1177/    B606 : =$2                 vcCF3 set $02
-(1) 1177/    B606 : =$2                 vcCF4 set $02
-(1) 1178/    B606 : (MACRO)             	smpsVcRateScale     $03, $01, $03, $01
-(1) 1178/    B606 : =$3                 vcRS1 set $03
-(1) 1178/    B606 : =$1                 vcRS2 set $01
-(1) 1178/    B606 : =$3                 vcRS3 set $03
-(1) 1178/    B606 : =$1                 vcRS4 set $01
-(1) 1179/    B606 : (MACRO)             	smpsVcAttackRate    $3F, $1F, $3F, $1F
-(1) 1179/    B606 : =$3F                vcAR1 set $3F
-(1) 1179/    B606 : =$1F                vcAR2 set $1F
-(1) 1179/    B606 : =$3F                vcAR3 set $3F
-(1) 1179/    B606 : =$1F                vcAR4 set $1F
-(1) 1180/    B606 : (MACRO)             	smpsVcAmpMod        $00, $00, $00, $00
-(1) 1180/    B606 : =$0                 vcAM1 set $00<<5
-(1) 1180/    B606 : =$0                 vcAM2 set $00<<5
-(1) 1180/    B606 : =$0                 vcAM3 set $00<<5
-(1) 1180/    B606 : =$0                 vcAM4 set $00<<5
-(1) 1181/    B606 : (MACRO)             	smpsVcDecayRate1    $07, $05, $05, $05
-(1) 1181/    B606 : =$7                 vcD1R1 set $07
-(1) 1181/    B606 : =$5                 vcD1R2 set $05
-(1) 1181/    B606 : =$5                 vcD1R3 set $05
-(1) 1181/    B606 : =$5                 vcD1R4 set $05
-(1) 1182/    B606 : (MACRO)             	smpsVcDecayRate2    $13, $21, $10, $15
-(1) 1182/    B606 : =$13                vcD2R1 set $13
-(1) 1182/    B606 : =$21                vcD2R2 set $21
-(1) 1182/    B606 : =$10                vcD2R3 set $10
-(1) 1182/    B606 : =$15                vcD2R4 set $15
-(1) 1183/    B606 : (MACRO)             	smpsVcDecayLevel    $0A, $05, $03, $09
-(1) 1183/    B606 : =$A                 vcDL1 set $0A
-(1) 1183/    B606 : =$5                 vcDL2 set $05
-(1) 1183/    B606 : =$3                 vcDL3 set $03
-(1) 1183/    B606 : =$9                 vcDL4 set $09
-(1) 1184/    B606 : (MACRO)             	smpsVcReleaseRate   $0F, $0F, $0F, $0F
-(1) 1184/    B606 : =$F                 vcRR1 set $0F
-(1) 1184/    B606 : =$F                 vcRR2 set $0F
-(1) 1184/    B606 : =$F                 vcRR3 set $0F
-(1) 1184/    B606 : =$F                 vcRR4 set $0F
-(1) 1185/    B606 : (MACRO)             	smpsVcTotalLevel    $04, $02, $00, $30
-(1) 1185/    B606 : =$4                 vcTL1 set $04
-(1) 1185/    B606 : =$2                 vcTL2 set $02
-(1) 1185/    B606 : =$0                 vcTL3 set $00
-(1) 1185/    B606 : =$30                vcTL4 set $30
-(1) 1185/    B606 : 1C                          dc.b    (vcUnusedBits<<6)+(vcFeedback<<3)+vcAlgorithm
-(1) 1185/    B607 :                     ;   0     1     2     3     4     5     6     7
-(1) 1185/    B607 :                     ;%1000,%1000,%1000,%1000,%1010,%1110,%1110,%1111
-(1) 1185/    B607 : =$0                 vcTLMask4 set ((vcAlgorithm==7)<<7)
-(1) 1185/    B607 : =$80                vcTLMask3 set ((vcAlgorithm>=4)<<7)
-(1) 1185/    B607 : =$0                 vcTLMask2 set ((vcAlgorithm>=5)<<7)
-(1) 1185/    B607 : =$80                vcTLMask1 set $80
-(1) 1185/    B607 :                     
-(1) 1185/    B607 :                     
-(1) 1185/    B607 : 3202 0434                           dc.b    (vcDT4<<4)+vcCF4       ,(vcDT3<<4)+vcCF3       ,(vcDT2<<4)+vcCF2       ,(vcDT1<<4)+vcCF1
-(1) 1185/    B60B : 5FFF 5FFF                           dc.b    (vcRS4<<6)+vcAR4       ,(vcRS3<<6)+vcAR3       ,(vcRS2<<6)+vcAR2       ,(vcRS1<<6)+vcAR1
-(1) 1185/    B60F : 0505 0507                           dc.b    vcAM4|vcD1R4|vcD1R4Unk ,vcAM3|vcD1R3|vcD1R3Unk ,vcAM2|vcD1R2|vcD1R2Unk ,vcAM1|vcD1R1|vcD1R1Unk
-(1) 1185/    B613 : 1510 2113                           dc.b    vcD2R4                 ,vcD2R3                 ,vcD2R2                 ,vcD2R1
-(1) 1185/    B617 : 9F3F 5FAF                           dc.b    (vcDL4<<4)+vcRR4       ,(vcDL3<<4)+vcRR3       ,(vcDL2<<4)+vcRR2       ,(vcDL1<<4)+vcRR1
-(1) 1185/    B61B : 3080 0284                           dc.b    vcTL4|vcTLMask4        ,vcTL3|vcTLMask3        ,vcTL2|vcTLMask2        ,vcTL1|vcTLMask1
-(1) 1186/    B61F :                     
-(1) 1187/    B61F :                     ;	Voice $02
-(1) 1188/    B61F :                     ;	$2D
-(1) 1189/    B61F :                     ;	$06, $05, $04, $10, 	$1F, $5F, $5F, $5F, 	$05, $07, $0C, $0C
-(1) 1190/    B61F :                     ;	$17, $17, $12, $18, 	$9F, $9C, $9C, $9C, 	$2D, $80, $80, $80
-(1) 1191/    B61F : (MACRO)             	smpsVcAlgorithm     $05
-(1) 1191/    B61F : =$5                 vcAlgorithm set $05
-(1) 1192/    B61F : (MACRO)             	smpsVcFeedback      $05
-(1) 1192/    B61F : =$5                 vcFeedback set $05
-(1) 1193/    B61F : (MACRO)             	smpsVcUnusedBits    $00
-(1) 1193/    B61F : =$0                 vcUnusedBits set $00
-(1) 1193/    B61F : =$0                 vcD1R1Unk set 0
-(1) 1193/    B61F : =$0                 vcD1R2Unk set 0
-(1) 1193/    B61F : =$0                 vcD1R3Unk set 0
-(1) 1193/    B61F : =$0                 vcD1R4Unk set 0
-(1) 1194/    B61F : (MACRO)             	smpsVcDetune        $01, $00, $00, $00
-(1) 1194/    B61F : =$1                 vcDT1 set $01
-(1) 1194/    B61F : =$0                 vcDT2 set $00
-(1) 1194/    B61F : =$0                 vcDT3 set $00
-(1) 1194/    B61F : =$0                 vcDT4 set $00
-(1) 1195/    B61F : (MACRO)             	smpsVcCoarseFreq    $00, $04, $05, $06
-(1) 1195/    B61F : =$0                 vcCF1 set $00
-(1) 1195/    B61F : =$4                 vcCF2 set $04
-(1) 1195/    B61F : =$5                 vcCF3 set $05
-(1) 1195/    B61F : =$6                 vcCF4 set $06
-(1) 1196/    B61F : (MACRO)             	smpsVcRateScale     $01, $01, $01, $00
-(1) 1196/    B61F : =$1                 vcRS1 set $01
-(1) 1196/    B61F : =$1                 vcRS2 set $01
-(1) 1196/    B61F : =$1                 vcRS3 set $01
-(1) 1196/    B61F : =$0                 vcRS4 set $00
-(1) 1197/    B61F : (MACRO)             	smpsVcAttackRate    $1F, $1F, $1F, $1F
-(1) 1197/    B61F : =$1F                vcAR1 set $1F
-(1) 1197/    B61F : =$1F                vcAR2 set $1F
-(1) 1197/    B61F : =$1F                vcAR3 set $1F
-(1) 1197/    B61F : =$1F                vcAR4 set $1F
-(1) 1198/    B61F : (MACRO)             	smpsVcAmpMod        $00, $00, $00, $00
-(1) 1198/    B61F : =$0                 vcAM1 set $00<<5
-(1) 1198/    B61F : =$0                 vcAM2 set $00<<5
-(1) 1198/    B61F : =$0                 vcAM3 set $00<<5
-(1) 1198/    B61F : =$0                 vcAM4 set $00<<5
-(1) 1199/    B61F : (MACRO)             	smpsVcDecayRate1    $0C, $0C, $07, $05
-(1) 1199/    B61F : =$C                 vcD1R1 set $0C
-(1) 1199/    B61F : =$C                 vcD1R2 set $0C
-(1) 1199/    B61F : =$7                 vcD1R3 set $07
-(1) 1199/    B61F : =$5                 vcD1R4 set $05
-(1) 1200/    B61F : (MACRO)             	smpsVcDecayRate2    $18, $12, $17, $17
-(1) 1200/    B61F : =$18                vcD2R1 set $18
-(1) 1200/    B61F : =$12                vcD2R2 set $12
-(1) 1200/    B61F : =$17                vcD2R3 set $17
-(1) 1200/    B61F : =$17                vcD2R4 set $17
-(1) 1201/    B61F : (MACRO)             	smpsVcDecayLevel    $09, $09, $09, $09
-(1) 1201/    B61F : =$9                 vcDL1 set $09
-(1) 1201/    B61F : =$9                 vcDL2 set $09
-(1) 1201/    B61F : =$9                 vcDL3 set $09
-(1) 1201/    B61F : =$9                 vcDL4 set $09
-(1) 1202/    B61F : (MACRO)             	smpsVcReleaseRate   $0C, $0C, $0C, $0F
-(1) 1202/    B61F : =$C                 vcRR1 set $0C
-(1) 1202/    B61F : =$C                 vcRR2 set $0C
-(1) 1202/    B61F : =$C                 vcRR3 set $0C
-(1) 1202/    B61F : =$F                 vcRR4 set $0F
-(1) 1203/    B61F : (MACRO)             	smpsVcTotalLevel    $00, $00, $00, $2D
-(1) 1203/    B61F : =$0                 vcTL1 set $00
-(1) 1203/    B61F : =$0                 vcTL2 set $00
-(1) 1203/    B61F : =$0                 vcTL3 set $00
-(1) 1203/    B61F : =$2D                vcTL4 set $2D
-(1) 1203/    B61F : 2D                          dc.b    (vcUnusedBits<<6)+(vcFeedback<<3)+vcAlgorithm
-(1) 1203/    B620 :                     ;   0     1     2     3     4     5     6     7
-(1) 1203/    B620 :                     ;%1000,%1000,%1000,%1000,%1010,%1110,%1110,%1111
-(1) 1203/    B620 : =$0                 vcTLMask4 set ((vcAlgorithm==7)<<7)
-(1) 1203/    B620 : =$80                vcTLMask3 set ((vcAlgorithm>=4)<<7)
-(1) 1203/    B620 : =$80                vcTLMask2 set ((vcAlgorithm>=5)<<7)
-(1) 1203/    B620 : =$80                vcTLMask1 set $80
-(1) 1203/    B620 :                     
-(1) 1203/    B620 :                     
-(1) 1203/    B620 : 0605 0410                           dc.b    (vcDT4<<4)+vcCF4       ,(vcDT3<<4)+vcCF3       ,(vcDT2<<4)+vcCF2       ,(vcDT1<<4)+vcCF1
-(1) 1203/    B624 : 1F5F 5F5F                           dc.b    (vcRS4<<6)+vcAR4       ,(vcRS3<<6)+vcAR3       ,(vcRS2<<6)+vcAR2       ,(vcRS1<<6)+vcAR1
-(1) 1203/    B628 : 0507 0C0C                           dc.b    vcAM4|vcD1R4|vcD1R4Unk ,vcAM3|vcD1R3|vcD1R3Unk ,vcAM2|vcD1R2|vcD1R2Unk ,vcAM1|vcD1R1|vcD1R1Unk
-(1) 1203/    B62C : 1717 1218                           dc.b    vcD2R4                 ,vcD2R3                 ,vcD2R2                 ,vcD2R1
-(1) 1203/    B630 : 9F9C 9C9C                           dc.b    (vcDL4<<4)+vcRR4       ,(vcDL3<<4)+vcRR3       ,(vcDL2<<4)+vcRR2       ,(vcDL1<<4)+vcRR1
-(1) 1203/    B634 : 2D80 8080                           dc.b    vcTL4|vcTLMask4        ,vcTL3|vcTLMask3        ,vcTL2|vcTLMask2        ,vcTL1|vcTLMask1
-(1) 1204/    B638 :                     
-(1) 1205/    B638 :                     ;	Voice $03
-(1) 1206/    B638 :                     ;	$3D
-(1) 1207/    B638 :                     ;	$01, $01, $01, $01, 	$94, $19, $19, $19, 	$0F, $0D, $0D, $0D
-(1) 1208/    B638 :                     ;	$07, $04, $04, $04, 	$25, $1A, $1A, $1A, 	$15, $80, $80, $80
-(1) 1209/    B638 : (MACRO)             	smpsVcAlgorithm     $05
-(1) 1209/    B638 : =$5                 vcAlgorithm set $05
-(1) 1210/    B638 : (MACRO)             	smpsVcFeedback      $07
-(1) 1210/    B638 : =$7                 vcFeedback set $07
-(1) 1211/    B638 : (MACRO)             	smpsVcUnusedBits    $00
-(1) 1211/    B638 : =$0                 vcUnusedBits set $00
-(1) 1211/    B638 : =$0                 vcD1R1Unk set 0
-(1) 1211/    B638 : =$0                 vcD1R2Unk set 0
-(1) 1211/    B638 : =$0                 vcD1R3Unk set 0
-(1) 1211/    B638 : =$0                 vcD1R4Unk set 0
-(1) 1212/    B638 : (MACRO)             	smpsVcDetune        $00, $00, $00, $00
-(1) 1212/    B638 : =$0                 vcDT1 set $00
-(1) 1212/    B638 : =$0                 vcDT2 set $00
-(1) 1212/    B638 : =$0                 vcDT3 set $00
-(1) 1212/    B638 : =$0                 vcDT4 set $00
-(1) 1213/    B638 : (MACRO)             	smpsVcCoarseFreq    $01, $01, $01, $01
-(1) 1213/    B638 : =$1                 vcCF1 set $01
-(1) 1213/    B638 : =$1                 vcCF2 set $01
-(1) 1213/    B638 : =$1                 vcCF3 set $01
-(1) 1213/    B638 : =$1                 vcCF4 set $01
-(1) 1214/    B638 : (MACRO)             	smpsVcRateScale     $00, $00, $00, $02
-(1) 1214/    B638 : =$0                 vcRS1 set $00
-(1) 1214/    B638 : =$0                 vcRS2 set $00
-(1) 1214/    B638 : =$0                 vcRS3 set $00
-(1) 1214/    B638 : =$2                 vcRS4 set $02
-(1) 1215/    B638 : (MACRO)             	smpsVcAttackRate    $19, $19, $19, $14
-(1) 1215/    B638 : =$19                vcAR1 set $19
-(1) 1215/    B638 : =$19                vcAR2 set $19
-(1) 1215/    B638 : =$19                vcAR3 set $19
-(1) 1215/    B638 : =$14                vcAR4 set $14
-(1) 1216/    B638 : (MACRO)             	smpsVcAmpMod        $00, $00, $00, $00
-(1) 1216/    B638 : =$0                 vcAM1 set $00<<5
-(1) 1216/    B638 : =$0                 vcAM2 set $00<<5
-(1) 1216/    B638 : =$0                 vcAM3 set $00<<5
-(1) 1216/    B638 : =$0                 vcAM4 set $00<<5
-(1) 1217/    B638 : (MACRO)             	smpsVcDecayRate1    $0D, $0D, $0D, $0F
-(1) 1217/    B638 : =$D                 vcD1R1 set $0D
-(1) 1217/    B638 : =$D                 vcD1R2 set $0D
-(1) 1217/    B638 : =$D                 vcD1R3 set $0D
-(1) 1217/    B638 : =$F                 vcD1R4 set $0F
-(1) 1218/    B638 : (MACRO)             	smpsVcDecayRate2    $04, $04, $04, $07
-(1) 1218/    B638 : =$4                 vcD2R1 set $04
-(1) 1218/    B638 : =$4                 vcD2R2 set $04
-(1) 1218/    B638 : =$4                 vcD2R3 set $04
-(1) 1218/    B638 : =$7                 vcD2R4 set $07
-(1) 1219/    B638 : (MACRO)             	smpsVcDecayLevel    $01, $01, $01, $02
-(1) 1219/    B638 : =$1                 vcDL1 set $01
-(1) 1219/    B638 : =$1                 vcDL2 set $01
-(1) 1219/    B638 : =$1                 vcDL3 set $01
-(1) 1219/    B638 : =$2                 vcDL4 set $02
-(1) 1220/    B638 : (MACRO)             	smpsVcReleaseRate   $0A, $0A, $0A, $05
-(1) 1220/    B638 : =$A                 vcRR1 set $0A
-(1) 1220/    B638 : =$A                 vcRR2 set $0A
-(1) 1220/    B638 : =$A                 vcRR3 set $0A
-(1) 1220/    B638 : =$5                 vcRR4 set $05
-(1) 1221/    B638 : (MACRO)             	smpsVcTotalLevel    $00, $00, $00, $15
-(1) 1221/    B638 : =$0                 vcTL1 set $00
-(1) 1221/    B638 : =$0                 vcTL2 set $00
-(1) 1221/    B638 : =$0                 vcTL3 set $00
-(1) 1221/    B638 : =$15                vcTL4 set $15
-(1) 1221/    B638 : 3D                          dc.b    (vcUnusedBits<<6)+(vcFeedback<<3)+vcAlgorithm
-(1) 1221/    B639 :                     ;   0     1     2     3     4     5     6     7
-(1) 1221/    B639 :                     ;%1000,%1000,%1000,%1000,%1010,%1110,%1110,%1111
-(1) 1221/    B639 : =$0                 vcTLMask4 set ((vcAlgorithm==7)<<7)
-(1) 1221/    B639 : =$80                vcTLMask3 set ((vcAlgorithm>=4)<<7)
-(1) 1221/    B639 : =$80                vcTLMask2 set ((vcAlgorithm>=5)<<7)
-(1) 1221/    B639 : =$80                vcTLMask1 set $80
-(1) 1221/    B639 :                     
-(1) 1221/    B639 :                     
-(1) 1221/    B639 : 0101 0101                           dc.b    (vcDT4<<4)+vcCF4       ,(vcDT3<<4)+vcCF3       ,(vcDT2<<4)+vcCF2       ,(vcDT1<<4)+vcCF1
-(1) 1221/    B63D : 9419 1919                           dc.b    (vcRS4<<6)+vcAR4       ,(vcRS3<<6)+vcAR3       ,(vcRS2<<6)+vcAR2       ,(vcRS1<<6)+vcAR1
-(1) 1221/    B641 : 0F0D 0D0D                           dc.b    vcAM4|vcD1R4|vcD1R4Unk ,vcAM3|vcD1R3|vcD1R3Unk ,vcAM2|vcD1R2|vcD1R2Unk ,vcAM1|vcD1R1|vcD1R1Unk
-(1) 1221/    B645 : 0704 0404                           dc.b    vcD2R4                 ,vcD2R3                 ,vcD2R2                 ,vcD2R1
-(1) 1221/    B649 : 251A 1A1A                           dc.b    (vcDL4<<4)+vcRR4       ,(vcDL3<<4)+vcRR3       ,(vcDL2<<4)+vcRR2       ,(vcDL1<<4)+vcRR1
-(1) 1221/    B64D : 1580 8080                           dc.b    vcTL4|vcTLMask4        ,vcTL3|vcTLMask3        ,vcTL2|vcTLMask2        ,vcTL1|vcTLMask1
-(1) 1222/    B651 :                     
-(1) 1223/    B651 :                     ;	Voice $04
-(1) 1224/    B651 :                     ;	$3C
-(1) 1225/    B651 :                     ;	$07, $01, $08, $04, 	$5F, $9F, $9F, $5F, 	$16, $1F, $16, $1F
-(1) 1226/    B651 :                     ;	$09, $0F, $16, $11, 	$6F, $0F, $AF, $0F, 	$16, $80, $11, $80
-(1) 1227/    B651 : (MACRO)             	smpsVcAlgorithm     $04
-(1) 1227/    B651 : =$4                 vcAlgorithm set $04
-(1) 1228/    B651 : (MACRO)             	smpsVcFeedback      $07
-(1) 1228/    B651 : =$7                 vcFeedback set $07
-(1) 1229/    B651 : (MACRO)             	smpsVcUnusedBits    $00
-(1) 1229/    B651 : =$0                 vcUnusedBits set $00
-(1) 1229/    B651 : =$0                 vcD1R1Unk set 0
-(1) 1229/    B651 : =$0                 vcD1R2Unk set 0
-(1) 1229/    B651 : =$0                 vcD1R3Unk set 0
-(1) 1229/    B651 : =$0                 vcD1R4Unk set 0
-(1) 1230/    B651 : (MACRO)             	smpsVcDetune        $00, $00, $00, $00
-(1) 1230/    B651 : =$0                 vcDT1 set $00
-(1) 1230/    B651 : =$0                 vcDT2 set $00
-(1) 1230/    B651 : =$0                 vcDT3 set $00
-(1) 1230/    B651 : =$0                 vcDT4 set $00
-(1) 1231/    B651 : (MACRO)             	smpsVcCoarseFreq    $04, $08, $01, $07
-(1) 1231/    B651 : =$4                 vcCF1 set $04
-(1) 1231/    B651 : =$8                 vcCF2 set $08
-(1) 1231/    B651 : =$1                 vcCF3 set $01
-(1) 1231/    B651 : =$7                 vcCF4 set $07
-(1) 1232/    B651 : (MACRO)             	smpsVcRateScale     $01, $02, $02, $01
-(1) 1232/    B651 : =$1                 vcRS1 set $01
-(1) 1232/    B651 : =$2                 vcRS2 set $02
-(1) 1232/    B651 : =$2                 vcRS3 set $02
-(1) 1232/    B651 : =$1                 vcRS4 set $01
-(1) 1233/    B651 : (MACRO)             	smpsVcAttackRate    $1F, $1F, $1F, $1F
-(1) 1233/    B651 : =$1F                vcAR1 set $1F
-(1) 1233/    B651 : =$1F                vcAR2 set $1F
-(1) 1233/    B651 : =$1F                vcAR3 set $1F
-(1) 1233/    B651 : =$1F                vcAR4 set $1F
-(1) 1234/    B651 : (MACRO)             	smpsVcAmpMod        $00, $00, $00, $00
-(1) 1234/    B651 : =$0                 vcAM1 set $00<<5
-(1) 1234/    B651 : =$0                 vcAM2 set $00<<5
-(1) 1234/    B651 : =$0                 vcAM3 set $00<<5
-(1) 1234/    B651 : =$0                 vcAM4 set $00<<5
-(1) 1235/    B651 : (MACRO)             	smpsVcDecayRate1    $1F, $16, $1F, $16
-(1) 1235/    B651 : =$1F                vcD1R1 set $1F
-(1) 1235/    B651 : =$16                vcD1R2 set $16
-(1) 1235/    B651 : =$1F                vcD1R3 set $1F
-(1) 1235/    B651 : =$16                vcD1R4 set $16
-(1) 1236/    B651 : (MACRO)             	smpsVcDecayRate2    $11, $16, $0F, $09
-(1) 1236/    B651 : =$11                vcD2R1 set $11
-(1) 1236/    B651 : =$16                vcD2R2 set $16
-(1) 1236/    B651 : =$F                 vcD2R3 set $0F
-(1) 1236/    B651 : =$9                 vcD2R4 set $09
-(1) 1237/    B651 : (MACRO)             	smpsVcDecayLevel    $00, $0A, $00, $06
-(1) 1237/    B651 : =$0                 vcDL1 set $00
-(1) 1237/    B651 : =$A                 vcDL2 set $0A
-(1) 1237/    B651 : =$0                 vcDL3 set $00
-(1) 1237/    B651 : =$6                 vcDL4 set $06
-(1) 1238/    B651 : (MACRO)             	smpsVcReleaseRate   $0F, $0F, $0F, $0F
-(1) 1238/    B651 : =$F                 vcRR1 set $0F
-(1) 1238/    B651 : =$F                 vcRR2 set $0F
-(1) 1238/    B651 : =$F                 vcRR3 set $0F
-(1) 1238/    B651 : =$F                 vcRR4 set $0F
-(1) 1239/    B651 : (MACRO)             	smpsVcTotalLevel    $00, $11, $00, $16
-(1) 1239/    B651 : =$0                 vcTL1 set $00
-(1) 1239/    B651 : =$11                vcTL2 set $11
-(1) 1239/    B651 : =$0                 vcTL3 set $00
-(1) 1239/    B651 : =$16                vcTL4 set $16
-(1) 1239/    B651 : 3C                          dc.b    (vcUnusedBits<<6)+(vcFeedback<<3)+vcAlgorithm
-(1) 1239/    B652 :                     ;   0     1     2     3     4     5     6     7
-(1) 1239/    B652 :                     ;%1000,%1000,%1000,%1000,%1010,%1110,%1110,%1111
-(1) 1239/    B652 : =$0                 vcTLMask4 set ((vcAlgorithm==7)<<7)
-(1) 1239/    B652 : =$80                vcTLMask3 set ((vcAlgorithm>=4)<<7)
-(1) 1239/    B652 : =$0                 vcTLMask2 set ((vcAlgorithm>=5)<<7)
-(1) 1239/    B652 : =$80                vcTLMask1 set $80
-(1) 1239/    B652 :                     
-(1) 1239/    B652 :                     
-(1) 1239/    B652 : 0701 0804                           dc.b    (vcDT4<<4)+vcCF4       ,(vcDT3<<4)+vcCF3       ,(vcDT2<<4)+vcCF2       ,(vcDT1<<4)+vcCF1
-(1) 1239/    B656 : 5F9F 9F5F                           dc.b    (vcRS4<<6)+vcAR4       ,(vcRS3<<6)+vcAR3       ,(vcRS2<<6)+vcAR2       ,(vcRS1<<6)+vcAR1
-(1) 1239/    B65A : 161F 161F                           dc.b    vcAM4|vcD1R4|vcD1R4Unk ,vcAM3|vcD1R3|vcD1R3Unk ,vcAM2|vcD1R2|vcD1R2Unk ,vcAM1|vcD1R1|vcD1R1Unk
-(1) 1239/    B65E : 090F 1611                           dc.b    vcD2R4                 ,vcD2R3                 ,vcD2R2                 ,vcD2R1
-(1) 1239/    B662 : 6F0F AF0F                           dc.b    (vcDL4<<4)+vcRR4       ,(vcDL3<<4)+vcRR3       ,(vcDL2<<4)+vcRR2       ,(vcDL1<<4)+vcRR1
-(1) 1239/    B666 : 1680 1180                           dc.b    vcTL4|vcTLMask4        ,vcTL3|vcTLMask3        ,vcTL2|vcTLMask2        ,vcTL1|vcTLMask1
-(1) 1240/    B66A :                     
-(1) 1241/    B66A :                     
- AS V1.42 Beta [Bld 251] - Source File Music.asm - Page 2 - 11/3/2023 0:6:8
+(1) 1077/    B4D3 :                     ; PWM2 Data
+(1) 1078/    B4D3 :                     DoorIntoSummer_PWM2:
+(1) 1079/    B4D3 : 8118 8212 810C 8106 	dc.b	nC0,	$0C*2,	nCs0,	$09*2,	nC0,	$06*2,	nC0,	$03*2,	nC0,	$06*2,	nCs0,	$06*2
+             B4DB : 810C 820C         
+(1) 1080/    B4DF : 810C 8118 8212 810C 	dc.b	nC0,	$06*2,	nC0,	$0C*2,	nCs0,	$09*2,	nC0,	$06*2,	nC0,	$03*2,	nC0,	$06*2
+             B4E7 : 8106 810C         
+(1) 1081/    B4EB : 8218 8118 8212 810C 	dc.b	nCs0,	$0C*2,	nC0,	$0C*2,	nCs0,	$09*2,	nC0,	$06*2,	nC0,	$03*2,	nC0,	$06*2
+             B4F3 : 8106 810C         
+(1) 1082/    B4F7 : 820C 810C 8118 8206 	dc.b	nCs0,	$06*2,	nC0,	$06*2,	nC0,	$0C*2,	nCs0,	$03*2,	nC0,	$06*2,	nC0,	$0F*2
+             B4FF : 810C 811E         
+(1) 1083/    B503 : 8118 8118 8212 810C 	dc.b	nC0,	$0C*2,	nC0,	$0C*2,	nCs0,	$09*2,	nC0,	$06*2,	nC0,	$03*2,	nC0,	$06*2
+             B50B : 8106 810C         
+(1) 1084/    B50F : 820C 810C 8118 8212 	dc.b	nCs0,	$06*2,	nC0,	$06*2,	nC0,	$0C*2,	nCs0,	$09*2,	nC0,	$06*2,	nC0,	$03*2
+             B517 : 810C 8106         
+(1) 1085/    B51B : 810C 8218 8118 8212 	dc.b	nC0,	$06*2,	nCs0,	$0C*2,	nC0,	$0C*2,	nCs0,	$09*2,	nC0,	$06*2,	nC0,	$03*2
+             B523 : 810C 8106         
+(1) 1086/    B527 : 810C 820C 810C 8118 	dc.b	nC0,	$06*2,	nCs0,	$06*2,	nC0,	$06*2,	nC0,	$0C*2,	nCs0,	$09*2,	nC0,	$06*2
+             B52F : 8212 810C         
+(1) 1087/    B533 : 8106 810C 8206 8206 	dc.b	nC0,	$03*2,	nC0,	$06*2,	nCs0,	$03*2,	nCs0,	$03*2,	nEb0,	$06*2,	nC0,	$0C*2
+             B53B : 840C 8118         
+(1) 1088/    B53F : 8212 810C 8106 810C 	dc.b	nCs0,	$09*2,	nC0,	$06*2,	nC0,	$03*2,	nC0,	$06*2,	nCs0,	$06*2,	nC0,	$06*2
+             B547 : 820C 810C         
+(1) 1089/    B54B : 8118 8212 810C 8106 	dc.b	nC0,	$0C*2,	nCs0,	$09*2,	nC0,	$06*2,	nC0,	$03*2,	nC0,	$06*2,	nCs0,	$0C*2
+             B553 : 810C 8218         
+(1) 1090/    B557 : 8118 8212 810C 8106 	dc.b	nC0,	$0C*2,	nCs0,	$09*2,	nC0,	$06*2,	nC0,	$03*2,	nC0,	$06*2,	nCs0,	$06*2
+             B55F : 810C 820C         
+(1) 1091/    B563 : 810C 8118 8206 810C 	dc.b	nC0,	$06*2,	nC0,	$0C*2,	nCs0,	$03*2,	nC0,	$06*2,	nC0,	$09*2,	nCs0,	$06*2
+             B56B : 8112 820C         
+(1) 1092/    B56F : 8206 8206 8418 8112 	dc.b	nCs0,	$03*2,	nCs0,	$03*2,	nEb0,	$0C*2,	nC0,	$09*2,	nC0,	$06*2,	nC0,	$0F*2
+             B577 : 810C 811E         
+(1) 1093/    B57B : 8218 8118 820C 8118 	dc.b	nCs0,	$0C*2,	nC0,	$0C*2,	nCs0,	$06*2,	nC0,	$0C*2,	nC0,	$06*2,	nCs0,	$03*2
+             B583 : 810C 8206         
+(1) 1094/    B587 : 810C 8112 8112 810C 	dc.b	nC0,	$06*2,	nC0,	$09*2,	nC0,	$09*2,	nC0,	$06*2,	nC0,	$0F*2,	nCs0,	$0C*2
+             B58F : 811E 8218         
+(1) 1095/    B593 : 8118 820C 8118 810C 	dc.b	nC0,	$0C*2,	nCs0,	$06*2,	nC0,	$0C*2,	nC0,	$06*2,	nCs0,	$03*2,	nC0,	$03*2
+             B59B : 8206 8106         
+(1) 1096/    B59F : 8406 8512 8112 810C 	dc.b	nEb0,	$03*2,	nE0,	$09*2,	nC0,	$09*2,	nC0,	$06*2,	nC0,	$0F*2,	nCs0,	$0C*2
+             B5A7 : 811E 8218         
+(1) 1097/    B5AB : 810C 820C 820C 8118 	dc.b	nC0,	$06*2,	nCs0,	$06*2,	nCs0,	$06*2,	nC0,	$0C*2,	nC0,	$06*2,	nCs0,	$03*2
+             B5B3 : 810C 8206         
+(1) 1098/    B5B7 : 810C 8112 8112 810C 	dc.b	nC0,	$06*2,	nC0,	$09*2,	nC0,	$09*2,	nC0,	$06*2,	nC0,	$09*2,	nE0,	$02*2
+             B5BF : 8112 8504         
+(1) 1099/    B5C3 : 8504 8504 820C 820C 	dc.b	nE0,	$02*2,	nE0,	$02*2,	nCs0,	$06*2,	nCs0,	$06*2,	nC0,	$12*2,	nC0,	$0C*2
+             B5CB : 8124 8118         
+(1) 1100/    B5CF : 810C 8206 8206 8206 	dc.b	nC0,	$06*2,	nCs0,	$03*2,	nCs0,	$03*2,	nCs0,	$03*2,	nCs0,	$03*2,	nC0,	$0C*2
+             B5D7 : 8206 8118         
+(1) 1101/    B5DB : 8212 810C 8106 810C 	dc.b	nCs0,	$09*2,	nC0,	$06*2,	nC0,	$03*2,	nC0,	$06*2,	nCs0,	$06*2,	nC0,	$06*2
+             B5E3 : 820C 810C         
+(1) 1102/    B5E7 : 8118 8212 810C 8106 	dc.b	nC0,	$0C*2,	nCs0,	$09*2,	nC0,	$06*2,	nC0,	$03*2,	nC0,	$06*2,	nCs0,	$0C*2
+             B5EF : 810C 8218         
+(1) 1103/    B5F3 : 8118 8212 810C 8106 	dc.b	nC0,	$0C*2,	nCs0,	$09*2,	nC0,	$06*2,	nC0,	$03*2,	nC0,	$06*2,	nCs0,	$06*2
+             B5FB : 810C 820C         
+(1) 1104/    B5FF : 810C 8118 8212 810C 	dc.b	nC0,	$06*2,	nC0,	$0C*2,	nCs0,	$09*2,	nC0,	$06*2,	nC0,	$03*2,	nC0,	$06*2
+             B607 : 8106 810C         
+(1) 1105/    B60B : 8206 8206 840C 8118 	dc.b	nCs0,	$03*2,	nCs0,	$03*2,	nEb0,	$06*2,	nC0,	$0C*2,	nCs0,	$09*2,	nC0,	$06*2
+             B613 : 8212 810C         
+(1) 1106/    B617 : 8106 810C 820C 810C 	dc.b	nC0,	$03*2,	nC0,	$06*2,	nCs0,	$06*2,	nC0,	$06*2,	nC0,	$0C*2,	nCs0,	$09*2
+             B61F : 8118 8212         
+(1) 1107/    B623 : 810C 8106 810C 8218 	dc.b	nC0,	$06*2,	nC0,	$03*2,	nC0,	$06*2,	nCs0,	$0C*2,	nC0,	$0C*2,	nCs0,	$09*2
+             B62B : 8118 8212         
+(1) 1108/    B62F : 810C 8106 810C 820C 	dc.b	nC0,	$06*2,	nC0,	$03*2,	nC0,	$06*2,	nCs0,	$06*2,	nC0,	$06*2,	nC0,	$0C*2
+             B637 : 810C 8118         
+(1) 1109/    B63B : 8212 810C 8106 810C 	dc.b	nCs0,	$09*2,	nC0,	$06*2,	nC0,	$03*2,	nC0,	$06*2,	nCs0,	$03*2,	nCs0,	$03*2
+             B643 : 8206 8206         
+(1) 1110/    B647 : 840C 8118 8212 810C 	dc.b	nEb0,	$06*2,	nC0,	$0C*2,	nCs0,	$09*2,	nC0,	$06*2,	nC0,	$03*2,	nC0,	$06*2
+             B64F : 8106 810C         
+(1) 1111/    B653 : 820C 810C 8118 8212 	dc.b	nCs0,	$06*2,	nC0,	$06*2,	nC0,	$0C*2,	nCs0,	$09*2,	nC0,	$06*2,	nC0,	$03*2
+             B65B : 810C 8106         
+(1) 1112/    B65F : 810C 8218 8118 8212 	dc.b	nC0,	$06*2,	nCs0,	$0C*2,	nC0,	$0C*2,	nCs0,	$09*2,	nC0,	$06*2,	nC0,	$03*2
+             B667 : 810C 8106         
+(1) 1113/    B66B : 810C 820C 810C 8118 	dc.b	nC0,	$06*2,	nCs0,	$06*2,	nC0,	$06*2,	nC0,	$0C*2,	nCs0,	$09*2,	nC0,	$06*2
+             B673 : 8212 810C         
+(1) 1114/    B677 : 8106 810C 8206 8206 	dc.b	nC0,	$03*2,	nC0,	$06*2,	nCs0,	$03*2,	nCs0,	$03*2,	nEb0,	$06*2,	nC0,	$0C*2
+             B67F : 840C 8118         
+(1) 1115/    B683 : 8212 810C 8106 810C 	dc.b	nCs0,	$09*2,	nC0,	$06*2,	nC0,	$03*2,	nC0,	$06*2,	nCs0,	$06*2,	nC0,	$06*2
+             B68B : 820C 810C         
+(1) 1116/    B68F : 8118 8212 810C 8106 	dc.b	nC0,	$0C*2,	nCs0,	$09*2,	nC0,	$06*2,	nC0,	$03*2,	nC0,	$06*2,	nCs0,	$0C*2
+             B697 : 810C 8218         
+(1) 1117/    B69B : 8118 8212 810C 8106 	dc.b	nC0,	$0C*2,	nCs0,	$09*2,	nC0,	$06*2,	nC0,	$03*2,	nC0,	$06*2,	nCs0,	$06*2
+             B6A3 : 810C 820C         
+(1) 1118/    B6A7 : 810C 8118 8212 810C 	dc.b	nC0,	$06*2,	nC0,	$0C*2,	nCs0,	$09*2,	nC0,	$06*2,	nC0,	$03*2,	nC0,	$06*2
+             B6AF : 8106 810C         
+(1) 1119/    B6B3 : 8206 8206 840C 8118 	dc.b	nCs0,	$03*2,	nCs0,	$03*2,	nEb0,	$06*2,	nC0,	$0C*2,	nCs0,	$09*2,	nC0,	$06*2
+             B6BB : 8212 810C         
+(1) 1120/    B6BF : 8106 810C 820C 810C 	dc.b	nC0,	$03*2,	nC0,	$06*2,	nCs0,	$06*2,	nC0,	$06*2,	nC0,	$0C*2,	nCs0,	$09*2
+             B6C7 : 8118 8212         
+(1) 1121/    B6CB : 810C 8106 810C 8218 	dc.b	nC0,	$06*2,	nC0,	$03*2,	nC0,	$06*2,	nCs0,	$0C*2,	nC0,	$0C*2,	nCs0,	$09*2
+             B6D3 : 8118 8212         
+(1) 1122/    B6D7 : 810C 8106 810C 820C 	dc.b	nC0,	$06*2,	nC0,	$03*2,	nC0,	$06*2,	nCs0,	$06*2,	nC0,	$06*2,	nC0,	$0C*2
+             B6DF : 810C 8118         
+(1) 1123/    B6E3 : 8206 810C 811E 8118 	dc.b	nCs0,	$03*2,	nC0,	$06*2,	nC0,	$0F*2,	nC0,	$0C*2,	nC0,	$0C*2,	nCs0,	$09*2
+             B6EB : 8118 8212         
+(1) 1124/    B6EF : 810C 8106 810C 820C 	dc.b	nC0,	$06*2,	nC0,	$03*2,	nC0,	$06*2,	nCs0,	$06*2,	nC0,	$06*2,	nC0,	$0C*2
+             B6F7 : 810C 8118         
+(1) 1125/    B6FB : 8212 810C 8106 810C 	dc.b	nCs0,	$09*2,	nC0,	$06*2,	nC0,	$03*2,	nC0,	$06*2,	nCs0,	$0C*2,	nC0,	$0C*2
+             B703 : 8218 8118         
+(1) 1126/    B707 : 8212 810C 8106 810C 	dc.b	nCs0,	$09*2,	nC0,	$06*2,	nC0,	$03*2,	nC0,	$06*2,	nCs0,	$06*2,	nC0,	$06*2
+             B70F : 820C 810C         
+(1) 1127/    B713 : 8118 8212 810C 8106 	dc.b	nC0,	$0C*2,	nCs0,	$09*2,	nC0,	$06*2,	nC0,	$03*2,	nC0,	$06*2,	nCs0,	$03*2
+             B71B : 810C 8206         
+(1) 1128/    B71F : 8206 840C 8118 8212 	dc.b	nCs0,	$03*2,	nEb0,	$06*2,	nC0,	$0C*2,	nCs0,	$09*2,	nC0,	$06*2,	nC0,	$03*2
+             B727 : 810C 8106         
+(1) 1129/    B72B : 810C 820C 810C 8118 	dc.b	nC0,	$06*2,	nCs0,	$06*2,	nC0,	$06*2,	nC0,	$0C*2,	nCs0,	$09*2,	nC0,	$06*2
+             B733 : 8212 810C         
+(1) 1130/    B737 : 8106 810C 8218 8118 	dc.b	nC0,	$03*2,	nC0,	$06*2,	nCs0,	$0C*2,	nC0,	$0C*2,	nCs0,	$09*2,	nC0,	$06*2
+             B73F : 8212 810C         
+(1) 1131/    B743 : 8106 810C 820C 810C 	dc.b	nC0,	$03*2,	nC0,	$06*2,	nCs0,	$06*2,	nC0,	$06*2,	nC0,	$0C*2,	nCs0,	$03*2
+             B74B : 8118 8206         
+(1) 1132/    B74F : 810C 8112 820C 8206 	dc.b	nC0,	$06*2,	nC0,	$09*2,	nCs0,	$06*2,	nCs0,	$03*2,	nCs0,	$03*2,	nEb0,	$0C*2
+             B757 : 8206 8418         
+(1) 1133/    B75B : 8112 810C 811E 8218 	dc.b	nC0,	$09*2,	nC0,	$06*2,	nC0,	$0F*2,	nCs0,	$0C*2,	nC0,	$0C*2,	nCs0,	$06*2
+             B763 : 8118 820C         
+(1) 1134/    B767 : 8118 810C 8206 810C 	dc.b	nC0,	$0C*2,	nC0,	$06*2,	nCs0,	$03*2,	nC0,	$06*2,	nC0,	$09*2,	nC0,	$09*2
+             B76F : 8112 8112         
+(1) 1135/    B773 : 810C 811E 8218 8118 	dc.b	nC0,	$06*2,	nC0,	$0F*2,	nCs0,	$0C*2,	nC0,	$0C*2,	nCs0,	$06*2,	nC0,	$0C*2
+             B77B : 820C 8118         
+(1) 1136/    B77F : 810C 8206 8106 8406 	dc.b	nC0,	$06*2,	nCs0,	$03*2,	nC0,	$03*2,	nEb0,	$03*2,	nE0,	$09*2,	nC0,	$09*2
+             B787 : 8512 8112         
+(1) 1137/    B78B : 810C 811E 8218 810C 	dc.b	nC0,	$06*2,	nC0,	$0F*2,	nCs0,	$0C*2,	nC0,	$06*2,	nCs0,	$06*2,	nCs0,	$06*2
+             B793 : 820C 820C         
+(1) 1138/    B797 : 8118 810C 8206 810C 	dc.b	nC0,	$0C*2,	nC0,	$06*2,	nCs0,	$03*2,	nC0,	$06*2,	nC0,	$09*2,	nC0,	$09*2
+             B79F : 8112 8112         
+(1) 1139/    B7A3 : 810C 8112 8504 8504 	dc.b	nC0,	$06*2,	nC0,	$09*2,	nE0,	$02*2,	nE0,	$02*2,	nE0,	$02*2,	nCs0,	$06*2
+             B7AB : 8504 820C         
+(1) 1140/    B7AF : 820C 8124 8118 810C 	dc.b	nCs0,	$06*2,	nC0,	$12*2,	nC0,	$0C*2,	nC0,	$06*2,	nC0,	$03*2,	nCs0,	$03*2
+             B7B7 : 8106 8206         
+(1) 1141/    B7BB : 8206 8206 8118 8212 	dc.b	nCs0,	$03*2,	nCs0,	$03*2,	nC0,	$0C*2,	nCs0,	$09*2,	nC0,	$06*2,	nC0,	$03*2
+             B7C3 : 810C 8106         
+(1) 1142/    B7C7 : 810C 820C 810C 8118 	dc.b	nC0,	$06*2,	nCs0,	$06*2,	nC0,	$06*2,	nC0,	$0C*2,	nCs0,	$09*2,	nC0,	$06*2
+             B7CF : 8212 810C         
+(1) 1143/    B7D3 : 8106 810C 8218 8118 	dc.b	nC0,	$03*2,	nC0,	$06*2,	nCs0,	$0C*2,	nC0,	$0C*2,	nCs0,	$09*2,	nC0,	$06*2
+             B7DB : 8212 810C         
+(1) 1144/    B7DF : 8106 810C 820C 810C 	dc.b	nC0,	$03*2,	nC0,	$06*2,	nCs0,	$06*2,	nC0,	$06*2,	nC0,	$0C*2,	nCs0,	$09*2
+             B7E7 : 8118 8212         
+(1) 1145/    B7EB : 810C 8106 810C 8206 	dc.b	nC0,	$06*2,	nC0,	$03*2,	nC0,	$06*2,	nCs0,	$03*2,	nCs0,	$03*2,	nEb0,	$06*2
+             B7F3 : 8206 840C         
+(1) 1146/    B7F7 : 8118 8212 810C 8106 	dc.b	nC0,	$0C*2,	nCs0,	$09*2,	nC0,	$06*2,	nC0,	$03*2,	nC0,	$06*2,	nCs0,	$06*2
+             B7FF : 810C 820C         
+(1) 1147/    B803 : 810C 8118 8212 810C 	dc.b	nC0,	$06*2,	nC0,	$0C*2,	nCs0,	$09*2,	nC0,	$06*2,	nC0,	$03*2,	nC0,	$06*2
+             B80B : 8106 810C         
+(1) 1148/    B80F : 8218 8118 8212 810C 	dc.b	nCs0,	$0C*2,	nC0,	$0C*2,	nCs0,	$09*2,	nC0,	$06*2,	nC0,	$03*2,	nC0,	$06*2
+             B817 : 8106 810C         
+(1) 1149/    B81B : 820C 810C 8118 8212 	dc.b	nCs0,	$06*2,	nC0,	$06*2,	nC0,	$0C*2,	nCs0,	$09*2,	nC0,	$06*2,	nC0,	$03*2
+             B823 : 810C 8106         
+(1) 1150/    B827 : 810C 8206 8206 840C 	dc.b	nC0,	$06*2,	nCs0,	$03*2,	nCs0,	$03*2,	nEb0,	$06*2,	nC0,	$0C*2,	nCs0,	$09*2
+             B82F : 8118 8212         
+(1) 1151/    B833 : 810C 8106 810C 820C 	dc.b	nC0,	$06*2,	nC0,	$03*2,	nC0,	$06*2,	nCs0,	$06*2,	nC0,	$06*2,	nC0,	$0C*2
+             B83B : 810C 8118         
+(1) 1152/    B83F : 8212 810C 8106 810C 	dc.b	nCs0,	$09*2,	nC0,	$06*2,	nC0,	$03*2,	nC0,	$06*2,	nCs0,	$0C*2,	nC0,	$0C*2
+             B847 : 8218 8118         
+(1) 1153/    B84B : 8212 810C 8106 810C 	dc.b	nCs0,	$09*2,	nC0,	$06*2,	nC0,	$03*2,	nC0,	$06*2,	nCs0,	$06*2,	nC0,	$06*2
+             B853 : 820C 810C         
+(1) 1154/    B857 : 8118 8212 810C 8106 	dc.b	nC0,	$0C*2,	nCs0,	$09*2,	nC0,	$06*2,	nC0,	$03*2,	nC0,	$06*2,	nCs0,	$03*2
+             B85F : 810C 8206         
+(1) 1155/    B863 : 8206 840C 8118 8212 	dc.b	nCs0,	$03*2,	nEb0,	$06*2,	nC0,	$0C*2,	nCs0,	$09*2,	nC0,	$06*2,	nC0,	$03*2
+             B86B : 810C 8106         
+(1) 1156/    B86F : 810C 820C 810C 8118 	dc.b	nC0,	$06*2,	nCs0,	$06*2,	nC0,	$06*2,	nC0,	$0C*2,	nCs0,	$09*2,	nC0,	$06*2
+             B877 : 8212 810C         
+(1) 1157/    B87B : 8106 810C 8218 8118 	dc.b	nC0,	$03*2,	nC0,	$06*2,	nCs0,	$0C*2,	nC0,	$0C*2,	nCs0,	$09*2,	nC0,	$06*2
+             B883 : 8212 810C         
+(1) 1158/    B887 : 8106 810C 820C 810C 	dc.b	nC0,	$03*2,	nC0,	$06*2,	nCs0,	$06*2,	nC0,	$06*2,	nC0,	$0C*2,	nCs0,	$09*2
+             B88F : 8118 8212         
+(1) 1159/    B893 : 810C 8106 810C 8206 	dc.b	nC0,	$06*2,	nC0,	$03*2,	nC0,	$06*2,	nCs0,	$03*2,	nCs0,	$03*2,	nEb0,	$06*2
+             B89B : 8206 840C         
+(1) 1160/    B89F : 8118 8212 810C 8106 	dc.b	nC0,	$0C*2,	nCs0,	$09*2,	nC0,	$06*2,	nC0,	$03*2,	nC0,	$06*2,	nCs0,	$06*2
+             B8A7 : 810C 820C         
+(1) 1161/    B8AB : 810C 8118 8212 810C 	dc.b	nC0,	$06*2,	nC0,	$0C*2,	nCs0,	$09*2,	nC0,	$06*2,	nC0,	$03*2,	nC0,	$06*2
+             B8B3 : 8106 810C         
+(1) 1162/    B8B7 : 8218 8118 8212 810C 	dc.b	nCs0,	$0C*2,	nC0,	$0C*2,	nCs0,	$09*2,	nC0,	$06*2,	nC0,	$03*2,	nC0,	$06*2
+             B8BF : 8106 810C         
+(1) 1163/    B8C3 : 820C 810C 8118 8206 	dc.b	nCs0,	$06*2,	nC0,	$06*2,	nC0,	$0C*2,	nCs0,	$03*2,	nC0,	$06*2,	nC0,	$0F*2
+             B8CB : 810C 811E         
+(1) 1164/    B8CF : (MACRO)             	smpsReturn
+(1) 1164/    B8CF : F9                                  dc.b    $F9
+(1) 1165/    B8D0 :                     
+(1) 1166/    B8D0 :                     
+(1) 1167/    B8D0 :                     DoorIntoSummer_Voices:
+(1) 1168/    B8D0 :                     ;	Voice $00
+(1) 1169/    B8D0 :                     ;	$3A
+(1) 1170/    B8D0 :                     ;	$01, $05, $32, $71, 	$CF, $95, $1F, $1F, 	$0E, $0F, $05, $0C
+(1) 1171/    B8D0 :                     ;	$17, $06, $06, $07, 	$8F, $4F, $4F, $4F, 	$21, $13, $24, $80
+(1) 1172/    B8D0 : (MACRO)             	smpsVcAlgorithm     $02
+(1) 1172/    B8D0 : =$2                 vcAlgorithm set $02
+(1) 1173/    B8D0 : (MACRO)             	smpsVcFeedback      $07
+(1) 1173/    B8D0 : =$7                 vcFeedback set $07
+(1) 1174/    B8D0 : (MACRO)             	smpsVcUnusedBits    $00
+(1) 1174/    B8D0 : =$0                 vcUnusedBits set $00
+(1) 1174/    B8D0 : =$0                 vcD1R1Unk set 0
+(1) 1174/    B8D0 : =$0                 vcD1R2Unk set 0
+(1) 1174/    B8D0 : =$0                 vcD1R3Unk set 0
+(1) 1174/    B8D0 : =$0                 vcD1R4Unk set 0
+(1) 1175/    B8D0 : (MACRO)             	smpsVcDetune        $07, $03, $00, $00
+(1) 1175/    B8D0 : =$7                 vcDT1 set $07
+(1) 1175/    B8D0 : =$3                 vcDT2 set $03
+(1) 1175/    B8D0 : =$0                 vcDT3 set $00
+(1) 1175/    B8D0 : =$0                 vcDT4 set $00
+(1) 1176/    B8D0 : (MACRO)             	smpsVcCoarseFreq    $01, $02, $05, $01
+(1) 1176/    B8D0 : =$1                 vcCF1 set $01
+(1) 1176/    B8D0 : =$2                 vcCF2 set $02
+(1) 1176/    B8D0 : =$5                 vcCF3 set $05
+(1) 1176/    B8D0 : =$1                 vcCF4 set $01
+(1) 1177/    B8D0 : (MACRO)             	smpsVcRateScale     $00, $00, $02, $03
+(1) 1177/    B8D0 : =$0                 vcRS1 set $00
+(1) 1177/    B8D0 : =$0                 vcRS2 set $00
+(1) 1177/    B8D0 : =$2                 vcRS3 set $02
+(1) 1177/    B8D0 : =$3                 vcRS4 set $03
+(1) 1178/    B8D0 : (MACRO)             	smpsVcAttackRate    $1F, $1F, $15, $0F
+(1) 1178/    B8D0 : =$1F                vcAR1 set $1F
+(1) 1178/    B8D0 : =$1F                vcAR2 set $1F
+(1) 1178/    B8D0 : =$15                vcAR3 set $15
+(1) 1178/    B8D0 : =$F                 vcAR4 set $0F
+(1) 1179/    B8D0 : (MACRO)             	smpsVcAmpMod        $00, $00, $00, $00
+(1) 1179/    B8D0 : =$0                 vcAM1 set $00<<5
+(1) 1179/    B8D0 : =$0                 vcAM2 set $00<<5
+(1) 1179/    B8D0 : =$0                 vcAM3 set $00<<5
+(1) 1179/    B8D0 : =$0                 vcAM4 set $00<<5
+(1) 1180/    B8D0 : (MACRO)             	smpsVcDecayRate1    $0C, $05, $0F, $0E
+(1) 1180/    B8D0 : =$C                 vcD1R1 set $0C
+(1) 1180/    B8D0 : =$5                 vcD1R2 set $05
+(1) 1180/    B8D0 : =$F                 vcD1R3 set $0F
+(1) 1180/    B8D0 : =$E                 vcD1R4 set $0E
+(1) 1181/    B8D0 : (MACRO)             	smpsVcDecayRate2    $07, $06, $06, $17
+(1) 1181/    B8D0 : =$7                 vcD2R1 set $07
+(1) 1181/    B8D0 : =$6                 vcD2R2 set $06
+(1) 1181/    B8D0 : =$6                 vcD2R3 set $06
+(1) 1181/    B8D0 : =$17                vcD2R4 set $17
+(1) 1182/    B8D0 : (MACRO)             	smpsVcDecayLevel    $04, $04, $04, $08
+(1) 1182/    B8D0 : =$4                 vcDL1 set $04
+(1) 1182/    B8D0 : =$4                 vcDL2 set $04
+(1) 1182/    B8D0 : =$4                 vcDL3 set $04
+(1) 1182/    B8D0 : =$8                 vcDL4 set $08
+(1) 1183/    B8D0 : (MACRO)             	smpsVcReleaseRate   $0F, $0F, $0F, $0F
+(1) 1183/    B8D0 : =$F                 vcRR1 set $0F
+(1) 1183/    B8D0 : =$F                 vcRR2 set $0F
+(1) 1183/    B8D0 : =$F                 vcRR3 set $0F
+(1) 1183/    B8D0 : =$F                 vcRR4 set $0F
+(1) 1184/    B8D0 : (MACRO)             	smpsVcTotalLevel    $00, $24, $13, $21
+(1) 1184/    B8D0 : =$0                 vcTL1 set $00
+(1) 1184/    B8D0 : =$24                vcTL2 set $24
+(1) 1184/    B8D0 : =$13                vcTL3 set $13
+(1) 1184/    B8D0 : =$21                vcTL4 set $21
+(1) 1184/    B8D0 : 3A                          dc.b    (vcUnusedBits<<6)+(vcFeedback<<3)+vcAlgorithm
+(1) 1184/    B8D1 :                     ;   0     1     2     3     4     5     6     7
+(1) 1184/    B8D1 :                     ;%1000,%1000,%1000,%1000,%1010,%1110,%1110,%1111
+(1) 1184/    B8D1 : =$0                 vcTLMask4 set ((vcAlgorithm==7)<<7)
+(1) 1184/    B8D1 : =$0                 vcTLMask3 set ((vcAlgorithm>=4)<<7)
+(1) 1184/    B8D1 : =$0                 vcTLMask2 set ((vcAlgorithm>=5)<<7)
+(1) 1184/    B8D1 : =$80                vcTLMask1 set $80
+(1) 1184/    B8D1 :                     
+(1) 1184/    B8D1 :                     
+(1) 1184/    B8D1 : 0105 3271                           dc.b    (vcDT4<<4)+vcCF4       ,(vcDT3<<4)+vcCF3       ,(vcDT2<<4)+vcCF2       ,(vcDT1<<4)+vcCF1
+(1) 1184/    B8D5 : CF95 1F1F                           dc.b    (vcRS4<<6)+vcAR4       ,(vcRS3<<6)+vcAR3       ,(vcRS2<<6)+vcAR2       ,(vcRS1<<6)+vcAR1
+(1) 1184/    B8D9 : 0E0F 050C                           dc.b    vcAM4|vcD1R4|vcD1R4Unk ,vcAM3|vcD1R3|vcD1R3Unk ,vcAM2|vcD1R2|vcD1R2Unk ,vcAM1|vcD1R1|vcD1R1Unk
+(1) 1184/    B8DD : 1706 0607                           dc.b    vcD2R4                 ,vcD2R3                 ,vcD2R2                 ,vcD2R1
+(1) 1184/    B8E1 : 8F4F 4F4F                           dc.b    (vcDL4<<4)+vcRR4       ,(vcDL3<<4)+vcRR3       ,(vcDL2<<4)+vcRR2       ,(vcDL1<<4)+vcRR1
+(1) 1184/    B8E5 : 2113 2480                           dc.b    vcTL4|vcTLMask4        ,vcTL3|vcTLMask3        ,vcTL2|vcTLMask2        ,vcTL1|vcTLMask1
+(1) 1185/    B8E9 :                     
+(1) 1186/    B8E9 :                     ;	Voice $01
+(1) 1187/    B8E9 :                     ;	$1C
+(1) 1188/    B8E9 :                     ;	$32, $02, $04, $34, 	$5F, $FF, $5F, $FF, 	$05, $05, $05, $07
+(1) 1189/    B8E9 :                     ;	$15, $10, $21, $13, 	$9F, $3F, $5F, $AF, 	$30, $80, $02, $84
+(1) 1190/    B8E9 : (MACRO)             	smpsVcAlgorithm     $04
+(1) 1190/    B8E9 : =$4                 vcAlgorithm set $04
+(1) 1191/    B8E9 : (MACRO)             	smpsVcFeedback      $03
+(1) 1191/    B8E9 : =$3                 vcFeedback set $03
+(1) 1192/    B8E9 : (MACRO)             	smpsVcUnusedBits    $00
+(1) 1192/    B8E9 : =$0                 vcUnusedBits set $00
+(1) 1192/    B8E9 : =$0                 vcD1R1Unk set 0
+(1) 1192/    B8E9 : =$0                 vcD1R2Unk set 0
+(1) 1192/    B8E9 : =$0                 vcD1R3Unk set 0
+(1) 1192/    B8E9 : =$0                 vcD1R4Unk set 0
+(1) 1193/    B8E9 : (MACRO)             	smpsVcDetune        $03, $00, $00, $03
+(1) 1193/    B8E9 : =$3                 vcDT1 set $03
+(1) 1193/    B8E9 : =$0                 vcDT2 set $00
+(1) 1193/    B8E9 : =$0                 vcDT3 set $00
+(1) 1193/    B8E9 : =$3                 vcDT4 set $03
+(1) 1194/    B8E9 : (MACRO)             	smpsVcCoarseFreq    $04, $04, $02, $02
+(1) 1194/    B8E9 : =$4                 vcCF1 set $04
+(1) 1194/    B8E9 : =$4                 vcCF2 set $04
+(1) 1194/    B8E9 : =$2                 vcCF3 set $02
+(1) 1194/    B8E9 : =$2                 vcCF4 set $02
+(1) 1195/    B8E9 : (MACRO)             	smpsVcRateScale     $03, $01, $03, $01
+(1) 1195/    B8E9 : =$3                 vcRS1 set $03
+(1) 1195/    B8E9 : =$1                 vcRS2 set $01
+(1) 1195/    B8E9 : =$3                 vcRS3 set $03
+(1) 1195/    B8E9 : =$1                 vcRS4 set $01
+(1) 1196/    B8E9 : (MACRO)             	smpsVcAttackRate    $3F, $1F, $3F, $1F
+(1) 1196/    B8E9 : =$3F                vcAR1 set $3F
+(1) 1196/    B8E9 : =$1F                vcAR2 set $1F
+(1) 1196/    B8E9 : =$3F                vcAR3 set $3F
+(1) 1196/    B8E9 : =$1F                vcAR4 set $1F
+(1) 1197/    B8E9 : (MACRO)             	smpsVcAmpMod        $00, $00, $00, $00
+(1) 1197/    B8E9 : =$0                 vcAM1 set $00<<5
+(1) 1197/    B8E9 : =$0                 vcAM2 set $00<<5
+(1) 1197/    B8E9 : =$0                 vcAM3 set $00<<5
+(1) 1197/    B8E9 : =$0                 vcAM4 set $00<<5
+(1) 1198/    B8E9 : (MACRO)             	smpsVcDecayRate1    $07, $05, $05, $05
+(1) 1198/    B8E9 : =$7                 vcD1R1 set $07
+(1) 1198/    B8E9 : =$5                 vcD1R2 set $05
+(1) 1198/    B8E9 : =$5                 vcD1R3 set $05
+(1) 1198/    B8E9 : =$5                 vcD1R4 set $05
+(1) 1199/    B8E9 : (MACRO)             	smpsVcDecayRate2    $13, $21, $10, $15
+(1) 1199/    B8E9 : =$13                vcD2R1 set $13
+(1) 1199/    B8E9 : =$21                vcD2R2 set $21
+(1) 1199/    B8E9 : =$10                vcD2R3 set $10
+(1) 1199/    B8E9 : =$15                vcD2R4 set $15
+(1) 1200/    B8E9 : (MACRO)             	smpsVcDecayLevel    $0A, $05, $03, $09
+(1) 1200/    B8E9 : =$A                 vcDL1 set $0A
+(1) 1200/    B8E9 : =$5                 vcDL2 set $05
+(1) 1200/    B8E9 : =$3                 vcDL3 set $03
+(1) 1200/    B8E9 : =$9                 vcDL4 set $09
+(1) 1201/    B8E9 : (MACRO)             	smpsVcReleaseRate   $0F, $0F, $0F, $0F
+(1) 1201/    B8E9 : =$F                 vcRR1 set $0F
+(1) 1201/    B8E9 : =$F                 vcRR2 set $0F
+(1) 1201/    B8E9 : =$F                 vcRR3 set $0F
+(1) 1201/    B8E9 : =$F                 vcRR4 set $0F
+(1) 1202/    B8E9 : (MACRO)             	smpsVcTotalLevel    $04, $02, $00, $30
+(1) 1202/    B8E9 : =$4                 vcTL1 set $04
+(1) 1202/    B8E9 : =$2                 vcTL2 set $02
+(1) 1202/    B8E9 : =$0                 vcTL3 set $00
+(1) 1202/    B8E9 : =$30                vcTL4 set $30
+(1) 1202/    B8E9 : 1C                          dc.b    (vcUnusedBits<<6)+(vcFeedback<<3)+vcAlgorithm
+(1) 1202/    B8EA :                     ;   0     1     2     3     4     5     6     7
+(1) 1202/    B8EA :                     ;%1000,%1000,%1000,%1000,%1010,%1110,%1110,%1111
+(1) 1202/    B8EA : =$0                 vcTLMask4 set ((vcAlgorithm==7)<<7)
+(1) 1202/    B8EA : =$80                vcTLMask3 set ((vcAlgorithm>=4)<<7)
+(1) 1202/    B8EA : =$0                 vcTLMask2 set ((vcAlgorithm>=5)<<7)
+(1) 1202/    B8EA : =$80                vcTLMask1 set $80
+(1) 1202/    B8EA :                     
+(1) 1202/    B8EA :                     
+(1) 1202/    B8EA : 3202 0434                           dc.b    (vcDT4<<4)+vcCF4       ,(vcDT3<<4)+vcCF3       ,(vcDT2<<4)+vcCF2       ,(vcDT1<<4)+vcCF1
+(1) 1202/    B8EE : 5FFF 5FFF                           dc.b    (vcRS4<<6)+vcAR4       ,(vcRS3<<6)+vcAR3       ,(vcRS2<<6)+vcAR2       ,(vcRS1<<6)+vcAR1
+(1) 1202/    B8F2 : 0505 0507                           dc.b    vcAM4|vcD1R4|vcD1R4Unk ,vcAM3|vcD1R3|vcD1R3Unk ,vcAM2|vcD1R2|vcD1R2Unk ,vcAM1|vcD1R1|vcD1R1Unk
+(1) 1202/    B8F6 : 1510 2113                           dc.b    vcD2R4                 ,vcD2R3                 ,vcD2R2                 ,vcD2R1
+(1) 1202/    B8FA : 9F3F 5FAF                           dc.b    (vcDL4<<4)+vcRR4       ,(vcDL3<<4)+vcRR3       ,(vcDL2<<4)+vcRR2       ,(vcDL1<<4)+vcRR1
+(1) 1202/    B8FE : 3080 0284                           dc.b    vcTL4|vcTLMask4        ,vcTL3|vcTLMask3        ,vcTL2|vcTLMask2        ,vcTL1|vcTLMask1
+(1) 1203/    B902 :                     
+(1) 1204/    B902 :                     ;	Voice $02
+(1) 1205/    B902 :                     ;	$2D
+(1) 1206/    B902 :                     ;	$06, $05, $04, $10, 	$1F, $5F, $5F, $5F, 	$05, $07, $0C, $0C
+(1) 1207/    B902 :                     ;	$17, $17, $12, $18, 	$9F, $9C, $9C, $9C, 	$2D, $80, $80, $80
+(1) 1208/    B902 : (MACRO)             	smpsVcAlgorithm     $05
+(1) 1208/    B902 : =$5                 vcAlgorithm set $05
+(1) 1209/    B902 : (MACRO)             	smpsVcFeedback      $05
+(1) 1209/    B902 : =$5                 vcFeedback set $05
+(1) 1210/    B902 : (MACRO)             	smpsVcUnusedBits    $00
+(1) 1210/    B902 : =$0                 vcUnusedBits set $00
+(1) 1210/    B902 : =$0                 vcD1R1Unk set 0
+(1) 1210/    B902 : =$0                 vcD1R2Unk set 0
+(1) 1210/    B902 : =$0                 vcD1R3Unk set 0
+(1) 1210/    B902 : =$0                 vcD1R4Unk set 0
+(1) 1211/    B902 : (MACRO)             	smpsVcDetune        $01, $00, $00, $00
+(1) 1211/    B902 : =$1                 vcDT1 set $01
+(1) 1211/    B902 : =$0                 vcDT2 set $00
+(1) 1211/    B902 : =$0                 vcDT3 set $00
+(1) 1211/    B902 : =$0                 vcDT4 set $00
+(1) 1212/    B902 : (MACRO)             	smpsVcCoarseFreq    $00, $04, $05, $06
+(1) 1212/    B902 : =$0                 vcCF1 set $00
+(1) 1212/    B902 : =$4                 vcCF2 set $04
+(1) 1212/    B902 : =$5                 vcCF3 set $05
+(1) 1212/    B902 : =$6                 vcCF4 set $06
+(1) 1213/    B902 : (MACRO)             	smpsVcRateScale     $01, $01, $01, $00
+(1) 1213/    B902 : =$1                 vcRS1 set $01
+(1) 1213/    B902 : =$1                 vcRS2 set $01
+(1) 1213/    B902 : =$1                 vcRS3 set $01
+(1) 1213/    B902 : =$0                 vcRS4 set $00
+(1) 1214/    B902 : (MACRO)             	smpsVcAttackRate    $1F, $1F, $1F, $1F
+(1) 1214/    B902 : =$1F                vcAR1 set $1F
+(1) 1214/    B902 : =$1F                vcAR2 set $1F
+(1) 1214/    B902 : =$1F                vcAR3 set $1F
+(1) 1214/    B902 : =$1F                vcAR4 set $1F
+(1) 1215/    B902 : (MACRO)             	smpsVcAmpMod        $00, $00, $00, $00
+(1) 1215/    B902 : =$0                 vcAM1 set $00<<5
+(1) 1215/    B902 : =$0                 vcAM2 set $00<<5
+(1) 1215/    B902 : =$0                 vcAM3 set $00<<5
+(1) 1215/    B902 : =$0                 vcAM4 set $00<<5
+(1) 1216/    B902 : (MACRO)             	smpsVcDecayRate1    $0C, $0C, $07, $05
+(1) 1216/    B902 : =$C                 vcD1R1 set $0C
+(1) 1216/    B902 : =$C                 vcD1R2 set $0C
+(1) 1216/    B902 : =$7                 vcD1R3 set $07
+(1) 1216/    B902 : =$5                 vcD1R4 set $05
+(1) 1217/    B902 : (MACRO)             	smpsVcDecayRate2    $18, $12, $17, $17
+(1) 1217/    B902 : =$18                vcD2R1 set $18
+(1) 1217/    B902 : =$12                vcD2R2 set $12
+(1) 1217/    B902 : =$17                vcD2R3 set $17
+(1) 1217/    B902 : =$17                vcD2R4 set $17
+(1) 1218/    B902 : (MACRO)             	smpsVcDecayLevel    $09, $09, $09, $09
+(1) 1218/    B902 : =$9                 vcDL1 set $09
+(1) 1218/    B902 : =$9                 vcDL2 set $09
+(1) 1218/    B902 : =$9                 vcDL3 set $09
+(1) 1218/    B902 : =$9                 vcDL4 set $09
+(1) 1219/    B902 : (MACRO)             	smpsVcReleaseRate   $0C, $0C, $0C, $0F
+(1) 1219/    B902 : =$C                 vcRR1 set $0C
+(1) 1219/    B902 : =$C                 vcRR2 set $0C
+(1) 1219/    B902 : =$C                 vcRR3 set $0C
+(1) 1219/    B902 : =$F                 vcRR4 set $0F
+(1) 1220/    B902 : (MACRO)             	smpsVcTotalLevel    $00, $00, $00, $2D
+(1) 1220/    B902 : =$0                 vcTL1 set $00
+(1) 1220/    B902 : =$0                 vcTL2 set $00
+(1) 1220/    B902 : =$0                 vcTL3 set $00
+(1) 1220/    B902 : =$2D                vcTL4 set $2D
+(1) 1220/    B902 : 2D                          dc.b    (vcUnusedBits<<6)+(vcFeedback<<3)+vcAlgorithm
+(1) 1220/    B903 :                     ;   0     1     2     3     4     5     6     7
+(1) 1220/    B903 :                     ;%1000,%1000,%1000,%1000,%1010,%1110,%1110,%1111
+(1) 1220/    B903 : =$0                 vcTLMask4 set ((vcAlgorithm==7)<<7)
+(1) 1220/    B903 : =$80                vcTLMask3 set ((vcAlgorithm>=4)<<7)
+(1) 1220/    B903 : =$80                vcTLMask2 set ((vcAlgorithm>=5)<<7)
+(1) 1220/    B903 : =$80                vcTLMask1 set $80
+(1) 1220/    B903 :                     
+(1) 1220/    B903 :                     
+(1) 1220/    B903 : 0605 0410                           dc.b    (vcDT4<<4)+vcCF4       ,(vcDT3<<4)+vcCF3       ,(vcDT2<<4)+vcCF2       ,(vcDT1<<4)+vcCF1
+(1) 1220/    B907 : 1F5F 5F5F                           dc.b    (vcRS4<<6)+vcAR4       ,(vcRS3<<6)+vcAR3       ,(vcRS2<<6)+vcAR2       ,(vcRS1<<6)+vcAR1
+(1) 1220/    B90B : 0507 0C0C                           dc.b    vcAM4|vcD1R4|vcD1R4Unk ,vcAM3|vcD1R3|vcD1R3Unk ,vcAM2|vcD1R2|vcD1R2Unk ,vcAM1|vcD1R1|vcD1R1Unk
+(1) 1220/    B90F : 1717 1218                           dc.b    vcD2R4                 ,vcD2R3                 ,vcD2R2                 ,vcD2R1
+(1) 1220/    B913 : 9F9C 9C9C                           dc.b    (vcDL4<<4)+vcRR4       ,(vcDL3<<4)+vcRR3       ,(vcDL2<<4)+vcRR2       ,(vcDL1<<4)+vcRR1
+(1) 1220/    B917 : 2D80 8080                           dc.b    vcTL4|vcTLMask4        ,vcTL3|vcTLMask3        ,vcTL2|vcTLMask2        ,vcTL1|vcTLMask1
+(1) 1221/    B91B :                     
+(1) 1222/    B91B :                     ;	Voice $03
+(1) 1223/    B91B :                     ;	$3D
+(1) 1224/    B91B :                     ;	$01, $01, $01, $01, 	$94, $19, $19, $19, 	$0F, $0D, $0D, $0D
+(1) 1225/    B91B :                     ;	$07, $04, $04, $04, 	$25, $1A, $1A, $1A, 	$15, $80, $80, $80
+(1) 1226/    B91B : (MACRO)             	smpsVcAlgorithm     $05
+(1) 1226/    B91B : =$5                 vcAlgorithm set $05
+(1) 1227/    B91B : (MACRO)             	smpsVcFeedback      $07
+(1) 1227/    B91B : =$7                 vcFeedback set $07
+(1) 1228/    B91B : (MACRO)             	smpsVcUnusedBits    $00
+(1) 1228/    B91B : =$0                 vcUnusedBits set $00
+(1) 1228/    B91B : =$0                 vcD1R1Unk set 0
+(1) 1228/    B91B : =$0                 vcD1R2Unk set 0
+(1) 1228/    B91B : =$0                 vcD1R3Unk set 0
+(1) 1228/    B91B : =$0                 vcD1R4Unk set 0
+(1) 1229/    B91B : (MACRO)             	smpsVcDetune        $00, $00, $00, $00
+(1) 1229/    B91B : =$0                 vcDT1 set $00
+(1) 1229/    B91B : =$0                 vcDT2 set $00
+(1) 1229/    B91B : =$0                 vcDT3 set $00
+(1) 1229/    B91B : =$0                 vcDT4 set $00
+(1) 1230/    B91B : (MACRO)             	smpsVcCoarseFreq    $01, $01, $01, $01
+(1) 1230/    B91B : =$1                 vcCF1 set $01
+(1) 1230/    B91B : =$1                 vcCF2 set $01
+(1) 1230/    B91B : =$1                 vcCF3 set $01
+(1) 1230/    B91B : =$1                 vcCF4 set $01
+(1) 1231/    B91B : (MACRO)             	smpsVcRateScale     $00, $00, $00, $02
+(1) 1231/    B91B : =$0                 vcRS1 set $00
+(1) 1231/    B91B : =$0                 vcRS2 set $00
+(1) 1231/    B91B : =$0                 vcRS3 set $00
+(1) 1231/    B91B : =$2                 vcRS4 set $02
+(1) 1232/    B91B : (MACRO)             	smpsVcAttackRate    $19, $19, $19, $14
+(1) 1232/    B91B : =$19                vcAR1 set $19
+(1) 1232/    B91B : =$19                vcAR2 set $19
+(1) 1232/    B91B : =$19                vcAR3 set $19
+(1) 1232/    B91B : =$14                vcAR4 set $14
+(1) 1233/    B91B : (MACRO)             	smpsVcAmpMod        $00, $00, $00, $00
+(1) 1233/    B91B : =$0                 vcAM1 set $00<<5
+(1) 1233/    B91B : =$0                 vcAM2 set $00<<5
+(1) 1233/    B91B : =$0                 vcAM3 set $00<<5
+(1) 1233/    B91B : =$0                 vcAM4 set $00<<5
+(1) 1234/    B91B : (MACRO)             	smpsVcDecayRate1    $0D, $0D, $0D, $0F
+(1) 1234/    B91B : =$D                 vcD1R1 set $0D
+(1) 1234/    B91B : =$D                 vcD1R2 set $0D
+(1) 1234/    B91B : =$D                 vcD1R3 set $0D
+(1) 1234/    B91B : =$F                 vcD1R4 set $0F
+(1) 1235/    B91B : (MACRO)             	smpsVcDecayRate2    $04, $04, $04, $07
+(1) 1235/    B91B : =$4                 vcD2R1 set $04
+(1) 1235/    B91B : =$4                 vcD2R2 set $04
+(1) 1235/    B91B : =$4                 vcD2R3 set $04
+(1) 1235/    B91B : =$7                 vcD2R4 set $07
+(1) 1236/    B91B : (MACRO)             	smpsVcDecayLevel    $01, $01, $01, $02
+(1) 1236/    B91B : =$1                 vcDL1 set $01
+(1) 1236/    B91B : =$1                 vcDL2 set $01
+(1) 1236/    B91B : =$1                 vcDL3 set $01
+(1) 1236/    B91B : =$2                 vcDL4 set $02
+(1) 1237/    B91B : (MACRO)             	smpsVcReleaseRate   $0A, $0A, $0A, $05
+(1) 1237/    B91B : =$A                 vcRR1 set $0A
+(1) 1237/    B91B : =$A                 vcRR2 set $0A
+(1) 1237/    B91B : =$A                 vcRR3 set $0A
+(1) 1237/    B91B : =$5                 vcRR4 set $05
+(1) 1238/    B91B : (MACRO)             	smpsVcTotalLevel    $00, $00, $00, $15
+(1) 1238/    B91B : =$0                 vcTL1 set $00
+(1) 1238/    B91B : =$0                 vcTL2 set $00
+(1) 1238/    B91B : =$0                 vcTL3 set $00
+(1) 1238/    B91B : =$15                vcTL4 set $15
+(1) 1238/    B91B : 3D                          dc.b    (vcUnusedBits<<6)+(vcFeedback<<3)+vcAlgorithm
+(1) 1238/    B91C :                     ;   0     1     2     3     4     5     6     7
+(1) 1238/    B91C :                     ;%1000,%1000,%1000,%1000,%1010,%1110,%1110,%1111
+(1) 1238/    B91C : =$0                 vcTLMask4 set ((vcAlgorithm==7)<<7)
+(1) 1238/    B91C : =$80                vcTLMask3 set ((vcAlgorithm>=4)<<7)
+(1) 1238/    B91C : =$80                vcTLMask2 set ((vcAlgorithm>=5)<<7)
+(1) 1238/    B91C : =$80                vcTLMask1 set $80
+(1) 1238/    B91C :                     
+(1) 1238/    B91C :                     
+(1) 1238/    B91C : 0101 0101                           dc.b    (vcDT4<<4)+vcCF4       ,(vcDT3<<4)+vcCF3       ,(vcDT2<<4)+vcCF2       ,(vcDT1<<4)+vcCF1
+(1) 1238/    B920 : 9419 1919                           dc.b    (vcRS4<<6)+vcAR4       ,(vcRS3<<6)+vcAR3       ,(vcRS2<<6)+vcAR2       ,(vcRS1<<6)+vcAR1
+(1) 1238/    B924 : 0F0D 0D0D                           dc.b    vcAM4|vcD1R4|vcD1R4Unk ,vcAM3|vcD1R3|vcD1R3Unk ,vcAM2|vcD1R2|vcD1R2Unk ,vcAM1|vcD1R1|vcD1R1Unk
+(1) 1238/    B928 : 0704 0404                           dc.b    vcD2R4                 ,vcD2R3                 ,vcD2R2                 ,vcD2R1
+(1) 1238/    B92C : 251A 1A1A                           dc.b    (vcDL4<<4)+vcRR4       ,(vcDL3<<4)+vcRR3       ,(vcDL2<<4)+vcRR2       ,(vcDL1<<4)+vcRR1
+(1) 1238/    B930 : 1580 8080                           dc.b    vcTL4|vcTLMask4        ,vcTL3|vcTLMask3        ,vcTL2|vcTLMask2        ,vcTL1|vcTLMask1
+(1) 1239/    B934 :                     
+(1) 1240/    B934 :                     ;	Voice $04
+(1) 1241/    B934 :                     ;	$3C
+(1) 1242/    B934 :                     ;	$07, $01, $08, $04, 	$5F, $9F, $9F, $5F, 	$16, $1F, $16, $1F
+(1) 1243/    B934 :                     ;	$09, $0F, $16, $11, 	$6F, $0F, $AF, $0F, 	$16, $80, $11, $80
+(1) 1244/    B934 : (MACRO)             	smpsVcAlgorithm     $04
+(1) 1244/    B934 : =$4                 vcAlgorithm set $04
+(1) 1245/    B934 : (MACRO)             	smpsVcFeedback      $07
+(1) 1245/    B934 : =$7                 vcFeedback set $07
+(1) 1246/    B934 : (MACRO)             	smpsVcUnusedBits    $00
+(1) 1246/    B934 : =$0                 vcUnusedBits set $00
+(1) 1246/    B934 : =$0                 vcD1R1Unk set 0
+(1) 1246/    B934 : =$0                 vcD1R2Unk set 0
+(1) 1246/    B934 : =$0                 vcD1R3Unk set 0
+(1) 1246/    B934 : =$0                 vcD1R4Unk set 0
+(1) 1247/    B934 : (MACRO)             	smpsVcDetune        $00, $00, $00, $00
+(1) 1247/    B934 : =$0                 vcDT1 set $00
+(1) 1247/    B934 : =$0                 vcDT2 set $00
+(1) 1247/    B934 : =$0                 vcDT3 set $00
+(1) 1247/    B934 : =$0                 vcDT4 set $00
+(1) 1248/    B934 : (MACRO)             	smpsVcCoarseFreq    $04, $08, $01, $07
+(1) 1248/    B934 : =$4                 vcCF1 set $04
+(1) 1248/    B934 : =$8                 vcCF2 set $08
+(1) 1248/    B934 : =$1                 vcCF3 set $01
+(1) 1248/    B934 : =$7                 vcCF4 set $07
+(1) 1249/    B934 : (MACRO)             	smpsVcRateScale     $01, $02, $02, $01
+(1) 1249/    B934 : =$1                 vcRS1 set $01
+(1) 1249/    B934 : =$2                 vcRS2 set $02
+(1) 1249/    B934 : =$2                 vcRS3 set $02
+(1) 1249/    B934 : =$1                 vcRS4 set $01
+(1) 1250/    B934 : (MACRO)             	smpsVcAttackRate    $1F, $1F, $1F, $1F
+(1) 1250/    B934 : =$1F                vcAR1 set $1F
+(1) 1250/    B934 : =$1F                vcAR2 set $1F
+(1) 1250/    B934 : =$1F                vcAR3 set $1F
+(1) 1250/    B934 : =$1F                vcAR4 set $1F
+(1) 1251/    B934 : (MACRO)             	smpsVcAmpMod        $00, $00, $00, $00
+(1) 1251/    B934 : =$0                 vcAM1 set $00<<5
+(1) 1251/    B934 : =$0                 vcAM2 set $00<<5
+(1) 1251/    B934 : =$0                 vcAM3 set $00<<5
+(1) 1251/    B934 : =$0                 vcAM4 set $00<<5
+(1) 1252/    B934 : (MACRO)             	smpsVcDecayRate1    $1F, $16, $1F, $16
+(1) 1252/    B934 : =$1F                vcD1R1 set $1F
+(1) 1252/    B934 : =$16                vcD1R2 set $16
+(1) 1252/    B934 : =$1F                vcD1R3 set $1F
+(1) 1252/    B934 : =$16                vcD1R4 set $16
+(1) 1253/    B934 : (MACRO)             	smpsVcDecayRate2    $11, $16, $0F, $09
+(1) 1253/    B934 : =$11                vcD2R1 set $11
+(1) 1253/    B934 : =$16                vcD2R2 set $16
+(1) 1253/    B934 : =$F                 vcD2R3 set $0F
+(1) 1253/    B934 : =$9                 vcD2R4 set $09
+(1) 1254/    B934 : (MACRO)             	smpsVcDecayLevel    $00, $0A, $00, $06
+(1) 1254/    B934 : =$0                 vcDL1 set $00
+(1) 1254/    B934 : =$A                 vcDL2 set $0A
+(1) 1254/    B934 : =$0                 vcDL3 set $00
+(1) 1254/    B934 : =$6                 vcDL4 set $06
+(1) 1255/    B934 : (MACRO)             	smpsVcReleaseRate   $0F, $0F, $0F, $0F
+(1) 1255/    B934 : =$F                 vcRR1 set $0F
+(1) 1255/    B934 : =$F                 vcRR2 set $0F
+(1) 1255/    B934 : =$F                 vcRR3 set $0F
+(1) 1255/    B934 : =$F                 vcRR4 set $0F
+(1) 1256/    B934 : (MACRO)             	smpsVcTotalLevel    $00, $11, $00, $16
+(1) 1256/    B934 : =$0                 vcTL1 set $00
+(1) 1256/    B934 : =$11                vcTL2 set $11
+(1) 1256/    B934 : =$0                 vcTL3 set $00
+(1) 1256/    B934 : =$16                vcTL4 set $16
+(1) 1256/    B934 : 3C                          dc.b    (vcUnusedBits<<6)+(vcFeedback<<3)+vcAlgorithm
+(1) 1256/    B935 :                     ;   0     1     2     3     4     5     6     7
+(1) 1256/    B935 :                     ;%1000,%1000,%1000,%1000,%1010,%1110,%1110,%1111
+(1) 1256/    B935 : =$0                 vcTLMask4 set ((vcAlgorithm==7)<<7)
+(1) 1256/    B935 : =$80                vcTLMask3 set ((vcAlgorithm>=4)<<7)
+(1) 1256/    B935 : =$0                 vcTLMask2 set ((vcAlgorithm>=5)<<7)
+(1) 1256/    B935 : =$80                vcTLMask1 set $80
+(1) 1256/    B935 :                     
+(1) 1256/    B935 :                     
+(1) 1256/    B935 : 0701 0804                           dc.b    (vcDT4<<4)+vcCF4       ,(vcDT3<<4)+vcCF3       ,(vcDT2<<4)+vcCF2       ,(vcDT1<<4)+vcCF1
+(1) 1256/    B939 : 5F9F 9F5F                           dc.b    (vcRS4<<6)+vcAR4       ,(vcRS3<<6)+vcAR3       ,(vcRS2<<6)+vcAR2       ,(vcRS1<<6)+vcAR1
+(1) 1256/    B93D : 161F 161F                           dc.b    vcAM4|vcD1R4|vcD1R4Unk ,vcAM3|vcD1R3|vcD1R3Unk ,vcAM2|vcD1R2|vcD1R2Unk ,vcAM1|vcD1R1|vcD1R1Unk
+(1) 1256/    B941 : 090F 1611                           dc.b    vcD2R4                 ,vcD2R3                 ,vcD2R2                 ,vcD2R1
+(1) 1256/    B945 : 6F0F AF0F                           dc.b    (vcDL4<<4)+vcRR4       ,(vcDL3<<4)+vcRR3       ,(vcDL2<<4)+vcRR2       ,(vcDL1<<4)+vcRR1
+(1) 1256/    B949 : 1680 1180                           dc.b    vcTL4|vcTLMask4        ,vcTL3|vcTLMask3        ,vcTL2|vcTLMask2        ,vcTL1|vcTLMask1
+(1) 1257/    B94D :                     
+(1) 1258/    B94D :                     
+ AS V1.42 Beta [Bld 251] - Source File Music.asm - Page 2 - 11/3/2023 0:38:46
 
 
   Symbol Table (* = unused):
@@ -14770,7 +14814,6 @@
  DCRACKERKICK :                  81 - | *DCRACKERLESSGO :                86 - |
  DCRACKERSNARE :                 82 - |  DCRACKERTIMPANIHI :             83 - |
  DCRACKERTIMPANILOW :            85 - |  DCRACKERTIMPANIMID :            84 - |
- DOORINTOSUMMER_CALL01 :       B5DC C |  DOORINTOSUMMER_CALL02 :       B550 C |
  DOORINTOSUMMER_CALL03 :       AFB5 C |  DOORINTOSUMMER_CALL04 :       AFDD C |
  DOORINTOSUMMER_CALL05 :       B294 C |  DOORINTOSUMMER_CALL06 :       B143 C |
  DOORINTOSUMMER_CALL07 :       AFF6 C |  DOORINTOSUMMER_CALL08 :       AE49 C |
@@ -14782,12 +14825,9 @@
  DOORINTOSUMMER_FM1 :          AA79 C |  DOORINTOSUMMER_FM2 :          AB66 C |
  DOORINTOSUMMER_FM3 :          ACAE C |  DOORINTOSUMMER_FM4 :          AE81 C |
 *DOORINTOSUMMER_FM5 :          B00B C |  DOORINTOSUMMER_FM6 :          B158 C |
-*DOORINTOSUMMER_HEADER :       AA48 C |  DOORINTOSUMMER_JUMP01 :       B588 C |
- DOORINTOSUMMER_JUMP02 :       B4E0 C |  DOORINTOSUMMER_JUMP03 :       ACB3 C |
+*DOORINTOSUMMER_HEADER :       AA48 C |  DOORINTOSUMMER_JUMP03 :       ACB3 C |
  DOORINTOSUMMER_JUMP04 :       AB6B C |  DOORINTOSUMMER_JUMP05 :       B2AB C |
- DOORINTOSUMMER_JUMP06 :       B2B5 C |  DOORINTOSUMMER_LOOP06 :       B5C9 C |
- DOORINTOSUMMER_LOOP07 :       B5D1 C |  DOORINTOSUMMER_LOOP08 :       B4FB C |
- DOORINTOSUMMER_LOOP09 :       B52C C |  DOORINTOSUMMER_LOOP0A :       B170 C |
+ DOORINTOSUMMER_JUMP06 :       B2B5 C |  DOORINTOSUMMER_LOOP0A :       B170 C |
  DOORINTOSUMMER_LOOP0B :       B24E C |  DOORINTOSUMMER_LOOP0C :       B023 C |
  DOORINTOSUMMER_LOOP0D :       B101 C |  DOORINTOSUMMER_LOOP0E :       AE97 C |
  DOORINTOSUMMER_LOOP0F :       AF75 C |  DOORINTOSUMMER_LOOP10 :       ACD5 C |
@@ -14797,278 +14837,278 @@
  DOORINTOSUMMER_LOOP17 :       AB24 C |  DOORINTOSUMMER_LOOP18 :       B3D9 C |
  DOORINTOSUMMER_LOOP19 :       B475 C |  DOORINTOSUMMER_LOOP1A :       B483 C |
  DOORINTOSUMMER_PSG1 :         B2A9 C |  DOORINTOSUMMER_PSG2 :         B3C5 C |
- DOORINTOSUMMER_PSG3 :         B3D1 C | *DOORINTOSUMMER_PWM1 :         B4D3 C |
- DOORINTOSUMMER_PWM2 :         B577 C |  DOORINTOSUMMER_VOICES :       B5ED C |
-*DUMMYSPEED :                  9C44 C |  ELECTORIA_CALL00 :            87D9 C |
- ELECTORIA_CALL01 :            87E7 C |  ELECTORIA_CALL02 :            87F5 C |
- ELECTORIA_CALL03 :            8802 C |  ELECTORIA_CALL04 :            8181 C |
- ELECTORIA_CALL05 :            855D C |  ELECTORIA_CALL06 :            81AE C |
- ELECTORIA_CALL07 :            81C3 C |  ELECTORIA_CALL08 :            81EE C |
- ELECTORIA_CALL09 :            825C C |  ELECTORIA_CALL0A :            82CB C |
- ELECTORIA_CALL0B :            80A1 C |  ELECTORIA_CALL0C :            8728 C |
- ELECTORIA_CALL0D :            8735 C |  ELECTORIA_CALL0E :            86BA C |
- ELECTORIA_CALL0F :            86CC C |  ELECTORIA_CALL10 :            86DE C |
- ELECTORIA_CALL11 :            86F2 C |  ELECTORIA_CALL12 :            863C C |
- ELECTORIA_CALL13 :            833A C |  ELECTORIA_DAC :               8748 C |
- ELECTORIA_FM1 :               8030 C |  ELECTORIA_FM2 :               80B2 C |
- ELECTORIA_FM3 :               83DD C |  ELECTORIA_FM4 :               84E8 C |
- ELECTORIA_FM5 :               856F C | *ELECTORIA_HEADER :            8000 C |
- ELECTORIA_JUMP00 :            83EF C |  ELECTORIA_JUMP01 :            80C7 C |
- ELECTORIA_LOOP00 :            8759 C |  ELECTORIA_LOOP01 :            876A C |
- ELECTORIA_LOOP02 :            877B C |  ELECTORIA_LOOP03 :            8796 C |
- ELECTORIA_LOOP04 :            87A7 C |  ELECTORIA_LOOP05 :            8573 C |
- ELECTORIA_LOOP06 :            857C C |  ELECTORIA_LOOP07 :            8586 C |
- ELECTORIA_LOOP08 :            85A5 C |  ELECTORIA_LOOP09 :            85AF C |
- ELECTORIA_LOOP0A :            85BE C |  ELECTORIA_LOOP0B :            84EE C |
- ELECTORIA_LOOP0C :            84F8 C |  ELECTORIA_LOOP0D :            8507 C |
- ELECTORIA_LOOP0E :            8522 C |  ELECTORIA_LOOP0F :            8536 C |
- ELECTORIA_LOOP10 :            854B C |  ELECTORIA_LOOP11 :            83E3 C |
- ELECTORIA_LOOP12 :            84CA C |  ELECTORIA_LOOP13 :            84D9 C |
- ELECTORIA_LOOP14 :            80B6 C |  ELECTORIA_LOOP15 :            8173 C |
- ELECTORIA_LOOP16 :            8043 C |  ELECTORIA_LOOP17 :            804B C |
- ELECTORIA_LOOP18 :            8055 C |  ELECTORIA_LOOP19 :            8078 C |
- ELECTORIA_LOOP1A :            808E C |  ELECTORIA_LOOP1B :            8096 C |
- ELECTORIA_LOOP1C :            86FF C |  ELECTORIA_LOOP1D :            8707 C |
- ELECTORIA_LOOP1E :            8712 C |  ELECTORIA_LOOP1F :            871D C |
- ELECTORIA_LOOP20 :            8654 C |  ELECTORIA_LOOP21 :            8663 C |
- ELECTORIA_LOOP22 :            866F C |  ELECTORIA_LOOP23 :            867C C |
- ELECTORIA_LOOP24 :            8686 C |  ELECTORIA_LOOP25 :            86A8 C |
- ELECTORIA_LOOP26 :            85CD C |  ELECTORIA_LOOP27 :            85D5 C |
- ELECTORIA_LOOP28 :            85DD C |  ELECTORIA_LOOP29 :            860C C |
- ELECTORIA_LOOP2A :            8616 C |  ELECTORIA_LOOP2B :            861E C |
- ELECTORIA_LOOP2C :            8631 C |  ELECTORIA_PSG1 :              85C9 C |
- ELECTORIA_PSG2 :              864E C |  ELECTORIA_PSG3 :              86FD C |
- ELECTORIA_VOICES :            880F C |  EVENINGSTAR_CALL00 :          9681 C |
- EVENINGSTAR_CALL01 :          92D8 C |  EVENINGSTAR_CALL02 :          94A2 C |
- EVENINGSTAR_CALL03 :          94D4 C |  EVENINGSTAR_CALL04 :          9505 C |
- EVENINGSTAR_CALL05 :          948B C |  EVENINGSTAR_CALL06 :          939C C |
- EVENINGSTAR_CALL07 :          93CE C |  EVENINGSTAR_CALL08 :          9412 C |
- EVENINGSTAR_CALL09 :          93FF C |  EVENINGSTAR_CALL0A :          9290 C |
- EVENINGSTAR_CALL0B :          929C C |  EVENINGSTAR_CALL0C :          962B C |
- EVENINGSTAR_CALL0D :          9636 C |  EVENINGSTAR_DAC :             9644 C |
- EVENINGSTAR_FM1 :             9225 C |  EVENINGSTAR_FM2 :             92B1 C |
- EVENINGSTAR_FM3 :             934C C |  EVENINGSTAR_FM4 :             9423 C |
- EVENINGSTAR_FM5 :             9516 C | *EVENINGSTAR_HEADER :          91F5 C |
- EVENINGSTAR_JUMP00 :          9524 C |  EVENINGSTAR_JUMP01 :          923D C |
- EVENINGSTAR_JUMP02 :          959F C |  EVENINGSTAR_JUMP03 :          9546 C |
- EVENINGSTAR_LOOP00 :          9658 C |  EVENINGSTAR_LOOP01 :          9660 C |
- EVENINGSTAR_LOOP02 :          9676 C |  EVENINGSTAR_LOOP03 :          943B C |
- EVENINGSTAR_LOOP04 :          935C C |  EVENINGSTAR_LOOP05 :          92CB C |
- EVENINGSTAR_LOOP06 :          95E0 C |  EVENINGSTAR_LOOP07 :          95ED C |
- EVENINGSTAR_PSG1 :            9533 C |  EVENINGSTAR_PSG2 :            9585 C |
- EVENINGSTAR_PSG3 :            95DE C |  EVENINGSTAR_VOICES :          9691 C |
-*FALSE :                          0 - | *FULLPMMU :                       1 - |
- GAMEOVER_DAC :                9BA7 C |  GAMEOVER_FM1 :                9AF0 C |
- GAMEOVER_FM2 :                9B27 C |  GAMEOVER_FM3 :                9B46 C |
- GAMEOVER_FM4 :                9B5B C |  GAMEOVER_FM5 :                9B91 C |
-*GAMEOVER_HEADER :             9AC0 C |  GAMEOVER_PSG1 :               9BA4 C |
- GAMEOVER_PSG2 :               9BA5 C |  GAMEOVER_PSG3 :               9BA6 C |
- GAMEOVER_VOICES :             9BB0 C | *HAS64 :                          0 - |
-*HASFPU :                         0 - | *HASPMMU :                        0 - |
- HYPERHYPER_CALL00 :           915F C |  HYPERHYPER_CALL01 :           916C C |
- HYPERHYPER_CALL02 :           917C C |  HYPERHYPER_CALL03 :           8F63 C |
- HYPERHYPER_CALL04 :           8F12 C |  HYPERHYPER_CALL05 :           8F07 C |
- HYPERHYPER_CALL06 :           8DF5 C |  HYPERHYPER_CALL07 :           8E10 C |
- HYPERHYPER_CALL08 :           8CEC C |  HYPERHYPER_CALL09 :           8CFA C |
- HYPERHYPER_CALL0A :           8D05 C |  HYPERHYPER_CALL0B :           8C44 C |
- HYPERHYPER_CALL0C :           8C39 C |  HYPERHYPER_CALL0D :           90F5 C |
- HYPERHYPER_CALL0E :           9103 C |  HYPERHYPER_CALL0F :           8FFD C |
- HYPERHYPER_CALL10 :           8FEE C |  HYPERHYPER_DAC :              9117 C |
- HYPERHYPER_FM1 :              8BF0 C |  HYPERHYPER_FM2 :              8C56 C |
- HYPERHYPER_FM3 :              8D1A C |  HYPERHYPER_FM4 :              8E1B C |
- HYPERHYPER_FM5 :              8F18 C | *HYPERHYPER_HEADER :           8BC0 C |
- HYPERHYPER_JUMP00 :           8E43 C |  HYPERHYPER_JUMP01 :           8D27 C |
- HYPERHYPER_JUMP02 :           8C63 C |  HYPERHYPER_JUMP03 :           903D C |
- HYPERHYPER_JUMP04 :           8F86 C |  HYPERHYPER_LOOP00 :           9128 C |
- HYPERHYPER_LOOP01 :           9139 C |  HYPERHYPER_LOOP02 :           8F1A C |
- HYPERHYPER_LOOP03 :           8F22 C |  HYPERHYPER_LOOP04 :           8F3A C |
- HYPERHYPER_LOOP05 :           8E21 C |  HYPERHYPER_LOOP06 :           8C09 C |
- HYPERHYPER_LOOP07 :           90A9 C |  HYPERHYPER_LOOP08 :           90B4 C |
- HYPERHYPER_LOOP09 :           90C4 C |  HYPERHYPER_PSG1 :             8F6E C |
- HYPERHYPER_PSG2 :             9020 C |  HYPERHYPER_PSG3 :             90A7 C |
- HYPERHYPER_VOICES :           9191 C | *INSUPMODE :                      1 - |
-*LISTON :                         3 - | *MACEXP :                         7 - |
- MOMCPU :                     68008 - | *MOMCPUNAME :               "68008" - |
- MOONRISE_CALL00 :             9A2C C |  MOONRISE_CALL01 :             9A37 C |
- MOONRISE_CALL02 :             9898 C |  MOONRISE_CALL03 :             98AC C |
- MOONRISE_CALL04 :             98D9 C |  MOONRISE_CALL05 :             98FD C |
- MOONRISE_CALL06 :             985C C |  MOONRISE_CALL07 :             9825 C |
- MOONRISE_CALL08 :             97F2 C |  MOONRISE_CALL09 :             9721 C |
- MOONRISE_CALL0A :             99C9 C |  MOONRISE_CALL0B :             9938 C |
- MOONRISE_DAC :                99DD C |  MOONRISE_FM1 :                970C C |
- MOONRISE_FM2 :                9731 C |  MOONRISE_FM3 :                97FF C |
- MOONRISE_FM4 :                9832 C |  MOONRISE_FM5 :                9869 C |
-*MOONRISE_HEADER :             96DC C |  MOONRISE_JUMP00 :             99FA C |
- MOONRISE_JUMP01 :             9773 C |  MOONRISE_JUMP02 :             99AE C |
- MOONRISE_JUMP03 :             9932 C |  MOONRISE_LOOP00 :             9878 C |
- MOONRISE_LOOP01 :             9840 C |  MOONRISE_LOOP02 :             980D C |
- MOONRISE_LOOP03 :             9786 C |  MOONRISE_LOOP04 :             97C5 C |
- MOONRISE_LOOP05 :             970E C |  MOONRISE_LOOP06 :             9716 C |
- MOONRISE_LOOP07 :             99B6 C |  MOONRISE_LOOP08 :             99BE C |
- MOONRISE_PSG1 :               9921 C |  MOONRISE_PSG2 :               9999 C |
- MOONRISE_PSG3 :               99B4 C |  MOONRISE_VOICES :             9A43 C |
-*NA0 :                           8A - |  NA1 :                           96 - |
- NA2 :                           A2 - |  NA3 :                           AE - |
- NA4 :                           BA - |  NA5 :                           C6 - |
- NA6 :                           D2 - | *NA7 :                           DE - |
-*NAB0 :                          89 - |  NAB1 :                          95 - |
- NAB2 :                          A1 - |  NAB3 :                          AD - |
- NAB4 :                          B9 - |  NAB5 :                          C5 - |
-*NAB6 :                          D1 - | *NAB7 :                          DD - |
-*NB0 :                           8C - |  NB1 :                           98 - |
- NB2 :                           A4 - |  NB3 :                           B0 - |
- NB4 :                           BC - |  NB5 :                           C8 - |
- NB6 :                           D4 - | *NBB0 :                          8B - |
- NBB1 :                          97 - |  NBB2 :                          A3 - |
- NBB3 :                          AF - |  NBB4 :                          BB - |
- NBB5 :                          C7 - |  NBB6 :                          D3 - |
-*NBB7 :                          DF - | *NC0 :                           81 - |
-*NC1 :                           8D - |  NC2 :                           99 - |
- NC3 :                           A5 - |  NC4 :                           B1 - |
- NC5 :                           BD - |  NC6 :                           C9 - |
-*NC7 :                           D5 - | *NCS0 :                          82 - |
-*NCS1 :                          8E - | *NCS2 :                          9A - |
- NCS3 :                          A6 - |  NCS4 :                          B2 - |
- NCS5 :                          BE - |  NCS6 :                          CA - |
- NCS7 :                          D6 - | *ND0 :                           83 - |
- ND1 :                           8F - |  ND2 :                           9B - |
- ND3 :                           A7 - |  ND4 :                           B3 - |
- ND5 :                           BF - |  ND6 :                           CB - |
- ND7 :                           D7 - | *NE0 :                           85 - |
- NE1 :                           91 - |  NE2 :                           9D - |
- NE3 :                           A9 - |  NE4 :                           B5 - |
- NE5 :                           C1 - |  NE6 :                           CD - |
- NE7 :                           D9 - | *NEB0 :                          84 - |
- NEB1 :                          90 - |  NEB2 :                          9C - |
- NEB3 :                          A8 - |  NEB4 :                          B4 - |
- NEB5 :                          C0 - | *NEB6 :                          CC - |
-*NEB7 :                          D8 - | *NESTMAX :                      100 - |
-*NF0 :                           86 - |  NF1 :                           92 - |
- NF2 :                           9E - |  NF3 :                           AA - |
- NF4 :                           B6 - |  NF5 :                           C2 - |
- NF6 :                           CE - | *NF7 :                           DA - |
-*NFS0 :                          87 - |  NFS1 :                          93 - |
- NFS2 :                          9F - |  NFS3 :                          AB - |
- NFS4 :                          B7 - |  NFS5 :                          C3 - |
- NFS6 :                          CF - | *NFS7 :                          DB - |
-*NG0 :                           88 - |  NG1 :                           94 - |
- NG2 :                           A0 - |  NG3 :                           AC - |
- NG4 :                           B8 - |  NG5 :                           C4 - |
-*NG6 :                           D0 - |  NG7 :                           DC - |
-*NMAXPSG :                       C7 - |  NMAXPSG1 :                      D3 - |
- NMAXPSG2 :                      D4 - |  NRST :                          80 - |
-*PADDING :                        0 - |  PANCENTER :                     C0 - |
-*PANCENTRE :                     C0 - |  PANLEFT :                       80 - |
-*PANNONE :                        0 - |  PANRIGHT :                      40 - |
- PSGDELTA :                       C - | *RELAXED :                        0 - |
- SMPS2ASMVER :                    1 - |  SMPSNOATTACK :                  E7 - |
-*SMPSPITCH00 :                    0 - | *SMPSPITCH01HI :                  C - |
-*SMPSPITCH01LO :                 F4 - | *SMPSPITCH02HI :                 18 - |
-*SMPSPITCH02LO :                 E8 - | *SMPSPITCH03HI :                 24 - |
-*SMPSPITCH03LO :                 DC - | *SMPSPITCH04HI :                 30 - |
-*SMPSPITCH04LO :                 D0 - | *SMPSPITCH05HI :                 3C - |
-*SMPSPITCH05LO :                 C4 - | *SMPSPITCH06HI :                 48 - |
-*SMPSPITCH06LO :                 B8 - | *SMPSPITCH07HI :                 54 - |
-*SMPSPITCH07LO :                 AC - | *SMPSPITCH08HI :                 60 - |
-*SMPSPITCH08LO :                 A0 - | *SMPSPITCH09HI :                 6C - |
-*SMPSPITCH09LO :                 94 - | *SMPSPITCH10HI :                 78 - |
-*SMPSPITCH10LO :                 88 - |  SONGSTART :                   AA48 - |
- SONICDRIVERVER :                 3 - |  SOURCEDRIVER :                   3 - |
- SOURCESMPS2ASM :                 0 - |  SPEEDOFSOUND_CALL02 :         9CE7 C |
- SPEEDOFSOUND_CALL03 :         9D1F C |  SPEEDOFSOUND_CALL05 :         A4A7 C |
- SPEEDOFSOUND_CALL06 :         A67E C |  SPEEDOFSOUND_CALL07 :         A6AB C |
- SPEEDOFSOUND_CALL08 :         A50C C |  SPEEDOFSOUND_CALL09 :         A52C C |
- SPEEDOFSOUND_CALL0A :         A4CD C |  SPEEDOFSOUND_CALL0B :         A4FA C |
- SPEEDOFSOUND_CALL0C :         A2F7 C |  SPEEDOFSOUND_CALL0D :         A310 C |
- SPEEDOFSOUND_CALL0E :         A31A C |  SPEEDOFSOUND_CALL0F :         A32A C |
- SPEEDOFSOUND_CALL10 :         A114 C |  SPEEDOFSOUND_CALL11 :         A13B C |
- SPEEDOFSOUND_CALL12 :         9ECB C |  SPEEDOFSOUND_CALL13 :         9EDB C |
- SPEEDOFSOUND_CALL14 :         9EE6 C |  SPEEDOFSOUND_CALL15 :         A9BD C |
- SPEEDOFSOUND_CALL16 :         A949 C |  SPEEDOFSOUND_CALL17 :         A95C C |
- SPEEDOFSOUND_DAC :            9C45 C |  SPEEDOFSOUND_FM1 :            9D52 C |
- SPEEDOFSOUND_FM2 :            9EF1 C |  SPEEDOFSOUND_FM3 :            A15E C |
- SPEEDOFSOUND_FM4 :            A35B C |  SPEEDOFSOUND_FM5 :            A54A C |
-*SPEEDOFSOUND_HEADER :         9C14 C |  SPEEDOFSOUND_JUMP00 :         9C68 C |
- SPEEDOFSOUND_JUMP01 :         9EFC C |  SPEEDOFSOUND_JUMP02 :         A368 C |
- SPEEDOFSOUND_JUMP03 :         A166 C |  SPEEDOFSOUND_JUMP04 :         A7D8 C |
- SPEEDOFSOUND_JUMP05 :         A6CA C |  SPEEDOFSOUND_LOOP06 :         A559 C |
- SPEEDOFSOUND_LOOP07 :         A585 C |  SPEEDOFSOUND_LOOP08 :         A58F C |
- SPEEDOFSOUND_LOOP09 :         9D74 C |  SPEEDOFSOUND_LOOP0A :         9D82 C |
- SPEEDOFSOUND_LOOP0B :         9D8C C |  SPEEDOFSOUND_LOOP0C :         9D96 C |
- SPEEDOFSOUND_LOOP0D :         9DA0 C |  SPEEDOFSOUND_LOOP0E :         A972 C |
- SPEEDOFSOUND_LOOP0F :         A97A C |  SPEEDOFSOUND_LOOP10 :         A994 C |
- SPEEDOFSOUND_LOOP11 :         A99C C |  SPEEDOFSOUND_LOOP12 :         A9A4 C |
- SPEEDOFSOUND_LOOP13 :         A9B2 C |  SPEEDOFSOUND_PSG1 :           A6BB C |
- SPEEDOFSOUND_PSG2 :           A7CC C |  SPEEDOFSOUND_PSG3 :           A970 C |
- SPEEDOFSOUND_VOICES :         A9CB C | *STONE_01 :                       1 - |
- STONE_02 :                       2 - |  STONE_03 :                       3 - |
- STONE_04 :                       4 - |  STONE_05 :                       5 - |
- STONE_06 :                       6 - | *STONE_07 :                       7 - |
- STONE_08 :                       8 - | *STONE_09 :                       9 - |
-*STONE_0A :                       A - | *STONE_0B :                       B - |
- STONE_0C :                       C - | *STONE_0D :                       D - |
-*STONE_0E :                       E - | *STONE_0F :                       F - |
-*STONE_10 :                      10 - | *STONE_11 :                      11 - |
- STONE_12 :                      12 - | *STONE_13 :                      13 - |
-*STONE_14 :                      14 - | *STONE_15 :                      15 - |
-*STONE_16 :                      16 - | *STONE_17 :                      17 - |
- STONE_18 :                      18 - | *STONE_19 :                      19 - |
-*STONE_1A :                      1A - | *STONE_1B :                      1B - |
-*STONE_1C :                      1C - | *STONE_1D :                      1D - |
- STONE_1E :                      1E - | *STONE_1F :                      1F - |
-*STONE_20 :                      20 - | *STONE_21 :                      21 - |
-*STONE_22 :                      22 - | *STONE_23 :                      23 - |
- STONE_24 :                      24 - | *STONE_25 :                      25 - |
-*STONE_26 :                      26 - | *STONE_27 :                      27 - |
-*TIME :                     "0:6:8" - | *TRACENUM :                       0 - |
-*TRUE :                           1 - | *USE_S2_SAMPLES :                 1 - |
-*USE_S3D_SAMPLES :                1 - | *USE_S3_SAMPLES :                 1 - |
-*USE_SK_SAMPLES :                 1 - |  VCALGORITHM :                    4 - |
- VCAM1 :                          0 - |  VCAM2 :                          0 - |
- VCAM3 :                          0 - |  VCAM4 :                          0 - |
- VCAR1 :                         1F - |  VCAR2 :                         1F - |
- VCAR3 :                         1F - |  VCAR4 :                         1F - |
- VCCF1 :                          4 - |  VCCF2 :                          8 - |
- VCCF3 :                          1 - |  VCCF4 :                          7 - |
- VCD1R1 :                        1F - |  VCD1R1UNK :                      0 - |
- VCD1R2 :                        16 - |  VCD1R2UNK :                      0 - |
- VCD1R3 :                        1F - |  VCD1R3UNK :                      0 - |
- VCD1R4 :                        16 - |  VCD1R4UNK :                      0 - |
- VCD2R1 :                        11 - |  VCD2R2 :                        16 - |
- VCD2R3 :                         F - |  VCD2R4 :                         9 - |
- VCDL1 :                          0 - |  VCDL2 :                          A - |
- VCDL3 :                          0 - |  VCDL4 :                          6 - |
- VCDT1 :                          0 - |  VCDT2 :                          0 - |
- VCDT3 :                          0 - |  VCDT4 :                          0 - |
- VCFEEDBACK :                     7 - |  VCRR1 :                          F - |
- VCRR2 :                          F - |  VCRR3 :                          F - |
- VCRR4 :                          F - |  VCRS1 :                          1 - |
- VCRS2 :                          2 - |  VCRS3 :                          2 - |
- VCRS4 :                          1 - |  VCTL1 :                          0 - |
- VCTL2 :                         11 - |  VCTL3 :                          0 - |
- VCTL4 :                         16 - |  VCTLMASK1 :                     80 - |
- VCTLMASK2 :                      0 - |  VCTLMASK3 :                     80 - |
- VCTLMASK4 :                      0 - |  VCUNUSEDBITS :                   0 - |
-*VERSION :                     142F - |  WALKIN_CALL00 :               8B54 C |
- WALKIN_CALL01 :               8AB1 C |  WALKIN_CALL02 :               8AC0 C |
- WALKIN_CALL03 :               89F2 C |  WALKIN_CALL04 :               8900 C |
- WALKIN_CALL05 :               88C5 C |  WALKIN_CALL06 :               8B01 C |
- WALKIN_CALL07 :               88F1 C |  WALKIN_DAC :                  8B2F C |
- WALKIN_FM1 :                  88A3 C |  WALKIN_FM2 :                  88E5 C |
- WALKIN_FM3 :                  897C C |  WALKIN_FM4 :                  8A19 C |
- WALKIN_FM5 :                  8A96 C | *WALKIN_HEADER :               8873 C |
- WALKIN_JUMP00 :               8982 C |  WALKIN_JUMP01 :               88E9 C |
- WALKIN_JUMP02 :               88B2 C |  WALKIN_JUMP03 :               8AD8 C |
- WALKIN_LOOP00 :               8B36 C |  WALKIN_LOOP01 :               8A9A C |
- WALKIN_LOOP02 :               8A1F C |  WALKIN_LOOP03 :               8B0F C |
- WALKIN_LOOP04 :               8AE6 C |  WALKIN_PSG1 :                 8ACF C |
- WALKIN_PSG2 :                 8AE2 C |  WALKIN_PSG3 :                 8B0B C |
- WALKIN_VOICES :               8B5C C |  ZEROOFFSETOPTIMIZATION :         0 - |
+ DOORINTOSUMMER_PSG3 :         B3D1 C |  DOORINTOSUMMER_PWM2 :         B4D3 C |
+ DOORINTOSUMMER_VOICES :       B8D0 C | *DUMMYSPEED :                  9C44 C |
+ ELECTORIA_CALL00 :            87D9 C |  ELECTORIA_CALL01 :            87E7 C |
+ ELECTORIA_CALL02 :            87F5 C |  ELECTORIA_CALL03 :            8802 C |
+ ELECTORIA_CALL04 :            8181 C |  ELECTORIA_CALL05 :            855D C |
+ ELECTORIA_CALL06 :            81AE C |  ELECTORIA_CALL07 :            81C3 C |
+ ELECTORIA_CALL08 :            81EE C |  ELECTORIA_CALL09 :            825C C |
+ ELECTORIA_CALL0A :            82CB C |  ELECTORIA_CALL0B :            80A1 C |
+ ELECTORIA_CALL0C :            8728 C |  ELECTORIA_CALL0D :            8735 C |
+ ELECTORIA_CALL0E :            86BA C |  ELECTORIA_CALL0F :            86CC C |
+ ELECTORIA_CALL10 :            86DE C |  ELECTORIA_CALL11 :            86F2 C |
+ ELECTORIA_CALL12 :            863C C |  ELECTORIA_CALL13 :            833A C |
+ ELECTORIA_DAC :               8748 C |  ELECTORIA_FM1 :               8030 C |
+ ELECTORIA_FM2 :               80B2 C |  ELECTORIA_FM3 :               83DD C |
+ ELECTORIA_FM4 :               84E8 C |  ELECTORIA_FM5 :               856F C |
+*ELECTORIA_HEADER :            8000 C |  ELECTORIA_JUMP00 :            83EF C |
+ ELECTORIA_JUMP01 :            80C7 C |  ELECTORIA_LOOP00 :            8759 C |
+ ELECTORIA_LOOP01 :            876A C |  ELECTORIA_LOOP02 :            877B C |
+ ELECTORIA_LOOP03 :            8796 C |  ELECTORIA_LOOP04 :            87A7 C |
+ ELECTORIA_LOOP05 :            8573 C |  ELECTORIA_LOOP06 :            857C C |
+ ELECTORIA_LOOP07 :            8586 C |  ELECTORIA_LOOP08 :            85A5 C |
+ ELECTORIA_LOOP09 :            85AF C |  ELECTORIA_LOOP0A :            85BE C |
+ ELECTORIA_LOOP0B :            84EE C |  ELECTORIA_LOOP0C :            84F8 C |
+ ELECTORIA_LOOP0D :            8507 C |  ELECTORIA_LOOP0E :            8522 C |
+ ELECTORIA_LOOP0F :            8536 C |  ELECTORIA_LOOP10 :            854B C |
+ ELECTORIA_LOOP11 :            83E3 C |  ELECTORIA_LOOP12 :            84CA C |
+ ELECTORIA_LOOP13 :            84D9 C |  ELECTORIA_LOOP14 :            80B6 C |
+ ELECTORIA_LOOP15 :            8173 C |  ELECTORIA_LOOP16 :            8043 C |
+ ELECTORIA_LOOP17 :            804B C |  ELECTORIA_LOOP18 :            8055 C |
+ ELECTORIA_LOOP19 :            8078 C |  ELECTORIA_LOOP1A :            808E C |
+ ELECTORIA_LOOP1B :            8096 C |  ELECTORIA_LOOP1C :            86FF C |
+ ELECTORIA_LOOP1D :            8707 C |  ELECTORIA_LOOP1E :            8712 C |
+ ELECTORIA_LOOP1F :            871D C |  ELECTORIA_LOOP20 :            8654 C |
+ ELECTORIA_LOOP21 :            8663 C |  ELECTORIA_LOOP22 :            866F C |
+ ELECTORIA_LOOP23 :            867C C |  ELECTORIA_LOOP24 :            8686 C |
+ ELECTORIA_LOOP25 :            86A8 C |  ELECTORIA_LOOP26 :            85CD C |
+ ELECTORIA_LOOP27 :            85D5 C |  ELECTORIA_LOOP28 :            85DD C |
+ ELECTORIA_LOOP29 :            860C C |  ELECTORIA_LOOP2A :            8616 C |
+ ELECTORIA_LOOP2B :            861E C |  ELECTORIA_LOOP2C :            8631 C |
+ ELECTORIA_PSG1 :              85C9 C |  ELECTORIA_PSG2 :              864E C |
+ ELECTORIA_PSG3 :              86FD C |  ELECTORIA_VOICES :            880F C |
+ EVENINGSTAR_CALL00 :          9681 C |  EVENINGSTAR_CALL01 :          92D8 C |
+ EVENINGSTAR_CALL02 :          94A2 C |  EVENINGSTAR_CALL03 :          94D4 C |
+ EVENINGSTAR_CALL04 :          9505 C |  EVENINGSTAR_CALL05 :          948B C |
+ EVENINGSTAR_CALL06 :          939C C |  EVENINGSTAR_CALL07 :          93CE C |
+ EVENINGSTAR_CALL08 :          9412 C |  EVENINGSTAR_CALL09 :          93FF C |
+ EVENINGSTAR_CALL0A :          9290 C |  EVENINGSTAR_CALL0B :          929C C |
+ EVENINGSTAR_CALL0C :          962B C |  EVENINGSTAR_CALL0D :          9636 C |
+ EVENINGSTAR_DAC :             9644 C |  EVENINGSTAR_FM1 :             9225 C |
+ EVENINGSTAR_FM2 :             92B1 C |  EVENINGSTAR_FM3 :             934C C |
+ EVENINGSTAR_FM4 :             9423 C |  EVENINGSTAR_FM5 :             9516 C |
+*EVENINGSTAR_HEADER :          91F5 C |  EVENINGSTAR_JUMP00 :          9524 C |
+ EVENINGSTAR_JUMP01 :          923D C |  EVENINGSTAR_JUMP02 :          959F C |
+ EVENINGSTAR_JUMP03 :          9546 C |  EVENINGSTAR_LOOP00 :          9658 C |
+ EVENINGSTAR_LOOP01 :          9660 C |  EVENINGSTAR_LOOP02 :          9676 C |
+ EVENINGSTAR_LOOP03 :          943B C |  EVENINGSTAR_LOOP04 :          935C C |
+ EVENINGSTAR_LOOP05 :          92CB C |  EVENINGSTAR_LOOP06 :          95E0 C |
+ EVENINGSTAR_LOOP07 :          95ED C |  EVENINGSTAR_PSG1 :            9533 C |
+ EVENINGSTAR_PSG2 :            9585 C |  EVENINGSTAR_PSG3 :            95DE C |
+ EVENINGSTAR_VOICES :          9691 C | *FALSE :                          0 - |
+*FULLPMMU :                       1 - |  GAMEOVER_DAC :                9BA7 C |
+ GAMEOVER_FM1 :                9AF0 C |  GAMEOVER_FM2 :                9B27 C |
+ GAMEOVER_FM3 :                9B46 C |  GAMEOVER_FM4 :                9B5B C |
+ GAMEOVER_FM5 :                9B91 C | *GAMEOVER_HEADER :             9AC0 C |
+ GAMEOVER_PSG1 :               9BA4 C |  GAMEOVER_PSG2 :               9BA5 C |
+ GAMEOVER_PSG3 :               9BA6 C |  GAMEOVER_VOICES :             9BB0 C |
+*HAS64 :                          0 - | *HASFPU :                         0 - |
+*HASPMMU :                        0 - |  HYPERHYPER_CALL00 :           915F C |
+ HYPERHYPER_CALL01 :           916C C |  HYPERHYPER_CALL02 :           917C C |
+ HYPERHYPER_CALL03 :           8F63 C |  HYPERHYPER_CALL04 :           8F12 C |
+ HYPERHYPER_CALL05 :           8F07 C |  HYPERHYPER_CALL06 :           8DF5 C |
+ HYPERHYPER_CALL07 :           8E10 C |  HYPERHYPER_CALL08 :           8CEC C |
+ HYPERHYPER_CALL09 :           8CFA C |  HYPERHYPER_CALL0A :           8D05 C |
+ HYPERHYPER_CALL0B :           8C44 C |  HYPERHYPER_CALL0C :           8C39 C |
+ HYPERHYPER_CALL0D :           90F5 C |  HYPERHYPER_CALL0E :           9103 C |
+ HYPERHYPER_CALL0F :           8FFD C |  HYPERHYPER_CALL10 :           8FEE C |
+ HYPERHYPER_DAC :              9117 C |  HYPERHYPER_FM1 :              8BF0 C |
+ HYPERHYPER_FM2 :              8C56 C |  HYPERHYPER_FM3 :              8D1A C |
+ HYPERHYPER_FM4 :              8E1B C |  HYPERHYPER_FM5 :              8F18 C |
+*HYPERHYPER_HEADER :           8BC0 C |  HYPERHYPER_JUMP00 :           8E43 C |
+ HYPERHYPER_JUMP01 :           8D27 C |  HYPERHYPER_JUMP02 :           8C63 C |
+ HYPERHYPER_JUMP03 :           903D C |  HYPERHYPER_JUMP04 :           8F86 C |
+ HYPERHYPER_LOOP00 :           9128 C |  HYPERHYPER_LOOP01 :           9139 C |
+ HYPERHYPER_LOOP02 :           8F1A C |  HYPERHYPER_LOOP03 :           8F22 C |
+ HYPERHYPER_LOOP04 :           8F3A C |  HYPERHYPER_LOOP05 :           8E21 C |
+ HYPERHYPER_LOOP06 :           8C09 C |  HYPERHYPER_LOOP07 :           90A9 C |
+ HYPERHYPER_LOOP08 :           90B4 C |  HYPERHYPER_LOOP09 :           90C4 C |
+ HYPERHYPER_PSG1 :             8F6E C |  HYPERHYPER_PSG2 :             9020 C |
+ HYPERHYPER_PSG3 :             90A7 C |  HYPERHYPER_VOICES :           9191 C |
+*INSUPMODE :                      1 - | *LISTON :                         3 - |
+*MACEXP :                         7 - |  MOMCPU :                     68008 - |
+*MOMCPUNAME :               "68008" - |  MOONRISE_CALL00 :             9A2C C |
+ MOONRISE_CALL01 :             9A37 C |  MOONRISE_CALL02 :             9898 C |
+ MOONRISE_CALL03 :             98AC C |  MOONRISE_CALL04 :             98D9 C |
+ MOONRISE_CALL05 :             98FD C |  MOONRISE_CALL06 :             985C C |
+ MOONRISE_CALL07 :             9825 C |  MOONRISE_CALL08 :             97F2 C |
+ MOONRISE_CALL09 :             9721 C |  MOONRISE_CALL0A :             99C9 C |
+ MOONRISE_CALL0B :             9938 C |  MOONRISE_DAC :                99DD C |
+ MOONRISE_FM1 :                970C C |  MOONRISE_FM2 :                9731 C |
+ MOONRISE_FM3 :                97FF C |  MOONRISE_FM4 :                9832 C |
+ MOONRISE_FM5 :                9869 C | *MOONRISE_HEADER :             96DC C |
+ MOONRISE_JUMP00 :             99FA C |  MOONRISE_JUMP01 :             9773 C |
+ MOONRISE_JUMP02 :             99AE C |  MOONRISE_JUMP03 :             9932 C |
+ MOONRISE_LOOP00 :             9878 C |  MOONRISE_LOOP01 :             9840 C |
+ MOONRISE_LOOP02 :             980D C |  MOONRISE_LOOP03 :             9786 C |
+ MOONRISE_LOOP04 :             97C5 C |  MOONRISE_LOOP05 :             970E C |
+ MOONRISE_LOOP06 :             9716 C |  MOONRISE_LOOP07 :             99B6 C |
+ MOONRISE_LOOP08 :             99BE C |  MOONRISE_PSG1 :               9921 C |
+ MOONRISE_PSG2 :               9999 C |  MOONRISE_PSG3 :               99B4 C |
+ MOONRISE_VOICES :             9A43 C | *NA0 :                           8A - |
+ NA1 :                           96 - |  NA2 :                           A2 - |
+ NA3 :                           AE - |  NA4 :                           BA - |
+ NA5 :                           C6 - |  NA6 :                           D2 - |
+*NA7 :                           DE - | *NAB0 :                          89 - |
+ NAB1 :                          95 - |  NAB2 :                          A1 - |
+ NAB3 :                          AD - |  NAB4 :                          B9 - |
+ NAB5 :                          C5 - | *NAB6 :                          D1 - |
+*NAB7 :                          DD - | *NB0 :                           8C - |
+ NB1 :                           98 - |  NB2 :                           A4 - |
+ NB3 :                           B0 - |  NB4 :                           BC - |
+ NB5 :                           C8 - |  NB6 :                           D4 - |
+*NBB0 :                          8B - |  NBB1 :                          97 - |
+ NBB2 :                          A3 - |  NBB3 :                          AF - |
+ NBB4 :                          BB - |  NBB5 :                          C7 - |
+ NBB6 :                          D3 - | *NBB7 :                          DF - |
+ NC0 :                           81 - | *NC1 :                           8D - |
+ NC2 :                           99 - |  NC3 :                           A5 - |
+ NC4 :                           B1 - |  NC5 :                           BD - |
+ NC6 :                           C9 - | *NC7 :                           D5 - |
+ NCS0 :                          82 - | *NCS1 :                          8E - |
+*NCS2 :                          9A - |  NCS3 :                          A6 - |
+ NCS4 :                          B2 - |  NCS5 :                          BE - |
+ NCS6 :                          CA - |  NCS7 :                          D6 - |
+*ND0 :                           83 - |  ND1 :                           8F - |
+ ND2 :                           9B - |  ND3 :                           A7 - |
+ ND4 :                           B3 - |  ND5 :                           BF - |
+ ND6 :                           CB - |  ND7 :                           D7 - |
+ NE0 :                           85 - |  NE1 :                           91 - |
+ NE2 :                           9D - |  NE3 :                           A9 - |
+ NE4 :                           B5 - |  NE5 :                           C1 - |
+ NE6 :                           CD - |  NE7 :                           D9 - |
+ NEB0 :                          84 - |  NEB1 :                          90 - |
+ NEB2 :                          9C - |  NEB3 :                          A8 - |
+ NEB4 :                          B4 - |  NEB5 :                          C0 - |
+*NEB6 :                          CC - | *NEB7 :                          D8 - |
+*NESTMAX :                      100 - | *NF0 :                           86 - |
+ NF1 :                           92 - |  NF2 :                           9E - |
+ NF3 :                           AA - |  NF4 :                           B6 - |
+ NF5 :                           C2 - |  NF6 :                           CE - |
+*NF7 :                           DA - | *NFS0 :                          87 - |
+ NFS1 :                          93 - |  NFS2 :                          9F - |
+ NFS3 :                          AB - |  NFS4 :                          B7 - |
+ NFS5 :                          C3 - |  NFS6 :                          CF - |
+*NFS7 :                          DB - | *NG0 :                           88 - |
+ NG1 :                           94 - |  NG2 :                           A0 - |
+ NG3 :                           AC - |  NG4 :                           B8 - |
+ NG5 :                           C4 - | *NG6 :                           D0 - |
+ NG7 :                           DC - | *NMAXPSG :                       C7 - |
+ NMAXPSG1 :                      D3 - |  NMAXPSG2 :                      D4 - |
+ NRST :                          80 - | *PADDING :                        0 - |
+ PANCENTER :                     C0 - | *PANCENTRE :                     C0 - |
+ PANLEFT :                       80 - | *PANNONE :                        0 - |
+ PANRIGHT :                      40 - |  PSGDELTA :                       C - |
+*RELAXED :                        0 - |  SMPS2ASMVER :                    1 - |
+ SMPSNOATTACK :                  E7 - | *SMPSPITCH00 :                    0 - |
+*SMPSPITCH01HI :                  C - | *SMPSPITCH01LO :                 F4 - |
+*SMPSPITCH02HI :                 18 - | *SMPSPITCH02LO :                 E8 - |
+*SMPSPITCH03HI :                 24 - | *SMPSPITCH03LO :                 DC - |
+*SMPSPITCH04HI :                 30 - | *SMPSPITCH04LO :                 D0 - |
+*SMPSPITCH05HI :                 3C - | *SMPSPITCH05LO :                 C4 - |
+*SMPSPITCH06HI :                 48 - | *SMPSPITCH06LO :                 B8 - |
+*SMPSPITCH07HI :                 54 - | *SMPSPITCH07LO :                 AC - |
+*SMPSPITCH08HI :                 60 - | *SMPSPITCH08LO :                 A0 - |
+*SMPSPITCH09HI :                 6C - | *SMPSPITCH09LO :                 94 - |
+*SMPSPITCH10HI :                 78 - | *SMPSPITCH10LO :                 88 - |
+ SONGSTART :                   AA48 - |  SONICDRIVERVER :                 3 - |
+ SOURCEDRIVER :                   3 - |  SOURCESMPS2ASM :                 0 - |
+ SPEEDOFSOUND_CALL02 :         9CE7 C |  SPEEDOFSOUND_CALL03 :         9D1F C |
+ SPEEDOFSOUND_CALL05 :         A4A7 C |  SPEEDOFSOUND_CALL06 :         A67E C |
+ SPEEDOFSOUND_CALL07 :         A6AB C |  SPEEDOFSOUND_CALL08 :         A50C C |
+ SPEEDOFSOUND_CALL09 :         A52C C |  SPEEDOFSOUND_CALL0A :         A4CD C |
+ SPEEDOFSOUND_CALL0B :         A4FA C |  SPEEDOFSOUND_CALL0C :         A2F7 C |
+ SPEEDOFSOUND_CALL0D :         A310 C |  SPEEDOFSOUND_CALL0E :         A31A C |
+ SPEEDOFSOUND_CALL0F :         A32A C |  SPEEDOFSOUND_CALL10 :         A114 C |
+ SPEEDOFSOUND_CALL11 :         A13B C |  SPEEDOFSOUND_CALL12 :         9ECB C |
+ SPEEDOFSOUND_CALL13 :         9EDB C |  SPEEDOFSOUND_CALL14 :         9EE6 C |
+ SPEEDOFSOUND_CALL15 :         A9BD C |  SPEEDOFSOUND_CALL16 :         A949 C |
+ SPEEDOFSOUND_CALL17 :         A95C C |  SPEEDOFSOUND_DAC :            9C45 C |
+ SPEEDOFSOUND_FM1 :            9D52 C |  SPEEDOFSOUND_FM2 :            9EF1 C |
+ SPEEDOFSOUND_FM3 :            A15E C |  SPEEDOFSOUND_FM4 :            A35B C |
+ SPEEDOFSOUND_FM5 :            A54A C | *SPEEDOFSOUND_HEADER :         9C14 C |
+ SPEEDOFSOUND_JUMP00 :         9C68 C |  SPEEDOFSOUND_JUMP01 :         9EFC C |
+ SPEEDOFSOUND_JUMP02 :         A368 C |  SPEEDOFSOUND_JUMP03 :         A166 C |
+ SPEEDOFSOUND_JUMP04 :         A7D8 C |  SPEEDOFSOUND_JUMP05 :         A6CA C |
+ SPEEDOFSOUND_LOOP06 :         A559 C |  SPEEDOFSOUND_LOOP07 :         A585 C |
+ SPEEDOFSOUND_LOOP08 :         A58F C |  SPEEDOFSOUND_LOOP09 :         9D74 C |
+ SPEEDOFSOUND_LOOP0A :         9D82 C |  SPEEDOFSOUND_LOOP0B :         9D8C C |
+ SPEEDOFSOUND_LOOP0C :         9D96 C |  SPEEDOFSOUND_LOOP0D :         9DA0 C |
+ SPEEDOFSOUND_LOOP0E :         A972 C |  SPEEDOFSOUND_LOOP0F :         A97A C |
+ SPEEDOFSOUND_LOOP10 :         A994 C |  SPEEDOFSOUND_LOOP11 :         A99C C |
+ SPEEDOFSOUND_LOOP12 :         A9A4 C |  SPEEDOFSOUND_LOOP13 :         A9B2 C |
+ SPEEDOFSOUND_PSG1 :           A6BB C |  SPEEDOFSOUND_PSG2 :           A7CC C |
+ SPEEDOFSOUND_PSG3 :           A970 C |  SPEEDOFSOUND_VOICES :         A9CB C |
+*STONE_01 :                       1 - |  STONE_02 :                       2 - |
+ STONE_03 :                       3 - |  STONE_04 :                       4 - |
+ STONE_05 :                       5 - |  STONE_06 :                       6 - |
+*STONE_07 :                       7 - |  STONE_08 :                       8 - |
+*STONE_09 :                       9 - | *STONE_0A :                       A - |
+*STONE_0B :                       B - |  STONE_0C :                       C - |
+*STONE_0D :                       D - | *STONE_0E :                       E - |
+*STONE_0F :                       F - | *STONE_10 :                      10 - |
+*STONE_11 :                      11 - |  STONE_12 :                      12 - |
+*STONE_13 :                      13 - | *STONE_14 :                      14 - |
+*STONE_15 :                      15 - | *STONE_16 :                      16 - |
+*STONE_17 :                      17 - |  STONE_18 :                      18 - |
+*STONE_19 :                      19 - | *STONE_1A :                      1A - |
+*STONE_1B :                      1B - | *STONE_1C :                      1C - |
+*STONE_1D :                      1D - |  STONE_1E :                      1E - |
+*STONE_1F :                      1F - | *STONE_20 :                      20 - |
+*STONE_21 :                      21 - | *STONE_22 :                      22 - |
+*STONE_23 :                      23 - |  STONE_24 :                      24 - |
+*STONE_25 :                      25 - | *STONE_26 :                      26 - |
+*STONE_27 :                      27 - | *TIME :                   "0:38:45" - |
+*TRACENUM :                       0 - | *TRUE :                           1 - |
+*USE_S2_SAMPLES :                 1 - | *USE_S3D_SAMPLES :                1 - |
+*USE_S3_SAMPLES :                 1 - | *USE_SK_SAMPLES :                 1 - |
+ VCALGORITHM :                    4 - |  VCAM1 :                          0 - |
+ VCAM2 :                          0 - |  VCAM3 :                          0 - |
+ VCAM4 :                          0 - |  VCAR1 :                         1F - |
+ VCAR2 :                         1F - |  VCAR3 :                         1F - |
+ VCAR4 :                         1F - |  VCCF1 :                          4 - |
+ VCCF2 :                          8 - |  VCCF3 :                          1 - |
+ VCCF4 :                          7 - |  VCD1R1 :                        1F - |
+ VCD1R1UNK :                      0 - |  VCD1R2 :                        16 - |
+ VCD1R2UNK :                      0 - |  VCD1R3 :                        1F - |
+ VCD1R3UNK :                      0 - |  VCD1R4 :                        16 - |
+ VCD1R4UNK :                      0 - |  VCD2R1 :                        11 - |
+ VCD2R2 :                        16 - |  VCD2R3 :                         F - |
+ VCD2R4 :                         9 - |  VCDL1 :                          0 - |
+ VCDL2 :                          A - |  VCDL3 :                          0 - |
+ VCDL4 :                          6 - |  VCDT1 :                          0 - |
+ VCDT2 :                          0 - |  VCDT3 :                          0 - |
+ VCDT4 :                          0 - |  VCFEEDBACK :                     7 - |
+ VCRR1 :                          F - |  VCRR2 :                          F - |
+ VCRR3 :                          F - |  VCRR4 :                          F - |
+ VCRS1 :                          1 - |  VCRS2 :                          2 - |
+ VCRS3 :                          2 - |  VCRS4 :                          1 - |
+ VCTL1 :                          0 - |  VCTL2 :                         11 - |
+ VCTL3 :                          0 - |  VCTL4 :                         16 - |
+ VCTLMASK1 :                     80 - |  VCTLMASK2 :                      0 - |
+ VCTLMASK3 :                     80 - |  VCTLMASK4 :                      0 - |
+ VCUNUSEDBITS :                   0 - | *VERSION :                     142F - |
+ WALKIN_CALL00 :               8B54 C |  WALKIN_CALL01 :               8AB1 C |
+ WALKIN_CALL02 :               8AC0 C |  WALKIN_CALL03 :               89F2 C |
+ WALKIN_CALL04 :               8900 C |  WALKIN_CALL05 :               88C5 C |
+ WALKIN_CALL06 :               8B01 C |  WALKIN_CALL07 :               88F1 C |
+ WALKIN_DAC :                  8B2F C |  WALKIN_FM1 :                  88A3 C |
+ WALKIN_FM2 :                  88E5 C |  WALKIN_FM3 :                  897C C |
+ WALKIN_FM4 :                  8A19 C |  WALKIN_FM5 :                  8A96 C |
+*WALKIN_HEADER :               8873 C |  WALKIN_JUMP00 :               8982 C |
+ WALKIN_JUMP01 :               88E9 C |  WALKIN_JUMP02 :               88B2 C |
+ WALKIN_JUMP03 :               8AD8 C |  WALKIN_LOOP00 :               8B36 C |
+ WALKIN_LOOP01 :               8A9A C |  WALKIN_LOOP02 :               8A1F C |
+ WALKIN_LOOP03 :               8B0F C |  WALKIN_LOOP04 :               8AE6 C |
+ WALKIN_PSG1 :                 8ACF C |  WALKIN_PSG2 :                 8AE2 C |
+ WALKIN_PSG3 :                 8B0B C |  WALKIN_VOICES :               8B5C C |
+ ZEROOFFSETOPTIMIZATION :         0 - |
 
-    607 symbols
-    123 unused symbols
+    598 symbols
+    118 unused symbols
 
- AS V1.42 Beta [Bld 251] - Source File Music.asm - Page 3 - 11/3/2023 0:6:8
+ AS V1.42 Beta [Bld 251] - Source File Music.asm - Page 3 - 11/3/2023 0:38:46
 
 
   Defined Macros:
@@ -15126,7 +15166,7 @@ _MOVE                                 | _TST
 
      98 macros
 
- AS V1.42 Beta [Bld 251] - Source File Music.asm - Page 4 - 11/3/2023 0:6:8
+ AS V1.42 Beta [Bld 251] - Source File Music.asm - Page 4 - 11/3/2023 0:38:46
 
 
   Defined Functions:
@@ -15140,7 +15180,7 @@ SIGNEXTEND                            | SIGNMASK
 BIT                                   | CHKOP                                
 NOTZ80                                | Z80_PTR                              
 
- AS V1.42 Beta [Bld 251] - Source File Music.asm - Page 5 - 11/3/2023 0:6:8
+ AS V1.42 Beta [Bld 251] - Source File Music.asm - Page 5 - 11/3/2023 0:38:46
 
 
   Code Pages:
@@ -15150,10 +15190,10 @@ STANDARD (0 changed characters)
 
 1 code page
 
-0.47 seconds assembly time
+0.48 seconds assembly time
 
-   6622 lines source file
-  25813 lines incl. macro expansions
+   6639 lines source file
+  25700 lines incl. macro expansions
       2 passes
       0 errors
       0 warnings
