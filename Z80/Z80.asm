@@ -2954,6 +2954,8 @@ MusicPtrs:
 	dw 91F5h 
 	dw 96DCh 
 	dw 9AC0h
+	dw 9C14h
+	dw 0AA48h
 					; SetInsFromSong+6o
 SFXPtrs:	dw 0C000h, 0C033h, 0C09Ah, 0C0C7h, 0C0EFh, 0C124h, 0C165h
 					; DATA XREF: PlaySoundID+148o

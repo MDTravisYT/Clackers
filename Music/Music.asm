@@ -26,3 +26,5 @@ use_sk_samples			= 1
 		include		"Music/EveningStar.asm"
 		include		"Music/Moonrise.asm"
 		include		"Music/GameOver.asm"
+		include		"Music/SpeedOfSound.asm"
+		include		"Music/DoorIntoSummer.asm"
