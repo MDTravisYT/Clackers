@@ -7152,7 +7152,7 @@ Levels:							; Offset: 00008896
 		bra.s	LV_PlayMusic
 		
 SS_PlayMusic:
-		move.b	#$82,d0					; load BGM 81
+		move.b	#$81,d0					; load BGM 81
 		bra.s	LV_PlayMusic
 TT_PlayMusic:
 		move.b	#$87,d0					; load BGM 81
