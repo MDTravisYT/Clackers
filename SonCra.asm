@@ -10900,6 +10900,7 @@ loc_AB9A:				; CODE XREF: ROM:0000AB90j
 		neg.w	d1
 
 loc_ABAA:				; CODE XREF: ROM:0000ABA4j
+		move.w	#$30,$26(a6)
 		cmpi.w	#$10,d1
 		bcc.w	loc_ACE0
 		clr.w	$2C(a6)
@@ -19772,13 +19773,12 @@ AlignValue =	$00 ;*-$00010000+*%2				; calculate the correct alignment (current 
 ; ---------------------------------------------------------------------------
 AL01:		dcb.b ($00010000+AlignValue)-AL01,$FF		; Aligned for Z80
 ; ---------------------------------------------------------------------------
-Music81:	incbin	Music\Music81.bin 			; AKA Electoria (Chaotix Featuring Knuckles)
+Music81:	incbin	"Music\New Folder\Music.bin" 			; AKA Electoria (Chaotix Featuring Knuckles)
 Music82:	incbin	Music\Music82.bin 			; AKA Walkin' (Chaotix Featuring Knuckles)
 Music83:	incbin	Music\Music83.bin			; AKA Hyper-Hyper (Chaotix Featuring Knuckles)
 Music84:	incbin	Music\Music84.bin			; AKA Evening Star (Chaotix Featuring Knuckles)
 Music85:	incbin	Music\Music85.bin			; AKA Moonrise (ChaotiX Featuring Knuckles)
-;Music86:	incbin	Music\Music86.bin			; AKA Game Over (Sonic The Hedgehog)
-Music87:	incbin	Music\Music87.bin			; AKA Game Over (Sonic The Hedgehog)
+Music86:	incbin	Music\Music86.bin			; AKA Game Over (Sonic The Hedgehog)
 ; ---------------------------------------------------------------------------
 ; ===========================================================================
 ; ---------------------------------------------------------------------------
