@@ -19773,12 +19773,7 @@ AlignValue =	$00 ;*-$00010000+*%2				; calculate the correct alignment (current 
 ; ---------------------------------------------------------------------------
 AL01:		dcb.b ($00010000+AlignValue)-AL01,$FF		; Aligned for Z80
 ; ---------------------------------------------------------------------------
-Music81:	incbin	"Music\New Folder\Music.bin" 			; AKA Electoria (Chaotix Featuring Knuckles)
-Music82:	incbin	Music\Music82.bin 			; AKA Walkin' (Chaotix Featuring Knuckles)
-Music83:	incbin	Music\Music83.bin			; AKA Hyper-Hyper (Chaotix Featuring Knuckles)
-Music84:	incbin	Music\Music84.bin			; AKA Evening Star (Chaotix Featuring Knuckles)
-Music85:	incbin	Music\Music85.bin			; AKA Moonrise (ChaotiX Featuring Knuckles)
-Music86:	incbin	Music\Music86.bin			; AKA Game Over (Sonic The Hedgehog)
+Music8:	incbin	"Music\Music.bin" 			
 ; ---------------------------------------------------------------------------
 ; ===========================================================================
 ; ---------------------------------------------------------------------------
