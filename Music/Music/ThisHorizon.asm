@@ -13,7 +13,7 @@ ThisHorizon_Header:
 ;	smpsHeaderFM        ThisHorizon_FM6,	$00, $10
 	smpsHeaderPSG       ThisHorizon_PSG1,	$F4, $03, $00, sTone_0C
 	smpsHeaderPSG       ThisHorizon_PSG2,	$F4, $03, $00, sTone_0C
-	smpsHeaderPSG       ThisHorizon_PSG3,	$23, $02, $00, sTone_02
+	smpsHeaderPSG       ThisHorizon_PSG3,	$23, $01, $00, sTone_02
 ;	smpsHeaderPWM       ThisHorizon_PWM1,	$00, $99
 ;	smpsHeaderPWM       ThisHorizon_PWM2,	$00, $11
 ;	smpsHeaderPWM       ThisHorizon_PWM3,	$00, $99
@@ -428,7 +428,7 @@ ThisHorizon_Call06:
 
 ; PSG1 Data
 ThisHorizon_PSG1:
-	smpsPSGvoice        sTone_02
+	smpsPSGvoice        sTone_06
 	smpsPSGAlterVol     $02
 	dc.b	nRst, $30, nC4, $06, nG3, nC3, nC4, nG3, nC3, nC4, nG3
 	smpsPSGAlterVol     $FE
@@ -441,7 +441,7 @@ horizon_Loop08:
 
 ; PSG2 Data
 ThisHorizon_PSG2:
-	smpsPSGvoice        sTone_02
+	smpsPSGvoice        sTone_06
 	smpsPSGAlterVol     $05
 	dc.b	nRst, $01
 	smpsAlterNote       $02
@@ -511,7 +511,6 @@ ThisHorizon_Loop03:
 
 ; PWM2 Data
 ThisHorizon_PWM2:
-
 
 ThisHorizon_Loop02:
 	dc.b	nRst, $0C, dCrackerSnare, dCrackerSnare, dCrackerSnare, $06, dCrackerSnare, dCrackerSnare, dCrackerSnare, dCrackerTimpaniMid, nRst, dCrackerSnare

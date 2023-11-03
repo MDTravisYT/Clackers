@@ -1,4 +1,4 @@
- AS V1.42 Beta [Bld 251] - Source File Music.asm - Page 1 - 11/3/2023 17:25:27
+ AS V1.42 Beta [Bld 251] - Source File Music.asm - Page 1 - 11/3/2023 17:33:43
 
 
     1/       0 :                        z80_ptr function x,(x)<<8&$FF00|(x)>>8&$7F|$80
@@ -14779,12 +14779,12 @@
 (1)   15/    B792 :  (MACRO-2)                  PSGPitchConvert $F4
 (1)   15/    B792 : F4                                  dc.b    $F4
 (1)   15/    B793 : 0300 0C                     dc.b    $03,$00,STONE_0C
-(1)   16/    B796 : (MACRO)             	smpsHeaderPSG       ThisHorizon_PSG3,	$23, $02, $00, sTone_02
+(1)   16/    B796 : (MACRO)             	smpsHeaderPSG       ThisHorizon_PSG3,	$23, $01, $00, sTone_02
 (1)   16/    B796 :  (MACRO-2)                  CheckedChannelPointer THISHORIZON_PSG3
 (1)   16/    B796 : 70BB                                dc.w    z80_ptr(THISHORIZON_PSG3)
 (1)   16/    B798 :  (MACRO-2)                  PSGPitchConvert $23
 (1)   16/    B798 : 23                                  dc.b    $23
-(1)   16/    B799 : 0200 02                     dc.b    $02,$00,STONE_02
+(1)   16/    B799 : 0100 02                     dc.b    $01,$00,STONE_02
 (1)   17/    B79C :                     ;	smpsHeaderPWM       ThisHorizon_PWM1,	$00, $99
 (1)   18/    B79C :                     ;	smpsHeaderPWM       ThisHorizon_PWM2,	$00, $11
 (1)   19/    B79C :                     ;	smpsHeaderPWM       ThisHorizon_PWM3,	$00, $99
@@ -15918,8 +15918,8 @@
 (1)  428/    BB07 :                     
 (1)  429/    BB07 :                     ; PSG1 Data
 (1)  430/    BB07 :                     ThisHorizon_PSG1:
-(1)  431/    BB07 : (MACRO)             	smpsPSGvoice        sTone_02
-(1)  431/    BB07 : F502                        dc.b    $F5,STONE_02
+(1)  431/    BB07 : (MACRO)             	smpsPSGvoice        sTone_07
+(1)  431/    BB07 : F507                        dc.b    $F5,STONE_07
 (1)  432/    BB09 : (MACRO)             	smpsPSGAlterVol     $02
 (1)  432/    BB09 : EC02                        dc.b    $EC,$02
 (1)  433/    BB0B : 8030 B106 ACA5 B1AC 	dc.b	nRst, $30, nC4, $06, nG3, nC3, nC4, nG3, nC3, nC4, nG3
@@ -15941,8 +15941,8 @@
 (1)  441/    BB31 :                     
 (1)  442/    BB31 :                     ; PSG2 Data
 (1)  443/    BB31 :                     ThisHorizon_PSG2:
-(1)  444/    BB31 : (MACRO)             	smpsPSGvoice        sTone_02
-(1)  444/    BB31 : F502                        dc.b    $F5,STONE_02
+(1)  444/    BB31 : (MACRO)             	smpsPSGvoice        sTone_07
+(1)  444/    BB31 : F507                        dc.b    $F5,STONE_07
 (1)  445/    BB33 : (MACRO)             	smpsPSGAlterVol     $05
 (1)  445/    BB33 : EC05                        dc.b    $EC,$05
 (1)  446/    BB35 : 8001                	dc.b	nRst, $01
@@ -16068,469 +16068,468 @@
 (1)  512/    BBDA :                     ; PWM2 Data
 (1)  513/    BBDA :                     ThisHorizon_PWM2:
 (1)  514/    BBDA :                     
-(1)  515/    BBDA :                     
-(1)  516/    BBDA :                     ThisHorizon_Loop02:
-(1)  517/    BBDA : 800C 8282 8206 8282 	dc.b	nRst, $0C, dCrackerSnare, dCrackerSnare, dCrackerSnare, $06, dCrackerSnare, dCrackerSnare, dCrackerSnare, dCrackerTimpaniMid, nRst, dCrackerSnare
+(1)  515/    BBDA :                     ThisHorizon_Loop02:
+(1)  516/    BBDA : 800C 8282 8206 8282 	dc.b	nRst, $0C, dCrackerSnare, dCrackerSnare, dCrackerSnare, $06, dCrackerSnare, dCrackerSnare, dCrackerSnare, dCrackerTimpaniMid, nRst, dCrackerSnare
              BBE2 : 8284 8082         
-(1)  518/    BBE6 : 82                  	dc.b	dCrackerSnare
-(1)  519/    BBE7 : (MACRO)             	smpsFMAlterVol      $90
-(1)  519/    BBE7 : E690                                dc.b    $E6,$90
-(1)  520/    BBE9 : 85                  	dc.b	dCrackerTimpaniLow
-(1)  521/    BBEA : (MACRO)             	smpsFMAlterVol      $70
-(1)  521/    BBEA : E670                                dc.b    $E6,$70
-(1)  522/    BBEC : 82                  	dc.b	dCrackerSnare
-(1)  523/    BBED :                     
-(1)  524/    BBED :                     ThisHorizon_Jump01:
-(1)  525/    BBED : (MACRO)             	smpsCall            ThisHorizon_Call03
-(1)  525/    BBED : F8                          dc.b    $F8
-(1)  525/    BBEE : 1EBC                                dc.w    z80_ptr(THISHORIZON_CALL03)
-(1)  526/    BBF0 : (MACRO)             	smpsCall            ThisHorizon_Call03
-(1)  526/    BBF0 : F8                          dc.b    $F8
-(1)  526/    BBF1 : 1EBC                                dc.w    z80_ptr(THISHORIZON_CALL03)
-(1)  527/    BBF3 : 8018 8280 8280 8280 	dc.b	nRst, $18, dCrackerSnare, nRst, dCrackerSnare, nRst, dCrackerSnare, nRst, dCrackerSnare, nRst, dCrackerSnare, nRst
+(1)  517/    BBE6 : 82                  	dc.b	dCrackerSnare
+(1)  518/    BBE7 : (MACRO)             	smpsFMAlterVol      $90
+(1)  518/    BBE7 : E690                                dc.b    $E6,$90
+(1)  519/    BBE9 : 85                  	dc.b	dCrackerTimpaniLow
+(1)  520/    BBEA : (MACRO)             	smpsFMAlterVol      $70
+(1)  520/    BBEA : E670                                dc.b    $E6,$70
+(1)  521/    BBEC : 82                  	dc.b	dCrackerSnare
+(1)  522/    BBED :                     
+(1)  523/    BBED :                     ThisHorizon_Jump01:
+(1)  524/    BBED : (MACRO)             	smpsCall            ThisHorizon_Call03
+(1)  524/    BBED : F8                          dc.b    $F8
+(1)  524/    BBEE : 1EBC                                dc.w    z80_ptr(THISHORIZON_CALL03)
+(1)  525/    BBF0 : (MACRO)             	smpsCall            ThisHorizon_Call03
+(1)  525/    BBF0 : F8                          dc.b    $F8
+(1)  525/    BBF1 : 1EBC                                dc.w    z80_ptr(THISHORIZON_CALL03)
+(1)  526/    BBF3 : 8018 8280 8280 8280 	dc.b	nRst, $18, dCrackerSnare, nRst, dCrackerSnare, nRst, dCrackerSnare, nRst, dCrackerSnare, nRst, dCrackerSnare, nRst
              BBFB : 8280 8280         
-(1)  528/    BBFF : 8280 0C             	dc.b	dCrackerSnare, nRst, $0C
-(1)  529/    BC02 : (MACRO)             	smpsFMAlterVol      $F9
-(1)  529/    BC02 : E6F9                                dc.b    $E6,$F9
-(1)  530/    BC04 : 8306 8380 83        	dc.b	dCrackerTimpaniHi, $06, dCrackerTimpaniHi, nRst, dCrackerTimpaniHi
-(1)  531/    BC09 : (MACRO)             	smpsFMAlterVol      $07
-(1)  531/    BC09 : E607                                dc.b    $E6,$07
-(1)  532/    BC0B : 8480 8484 8084      	dc.b	dCrackerTimpaniMid, nRst, dCrackerTimpaniMid, dCrackerTimpaniMid, nRst, dCrackerTimpaniMid
-(1)  533/    BC11 : (MACRO)             	smpsFMAlterVol      $90
-(1)  533/    BC11 : E690                                dc.b    $E6,$90
-(1)  534/    BC13 : 850C                	dc.b	dCrackerTimpaniLow, $0C
-(1)  535/    BC15 : (MACRO)             	smpsFMAlterVol      $70
-(1)  535/    BC15 : E670                                dc.b    $E6,$70
-(1)  536/    BC17 : 82                  	dc.b	dCrackerSnare
-(1)  537/    BC18 : (MACRO)             	smpsCall            ThisHorizon_Call03
-(1)  537/    BC18 : F8                          dc.b    $F8
-(1)  537/    BC19 : 1EBC                                dc.w    z80_ptr(THISHORIZON_CALL03)
-(1)  538/    BC1B : (MACRO)             	smpsJump            ThisHorizon_Jump01
-(1)  538/    BC1B : F6                          dc.b    $F6
-(1)  538/    BC1C : EDBB                                dc.w    z80_ptr(THISHORIZON_JUMP01)
-(1)  539/    BC1E :                     
-(1)  540/    BC1E :                     ThisHorizon_Call03:
-(1)  541/    BC1E : 8018 82             	dc.b	nRst, $18, dCrackerSnare
-(1)  542/    BC21 : (MACRO)             	smpsLoop            $00, $06, ThisHorizon_Call03
-(1)  542/    BC21 : F7                          dc.b    $F7
-(1)  542/    BC22 : 0006                        dc.b    $00,$06
-(1)  542/    BC24 : 1EBC                                dc.w    z80_ptr(THISHORIZON_CALL03)
-(1)  543/    BC26 : 800C 8282 8206 8280 	dc.b	nRst, $0C, dCrackerSnare, dCrackerSnare, dCrackerSnare, $06, dCrackerSnare, nRst, dCrackerSnare, nRst, nRst, dCrackerSnare
+(1)  527/    BBFF : 8280 0C             	dc.b	dCrackerSnare, nRst, $0C
+(1)  528/    BC02 : (MACRO)             	smpsFMAlterVol      $F9
+(1)  528/    BC02 : E6F9                                dc.b    $E6,$F9
+(1)  529/    BC04 : 8306 8380 83        	dc.b	dCrackerTimpaniHi, $06, dCrackerTimpaniHi, nRst, dCrackerTimpaniHi
+(1)  530/    BC09 : (MACRO)             	smpsFMAlterVol      $07
+(1)  530/    BC09 : E607                                dc.b    $E6,$07
+(1)  531/    BC0B : 8480 8484 8084      	dc.b	dCrackerTimpaniMid, nRst, dCrackerTimpaniMid, dCrackerTimpaniMid, nRst, dCrackerTimpaniMid
+(1)  532/    BC11 : (MACRO)             	smpsFMAlterVol      $90
+(1)  532/    BC11 : E690                                dc.b    $E6,$90
+(1)  533/    BC13 : 850C                	dc.b	dCrackerTimpaniLow, $0C
+(1)  534/    BC15 : (MACRO)             	smpsFMAlterVol      $70
+(1)  534/    BC15 : E670                                dc.b    $E6,$70
+(1)  535/    BC17 : 82                  	dc.b	dCrackerSnare
+(1)  536/    BC18 : (MACRO)             	smpsCall            ThisHorizon_Call03
+(1)  536/    BC18 : F8                          dc.b    $F8
+(1)  536/    BC19 : 1EBC                                dc.w    z80_ptr(THISHORIZON_CALL03)
+(1)  537/    BC1B : (MACRO)             	smpsJump            ThisHorizon_Jump01
+(1)  537/    BC1B : F6                          dc.b    $F6
+(1)  537/    BC1C : EDBB                                dc.w    z80_ptr(THISHORIZON_JUMP01)
+(1)  538/    BC1E :                     
+(1)  539/    BC1E :                     ThisHorizon_Call03:
+(1)  540/    BC1E : 8018 82             	dc.b	nRst, $18, dCrackerSnare
+(1)  541/    BC21 : (MACRO)             	smpsLoop            $00, $06, ThisHorizon_Call03
+(1)  541/    BC21 : F7                          dc.b    $F7
+(1)  541/    BC22 : 0006                        dc.b    $00,$06
+(1)  541/    BC24 : 1EBC                                dc.w    z80_ptr(THISHORIZON_CALL03)
+(1)  542/    BC26 : 800C 8282 8206 8280 	dc.b	nRst, $0C, dCrackerSnare, dCrackerSnare, dCrackerSnare, $06, dCrackerSnare, nRst, dCrackerSnare, nRst, nRst, dCrackerSnare
              BC2E : 8280 8082         
-(1)  544/    BC32 : 82                  	dc.b	dCrackerSnare
-(1)  545/    BC33 : (MACRO)             	smpsFMAlterVol      $90
-(1)  545/    BC33 : E690                                dc.b    $E6,$90
-(1)  546/    BC35 : 85                  	dc.b	dCrackerTimpaniLow
-(1)  547/    BC36 : (MACRO)             	smpsFMAlterVol      $70
-(1)  547/    BC36 : E670                                dc.b    $E6,$70
-(1)  548/    BC38 : 80                  	dc.b	nRst
-(1)  549/    BC39 : (MACRO)             	smpsReturn
-(1)  549/    BC39 : F9                                  dc.b    $F9
+(1)  543/    BC32 : 82                  	dc.b	dCrackerSnare
+(1)  544/    BC33 : (MACRO)             	smpsFMAlterVol      $90
+(1)  544/    BC33 : E690                                dc.b    $E6,$90
+(1)  545/    BC35 : 85                  	dc.b	dCrackerTimpaniLow
+(1)  546/    BC36 : (MACRO)             	smpsFMAlterVol      $70
+(1)  546/    BC36 : E670                                dc.b    $E6,$70
+(1)  547/    BC38 : 80                  	dc.b	nRst
+(1)  548/    BC39 : (MACRO)             	smpsReturn
+(1)  548/    BC39 : F9                                  dc.b    $F9
+(1)  549/    BC3A :                     
 (1)  550/    BC3A :                     
-(1)  551/    BC3A :                     
-(1)  552/    BC3A :                     ThisHorizon_Voices:
-(1)  553/    BC3A :                     ;	Voice $00
-(1)  554/    BC3A :                     ;	$3B
-(1)  555/    BC3A :                     ;	$53, $31, $02, $03, 	$DF, $9F, $5F, $9F, 	$14, $08, $0E, $07
-(1)  556/    BC3A :                     ;	$13, $0E, $0F, $07, 	$8F, $7F, $3F, $8F, 	$05, $18, $1E, $80
-(1)  557/    BC3A : (MACRO)             	smpsVcAlgorithm     $03
-(1)  557/    BC3A : =$3                 vcAlgorithm set $03
-(1)  558/    BC3A : (MACRO)             	smpsVcFeedback      $07
-(1)  558/    BC3A : =$7                 vcFeedback set $07
-(1)  559/    BC3A : (MACRO)             	smpsVcUnusedBits    $00
-(1)  559/    BC3A : =$0                 vcUnusedBits set $00
-(1)  559/    BC3A : =$0                 vcD1R1Unk set 0
-(1)  559/    BC3A : =$0                 vcD1R2Unk set 0
-(1)  559/    BC3A : =$0                 vcD1R3Unk set 0
-(1)  559/    BC3A : =$0                 vcD1R4Unk set 0
-(1)  560/    BC3A : (MACRO)             	smpsVcDetune        $00, $00, $03, $05
-(1)  560/    BC3A : =$0                 vcDT1 set $00
-(1)  560/    BC3A : =$0                 vcDT2 set $00
-(1)  560/    BC3A : =$3                 vcDT3 set $03
-(1)  560/    BC3A : =$5                 vcDT4 set $05
-(1)  561/    BC3A : (MACRO)             	smpsVcCoarseFreq    $03, $02, $01, $03
-(1)  561/    BC3A : =$3                 vcCF1 set $03
-(1)  561/    BC3A : =$2                 vcCF2 set $02
-(1)  561/    BC3A : =$1                 vcCF3 set $01
-(1)  561/    BC3A : =$3                 vcCF4 set $03
-(1)  562/    BC3A : (MACRO)             	smpsVcRateScale     $02, $01, $02, $03
-(1)  562/    BC3A : =$2                 vcRS1 set $02
-(1)  562/    BC3A : =$1                 vcRS2 set $01
-(1)  562/    BC3A : =$2                 vcRS3 set $02
-(1)  562/    BC3A : =$3                 vcRS4 set $03
-(1)  563/    BC3A : (MACRO)             	smpsVcAttackRate    $1F, $1F, $1F, $1F
-(1)  563/    BC3A : =$1F                vcAR1 set $1F
-(1)  563/    BC3A : =$1F                vcAR2 set $1F
-(1)  563/    BC3A : =$1F                vcAR3 set $1F
-(1)  563/    BC3A : =$1F                vcAR4 set $1F
-(1)  564/    BC3A : (MACRO)             	smpsVcAmpMod        $00, $00, $00, $00
-(1)  564/    BC3A : =$0                 vcAM1 set $00<<5
-(1)  564/    BC3A : =$0                 vcAM2 set $00<<5
-(1)  564/    BC3A : =$0                 vcAM3 set $00<<5
-(1)  564/    BC3A : =$0                 vcAM4 set $00<<5
-(1)  565/    BC3A : (MACRO)             	smpsVcDecayRate1    $07, $0E, $08, $14
-(1)  565/    BC3A : =$7                 vcD1R1 set $07
-(1)  565/    BC3A : =$E                 vcD1R2 set $0E
-(1)  565/    BC3A : =$8                 vcD1R3 set $08
-(1)  565/    BC3A : =$14                vcD1R4 set $14
-(1)  566/    BC3A : (MACRO)             	smpsVcDecayRate2    $07, $0F, $0E, $13
-(1)  566/    BC3A : =$7                 vcD2R1 set $07
-(1)  566/    BC3A : =$F                 vcD2R2 set $0F
-(1)  566/    BC3A : =$E                 vcD2R3 set $0E
-(1)  566/    BC3A : =$13                vcD2R4 set $13
-(1)  567/    BC3A : (MACRO)             	smpsVcDecayLevel    $08, $03, $07, $08
-(1)  567/    BC3A : =$8                 vcDL1 set $08
-(1)  567/    BC3A : =$3                 vcDL2 set $03
-(1)  567/    BC3A : =$7                 vcDL3 set $07
-(1)  567/    BC3A : =$8                 vcDL4 set $08
-(1)  568/    BC3A : (MACRO)             	smpsVcReleaseRate   $0F, $0F, $0F, $0F
-(1)  568/    BC3A : =$F                 vcRR1 set $0F
-(1)  568/    BC3A : =$F                 vcRR2 set $0F
-(1)  568/    BC3A : =$F                 vcRR3 set $0F
-(1)  568/    BC3A : =$F                 vcRR4 set $0F
-(1)  569/    BC3A : (MACRO)             	smpsVcTotalLevel    $00, $1E, $18, $05
-(1)  569/    BC3A : =$0                 vcTL1 set $00
-(1)  569/    BC3A : =$1E                vcTL2 set $1E
-(1)  569/    BC3A : =$18                vcTL3 set $18
-(1)  569/    BC3A : =$5                 vcTL4 set $05
-(1)  569/    BC3A : 3B                          dc.b    (vcUnusedBits<<6)+(vcFeedback<<3)+vcAlgorithm
-(1)  569/    BC3B :                     ;   0     1     2     3     4     5     6     7
-(1)  569/    BC3B :                     ;%1000,%1000,%1000,%1000,%1010,%1110,%1110,%1111
-(1)  569/    BC3B : =$0                 vcTLMask4 set ((vcAlgorithm==7)<<7)
-(1)  569/    BC3B : =$0                 vcTLMask3 set ((vcAlgorithm>=4)<<7)
-(1)  569/    BC3B : =$0                 vcTLMask2 set ((vcAlgorithm>=5)<<7)
-(1)  569/    BC3B : =$80                vcTLMask1 set $80
-(1)  569/    BC3B :                     
-(1)  569/    BC3B :                     
-(1)  569/    BC3B : 5331 0203                           dc.b    (vcDT4<<4)+vcCF4       ,(vcDT3<<4)+vcCF3       ,(vcDT2<<4)+vcCF2       ,(vcDT1<<4)+vcCF1
-(1)  569/    BC3F : DF9F 5F9F                           dc.b    (vcRS4<<6)+vcAR4       ,(vcRS3<<6)+vcAR3       ,(vcRS2<<6)+vcAR2       ,(vcRS1<<6)+vcAR1
-(1)  569/    BC43 : 1408 0E07                           dc.b    vcAM4|vcD1R4|vcD1R4Unk ,vcAM3|vcD1R3|vcD1R3Unk ,vcAM2|vcD1R2|vcD1R2Unk ,vcAM1|vcD1R1|vcD1R1Unk
-(1)  569/    BC47 : 130E 0F07                           dc.b    vcD2R4                 ,vcD2R3                 ,vcD2R2                 ,vcD2R1
-(1)  569/    BC4B : 8F7F 3F8F                           dc.b    (vcDL4<<4)+vcRR4       ,(vcDL3<<4)+vcRR3       ,(vcDL2<<4)+vcRR2       ,(vcDL1<<4)+vcRR1
-(1)  569/    BC4F : 0518 1E80                           dc.b    vcTL4|vcTLMask4        ,vcTL3|vcTLMask3        ,vcTL2|vcTLMask2        ,vcTL1|vcTLMask1
-(1)  570/    BC53 :                     
-(1)  571/    BC53 :                     ;	Voice $01
-(1)  572/    BC53 :                     ;	$3B
-(1)  573/    BC53 :                     ;	$08, $02, $02, $02, 	$5D, $5D, $5D, $5E, 	$07, $07, $06, $0B
-(1)  574/    BC53 :                     ;	$15, $15, $14, $18, 	$FF, $FF, $FF, $FF, 	$24, $26, $17, $80
-(1)  575/    BC53 : (MACRO)             	smpsVcAlgorithm     $03
-(1)  575/    BC53 : =$3                 vcAlgorithm set $03
-(1)  576/    BC53 : (MACRO)             	smpsVcFeedback      $07
-(1)  576/    BC53 : =$7                 vcFeedback set $07
-(1)  577/    BC53 : (MACRO)             	smpsVcUnusedBits    $00
-(1)  577/    BC53 : =$0                 vcUnusedBits set $00
-(1)  577/    BC53 : =$0                 vcD1R1Unk set 0
-(1)  577/    BC53 : =$0                 vcD1R2Unk set 0
-(1)  577/    BC53 : =$0                 vcD1R3Unk set 0
-(1)  577/    BC53 : =$0                 vcD1R4Unk set 0
-(1)  578/    BC53 : (MACRO)             	smpsVcDetune        $00, $00, $00, $00
-(1)  578/    BC53 : =$0                 vcDT1 set $00
-(1)  578/    BC53 : =$0                 vcDT2 set $00
-(1)  578/    BC53 : =$0                 vcDT3 set $00
-(1)  578/    BC53 : =$0                 vcDT4 set $00
-(1)  579/    BC53 : (MACRO)             	smpsVcCoarseFreq    $02, $02, $02, $08
-(1)  579/    BC53 : =$2                 vcCF1 set $02
-(1)  579/    BC53 : =$2                 vcCF2 set $02
-(1)  579/    BC53 : =$2                 vcCF3 set $02
-(1)  579/    BC53 : =$8                 vcCF4 set $08
-(1)  580/    BC53 : (MACRO)             	smpsVcRateScale     $01, $01, $01, $01
-(1)  580/    BC53 : =$1                 vcRS1 set $01
-(1)  580/    BC53 : =$1                 vcRS2 set $01
-(1)  580/    BC53 : =$1                 vcRS3 set $01
-(1)  580/    BC53 : =$1                 vcRS4 set $01
-(1)  581/    BC53 : (MACRO)             	smpsVcAttackRate    $1E, $1D, $1D, $1D
-(1)  581/    BC53 : =$1E                vcAR1 set $1E
-(1)  581/    BC53 : =$1D                vcAR2 set $1D
-(1)  581/    BC53 : =$1D                vcAR3 set $1D
-(1)  581/    BC53 : =$1D                vcAR4 set $1D
-(1)  582/    BC53 : (MACRO)             	smpsVcAmpMod        $00, $00, $00, $00
-(1)  582/    BC53 : =$0                 vcAM1 set $00<<5
-(1)  582/    BC53 : =$0                 vcAM2 set $00<<5
-(1)  582/    BC53 : =$0                 vcAM3 set $00<<5
-(1)  582/    BC53 : =$0                 vcAM4 set $00<<5
-(1)  583/    BC53 : (MACRO)             	smpsVcDecayRate1    $0B, $06, $07, $07
-(1)  583/    BC53 : =$B                 vcD1R1 set $0B
-(1)  583/    BC53 : =$6                 vcD1R2 set $06
-(1)  583/    BC53 : =$7                 vcD1R3 set $07
-(1)  583/    BC53 : =$7                 vcD1R4 set $07
-(1)  584/    BC53 : (MACRO)             	smpsVcDecayRate2    $18, $14, $15, $15
-(1)  584/    BC53 : =$18                vcD2R1 set $18
-(1)  584/    BC53 : =$14                vcD2R2 set $14
-(1)  584/    BC53 : =$15                vcD2R3 set $15
-(1)  584/    BC53 : =$15                vcD2R4 set $15
-(1)  585/    BC53 : (MACRO)             	smpsVcDecayLevel    $0F, $0F, $0F, $0F
-(1)  585/    BC53 : =$F                 vcDL1 set $0F
-(1)  585/    BC53 : =$F                 vcDL2 set $0F
-(1)  585/    BC53 : =$F                 vcDL3 set $0F
-(1)  585/    BC53 : =$F                 vcDL4 set $0F
-(1)  586/    BC53 : (MACRO)             	smpsVcReleaseRate   $0F, $0F, $0F, $0F
-(1)  586/    BC53 : =$F                 vcRR1 set $0F
-(1)  586/    BC53 : =$F                 vcRR2 set $0F
-(1)  586/    BC53 : =$F                 vcRR3 set $0F
-(1)  586/    BC53 : =$F                 vcRR4 set $0F
-(1)  587/    BC53 : (MACRO)             	smpsVcTotalLevel    $00, $17, $26, $24
-(1)  587/    BC53 : =$0                 vcTL1 set $00
-(1)  587/    BC53 : =$17                vcTL2 set $17
-(1)  587/    BC53 : =$26                vcTL3 set $26
-(1)  587/    BC53 : =$24                vcTL4 set $24
-(1)  587/    BC53 : 3B                          dc.b    (vcUnusedBits<<6)+(vcFeedback<<3)+vcAlgorithm
-(1)  587/    BC54 :                     ;   0     1     2     3     4     5     6     7
-(1)  587/    BC54 :                     ;%1000,%1000,%1000,%1000,%1010,%1110,%1110,%1111
-(1)  587/    BC54 : =$0                 vcTLMask4 set ((vcAlgorithm==7)<<7)
-(1)  587/    BC54 : =$0                 vcTLMask3 set ((vcAlgorithm>=4)<<7)
-(1)  587/    BC54 : =$0                 vcTLMask2 set ((vcAlgorithm>=5)<<7)
-(1)  587/    BC54 : =$80                vcTLMask1 set $80
-(1)  587/    BC54 :                     
-(1)  587/    BC54 :                     
-(1)  587/    BC54 : 0802 0202                           dc.b    (vcDT4<<4)+vcCF4       ,(vcDT3<<4)+vcCF3       ,(vcDT2<<4)+vcCF2       ,(vcDT1<<4)+vcCF1
-(1)  587/    BC58 : 5D5D 5D5E                           dc.b    (vcRS4<<6)+vcAR4       ,(vcRS3<<6)+vcAR3       ,(vcRS2<<6)+vcAR2       ,(vcRS1<<6)+vcAR1
-(1)  587/    BC5C : 0707 060B                           dc.b    vcAM4|vcD1R4|vcD1R4Unk ,vcAM3|vcD1R3|vcD1R3Unk ,vcAM2|vcD1R2|vcD1R2Unk ,vcAM1|vcD1R1|vcD1R1Unk
-(1)  587/    BC60 : 1515 1418                           dc.b    vcD2R4                 ,vcD2R3                 ,vcD2R2                 ,vcD2R1
-(1)  587/    BC64 : FFFF FFFF                           dc.b    (vcDL4<<4)+vcRR4       ,(vcDL3<<4)+vcRR3       ,(vcDL2<<4)+vcRR2       ,(vcDL1<<4)+vcRR1
-(1)  587/    BC68 : 2426 1780                           dc.b    vcTL4|vcTLMask4        ,vcTL3|vcTLMask3        ,vcTL2|vcTLMask2        ,vcTL1|vcTLMask1
-(1)  588/    BC6C :                     
-(1)  589/    BC6C :                     ;	Voice $02
-(1)  590/    BC6C :                     ;	$2D
-(1)  591/    BC6C :                     ;	$77, $65, $05, $15, 	$1F, $9F, $9F, $9F, 	$00, $03, $03, $05
-(1)  592/    BC6C :                     ;	$00, $18, $16, $16, 	$0F, $5C, $5C, $5C, 	$22, $8B, $8B, $8A
-(1)  593/    BC6C : (MACRO)             	smpsVcAlgorithm     $05
-(1)  593/    BC6C : =$5                 vcAlgorithm set $05
-(1)  594/    BC6C : (MACRO)             	smpsVcFeedback      $05
-(1)  594/    BC6C : =$5                 vcFeedback set $05
-(1)  595/    BC6C : (MACRO)             	smpsVcUnusedBits    $00
-(1)  595/    BC6C : =$0                 vcUnusedBits set $00
-(1)  595/    BC6C : =$0                 vcD1R1Unk set 0
-(1)  595/    BC6C : =$0                 vcD1R2Unk set 0
-(1)  595/    BC6C : =$0                 vcD1R3Unk set 0
-(1)  595/    BC6C : =$0                 vcD1R4Unk set 0
-(1)  596/    BC6C : (MACRO)             	smpsVcDetune        $01, $00, $06, $07
-(1)  596/    BC6C : =$1                 vcDT1 set $01
-(1)  596/    BC6C : =$0                 vcDT2 set $00
-(1)  596/    BC6C : =$6                 vcDT3 set $06
-(1)  596/    BC6C : =$7                 vcDT4 set $07
-(1)  597/    BC6C : (MACRO)             	smpsVcCoarseFreq    $05, $05, $05, $07
-(1)  597/    BC6C : =$5                 vcCF1 set $05
-(1)  597/    BC6C : =$5                 vcCF2 set $05
-(1)  597/    BC6C : =$5                 vcCF3 set $05
-(1)  597/    BC6C : =$7                 vcCF4 set $07
-(1)  598/    BC6C : (MACRO)             	smpsVcRateScale     $02, $02, $02, $00
-(1)  598/    BC6C : =$2                 vcRS1 set $02
-(1)  598/    BC6C : =$2                 vcRS2 set $02
-(1)  598/    BC6C : =$2                 vcRS3 set $02
-(1)  598/    BC6C : =$0                 vcRS4 set $00
-(1)  599/    BC6C : (MACRO)             	smpsVcAttackRate    $1F, $1F, $1F, $1F
-(1)  599/    BC6C : =$1F                vcAR1 set $1F
-(1)  599/    BC6C : =$1F                vcAR2 set $1F
-(1)  599/    BC6C : =$1F                vcAR3 set $1F
-(1)  599/    BC6C : =$1F                vcAR4 set $1F
-(1)  600/    BC6C : (MACRO)             	smpsVcAmpMod        $00, $00, $00, $00
-(1)  600/    BC6C : =$0                 vcAM1 set $00<<5
-(1)  600/    BC6C : =$0                 vcAM2 set $00<<5
-(1)  600/    BC6C : =$0                 vcAM3 set $00<<5
-(1)  600/    BC6C : =$0                 vcAM4 set $00<<5
-(1)  601/    BC6C : (MACRO)             	smpsVcDecayRate1    $05, $03, $03, $00
-(1)  601/    BC6C : =$5                 vcD1R1 set $05
-(1)  601/    BC6C : =$3                 vcD1R2 set $03
-(1)  601/    BC6C : =$3                 vcD1R3 set $03
-(1)  601/    BC6C : =$0                 vcD1R4 set $00
-(1)  602/    BC6C : (MACRO)             	smpsVcDecayRate2    $16, $16, $18, $00
-(1)  602/    BC6C : =$16                vcD2R1 set $16
-(1)  602/    BC6C : =$16                vcD2R2 set $16
-(1)  602/    BC6C : =$18                vcD2R3 set $18
-(1)  602/    BC6C : =$0                 vcD2R4 set $00
-(1)  603/    BC6C : (MACRO)             	smpsVcDecayLevel    $05, $05, $05, $00
-(1)  603/    BC6C : =$5                 vcDL1 set $05
-(1)  603/    BC6C : =$5                 vcDL2 set $05
-(1)  603/    BC6C : =$5                 vcDL3 set $05
-(1)  603/    BC6C : =$0                 vcDL4 set $00
-(1)  604/    BC6C : (MACRO)             	smpsVcReleaseRate   $0C, $0C, $0C, $0F
-(1)  604/    BC6C : =$C                 vcRR1 set $0C
-(1)  604/    BC6C : =$C                 vcRR2 set $0C
-(1)  604/    BC6C : =$C                 vcRR3 set $0C
-(1)  604/    BC6C : =$F                 vcRR4 set $0F
-(1)  605/    BC6C : (MACRO)             	smpsVcTotalLevel    $0A, $0B, $0B, $22
-(1)  605/    BC6C : =$A                 vcTL1 set $0A
-(1)  605/    BC6C : =$B                 vcTL2 set $0B
-(1)  605/    BC6C : =$B                 vcTL3 set $0B
-(1)  605/    BC6C : =$22                vcTL4 set $22
-(1)  605/    BC6C : 2D                          dc.b    (vcUnusedBits<<6)+(vcFeedback<<3)+vcAlgorithm
-(1)  605/    BC6D :                     ;   0     1     2     3     4     5     6     7
-(1)  605/    BC6D :                     ;%1000,%1000,%1000,%1000,%1010,%1110,%1110,%1111
-(1)  605/    BC6D : =$0                 vcTLMask4 set ((vcAlgorithm==7)<<7)
-(1)  605/    BC6D : =$80                vcTLMask3 set ((vcAlgorithm>=4)<<7)
-(1)  605/    BC6D : =$80                vcTLMask2 set ((vcAlgorithm>=5)<<7)
-(1)  605/    BC6D : =$80                vcTLMask1 set $80
-(1)  605/    BC6D :                     
-(1)  605/    BC6D :                     
-(1)  605/    BC6D : 7765 0515                           dc.b    (vcDT4<<4)+vcCF4       ,(vcDT3<<4)+vcCF3       ,(vcDT2<<4)+vcCF2       ,(vcDT1<<4)+vcCF1
-(1)  605/    BC71 : 1F9F 9F9F                           dc.b    (vcRS4<<6)+vcAR4       ,(vcRS3<<6)+vcAR3       ,(vcRS2<<6)+vcAR2       ,(vcRS1<<6)+vcAR1
-(1)  605/    BC75 : 0003 0305                           dc.b    vcAM4|vcD1R4|vcD1R4Unk ,vcAM3|vcD1R3|vcD1R3Unk ,vcAM2|vcD1R2|vcD1R2Unk ,vcAM1|vcD1R1|vcD1R1Unk
-(1)  605/    BC79 : 0018 1616                           dc.b    vcD2R4                 ,vcD2R3                 ,vcD2R2                 ,vcD2R1
-(1)  605/    BC7D : 0F5C 5C5C                           dc.b    (vcDL4<<4)+vcRR4       ,(vcDL3<<4)+vcRR3       ,(vcDL2<<4)+vcRR2       ,(vcDL1<<4)+vcRR1
-(1)  605/    BC81 : 228B 8B8A                           dc.b    vcTL4|vcTLMask4        ,vcTL3|vcTLMask3        ,vcTL2|vcTLMask2        ,vcTL1|vcTLMask1
-(1)  606/    BC85 :                     
-(1)  607/    BC85 :                     ;	Voice $03
-(1)  608/    BC85 :                     ;	$3D
-(1)  609/    BC85 :                     ;	$02, $02, $01, $02, 	$94, $19, $19, $19, 	$0F, $0D, $0D, $0D
-(1)  610/    BC85 :                     ;	$07, $04, $04, $04, 	$25, $1A, $1A, $1A, 	$14, $80, $80, $80
-(1)  611/    BC85 : (MACRO)             	smpsVcAlgorithm     $05
-(1)  611/    BC85 : =$5                 vcAlgorithm set $05
-(1)  612/    BC85 : (MACRO)             	smpsVcFeedback      $07
-(1)  612/    BC85 : =$7                 vcFeedback set $07
-(1)  613/    BC85 : (MACRO)             	smpsVcUnusedBits    $00
-(1)  613/    BC85 : =$0                 vcUnusedBits set $00
-(1)  613/    BC85 : =$0                 vcD1R1Unk set 0
-(1)  613/    BC85 : =$0                 vcD1R2Unk set 0
-(1)  613/    BC85 : =$0                 vcD1R3Unk set 0
-(1)  613/    BC85 : =$0                 vcD1R4Unk set 0
-(1)  614/    BC85 : (MACRO)             	smpsVcDetune        $00, $00, $00, $00
-(1)  614/    BC85 : =$0                 vcDT1 set $00
-(1)  614/    BC85 : =$0                 vcDT2 set $00
-(1)  614/    BC85 : =$0                 vcDT3 set $00
-(1)  614/    BC85 : =$0                 vcDT4 set $00
-(1)  615/    BC85 : (MACRO)             	smpsVcCoarseFreq    $02, $01, $02, $02
-(1)  615/    BC85 : =$2                 vcCF1 set $02
-(1)  615/    BC85 : =$1                 vcCF2 set $01
-(1)  615/    BC85 : =$2                 vcCF3 set $02
-(1)  615/    BC85 : =$2                 vcCF4 set $02
-(1)  616/    BC85 : (MACRO)             	smpsVcRateScale     $00, $00, $00, $02
-(1)  616/    BC85 : =$0                 vcRS1 set $00
-(1)  616/    BC85 : =$0                 vcRS2 set $00
-(1)  616/    BC85 : =$0                 vcRS3 set $00
-(1)  616/    BC85 : =$2                 vcRS4 set $02
-(1)  617/    BC85 : (MACRO)             	smpsVcAttackRate    $19, $19, $19, $14
-(1)  617/    BC85 : =$19                vcAR1 set $19
-(1)  617/    BC85 : =$19                vcAR2 set $19
-(1)  617/    BC85 : =$19                vcAR3 set $19
-(1)  617/    BC85 : =$14                vcAR4 set $14
-(1)  618/    BC85 : (MACRO)             	smpsVcAmpMod        $00, $00, $00, $00
-(1)  618/    BC85 : =$0                 vcAM1 set $00<<5
-(1)  618/    BC85 : =$0                 vcAM2 set $00<<5
-(1)  618/    BC85 : =$0                 vcAM3 set $00<<5
-(1)  618/    BC85 : =$0                 vcAM4 set $00<<5
-(1)  619/    BC85 : (MACRO)             	smpsVcDecayRate1    $0D, $0D, $0D, $0F
-(1)  619/    BC85 : =$D                 vcD1R1 set $0D
-(1)  619/    BC85 : =$D                 vcD1R2 set $0D
-(1)  619/    BC85 : =$D                 vcD1R3 set $0D
-(1)  619/    BC85 : =$F                 vcD1R4 set $0F
-(1)  620/    BC85 : (MACRO)             	smpsVcDecayRate2    $04, $04, $04, $07
-(1)  620/    BC85 : =$4                 vcD2R1 set $04
-(1)  620/    BC85 : =$4                 vcD2R2 set $04
-(1)  620/    BC85 : =$4                 vcD2R3 set $04
-(1)  620/    BC85 : =$7                 vcD2R4 set $07
-(1)  621/    BC85 : (MACRO)             	smpsVcDecayLevel    $01, $01, $01, $02
-(1)  621/    BC85 : =$1                 vcDL1 set $01
-(1)  621/    BC85 : =$1                 vcDL2 set $01
-(1)  621/    BC85 : =$1                 vcDL3 set $01
-(1)  621/    BC85 : =$2                 vcDL4 set $02
-(1)  622/    BC85 : (MACRO)             	smpsVcReleaseRate   $0A, $0A, $0A, $05
-(1)  622/    BC85 : =$A                 vcRR1 set $0A
-(1)  622/    BC85 : =$A                 vcRR2 set $0A
-(1)  622/    BC85 : =$A                 vcRR3 set $0A
-(1)  622/    BC85 : =$5                 vcRR4 set $05
-(1)  623/    BC85 : (MACRO)             	smpsVcTotalLevel    $00, $00, $00, $14
-(1)  623/    BC85 : =$0                 vcTL1 set $00
-(1)  623/    BC85 : =$0                 vcTL2 set $00
-(1)  623/    BC85 : =$0                 vcTL3 set $00
-(1)  623/    BC85 : =$14                vcTL4 set $14
-(1)  623/    BC85 : 3D                          dc.b    (vcUnusedBits<<6)+(vcFeedback<<3)+vcAlgorithm
-(1)  623/    BC86 :                     ;   0     1     2     3     4     5     6     7
-(1)  623/    BC86 :                     ;%1000,%1000,%1000,%1000,%1010,%1110,%1110,%1111
-(1)  623/    BC86 : =$0                 vcTLMask4 set ((vcAlgorithm==7)<<7)
-(1)  623/    BC86 : =$80                vcTLMask3 set ((vcAlgorithm>=4)<<7)
-(1)  623/    BC86 : =$80                vcTLMask2 set ((vcAlgorithm>=5)<<7)
-(1)  623/    BC86 : =$80                vcTLMask1 set $80
-(1)  623/    BC86 :                     
-(1)  623/    BC86 :                     
-(1)  623/    BC86 : 0202 0102                           dc.b    (vcDT4<<4)+vcCF4       ,(vcDT3<<4)+vcCF3       ,(vcDT2<<4)+vcCF2       ,(vcDT1<<4)+vcCF1
-(1)  623/    BC8A : 9419 1919                           dc.b    (vcRS4<<6)+vcAR4       ,(vcRS3<<6)+vcAR3       ,(vcRS2<<6)+vcAR2       ,(vcRS1<<6)+vcAR1
-(1)  623/    BC8E : 0F0D 0D0D                           dc.b    vcAM4|vcD1R4|vcD1R4Unk ,vcAM3|vcD1R3|vcD1R3Unk ,vcAM2|vcD1R2|vcD1R2Unk ,vcAM1|vcD1R1|vcD1R1Unk
-(1)  623/    BC92 : 0704 0404                           dc.b    vcD2R4                 ,vcD2R3                 ,vcD2R2                 ,vcD2R1
-(1)  623/    BC96 : 251A 1A1A                           dc.b    (vcDL4<<4)+vcRR4       ,(vcDL3<<4)+vcRR3       ,(vcDL2<<4)+vcRR2       ,(vcDL1<<4)+vcRR1
-(1)  623/    BC9A : 1480 8080                           dc.b    vcTL4|vcTLMask4        ,vcTL3|vcTLMask3        ,vcTL2|vcTLMask2        ,vcTL1|vcTLMask1
-(1)  624/    BC9E :                     
-(1)  625/    BC9E :                     ;	Voice $04
-(1)  626/    BC9E :                     ;	$28
-(1)  627/    BC9E :                     ;	$44, $47, $12, $71, 	$1F, $12, $1F, $1F, 	$04, $01, $04, $0C
-(1)  628/    BC9E :                     ;	$01, $01, $01, $00, 	$1F, $1F, $1F, $1F, 	$26, $17, $14, $85
-(1)  629/    BC9E : (MACRO)             	smpsVcAlgorithm     $00
-(1)  629/    BC9E : =$0                 vcAlgorithm set $00
-(1)  630/    BC9E : (MACRO)             	smpsVcFeedback      $05
-(1)  630/    BC9E : =$5                 vcFeedback set $05
-(1)  631/    BC9E : (MACRO)             	smpsVcUnusedBits    $00
-(1)  631/    BC9E : =$0                 vcUnusedBits set $00
-(1)  631/    BC9E : =$0                 vcD1R1Unk set 0
-(1)  631/    BC9E : =$0                 vcD1R2Unk set 0
-(1)  631/    BC9E : =$0                 vcD1R3Unk set 0
-(1)  631/    BC9E : =$0                 vcD1R4Unk set 0
-(1)  632/    BC9E : (MACRO)             	smpsVcDetune        $07, $01, $04, $04
-(1)  632/    BC9E : =$7                 vcDT1 set $07
-(1)  632/    BC9E : =$1                 vcDT2 set $01
-(1)  632/    BC9E : =$4                 vcDT3 set $04
-(1)  632/    BC9E : =$4                 vcDT4 set $04
-(1)  633/    BC9E : (MACRO)             	smpsVcCoarseFreq    $01, $02, $07, $04
-(1)  633/    BC9E : =$1                 vcCF1 set $01
-(1)  633/    BC9E : =$2                 vcCF2 set $02
-(1)  633/    BC9E : =$7                 vcCF3 set $07
-(1)  633/    BC9E : =$4                 vcCF4 set $04
-(1)  634/    BC9E : (MACRO)             	smpsVcRateScale     $00, $00, $00, $00
-(1)  634/    BC9E : =$0                 vcRS1 set $00
-(1)  634/    BC9E : =$0                 vcRS2 set $00
-(1)  634/    BC9E : =$0                 vcRS3 set $00
-(1)  634/    BC9E : =$0                 vcRS4 set $00
-(1)  635/    BC9E : (MACRO)             	smpsVcAttackRate    $1F, $1F, $12, $1F
-(1)  635/    BC9E : =$1F                vcAR1 set $1F
-(1)  635/    BC9E : =$1F                vcAR2 set $1F
-(1)  635/    BC9E : =$12                vcAR3 set $12
-(1)  635/    BC9E : =$1F                vcAR4 set $1F
-(1)  636/    BC9E : (MACRO)             	smpsVcAmpMod        $00, $00, $00, $00
-(1)  636/    BC9E : =$0                 vcAM1 set $00<<5
-(1)  636/    BC9E : =$0                 vcAM2 set $00<<5
-(1)  636/    BC9E : =$0                 vcAM3 set $00<<5
-(1)  636/    BC9E : =$0                 vcAM4 set $00<<5
-(1)  637/    BC9E : (MACRO)             	smpsVcDecayRate1    $0C, $04, $01, $04
-(1)  637/    BC9E : =$C                 vcD1R1 set $0C
-(1)  637/    BC9E : =$4                 vcD1R2 set $04
-(1)  637/    BC9E : =$1                 vcD1R3 set $01
-(1)  637/    BC9E : =$4                 vcD1R4 set $04
-(1)  638/    BC9E : (MACRO)             	smpsVcDecayRate2    $00, $01, $01, $01
-(1)  638/    BC9E : =$0                 vcD2R1 set $00
-(1)  638/    BC9E : =$1                 vcD2R2 set $01
-(1)  638/    BC9E : =$1                 vcD2R3 set $01
-(1)  638/    BC9E : =$1                 vcD2R4 set $01
-(1)  639/    BC9E : (MACRO)             	smpsVcDecayLevel    $01, $01, $01, $01
-(1)  639/    BC9E : =$1                 vcDL1 set $01
-(1)  639/    BC9E : =$1                 vcDL2 set $01
-(1)  639/    BC9E : =$1                 vcDL3 set $01
-(1)  639/    BC9E : =$1                 vcDL4 set $01
-(1)  640/    BC9E : (MACRO)             	smpsVcReleaseRate   $0F, $0F, $0F, $0F
-(1)  640/    BC9E : =$F                 vcRR1 set $0F
-(1)  640/    BC9E : =$F                 vcRR2 set $0F
-(1)  640/    BC9E : =$F                 vcRR3 set $0F
-(1)  640/    BC9E : =$F                 vcRR4 set $0F
-(1)  641/    BC9E : (MACRO)             	smpsVcTotalLevel    $05, $14, $17, $26
-(1)  641/    BC9E : =$5                 vcTL1 set $05
-(1)  641/    BC9E : =$14                vcTL2 set $14
-(1)  641/    BC9E : =$17                vcTL3 set $17
-(1)  641/    BC9E : =$26                vcTL4 set $26
-(1)  641/    BC9E : 28                          dc.b    (vcUnusedBits<<6)+(vcFeedback<<3)+vcAlgorithm
-(1)  641/    BC9F :                     ;   0     1     2     3     4     5     6     7
-(1)  641/    BC9F :                     ;%1000,%1000,%1000,%1000,%1010,%1110,%1110,%1111
-(1)  641/    BC9F : =$0                 vcTLMask4 set ((vcAlgorithm==7)<<7)
-(1)  641/    BC9F : =$0                 vcTLMask3 set ((vcAlgorithm>=4)<<7)
-(1)  641/    BC9F : =$0                 vcTLMask2 set ((vcAlgorithm>=5)<<7)
-(1)  641/    BC9F : =$80                vcTLMask1 set $80
-(1)  641/    BC9F :                     
-(1)  641/    BC9F :                     
-(1)  641/    BC9F : 4447 1271                           dc.b    (vcDT4<<4)+vcCF4       ,(vcDT3<<4)+vcCF3       ,(vcDT2<<4)+vcCF2       ,(vcDT1<<4)+vcCF1
-(1)  641/    BCA3 : 1F12 1F1F                           dc.b    (vcRS4<<6)+vcAR4       ,(vcRS3<<6)+vcAR3       ,(vcRS2<<6)+vcAR2       ,(vcRS1<<6)+vcAR1
-(1)  641/    BCA7 : 0401 040C                           dc.b    vcAM4|vcD1R4|vcD1R4Unk ,vcAM3|vcD1R3|vcD1R3Unk ,vcAM2|vcD1R2|vcD1R2Unk ,vcAM1|vcD1R1|vcD1R1Unk
-(1)  641/    BCAB : 0101 0100                           dc.b    vcD2R4                 ,vcD2R3                 ,vcD2R2                 ,vcD2R1
-(1)  641/    BCAF : 1F1F 1F1F                           dc.b    (vcDL4<<4)+vcRR4       ,(vcDL3<<4)+vcRR3       ,(vcDL2<<4)+vcRR2       ,(vcDL1<<4)+vcRR1
-(1)  641/    BCB3 : 2617 1485                           dc.b    vcTL4|vcTLMask4        ,vcTL3|vcTLMask3        ,vcTL2|vcTLMask2        ,vcTL1|vcTLMask1
+(1)  551/    BC3A :                     ThisHorizon_Voices:
+(1)  552/    BC3A :                     ;	Voice $00
+(1)  553/    BC3A :                     ;	$3B
+(1)  554/    BC3A :                     ;	$53, $31, $02, $03, 	$DF, $9F, $5F, $9F, 	$14, $08, $0E, $07
+(1)  555/    BC3A :                     ;	$13, $0E, $0F, $07, 	$8F, $7F, $3F, $8F, 	$05, $18, $1E, $80
+(1)  556/    BC3A : (MACRO)             	smpsVcAlgorithm     $03
+(1)  556/    BC3A : =$3                 vcAlgorithm set $03
+(1)  557/    BC3A : (MACRO)             	smpsVcFeedback      $07
+(1)  557/    BC3A : =$7                 vcFeedback set $07
+(1)  558/    BC3A : (MACRO)             	smpsVcUnusedBits    $00
+(1)  558/    BC3A : =$0                 vcUnusedBits set $00
+(1)  558/    BC3A : =$0                 vcD1R1Unk set 0
+(1)  558/    BC3A : =$0                 vcD1R2Unk set 0
+(1)  558/    BC3A : =$0                 vcD1R3Unk set 0
+(1)  558/    BC3A : =$0                 vcD1R4Unk set 0
+(1)  559/    BC3A : (MACRO)             	smpsVcDetune        $00, $00, $03, $05
+(1)  559/    BC3A : =$0                 vcDT1 set $00
+(1)  559/    BC3A : =$0                 vcDT2 set $00
+(1)  559/    BC3A : =$3                 vcDT3 set $03
+(1)  559/    BC3A : =$5                 vcDT4 set $05
+(1)  560/    BC3A : (MACRO)             	smpsVcCoarseFreq    $03, $02, $01, $03
+(1)  560/    BC3A : =$3                 vcCF1 set $03
+(1)  560/    BC3A : =$2                 vcCF2 set $02
+(1)  560/    BC3A : =$1                 vcCF3 set $01
+(1)  560/    BC3A : =$3                 vcCF4 set $03
+(1)  561/    BC3A : (MACRO)             	smpsVcRateScale     $02, $01, $02, $03
+(1)  561/    BC3A : =$2                 vcRS1 set $02
+(1)  561/    BC3A : =$1                 vcRS2 set $01
+(1)  561/    BC3A : =$2                 vcRS3 set $02
+(1)  561/    BC3A : =$3                 vcRS4 set $03
+(1)  562/    BC3A : (MACRO)             	smpsVcAttackRate    $1F, $1F, $1F, $1F
+(1)  562/    BC3A : =$1F                vcAR1 set $1F
+(1)  562/    BC3A : =$1F                vcAR2 set $1F
+(1)  562/    BC3A : =$1F                vcAR3 set $1F
+(1)  562/    BC3A : =$1F                vcAR4 set $1F
+(1)  563/    BC3A : (MACRO)             	smpsVcAmpMod        $00, $00, $00, $00
+(1)  563/    BC3A : =$0                 vcAM1 set $00<<5
+(1)  563/    BC3A : =$0                 vcAM2 set $00<<5
+(1)  563/    BC3A : =$0                 vcAM3 set $00<<5
+(1)  563/    BC3A : =$0                 vcAM4 set $00<<5
+(1)  564/    BC3A : (MACRO)             	smpsVcDecayRate1    $07, $0E, $08, $14
+(1)  564/    BC3A : =$7                 vcD1R1 set $07
+(1)  564/    BC3A : =$E                 vcD1R2 set $0E
+(1)  564/    BC3A : =$8                 vcD1R3 set $08
+(1)  564/    BC3A : =$14                vcD1R4 set $14
+(1)  565/    BC3A : (MACRO)             	smpsVcDecayRate2    $07, $0F, $0E, $13
+(1)  565/    BC3A : =$7                 vcD2R1 set $07
+(1)  565/    BC3A : =$F                 vcD2R2 set $0F
+(1)  565/    BC3A : =$E                 vcD2R3 set $0E
+(1)  565/    BC3A : =$13                vcD2R4 set $13
+(1)  566/    BC3A : (MACRO)             	smpsVcDecayLevel    $08, $03, $07, $08
+(1)  566/    BC3A : =$8                 vcDL1 set $08
+(1)  566/    BC3A : =$3                 vcDL2 set $03
+(1)  566/    BC3A : =$7                 vcDL3 set $07
+(1)  566/    BC3A : =$8                 vcDL4 set $08
+(1)  567/    BC3A : (MACRO)             	smpsVcReleaseRate   $0F, $0F, $0F, $0F
+(1)  567/    BC3A : =$F                 vcRR1 set $0F
+(1)  567/    BC3A : =$F                 vcRR2 set $0F
+(1)  567/    BC3A : =$F                 vcRR3 set $0F
+(1)  567/    BC3A : =$F                 vcRR4 set $0F
+(1)  568/    BC3A : (MACRO)             	smpsVcTotalLevel    $00, $1E, $18, $05
+(1)  568/    BC3A : =$0                 vcTL1 set $00
+(1)  568/    BC3A : =$1E                vcTL2 set $1E
+(1)  568/    BC3A : =$18                vcTL3 set $18
+(1)  568/    BC3A : =$5                 vcTL4 set $05
+(1)  568/    BC3A : 3B                          dc.b    (vcUnusedBits<<6)+(vcFeedback<<3)+vcAlgorithm
+(1)  568/    BC3B :                     ;   0     1     2     3     4     5     6     7
+(1)  568/    BC3B :                     ;%1000,%1000,%1000,%1000,%1010,%1110,%1110,%1111
+(1)  568/    BC3B : =$0                 vcTLMask4 set ((vcAlgorithm==7)<<7)
+(1)  568/    BC3B : =$0                 vcTLMask3 set ((vcAlgorithm>=4)<<7)
+(1)  568/    BC3B : =$0                 vcTLMask2 set ((vcAlgorithm>=5)<<7)
+(1)  568/    BC3B : =$80                vcTLMask1 set $80
+(1)  568/    BC3B :                     
+(1)  568/    BC3B :                     
+(1)  568/    BC3B : 5331 0203                           dc.b    (vcDT4<<4)+vcCF4       ,(vcDT3<<4)+vcCF3       ,(vcDT2<<4)+vcCF2       ,(vcDT1<<4)+vcCF1
+(1)  568/    BC3F : DF9F 5F9F                           dc.b    (vcRS4<<6)+vcAR4       ,(vcRS3<<6)+vcAR3       ,(vcRS2<<6)+vcAR2       ,(vcRS1<<6)+vcAR1
+(1)  568/    BC43 : 1408 0E07                           dc.b    vcAM4|vcD1R4|vcD1R4Unk ,vcAM3|vcD1R3|vcD1R3Unk ,vcAM2|vcD1R2|vcD1R2Unk ,vcAM1|vcD1R1|vcD1R1Unk
+(1)  568/    BC47 : 130E 0F07                           dc.b    vcD2R4                 ,vcD2R3                 ,vcD2R2                 ,vcD2R1
+(1)  568/    BC4B : 8F7F 3F8F                           dc.b    (vcDL4<<4)+vcRR4       ,(vcDL3<<4)+vcRR3       ,(vcDL2<<4)+vcRR2       ,(vcDL1<<4)+vcRR1
+(1)  568/    BC4F : 0518 1E80                           dc.b    vcTL4|vcTLMask4        ,vcTL3|vcTLMask3        ,vcTL2|vcTLMask2        ,vcTL1|vcTLMask1
+(1)  569/    BC53 :                     
+(1)  570/    BC53 :                     ;	Voice $01
+(1)  571/    BC53 :                     ;	$3B
+(1)  572/    BC53 :                     ;	$08, $02, $02, $02, 	$5D, $5D, $5D, $5E, 	$07, $07, $06, $0B
+(1)  573/    BC53 :                     ;	$15, $15, $14, $18, 	$FF, $FF, $FF, $FF, 	$24, $26, $17, $80
+(1)  574/    BC53 : (MACRO)             	smpsVcAlgorithm     $03
+(1)  574/    BC53 : =$3                 vcAlgorithm set $03
+(1)  575/    BC53 : (MACRO)             	smpsVcFeedback      $07
+(1)  575/    BC53 : =$7                 vcFeedback set $07
+(1)  576/    BC53 : (MACRO)             	smpsVcUnusedBits    $00
+(1)  576/    BC53 : =$0                 vcUnusedBits set $00
+(1)  576/    BC53 : =$0                 vcD1R1Unk set 0
+(1)  576/    BC53 : =$0                 vcD1R2Unk set 0
+(1)  576/    BC53 : =$0                 vcD1R3Unk set 0
+(1)  576/    BC53 : =$0                 vcD1R4Unk set 0
+(1)  577/    BC53 : (MACRO)             	smpsVcDetune        $00, $00, $00, $00
+(1)  577/    BC53 : =$0                 vcDT1 set $00
+(1)  577/    BC53 : =$0                 vcDT2 set $00
+(1)  577/    BC53 : =$0                 vcDT3 set $00
+(1)  577/    BC53 : =$0                 vcDT4 set $00
+(1)  578/    BC53 : (MACRO)             	smpsVcCoarseFreq    $02, $02, $02, $08
+(1)  578/    BC53 : =$2                 vcCF1 set $02
+(1)  578/    BC53 : =$2                 vcCF2 set $02
+(1)  578/    BC53 : =$2                 vcCF3 set $02
+(1)  578/    BC53 : =$8                 vcCF4 set $08
+(1)  579/    BC53 : (MACRO)             	smpsVcRateScale     $01, $01, $01, $01
+(1)  579/    BC53 : =$1                 vcRS1 set $01
+(1)  579/    BC53 : =$1                 vcRS2 set $01
+(1)  579/    BC53 : =$1                 vcRS3 set $01
+(1)  579/    BC53 : =$1                 vcRS4 set $01
+(1)  580/    BC53 : (MACRO)             	smpsVcAttackRate    $1E, $1D, $1D, $1D
+(1)  580/    BC53 : =$1E                vcAR1 set $1E
+(1)  580/    BC53 : =$1D                vcAR2 set $1D
+(1)  580/    BC53 : =$1D                vcAR3 set $1D
+(1)  580/    BC53 : =$1D                vcAR4 set $1D
+(1)  581/    BC53 : (MACRO)             	smpsVcAmpMod        $00, $00, $00, $00
+(1)  581/    BC53 : =$0                 vcAM1 set $00<<5
+(1)  581/    BC53 : =$0                 vcAM2 set $00<<5
+(1)  581/    BC53 : =$0                 vcAM3 set $00<<5
+(1)  581/    BC53 : =$0                 vcAM4 set $00<<5
+(1)  582/    BC53 : (MACRO)             	smpsVcDecayRate1    $0B, $06, $07, $07
+(1)  582/    BC53 : =$B                 vcD1R1 set $0B
+(1)  582/    BC53 : =$6                 vcD1R2 set $06
+(1)  582/    BC53 : =$7                 vcD1R3 set $07
+(1)  582/    BC53 : =$7                 vcD1R4 set $07
+(1)  583/    BC53 : (MACRO)             	smpsVcDecayRate2    $18, $14, $15, $15
+(1)  583/    BC53 : =$18                vcD2R1 set $18
+(1)  583/    BC53 : =$14                vcD2R2 set $14
+(1)  583/    BC53 : =$15                vcD2R3 set $15
+(1)  583/    BC53 : =$15                vcD2R4 set $15
+(1)  584/    BC53 : (MACRO)             	smpsVcDecayLevel    $0F, $0F, $0F, $0F
+(1)  584/    BC53 : =$F                 vcDL1 set $0F
+(1)  584/    BC53 : =$F                 vcDL2 set $0F
+(1)  584/    BC53 : =$F                 vcDL3 set $0F
+(1)  584/    BC53 : =$F                 vcDL4 set $0F
+(1)  585/    BC53 : (MACRO)             	smpsVcReleaseRate   $0F, $0F, $0F, $0F
+(1)  585/    BC53 : =$F                 vcRR1 set $0F
+(1)  585/    BC53 : =$F                 vcRR2 set $0F
+(1)  585/    BC53 : =$F                 vcRR3 set $0F
+(1)  585/    BC53 : =$F                 vcRR4 set $0F
+(1)  586/    BC53 : (MACRO)             	smpsVcTotalLevel    $00, $17, $26, $24
+(1)  586/    BC53 : =$0                 vcTL1 set $00
+(1)  586/    BC53 : =$17                vcTL2 set $17
+(1)  586/    BC53 : =$26                vcTL3 set $26
+(1)  586/    BC53 : =$24                vcTL4 set $24
+(1)  586/    BC53 : 3B                          dc.b    (vcUnusedBits<<6)+(vcFeedback<<3)+vcAlgorithm
+(1)  586/    BC54 :                     ;   0     1     2     3     4     5     6     7
+(1)  586/    BC54 :                     ;%1000,%1000,%1000,%1000,%1010,%1110,%1110,%1111
+(1)  586/    BC54 : =$0                 vcTLMask4 set ((vcAlgorithm==7)<<7)
+(1)  586/    BC54 : =$0                 vcTLMask3 set ((vcAlgorithm>=4)<<7)
+(1)  586/    BC54 : =$0                 vcTLMask2 set ((vcAlgorithm>=5)<<7)
+(1)  586/    BC54 : =$80                vcTLMask1 set $80
+(1)  586/    BC54 :                     
+(1)  586/    BC54 :                     
+(1)  586/    BC54 : 0802 0202                           dc.b    (vcDT4<<4)+vcCF4       ,(vcDT3<<4)+vcCF3       ,(vcDT2<<4)+vcCF2       ,(vcDT1<<4)+vcCF1
+(1)  586/    BC58 : 5D5D 5D5E                           dc.b    (vcRS4<<6)+vcAR4       ,(vcRS3<<6)+vcAR3       ,(vcRS2<<6)+vcAR2       ,(vcRS1<<6)+vcAR1
+(1)  586/    BC5C : 0707 060B                           dc.b    vcAM4|vcD1R4|vcD1R4Unk ,vcAM3|vcD1R3|vcD1R3Unk ,vcAM2|vcD1R2|vcD1R2Unk ,vcAM1|vcD1R1|vcD1R1Unk
+(1)  586/    BC60 : 1515 1418                           dc.b    vcD2R4                 ,vcD2R3                 ,vcD2R2                 ,vcD2R1
+(1)  586/    BC64 : FFFF FFFF                           dc.b    (vcDL4<<4)+vcRR4       ,(vcDL3<<4)+vcRR3       ,(vcDL2<<4)+vcRR2       ,(vcDL1<<4)+vcRR1
+(1)  586/    BC68 : 2426 1780                           dc.b    vcTL4|vcTLMask4        ,vcTL3|vcTLMask3        ,vcTL2|vcTLMask2        ,vcTL1|vcTLMask1
+(1)  587/    BC6C :                     
+(1)  588/    BC6C :                     ;	Voice $02
+(1)  589/    BC6C :                     ;	$2D
+(1)  590/    BC6C :                     ;	$77, $65, $05, $15, 	$1F, $9F, $9F, $9F, 	$00, $03, $03, $05
+(1)  591/    BC6C :                     ;	$00, $18, $16, $16, 	$0F, $5C, $5C, $5C, 	$22, $8B, $8B, $8A
+(1)  592/    BC6C : (MACRO)             	smpsVcAlgorithm     $05
+(1)  592/    BC6C : =$5                 vcAlgorithm set $05
+(1)  593/    BC6C : (MACRO)             	smpsVcFeedback      $05
+(1)  593/    BC6C : =$5                 vcFeedback set $05
+(1)  594/    BC6C : (MACRO)             	smpsVcUnusedBits    $00
+(1)  594/    BC6C : =$0                 vcUnusedBits set $00
+(1)  594/    BC6C : =$0                 vcD1R1Unk set 0
+(1)  594/    BC6C : =$0                 vcD1R2Unk set 0
+(1)  594/    BC6C : =$0                 vcD1R3Unk set 0
+(1)  594/    BC6C : =$0                 vcD1R4Unk set 0
+(1)  595/    BC6C : (MACRO)             	smpsVcDetune        $01, $00, $06, $07
+(1)  595/    BC6C : =$1                 vcDT1 set $01
+(1)  595/    BC6C : =$0                 vcDT2 set $00
+(1)  595/    BC6C : =$6                 vcDT3 set $06
+(1)  595/    BC6C : =$7                 vcDT4 set $07
+(1)  596/    BC6C : (MACRO)             	smpsVcCoarseFreq    $05, $05, $05, $07
+(1)  596/    BC6C : =$5                 vcCF1 set $05
+(1)  596/    BC6C : =$5                 vcCF2 set $05
+(1)  596/    BC6C : =$5                 vcCF3 set $05
+(1)  596/    BC6C : =$7                 vcCF4 set $07
+(1)  597/    BC6C : (MACRO)             	smpsVcRateScale     $02, $02, $02, $00
+(1)  597/    BC6C : =$2                 vcRS1 set $02
+(1)  597/    BC6C : =$2                 vcRS2 set $02
+(1)  597/    BC6C : =$2                 vcRS3 set $02
+(1)  597/    BC6C : =$0                 vcRS4 set $00
+(1)  598/    BC6C : (MACRO)             	smpsVcAttackRate    $1F, $1F, $1F, $1F
+(1)  598/    BC6C : =$1F                vcAR1 set $1F
+(1)  598/    BC6C : =$1F                vcAR2 set $1F
+(1)  598/    BC6C : =$1F                vcAR3 set $1F
+(1)  598/    BC6C : =$1F                vcAR4 set $1F
+(1)  599/    BC6C : (MACRO)             	smpsVcAmpMod        $00, $00, $00, $00
+(1)  599/    BC6C : =$0                 vcAM1 set $00<<5
+(1)  599/    BC6C : =$0                 vcAM2 set $00<<5
+(1)  599/    BC6C : =$0                 vcAM3 set $00<<5
+(1)  599/    BC6C : =$0                 vcAM4 set $00<<5
+(1)  600/    BC6C : (MACRO)             	smpsVcDecayRate1    $05, $03, $03, $00
+(1)  600/    BC6C : =$5                 vcD1R1 set $05
+(1)  600/    BC6C : =$3                 vcD1R2 set $03
+(1)  600/    BC6C : =$3                 vcD1R3 set $03
+(1)  600/    BC6C : =$0                 vcD1R4 set $00
+(1)  601/    BC6C : (MACRO)             	smpsVcDecayRate2    $16, $16, $18, $00
+(1)  601/    BC6C : =$16                vcD2R1 set $16
+(1)  601/    BC6C : =$16                vcD2R2 set $16
+(1)  601/    BC6C : =$18                vcD2R3 set $18
+(1)  601/    BC6C : =$0                 vcD2R4 set $00
+(1)  602/    BC6C : (MACRO)             	smpsVcDecayLevel    $05, $05, $05, $00
+(1)  602/    BC6C : =$5                 vcDL1 set $05
+(1)  602/    BC6C : =$5                 vcDL2 set $05
+(1)  602/    BC6C : =$5                 vcDL3 set $05
+(1)  602/    BC6C : =$0                 vcDL4 set $00
+(1)  603/    BC6C : (MACRO)             	smpsVcReleaseRate   $0C, $0C, $0C, $0F
+(1)  603/    BC6C : =$C                 vcRR1 set $0C
+(1)  603/    BC6C : =$C                 vcRR2 set $0C
+(1)  603/    BC6C : =$C                 vcRR3 set $0C
+(1)  603/    BC6C : =$F                 vcRR4 set $0F
+(1)  604/    BC6C : (MACRO)             	smpsVcTotalLevel    $0A, $0B, $0B, $22
+(1)  604/    BC6C : =$A                 vcTL1 set $0A
+(1)  604/    BC6C : =$B                 vcTL2 set $0B
+(1)  604/    BC6C : =$B                 vcTL3 set $0B
+(1)  604/    BC6C : =$22                vcTL4 set $22
+(1)  604/    BC6C : 2D                          dc.b    (vcUnusedBits<<6)+(vcFeedback<<3)+vcAlgorithm
+(1)  604/    BC6D :                     ;   0     1     2     3     4     5     6     7
+(1)  604/    BC6D :                     ;%1000,%1000,%1000,%1000,%1010,%1110,%1110,%1111
+(1)  604/    BC6D : =$0                 vcTLMask4 set ((vcAlgorithm==7)<<7)
+(1)  604/    BC6D : =$80                vcTLMask3 set ((vcAlgorithm>=4)<<7)
+(1)  604/    BC6D : =$80                vcTLMask2 set ((vcAlgorithm>=5)<<7)
+(1)  604/    BC6D : =$80                vcTLMask1 set $80
+(1)  604/    BC6D :                     
+(1)  604/    BC6D :                     
+(1)  604/    BC6D : 7765 0515                           dc.b    (vcDT4<<4)+vcCF4       ,(vcDT3<<4)+vcCF3       ,(vcDT2<<4)+vcCF2       ,(vcDT1<<4)+vcCF1
+(1)  604/    BC71 : 1F9F 9F9F                           dc.b    (vcRS4<<6)+vcAR4       ,(vcRS3<<6)+vcAR3       ,(vcRS2<<6)+vcAR2       ,(vcRS1<<6)+vcAR1
+(1)  604/    BC75 : 0003 0305                           dc.b    vcAM4|vcD1R4|vcD1R4Unk ,vcAM3|vcD1R3|vcD1R3Unk ,vcAM2|vcD1R2|vcD1R2Unk ,vcAM1|vcD1R1|vcD1R1Unk
+(1)  604/    BC79 : 0018 1616                           dc.b    vcD2R4                 ,vcD2R3                 ,vcD2R2                 ,vcD2R1
+(1)  604/    BC7D : 0F5C 5C5C                           dc.b    (vcDL4<<4)+vcRR4       ,(vcDL3<<4)+vcRR3       ,(vcDL2<<4)+vcRR2       ,(vcDL1<<4)+vcRR1
+(1)  604/    BC81 : 228B 8B8A                           dc.b    vcTL4|vcTLMask4        ,vcTL3|vcTLMask3        ,vcTL2|vcTLMask2        ,vcTL1|vcTLMask1
+(1)  605/    BC85 :                     
+(1)  606/    BC85 :                     ;	Voice $03
+(1)  607/    BC85 :                     ;	$3D
+(1)  608/    BC85 :                     ;	$02, $02, $01, $02, 	$94, $19, $19, $19, 	$0F, $0D, $0D, $0D
+(1)  609/    BC85 :                     ;	$07, $04, $04, $04, 	$25, $1A, $1A, $1A, 	$14, $80, $80, $80
+(1)  610/    BC85 : (MACRO)             	smpsVcAlgorithm     $05
+(1)  610/    BC85 : =$5                 vcAlgorithm set $05
+(1)  611/    BC85 : (MACRO)             	smpsVcFeedback      $07
+(1)  611/    BC85 : =$7                 vcFeedback set $07
+(1)  612/    BC85 : (MACRO)             	smpsVcUnusedBits    $00
+(1)  612/    BC85 : =$0                 vcUnusedBits set $00
+(1)  612/    BC85 : =$0                 vcD1R1Unk set 0
+(1)  612/    BC85 : =$0                 vcD1R2Unk set 0
+(1)  612/    BC85 : =$0                 vcD1R3Unk set 0
+(1)  612/    BC85 : =$0                 vcD1R4Unk set 0
+(1)  613/    BC85 : (MACRO)             	smpsVcDetune        $00, $00, $00, $00
+(1)  613/    BC85 : =$0                 vcDT1 set $00
+(1)  613/    BC85 : =$0                 vcDT2 set $00
+(1)  613/    BC85 : =$0                 vcDT3 set $00
+(1)  613/    BC85 : =$0                 vcDT4 set $00
+(1)  614/    BC85 : (MACRO)             	smpsVcCoarseFreq    $02, $01, $02, $02
+(1)  614/    BC85 : =$2                 vcCF1 set $02
+(1)  614/    BC85 : =$1                 vcCF2 set $01
+(1)  614/    BC85 : =$2                 vcCF3 set $02
+(1)  614/    BC85 : =$2                 vcCF4 set $02
+(1)  615/    BC85 : (MACRO)             	smpsVcRateScale     $00, $00, $00, $02
+(1)  615/    BC85 : =$0                 vcRS1 set $00
+(1)  615/    BC85 : =$0                 vcRS2 set $00
+(1)  615/    BC85 : =$0                 vcRS3 set $00
+(1)  615/    BC85 : =$2                 vcRS4 set $02
+(1)  616/    BC85 : (MACRO)             	smpsVcAttackRate    $19, $19, $19, $14
+(1)  616/    BC85 : =$19                vcAR1 set $19
+(1)  616/    BC85 : =$19                vcAR2 set $19
+(1)  616/    BC85 : =$19                vcAR3 set $19
+(1)  616/    BC85 : =$14                vcAR4 set $14
+(1)  617/    BC85 : (MACRO)             	smpsVcAmpMod        $00, $00, $00, $00
+(1)  617/    BC85 : =$0                 vcAM1 set $00<<5
+(1)  617/    BC85 : =$0                 vcAM2 set $00<<5
+(1)  617/    BC85 : =$0                 vcAM3 set $00<<5
+(1)  617/    BC85 : =$0                 vcAM4 set $00<<5
+(1)  618/    BC85 : (MACRO)             	smpsVcDecayRate1    $0D, $0D, $0D, $0F
+(1)  618/    BC85 : =$D                 vcD1R1 set $0D
+(1)  618/    BC85 : =$D                 vcD1R2 set $0D
+(1)  618/    BC85 : =$D                 vcD1R3 set $0D
+(1)  618/    BC85 : =$F                 vcD1R4 set $0F
+(1)  619/    BC85 : (MACRO)             	smpsVcDecayRate2    $04, $04, $04, $07
+(1)  619/    BC85 : =$4                 vcD2R1 set $04
+(1)  619/    BC85 : =$4                 vcD2R2 set $04
+(1)  619/    BC85 : =$4                 vcD2R3 set $04
+(1)  619/    BC85 : =$7                 vcD2R4 set $07
+(1)  620/    BC85 : (MACRO)             	smpsVcDecayLevel    $01, $01, $01, $02
+(1)  620/    BC85 : =$1                 vcDL1 set $01
+(1)  620/    BC85 : =$1                 vcDL2 set $01
+(1)  620/    BC85 : =$1                 vcDL3 set $01
+(1)  620/    BC85 : =$2                 vcDL4 set $02
+(1)  621/    BC85 : (MACRO)             	smpsVcReleaseRate   $0A, $0A, $0A, $05
+(1)  621/    BC85 : =$A                 vcRR1 set $0A
+(1)  621/    BC85 : =$A                 vcRR2 set $0A
+(1)  621/    BC85 : =$A                 vcRR3 set $0A
+(1)  621/    BC85 : =$5                 vcRR4 set $05
+(1)  622/    BC85 : (MACRO)             	smpsVcTotalLevel    $00, $00, $00, $14
+(1)  622/    BC85 : =$0                 vcTL1 set $00
+(1)  622/    BC85 : =$0                 vcTL2 set $00
+(1)  622/    BC85 : =$0                 vcTL3 set $00
+(1)  622/    BC85 : =$14                vcTL4 set $14
+(1)  622/    BC85 : 3D                          dc.b    (vcUnusedBits<<6)+(vcFeedback<<3)+vcAlgorithm
+(1)  622/    BC86 :                     ;   0     1     2     3     4     5     6     7
+(1)  622/    BC86 :                     ;%1000,%1000,%1000,%1000,%1010,%1110,%1110,%1111
+(1)  622/    BC86 : =$0                 vcTLMask4 set ((vcAlgorithm==7)<<7)
+(1)  622/    BC86 : =$80                vcTLMask3 set ((vcAlgorithm>=4)<<7)
+(1)  622/    BC86 : =$80                vcTLMask2 set ((vcAlgorithm>=5)<<7)
+(1)  622/    BC86 : =$80                vcTLMask1 set $80
+(1)  622/    BC86 :                     
+(1)  622/    BC86 :                     
+(1)  622/    BC86 : 0202 0102                           dc.b    (vcDT4<<4)+vcCF4       ,(vcDT3<<4)+vcCF3       ,(vcDT2<<4)+vcCF2       ,(vcDT1<<4)+vcCF1
+(1)  622/    BC8A : 9419 1919                           dc.b    (vcRS4<<6)+vcAR4       ,(vcRS3<<6)+vcAR3       ,(vcRS2<<6)+vcAR2       ,(vcRS1<<6)+vcAR1
+(1)  622/    BC8E : 0F0D 0D0D                           dc.b    vcAM4|vcD1R4|vcD1R4Unk ,vcAM3|vcD1R3|vcD1R3Unk ,vcAM2|vcD1R2|vcD1R2Unk ,vcAM1|vcD1R1|vcD1R1Unk
+(1)  622/    BC92 : 0704 0404                           dc.b    vcD2R4                 ,vcD2R3                 ,vcD2R2                 ,vcD2R1
+(1)  622/    BC96 : 251A 1A1A                           dc.b    (vcDL4<<4)+vcRR4       ,(vcDL3<<4)+vcRR3       ,(vcDL2<<4)+vcRR2       ,(vcDL1<<4)+vcRR1
+(1)  622/    BC9A : 1480 8080                           dc.b    vcTL4|vcTLMask4        ,vcTL3|vcTLMask3        ,vcTL2|vcTLMask2        ,vcTL1|vcTLMask1
+(1)  623/    BC9E :                     
+(1)  624/    BC9E :                     ;	Voice $04
+(1)  625/    BC9E :                     ;	$28
+(1)  626/    BC9E :                     ;	$44, $47, $12, $71, 	$1F, $12, $1F, $1F, 	$04, $01, $04, $0C
+(1)  627/    BC9E :                     ;	$01, $01, $01, $00, 	$1F, $1F, $1F, $1F, 	$26, $17, $14, $85
+(1)  628/    BC9E : (MACRO)             	smpsVcAlgorithm     $00
+(1)  628/    BC9E : =$0                 vcAlgorithm set $00
+(1)  629/    BC9E : (MACRO)             	smpsVcFeedback      $05
+(1)  629/    BC9E : =$5                 vcFeedback set $05
+(1)  630/    BC9E : (MACRO)             	smpsVcUnusedBits    $00
+(1)  630/    BC9E : =$0                 vcUnusedBits set $00
+(1)  630/    BC9E : =$0                 vcD1R1Unk set 0
+(1)  630/    BC9E : =$0                 vcD1R2Unk set 0
+(1)  630/    BC9E : =$0                 vcD1R3Unk set 0
+(1)  630/    BC9E : =$0                 vcD1R4Unk set 0
+(1)  631/    BC9E : (MACRO)             	smpsVcDetune        $07, $01, $04, $04
+(1)  631/    BC9E : =$7                 vcDT1 set $07
+(1)  631/    BC9E : =$1                 vcDT2 set $01
+(1)  631/    BC9E : =$4                 vcDT3 set $04
+(1)  631/    BC9E : =$4                 vcDT4 set $04
+(1)  632/    BC9E : (MACRO)             	smpsVcCoarseFreq    $01, $02, $07, $04
+(1)  632/    BC9E : =$1                 vcCF1 set $01
+(1)  632/    BC9E : =$2                 vcCF2 set $02
+(1)  632/    BC9E : =$7                 vcCF3 set $07
+(1)  632/    BC9E : =$4                 vcCF4 set $04
+(1)  633/    BC9E : (MACRO)             	smpsVcRateScale     $00, $00, $00, $00
+(1)  633/    BC9E : =$0                 vcRS1 set $00
+(1)  633/    BC9E : =$0                 vcRS2 set $00
+(1)  633/    BC9E : =$0                 vcRS3 set $00
+(1)  633/    BC9E : =$0                 vcRS4 set $00
+(1)  634/    BC9E : (MACRO)             	smpsVcAttackRate    $1F, $1F, $12, $1F
+(1)  634/    BC9E : =$1F                vcAR1 set $1F
+(1)  634/    BC9E : =$1F                vcAR2 set $1F
+(1)  634/    BC9E : =$12                vcAR3 set $12
+(1)  634/    BC9E : =$1F                vcAR4 set $1F
+(1)  635/    BC9E : (MACRO)             	smpsVcAmpMod        $00, $00, $00, $00
+(1)  635/    BC9E : =$0                 vcAM1 set $00<<5
+(1)  635/    BC9E : =$0                 vcAM2 set $00<<5
+(1)  635/    BC9E : =$0                 vcAM3 set $00<<5
+(1)  635/    BC9E : =$0                 vcAM4 set $00<<5
+(1)  636/    BC9E : (MACRO)             	smpsVcDecayRate1    $0C, $04, $01, $04
+(1)  636/    BC9E : =$C                 vcD1R1 set $0C
+(1)  636/    BC9E : =$4                 vcD1R2 set $04
+(1)  636/    BC9E : =$1                 vcD1R3 set $01
+(1)  636/    BC9E : =$4                 vcD1R4 set $04
+(1)  637/    BC9E : (MACRO)             	smpsVcDecayRate2    $00, $01, $01, $01
+(1)  637/    BC9E : =$0                 vcD2R1 set $00
+(1)  637/    BC9E : =$1                 vcD2R2 set $01
+(1)  637/    BC9E : =$1                 vcD2R3 set $01
+(1)  637/    BC9E : =$1                 vcD2R4 set $01
+(1)  638/    BC9E : (MACRO)             	smpsVcDecayLevel    $01, $01, $01, $01
+(1)  638/    BC9E : =$1                 vcDL1 set $01
+(1)  638/    BC9E : =$1                 vcDL2 set $01
+(1)  638/    BC9E : =$1                 vcDL3 set $01
+(1)  638/    BC9E : =$1                 vcDL4 set $01
+(1)  639/    BC9E : (MACRO)             	smpsVcReleaseRate   $0F, $0F, $0F, $0F
+(1)  639/    BC9E : =$F                 vcRR1 set $0F
+(1)  639/    BC9E : =$F                 vcRR2 set $0F
+(1)  639/    BC9E : =$F                 vcRR3 set $0F
+(1)  639/    BC9E : =$F                 vcRR4 set $0F
+(1)  640/    BC9E : (MACRO)             	smpsVcTotalLevel    $05, $14, $17, $26
+(1)  640/    BC9E : =$5                 vcTL1 set $05
+(1)  640/    BC9E : =$14                vcTL2 set $14
+(1)  640/    BC9E : =$17                vcTL3 set $17
+(1)  640/    BC9E : =$26                vcTL4 set $26
+(1)  640/    BC9E : 28                          dc.b    (vcUnusedBits<<6)+(vcFeedback<<3)+vcAlgorithm
+(1)  640/    BC9F :                     ;   0     1     2     3     4     5     6     7
+(1)  640/    BC9F :                     ;%1000,%1000,%1000,%1000,%1010,%1110,%1110,%1111
+(1)  640/    BC9F : =$0                 vcTLMask4 set ((vcAlgorithm==7)<<7)
+(1)  640/    BC9F : =$0                 vcTLMask3 set ((vcAlgorithm>=4)<<7)
+(1)  640/    BC9F : =$0                 vcTLMask2 set ((vcAlgorithm>=5)<<7)
+(1)  640/    BC9F : =$80                vcTLMask1 set $80
+(1)  640/    BC9F :                     
+(1)  640/    BC9F :                     
+(1)  640/    BC9F : 4447 1271                           dc.b    (vcDT4<<4)+vcCF4       ,(vcDT3<<4)+vcCF3       ,(vcDT2<<4)+vcCF2       ,(vcDT1<<4)+vcCF1
+(1)  640/    BCA3 : 1F12 1F1F                           dc.b    (vcRS4<<6)+vcAR4       ,(vcRS3<<6)+vcAR3       ,(vcRS2<<6)+vcAR2       ,(vcRS1<<6)+vcAR1
+(1)  640/    BCA7 : 0401 040C                           dc.b    vcAM4|vcD1R4|vcD1R4Unk ,vcAM3|vcD1R3|vcD1R3Unk ,vcAM2|vcD1R2|vcD1R2Unk ,vcAM1|vcD1R1|vcD1R1Unk
+(1)  640/    BCAB : 0101 0100                           dc.b    vcD2R4                 ,vcD2R3                 ,vcD2R2                 ,vcD2R1
+(1)  640/    BCAF : 1F1F 1F1F                           dc.b    (vcDL4<<4)+vcRR4       ,(vcDL3<<4)+vcRR3       ,(vcDL2<<4)+vcRR2       ,(vcDL1<<4)+vcRR1
+(1)  640/    BCB3 : 2617 1485                           dc.b    vcTL4|vcTLMask4        ,vcTL3|vcTLMask3        ,vcTL2|vcTLMask2        ,vcTL1|vcTLMask1
+(1)  641/    BCB7 :                     
 (1)  642/    BCB7 :                     
-(1)  643/    BCB7 :                     
- AS V1.42 Beta [Bld 251] - Source File Music.asm - Page 2 - 11/3/2023 17:25:27
+ AS V1.42 Beta [Bld 251] - Source File Music.asm - Page 2 - 11/3/2023 17:33:43
 
 
   Symbol Table (* = unused):
@@ -16781,7 +16780,7 @@
  SPEEDOFSOUND_VOICES :         A9CB C | *STONE_01 :                       1 - |
  STONE_02 :                       2 - |  STONE_03 :                       3 - |
  STONE_04 :                       4 - |  STONE_05 :                       5 - |
- STONE_06 :                       6 - | *STONE_07 :                       7 - |
+ STONE_06 :                       6 - |  STONE_07 :                       7 - |
  STONE_08 :                       8 - | *STONE_09 :                       9 - |
 *STONE_0A :                       A - | *STONE_0B :                       B - |
  STONE_0C :                       C - | *STONE_0D :                       D - |
@@ -16807,7 +16806,7 @@
  THISHORIZON_LOOP03 :          BBC8 C |  THISHORIZON_PSG1 :            BB07 C |
  THISHORIZON_PSG2 :            BB31 C |  THISHORIZON_PSG3 :            BB70 C |
 *THISHORIZON_PWM1 :            BBC4 C |  THISHORIZON_PWM2 :            BBDA C |
- THISHORIZON_VOICES :          BC3A C | *TIME :                  "17:25:27" - |
+ THISHORIZON_VOICES :          BC3A C | *TIME :                  "17:33:43" - |
 *TRACENUM :                       0 - | *TRUE :                           1 - |
 *USE_S2_SAMPLES :                 1 - | *USE_S3D_SAMPLES :                1 - |
 *USE_S3_SAMPLES :                 1 - | *USE_SK_SAMPLES :                 1 - |
@@ -16854,9 +16853,9 @@
  ZEROOFFSETOPTIMIZATION :         0 - |
 
     630 symbols
-    124 unused symbols
+    123 unused symbols
 
- AS V1.42 Beta [Bld 251] - Source File Music.asm - Page 3 - 11/3/2023 17:25:27
+ AS V1.42 Beta [Bld 251] - Source File Music.asm - Page 3 - 11/3/2023 17:33:43
 
 
   Defined Macros:
@@ -16914,7 +16913,7 @@ _MOVE                                 | _TST
 
      98 macros
 
- AS V1.42 Beta [Bld 251] - Source File Music.asm - Page 4 - 11/3/2023 17:25:27
+ AS V1.42 Beta [Bld 251] - Source File Music.asm - Page 4 - 11/3/2023 17:33:43
 
 
   Defined Functions:
@@ -16928,7 +16927,7 @@ SIGNEXTEND                            | SIGNMASK
 BIT                                   | CHKOP                                
 NOTZ80                                | Z80_PTR                              
 
- AS V1.42 Beta [Bld 251] - Source File Music.asm - Page 5 - 11/3/2023 17:25:27
+ AS V1.42 Beta [Bld 251] - Source File Music.asm - Page 5 - 11/3/2023 17:33:43
 
 
   Code Pages:
@@ -16938,10 +16937,10 @@ STANDARD (0 changed characters)
 
 1 code page
 
-0.35 seconds assembly time
+0.36 seconds assembly time
 
-   7246 lines source file
-  28549 lines incl. macro expansions
+   7245 lines source file
+  28548 lines incl. macro expansions
       2 passes
       0 errors
       0 warnings
