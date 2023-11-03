@@ -8,7 +8,7 @@ ThisHorizon_Header:
 	smpsHeaderFM        ThisHorizon_FM1,	$0C, $0C
 	smpsHeaderFM        ThisHorizon_FM2,	$0C, $0C
 	smpsHeaderFM        ThisHorizon_FM3,	$00, $10
-	smpsHeaderFM        ThisHorizon_FM4,	$00, $10
+	smpsHeaderFM        ThisHorizon_FM4,	$00, $0C
 	smpsHeaderFM        ThisHorizon_FM5,	$00, $10
 ;	smpsHeaderFM        ThisHorizon_FM6,	$00, $10
 	smpsHeaderPSG       ThisHorizon_PSG1,	$F4, $03, $00, sTone_0C
@@ -287,163 +287,25 @@ horizon_Call02:
 
 ; FM4 Data
 ThisHorizon_FM4:
-	smpsSetvoice        $01
-	dc.b	nRst, $60
+	smpsSetvoice        $00
+	dc.b	nRst, $30, nG1, $06, nG2, nG1, $0C, nA1, $06, nA2, nA1, $0C
 
-horizon_Loop02:
-	smpsCall            horizon_Call01
-	dc.b	nRst, $0C, nF3
-	smpsFMAlterVol      $0A
-	smpsPan             panRight, $00
-	dc.b	$06
-	smpsFMAlterVol      $F6
-	smpsPan             panCenter, $00
-	dc.b	nF3, $0C
-	smpsFMAlterVol      $0A
-	smpsPan             panRight, $00
-	dc.b	$06
-	smpsFMAlterVol      $F6
-	smpsPan             panCenter, $00
-	dc.b	nE3, $0C
-	smpsFMAlterVol      $0A
-	smpsPan             panRight, $00
-	dc.b	$06
-	smpsFMAlterVol      $F6
-	smpsPan             panCenter, $00
-	dc.b	nE3, $0C
-	smpsFMAlterVol      $0A
-	smpsPan             panRight, $00
-	dc.b	$06
-	smpsFMAlterVol      $F6
-	smpsPan             panCenter, $00
-	dc.b	nE3, $0C, nRst, $0C, nE3
-	smpsFMAlterVol      $0A
-	smpsPan             panRight, $00
-	dc.b	$06
-	smpsFMAlterVol      $F6
-	smpsPan             panCenter, $00
-	dc.b	nE3, $0C
-	smpsFMAlterVol      $0A
-	smpsPan             panRight, $00
-	dc.b	$06
-	smpsFMAlterVol      $F6
-	smpsPan             panCenter, $00
-	dc.b	nE3, $0C
-	smpsFMAlterVol      $0A
-	smpsPan             panRight, $00
-	dc.b	$06
-	smpsFMAlterVol      $F6
-	smpsPan             panCenter, $00
-	dc.b	nE3, $0C
-	smpsFMAlterVol      $0A
-	smpsPan             panRight, $00
-	dc.b	$06
-	smpsFMAlterVol      $F6
-	smpsPan             panCenter, $00
-	dc.b	nF3, $0C
-	smpsCall            horizon_Call01
-	dc.b	nRst, $0C, nF3
-	smpsFMAlterVol      $0A
-	smpsPan             panRight, $00
-	dc.b	$06
-	smpsFMAlterVol      $F6
-	smpsPan             panCenter, $00
-	dc.b	nF3, $0C
-	smpsFMAlterVol      $0A
-	smpsPan             panRight, $00
-	dc.b	$06
-	smpsFMAlterVol      $F6
-	smpsPan             panCenter, $00
-	dc.b	nF3, $0C
-	smpsFMAlterVol      $0A
-	smpsPan             panRight, $00
-	dc.b	$06
-	smpsFMAlterVol      $F6
-	smpsPan             panCenter, $00
-	dc.b	nF3, $0C
-	smpsFMAlterVol      $0A
-	smpsPan             panRight, $00
-	dc.b	$06
-	smpsFMAlterVol      $F6
-	smpsPan             panCenter, $00
-	dc.b	nF3, $0C, nRst, $0C, nE3
-	smpsFMAlterVol      $0A
-	smpsPan             panRight, $00
-	dc.b	$06
-	smpsFMAlterVol      $F6
-	smpsPan             panCenter, $00
-	dc.b	nE3, $0C
-	smpsFMAlterVol      $0A
-	smpsPan             panRight, $00
-	dc.b	$06
-	smpsFMAlterVol      $F6
-	smpsPan             panCenter, $00
-	dc.b	nE3, $0C
-	smpsFMAlterVol      $0A
-	smpsPan             panRight, $00
-	dc.b	$06
-	smpsFMAlterVol      $F6
-	smpsPan             panCenter, $00
-	dc.b	nE3, $0C
-	smpsFMAlterVol      $0A
-	smpsPan             panRight, $00
-	dc.b	$06
-	smpsFMAlterVol      $F6
-	smpsPan             panCenter, $00
-	dc.b	nE3, $0C
-	smpsLoop            $00, $02, horizon_Loop02
-	smpsJump            horizon_Loop02
+horizon_Loop00:
+	smpsCall            horizon_Call00
+	dc.b	nG1, $12, nG2, $06, nRst, $0C, nG1, nC2, $18, nC3, $0C, nC2
+	dc.b	nF1, $12, nF2, $06, nRst, $0C, nF1, $0C, $12, $06, nF2, $0C
+	dc.b	nF1
+	smpsCall            horizon_Call00
+	dc.b	nG1, $12, nG2, $06, nRst, $0C, nG1, nEb2, $18, nEb3, $0C, nEb2
+	dc.b	nD2, $12, nD3, $06, nRst, $0C, nD2, nRst, $06, nD3, nRst, nD3
+	dc.b	nD2, nC2, $12
+	smpsLoop            $00, $02, horizon_Loop00
+	smpsJump            horizon_Loop00
 
-horizon_Call01:
-	dc.b	nRst, $0C, nF3
-	smpsFMAlterVol      $0A
-	smpsPan             panRight, $00
-	dc.b	$06
-	smpsFMAlterVol      $F6
-	smpsPan             panCenter, $00
-	dc.b	nF3, $0C
-	smpsFMAlterVol      $0A
-	smpsPan             panRight, $00
-	dc.b	$06
-	smpsFMAlterVol      $F6
-	smpsPan             panCenter, $00
-	dc.b	nE3, $0C
-	smpsFMAlterVol      $0A
-	smpsPan             panRight, $00
-	dc.b	$06
-	smpsFMAlterVol      $F6
-	smpsPan             panCenter, $00
-	dc.b	nE3, $0C
-	smpsFMAlterVol      $0A
-	smpsPan             panRight, $00
-	dc.b	$06
-	smpsFMAlterVol      $F6
-	smpsPan             panCenter, $00
-	dc.b	nE3, $0C, nRst, $0C, nE3
-	smpsFMAlterVol      $0A
-	smpsPan             panRight, $00
-	dc.b	$06
-	smpsFMAlterVol      $F6
-	smpsPan             panCenter, $00
-	dc.b	nE3, $0C
-	smpsFMAlterVol      $0A
-	smpsPan             panRight, $00
-	dc.b	$06
-	smpsFMAlterVol      $F6
-	smpsPan             panCenter, $00
-	dc.b	nF3, $0C
-	smpsFMAlterVol      $0A
-	smpsPan             panRight, $00
-	dc.b	$06
-	smpsFMAlterVol      $F6
-	smpsPan             panCenter, $00
-	dc.b	nF3, $0C
-	smpsFMAlterVol      $0A
-	smpsPan             panRight, $00
-	dc.b	$06
-	smpsFMAlterVol      $F6
-	smpsPan             panCenter, $00
-	dc.b	nF3, $0C
+horizon_Call00:
+	dc.b	nBb1, $12, nBb2, $06, nRst, $0C, nBb1, $0C, $18, nBb2, $0C, nBb1
+	dc.b	nA1, $12, nA2, $06, nRst, $0C, nA1, nD2, $12, $06, nD3, $0C
+	dc.b	nD2
 	smpsReturn
 
 ; FM5 Data
@@ -566,54 +428,46 @@ ThisHorizon_Call06:
 
 ; PSG1 Data
 ThisHorizon_PSG1:
-	smpsPSGvoice        sTone_04
-	smpsModSet          $09, $02, $FF, $00
-	smpsModSet          $00, $00, $00, $00
-	dc.b	smpsNoAttack, $30
 	smpsPSGvoice        sTone_02
 	smpsPSGAlterVol     $02
 	dc.b	nRst, $30, nC4, $06, nG3, nC3, nC4, nG3, nC3, nC4, nG3
 	smpsPSGAlterVol     $FE
 
-ThisHorizon_Loop0C:
+horizon_Loop08:
 	dc.b	nC3, $06, nC3, nC4, nG3, nC3, nC4, nG3, nC3, nC4, nG3, nC3
 	dc.b	nC4, nG3, nC3, nC4, nG3
-	smpsLoop            $00, $10, ThisHorizon_Loop0C
-	smpsJump            ThisHorizon_Loop0C
+	smpsLoop            $00, $10, horizon_Loop08
+	smpsJump            horizon_Loop08
 
 ; PSG2 Data
 ThisHorizon_PSG2:
-	smpsPSGvoice        sTone_04
-	smpsModSet          $09, $02, $FF, $00
-	smpsModSet          $00, $00, $00, $00
-	dc.b	smpsNoAttack, $30
 	smpsPSGvoice        sTone_02
 	smpsPSGAlterVol     $05
 	dc.b	nRst, $01
-	smpsDetune          $02
+	smpsAlterNote       $02
 	dc.b	nRst, $30, nC4, $06, nG3, nC3, nC4, nG3, nC3, nC4, nG3, $05
 	smpsPSGvoice        sTone_08
 	smpsPSGAlterVol     $FB
-	smpsDetune          $FE
+	smpsAlterNote       $FE
 	smpsModSet          $08, $01, $01, $02
 
-ThisHorizon_Loop0B:
-	smpsCall            ThisHorizon_Call06
+horizon_Loop07:
+	smpsCall            horizon_Call03
 	dc.b	smpsNoAttack, $0C, nD4, $18, nC4, $0C, smpsNoAttack, $60
-	smpsCall            ThisHorizon_Call06
+	smpsCall            horizon_Call03
 	dc.b	smpsNoAttack, $0C, nD3, $18, nF3, $0C, smpsNoAttack, $0C, nG3, $54
-	smpsLoop            $00, $02, ThisHorizon_Loop0B
-	smpsJump            ThisHorizon_Loop0B
+	smpsLoop            $00, $02, horizon_Loop07
+	smpsJump            horizon_Loop07
 
 ; PSG3 Data
 ThisHorizon_PSG3:
 	smpsPSGform         $E7
 	dc.b	nRst, $60
 
-ThisHorizon_Loop0A:
-	smpsCall            ThisHorizon_Call08
-	smpsLoop            $00, $04, ThisHorizon_Loop0A
-	smpsCall            ThisHorizon_Call08
+horizon_Loop06:
+	smpsCall            horizon_Call04
+	smpsLoop            $00, $04, horizon_Loop06
+	smpsCall            horizon_Call04
 	smpsPSGvoice        sTone_05
 	dc.b	(nMaxPSG2-$23)&$FF, $0C
 	smpsPSGvoice        sTone_02
@@ -634,11 +488,11 @@ ThisHorizon_Loop0A:
 	dc.b	$12
 	smpsPSGvoice        sTone_02
 	dc.b	$0C
-	smpsCall            ThisHorizon_Call08
-	smpsCall            ThisHorizon_Call08
-	smpsJump            ThisHorizon_Loop0A
+	smpsCall            horizon_Call04
+	smpsCall            horizon_Call04
+	smpsJump            horizon_Loop06
 
-ThisHorizon_Call08:
+horizon_Call04:
 	smpsPSGvoice        sTone_05
 	dc.b	(nMaxPSG2-$23)&$FF, $0C
 	smpsPSGvoice        sTone_02
@@ -660,9 +514,6 @@ ThisHorizon_PWM2:
 
 
 ThisHorizon_Loop02:
-	dc.b	dCrackerSnare, $04, dCrackerSnare
-	smpsFMAlterVol      $11
-	smpsLoop            $00, $06, ThisHorizon_Loop02
 	dc.b	nRst, $0C, dCrackerSnare, dCrackerSnare, dCrackerSnare, $06, dCrackerSnare, dCrackerSnare, dCrackerSnare, dCrackerTimpaniMid, nRst, dCrackerSnare
 	dc.b	dCrackerSnare
 	smpsFMAlterVol      $90

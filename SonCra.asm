@@ -5996,7 +5996,7 @@ TS_DumpPal:						; Offset: 00007462
 		clr.w	($FFFFD832).w				; clear Screen's FG Y position
 		move	#$2300,sr				; set the status register (enable interrupts)
 		addq.w	#$04,($FFFFD824).w			; increase routine counter
-		move.b	#$81,d0					; set "fade out" music
+		move.b	#$89,d0					; set "fade out" music
 		jsr	(PlayMusic).l				; play music
 		rts						; return
 
