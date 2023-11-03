@@ -1,4 +1,4 @@
- AS V1.42 Beta [Bld 251] - Source File Music.asm - Page 1 - 11/3/2023 17:33:43
+ AS V1.42 Beta [Bld 251] - Source File Music.asm - Page 1 - 11/3/2023 19:0:29
 
 
     1/       0 :                        z80_ptr function x,(x)<<8&$FF00|(x)>>8&$7F|$80
@@ -15918,8 +15918,8 @@
 (1)  428/    BB07 :                     
 (1)  429/    BB07 :                     ; PSG1 Data
 (1)  430/    BB07 :                     ThisHorizon_PSG1:
-(1)  431/    BB07 : (MACRO)             	smpsPSGvoice        sTone_07
-(1)  431/    BB07 : F507                        dc.b    $F5,STONE_07
+(1)  431/    BB07 : (MACRO)             	smpsPSGvoice        sTone_04
+(1)  431/    BB07 : F504                        dc.b    $F5,STONE_04
 (1)  432/    BB09 : (MACRO)             	smpsPSGAlterVol     $02
 (1)  432/    BB09 : EC02                        dc.b    $EC,$02
 (1)  433/    BB0B : 8030 B106 ACA5 B1AC 	dc.b	nRst, $30, nC4, $06, nG3, nC3, nC4, nG3, nC3, nC4, nG3
@@ -15941,8 +15941,8 @@
 (1)  441/    BB31 :                     
 (1)  442/    BB31 :                     ; PSG2 Data
 (1)  443/    BB31 :                     ThisHorizon_PSG2:
-(1)  444/    BB31 : (MACRO)             	smpsPSGvoice        sTone_07
-(1)  444/    BB31 : F507                        dc.b    $F5,STONE_07
+(1)  444/    BB31 : (MACRO)             	smpsPSGvoice        sTone_04
+(1)  444/    BB31 : F504                        dc.b    $F5,STONE_04
 (1)  445/    BB33 : (MACRO)             	smpsPSGAlterVol     $05
 (1)  445/    BB33 : EC05                        dc.b    $EC,$05
 (1)  446/    BB35 : 8001                	dc.b	nRst, $01
@@ -16529,7 +16529,7 @@
 (1)  640/    BCB3 : 2617 1485                           dc.b    vcTL4|vcTLMask4        ,vcTL3|vcTLMask3        ,vcTL2|vcTLMask2        ,vcTL1|vcTLMask1
 (1)  641/    BCB7 :                     
 (1)  642/    BCB7 :                     
- AS V1.42 Beta [Bld 251] - Source File Music.asm - Page 2 - 11/3/2023 17:33:43
+ AS V1.42 Beta [Bld 251] - Source File Music.asm - Page 2 - 11/3/2023 19:0:30
 
 
   Symbol Table (* = unused):
@@ -16780,7 +16780,7 @@
  SPEEDOFSOUND_VOICES :         A9CB C | *STONE_01 :                       1 - |
  STONE_02 :                       2 - |  STONE_03 :                       3 - |
  STONE_04 :                       4 - |  STONE_05 :                       5 - |
- STONE_06 :                       6 - |  STONE_07 :                       7 - |
+ STONE_06 :                       6 - | *STONE_07 :                       7 - |
  STONE_08 :                       8 - | *STONE_09 :                       9 - |
 *STONE_0A :                       A - | *STONE_0B :                       B - |
  STONE_0C :                       C - | *STONE_0D :                       D - |
@@ -16806,7 +16806,7 @@
  THISHORIZON_LOOP03 :          BBC8 C |  THISHORIZON_PSG1 :            BB07 C |
  THISHORIZON_PSG2 :            BB31 C |  THISHORIZON_PSG3 :            BB70 C |
 *THISHORIZON_PWM1 :            BBC4 C |  THISHORIZON_PWM2 :            BBDA C |
- THISHORIZON_VOICES :          BC3A C | *TIME :                  "17:33:43" - |
+ THISHORIZON_VOICES :          BC3A C | *TIME :                   "19:0:29" - |
 *TRACENUM :                       0 - | *TRUE :                           1 - |
 *USE_S2_SAMPLES :                 1 - | *USE_S3D_SAMPLES :                1 - |
 *USE_S3_SAMPLES :                 1 - | *USE_SK_SAMPLES :                 1 - |
@@ -16853,9 +16853,9 @@
  ZEROOFFSETOPTIMIZATION :         0 - |
 
     630 symbols
-    123 unused symbols
+    124 unused symbols
 
- AS V1.42 Beta [Bld 251] - Source File Music.asm - Page 3 - 11/3/2023 17:33:43
+ AS V1.42 Beta [Bld 251] - Source File Music.asm - Page 3 - 11/3/2023 19:0:30
 
 
   Defined Macros:
@@ -16913,7 +16913,7 @@ _MOVE                                 | _TST
 
      98 macros
 
- AS V1.42 Beta [Bld 251] - Source File Music.asm - Page 4 - 11/3/2023 17:33:43
+ AS V1.42 Beta [Bld 251] - Source File Music.asm - Page 4 - 11/3/2023 19:0:30
 
 
   Defined Functions:
@@ -16927,7 +16927,7 @@ SIGNEXTEND                            | SIGNMASK
 BIT                                   | CHKOP                                
 NOTZ80                                | Z80_PTR                              
 
- AS V1.42 Beta [Bld 251] - Source File Music.asm - Page 5 - 11/3/2023 17:33:43
+ AS V1.42 Beta [Bld 251] - Source File Music.asm - Page 5 - 11/3/2023 19:0:30
 
 
   Code Pages:
@@ -16937,7 +16937,7 @@ STANDARD (0 changed characters)
 
 1 code page
 
-0.36 seconds assembly time
+0.34 seconds assembly time
 
    7245 lines source file
   28548 lines incl. macro expansions

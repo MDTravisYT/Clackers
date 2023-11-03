@@ -20148,75 +20148,83 @@ unk_42364:		dc.b $FF,$A0,$FF,$AC,$FF,$B8
 ;
 ; AAAA = changes exactly what object is being placed (This cannot be an odd value or the engine will crash)
 ;
-; AAAA -> 00	=	Spring red Right
-; AAAA -> 02	=	Spring red Up
-; AAAA -> 04	=	Spring red Left
+SpringRed_Right		=	$00
+SpringRed_Up		=	$02
+SpringRed_Left		=	$04
 ; AAAA -> 06	=	Blank
-; AAAA -> 08	=	Spring red Up (Same as 02)
+SpringRed_Up_Dupe	=	$08	;	identical to 02
 ; AAAA -> 0A	=	Blank
-; AAAA -> 0C	=	Spring red Down
+SpringRed_Down		=	$0C
 ; AAAA -> 0E	=	Blank
 ;
 ; AAAA -> 10	=	Blank
-; AAAA -> 12	=	Spring red Angle Left/Up
-; AAAA -> 14	=	Spring red Angle Right/Up
+DiagRedSprngLU		=	$12
+DiagRedSprngRU		=	$14
 ; AAAA -> 16	=	(Crashes)
-; AAAA -> 18	=	Spring red Angle Left/Up
+DiagRedSprngLU_2	=	$18
 ; AAAA -> 1A	=	(Crashes)
-; AAAA -> 1C	=	Spring red Angle Down/Right
+DiagRedSprngRD		=	$1C
 ; AAAA -> 1E	=	(Crashes)
 ;
-; AAAA -> 20	=	Spring red Angle Down/Left
+DiagRedSprngLD		=	$20
 ; AAAA -> 22	=	(Crashes)
 ; AAAA -> 24	=	Blank
 ; AAAA -> 26	=	(Crashes)
-; AAAA -> 28	=	A Ring that spawns when hit from spikes (Uncollectable)
+LostRing			=	$28
 ; AAAA -> 2A	=	(Crashes)
 ; AAAA -> 2C	=	Blank
 ; AAAA -> 2E	=	Blank
 ;
 ; AAAA -> 30	=	Blank
 ; AAAA -> 32	=	(Crashes)
-; AAAA -> 34	=	Spring yellow Right
-; AAAA -> 36	=	Spring yellow Angle Right/Up
-; AAAA -> 38	=	Spring yellow Left
-; AAAA -> 3A	=	Spring yellow Angle Right/Up
-; AAAA -> 3C	=	Spring yellow Up
-; AAAA -> 3E	=	Spring yellow Angle Right/Up
+SpringYel_Right		=	$34
+DiagYelSprngRU		=	$36
+SpringYel_Left		=	$38
+DiagYelSprngRU_2	=	$3A
+SpringYel_Up		=	$3C
+DiagYelSprngRU_3	=	$3E
 ;
-; AAAA -> 40	=	Spring yellow Down
-; AAAA -> 42	=	Spring yellow Angle Right/Up
-; AAAA -> 44	=	Spring yellow Angle Right/Up
+SpringYel_Down		=	$40
+DiagYelSprngRU_4	=	$42
+DiagYelSprngRU_5	=	$44
 ; AAAA -> 46	=	(Crashes)
-; AAAA -> 48	=	Spring yellow Angle Left/Up
+DiagYelSprngLU		=	$48
 ; AAAA -> 4A	=	(Crashes)
-; AAAA -> 4C	=	Spring yellow Angle Down/Right
+DiagYelSprngRD		=	$4C
 ; AAAA -> 4E	=	(Crashes)
 ;
-; AAAA -> 50	=	Spring yellow Angle Down/Left
-; AAAA -> 52	=	Spikes Up
-; AAAA -> 54	=	Spikes Up
-; AAAA -> 56	=	Spikes Down (This seems to lag the engine and cause gliches after a few seconds of being present)
-; AAAA -> 58	=	Spikes Down
+DiagYelSprngLD		=	$50
+Spikes_Up			=	$52
+Spikes_Up_2			=	$54
+Spikes_DownBuggy	=	$56
+Spikes_Down			=	$58
 ; AAAA -> 5A	=	(Crashes)
-; AAAA -> 5C	=	Spikes Right
+Spikes_Right		=	$5C
 ; AAAA -> 5E	=	(Crashes)
 ;
-; AAAA -> 60	=	Spikes Left
+Spikes_Left			=	$60
 ; AAAA -> 62	=	(Crashes)
-; AAAA -> 64	=	Spikes Angle Right/Up
-; AAAA -> 66	=	Spikes Angle Left/Up
-; AAAA -> 68	=	Spikes Angle Left/Up
-; AAAA -> 6A	=	Spikes Angle Down/Left
-; AAAA -> 6C	=	Spikes Angle Down/Right
+DiagSpik_RU			=	$64
+DiagSpik_LU			=	$66
+DiagSpik_LU_2		=	$68
+DiagSpik_LD			=	$6A
+DiagSpik_RD			=	$6C
 ; AAAA -> 6E	=	(Crashes)
 ;
-; AAAA -> 70	=	Spikes Angle Down/Left
+DiagSpik_LD_2		=	$70
 ;
 ; AAAA -> 72 or Higher=	These are either pathswappers, blank, invalid, gliches of previous objects, lag the engine, or crash (as far as I've seen)
 ;			note: some pathswappers crash on TTZ (Not sure why though)
 ; ---------------------------------------------------------------------------
 ; ===========================================================================
+ObjLayout:	macro	x,	y,	o
+		dc.w	x,	y
+		dc.b	$00,	o
+		dc.w	$FFFF
+		endm
+ObjLayout_End:	macro	
+		dc.w	$FFFF
+		endm
 ; --------------------------------------------------------------------------
 Objpos_SSZ:
 	incbin	Uncompressed\Objpos_SSZ.bin			; Speed Slider Zone's Object Position
@@ -20224,7 +20232,32 @@ Objpos_SSZ:
 ; ---------------------------------------------------------------------------
 Objpos_TTZ:
 	;dc.w	$0100,$0E00,$0000,$FFFF
-	incbin	Uncompressed\Objpos_TTZ.bin			; Techno Tower Zone's Object Position
+	
+	ObjLayout	$03F0,	$0298,	SpringYel_Up
+	ObjLayout	$0410,	$0298,	SpringYel_Up
+	ObjLayout	$0488,	$0850,	SpringRed_Right
+	ObjLayout	$0513,	$070D,	DiagRedSprngRU
+	ObjLayout	$0513,	$060D,	DiagRedSprngRU
+	ObjLayout	$07CD,	$076D,	DiagRedSprngLU_2
+	ObjLayout	$07CD,	$068D,	DiagRedSprngLU_2
+	ObjLayout	$07CD,	$058D,	DiagRedSprngLU_2
+	ObjLayout	$0610,	$09F0,	Spikes_Up_2
+	ObjLayout	$0450,	$0810,	Spikes_Up_2
+	ObjLayout	$0190,	$0170,	Spikes_Up_2
+	ObjLayout	$0670,	$0170,	Spikes_Up_2
+	ObjLayout	$07D0,	$01F0,	Spikes_Up_2
+	ObjLayout	$0330,	$0770,	Spikes_Down
+	ObjLayout	$0350,	$0770,	Spikes_Down
+	ObjLayout	$0370,	$0770,	Spikes_Down
+	ObjLayout	$0038,	$0280,	DiagSpik_RU
+	ObjLayout	$07B0,	$0C98,	SpringRed_Up_Dupe
+	ObjLayout	$0030,	$0B70,	DiagRedSprngRU
+	ObjLayout	$0370,	$0738,	SpringRed_Up_Dupe
+	ObjLayout	$07D0,	$0C98,	SpringRed_Up_Dupe
+	ObjLayout	$0790,	$0C98,	SpringRed_Up_Dupe
+	ObjLayout	$00B0,	$0B78,	SpringYel_Up
+	ObjLayout	$0034,	$06ED,	DiagRedSprngRU
+	ObjLayout_End
 	even
 ; ---------------------------------------------------------------------------
 ; ===========================================================================
