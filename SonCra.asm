@@ -7142,13 +7142,23 @@ Levels:							; Offset: 00008896
 		movem.l	(sp)+,a0				; reload a0 data from stack
 		lea	Levels_VDPRegData(pc),a0		; load VDP register setup values
 		jsr	StoreVDPRegisters			; save VDP register data to ram spaces
-		move.b	#$83,d0					; load BGM 81
-		tst.w	($FFFFD834).w				; is level SSZ?
-		beq.s	LV_PlayMusic				; if yes, branch
-		move.w	($FFFFD83A).w,d0			; load Level time of day value
-		andi.w	#$03,d0					; Get only days 0, 1, 2 and 3
-		addi.w	#$82,d0					; add 82 to load BGM 82, 83, 84 or 85 based on the time of day
-
+		move.b	#$81,d0					; load BGM 81
+		cmpi.w	#0,($FFFFD834).w				; is level SSZ?
+		beq.s	TT_PlayMusic				; if yes, branch
+		cmpi.w	#1,($FFFFD834).w				; is level TTZ?
+		beq.s	SS_PlayMusic				; if yes, branch
+		cmpi.w	#2,($FFFFD834).w				; is level IIZ?
+		beq.s	II_PlayMusic				; if yes, branch
+		bra.s	LV_PlayMusic
+		
+SS_PlayMusic:
+		move.b	#$82,d0					; load BGM 81
+		bra.s	LV_PlayMusic
+TT_PlayMusic:
+		move.b	#$87,d0					; load BGM 81
+		bra.s	LV_PlayMusic
+II_PlayMusic:
+		move.b	#$88,d0					; load BGM 81
 LV_PlayMusic:						; Offset: 000088C2
 		jsr	(PlayMusic).l				; Play BGM
 		lea	PAL_PrimaryColours(pc),a1		; load primary Level palettes address to a1
