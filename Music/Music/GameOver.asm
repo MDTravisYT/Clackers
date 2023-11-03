@@ -73,7 +73,7 @@ GameOver_PSG3:
 
 ; DAC Data
 GameOver_DAC:
-	dc.b	nRst, $30, dSnareS3
+	dc.b	nRst, $30, dCrackerKick
 	smpsLoop            $00, $04, GameOver_DAC
 	smpsStop
 

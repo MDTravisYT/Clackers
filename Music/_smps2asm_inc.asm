@@ -71,66 +71,7 @@ nMaxPSG2			EQU nB6
 	endif
 ; ---------------------------------------------------------------------------
 ; DAC Equates
-	if SonicDriverVer==1
-		enum dKick=$81,dSnare,dTimpani
-		enum dHiTimpani=$88,dMidTimpani,dLowTimpani,dVLowTimpani
-	elseif SonicDriverVer==2
-		enum dKick=$81,dSnare,dClap,dScratch,dTimpani,dHiTom,dVLowClap,dHiTimpani,dMidTimpani
-		enum dLowTimpani=dMidTimpani+1,dVLowTimpani,dMidTom,dLowTom,dFloorTom,dHiClap
-		enum dMidClap=dHiClap+1,dLowClap
-	else;if SonicDriverVer>=3
-		if (use_s3_samples<>0)||(use_sk_samples<>0)||(use_s3d_samples<>0)
-			enum dSnareS3=$81,dHighTom,dMidTomS3,dLowTomS3,dFloorTomS3,dKickS3,dMuffledSnare
-			enum dCrashCymbal=dMuffledSnare+1,dRideCymbal,dLowMetalHit,dMetalHit,dHighMetalHit
-			enum dHigherMetalHit=dHighMetalHit+1,dMidMetalHit,dClapS3,dElectricHighTom
-			enum dElectricMidTom=dElectricHighTom+1,dElectricLowTom,dElectricFloorTom
-			enum dTightSnare=dElectricFloorTom+1,dMidpitchSnare,dLooseSnare,dLooserSnare
-			enum dHiTimpaniS3=dLooserSnare+1,dLowTimpaniS3,dMidTimpaniS3,dQuickLooseSnare
-			enum dClick=dQuickLooseSnare+1,dPowerKick,dQuickGlassCrash
-		endif
-		if (use_s3_samples<>0)||(use_sk_samples<>0)
-			enum dGlassCrashSnare=dQuickGlassCrash+1,dGlassCrash,dGlassCrashKick,dQuietGlassCrash
-			enum dOddSnareKick=dQuietGlassCrash+1,dKickExtraBass,dComeOn,dDanceSnare,dLooseKick
-			enum dModLooseKick=dLooseKick+1,dWoo,dGo,dSnareGo,dPowerTom,dHiWoodBlock,dLowWoodBlock
-			enum dHiHitDrum=dLowWoodBlock+1,dLowHitDrum,dMetalCrashHit,dEchoedClapHit
-			enum dLowerEchoedClapHit=dEchoedClapHit+1,dHipHopHitKick,dHipHopHitPowerKick
-			enum dBassHey=dHipHopHitPowerKick+1,dDanceStyleKick,dHipHopHitKick2,dHipHopHitKick3
-			enum dReverseFadingWind=dHipHopHitKick3+1,dScratchS3,dLooseSnareNoise,dPowerKick2
-			enum dCrashingNoiseWoo=dPowerKick2+1,dQuickHit,dKickHey,dPowerKickHit
-			enum dLowPowerKickHit=dPowerKickHit+1,dLowerPowerKickHit,dLowestPowerKickHit
-		endif
-		; For conversions:
-		if (use_s2_samples<>0)
-			if (use_s3_samples<>0)||(use_sk_samples<>0)
-				enum dKick=dLowestPowerKickHit+1
-			elseif (use_s3d_samples<>0)
-				enum dKick=dQuickGlassCrash+1
-			else
-				enum dKick=$81
-			endif
-			enum dSnare=dKick+1,dClap,dScratch,dTimpani,dHiTom,dVLowClap,dHiTimpani,dMidTimpani
-			enum dLowTimpani=dMidTimpani+1,dVLowTimpani,dMidTom,dLowTom,dFloorTom,dHiClap
-			enum dMidClap=dHiClap+1,dLowClap
-		endif
-		if (use_s3d_samples<>0)
-			if (use_s2_samples<>0)
-				enum dFinalFightMetalCrash=dLowClap+1,dIntroKick
-			elseif (use_s3_samples<>0)||(use_sk_samples<>0)
-				enum dFinalFightMetalCrash=dLowestPowerKickHit+1,dIntroKick
-			else
-				enum dFinalFightMetalCrash=dQuickGlassCrash+1,dIntroKick
-			endif
-		endif
-		if (use_s3_samples<>0)
-			if (use_s3d_samples<>0)
-				enum dEchoedClapHit_S3=dIntroKick+1,dLowerEchoedClapHit_S3
-			elseif (use_s2_samples<>0)
-				enum dEchoedClapHit_S3=dLowClap+1,dLowerEchoedClapHit_S3
-			else
-				enum dEchoedClapHit_S3=dLowestPowerKickHit+1,dLowerEchoedClapHit_S3
-			endif
-		endif
-	endif
+			enum dCrackerKick=$81,dCrackerSnare,dCrackerTimpaniHi,dCrackerTimpaniMid,dCrackerTimpaniLow,dCrackerLessgo,dCrackerHaa
 ; ---------------------------------------------------------------------------
 ; Channel IDs for SFX
 cPSG1				EQU $80

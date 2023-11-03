@@ -529,24 +529,24 @@ HyperHyper_Loop01:
 	smpsCall            HyperHyper_Call01
 	smpsLoop            $00, $02, HyperHyper_Loop01
 	smpsCall            HyperHyper_Call00
-	dc.b	dSnareS3, $12, $06, dHighTom, $0C, dSnareS3, nRst, dHighTom, $06, dSnareS3, dHighTom, dHighTom
-	dc.b	$0C, dHighTom, $06
+	dc.b	dCrackerKick, $12, $06, dCrackerSnare, $0C, dCrackerKick, nRst, dCrackerSnare, $06, dCrackerKick, dCrackerSnare, dCrackerSnare
+	dc.b	$0C, dCrackerSnare, $06
 	smpsCall            HyperHyper_Call00
 	smpsCall            HyperHyper_Call02
 	smpsJump            HyperHyper_Loop00
 
 HyperHyper_Call00:
-	dc.b	dSnareS3, $12, $06, dHighTom, $0C, dSnareS3, nRst, dSnareS3, dHighTom, $06, dSnareS3, $12
+	dc.b	dCrackerKick, $12, $06, dCrackerSnare, $0C, dCrackerKick, nRst, dCrackerKick, dCrackerSnare, $06, dCrackerKick, $12
 	smpsReturn
 
 HyperHyper_Call01:
-	dc.b	dSnareS3, $12, $06, dHighTom, $0C, dSnareS3, nRst, dSnareS3, $06, dSnareS3, dHighTom, dSnareS3
-	dc.b	$0C, dHighTom, $06
+	dc.b	dCrackerKick, $12, $06, dCrackerSnare, $0C, dCrackerKick, nRst, dCrackerKick, $06, dCrackerKick, dCrackerSnare, dCrackerKick
+	dc.b	$0C, dCrackerSnare, $06
 	smpsReturn
 
 HyperHyper_Call02:
-	dc.b	dSnareS3, $0C, dHighTom, $06, dSnareS3, dHighTom, $0C, dHighTom, $04, dHighTom, dHighTom, dHighTom
-	dc.b	$06, dHighTom, dHighTom, dHighTom, dMidTomS3, dMidTomS3, dLowTomS3, dFloorTomS3
+	dc.b	dCrackerKick, $0C, dCrackerSnare, $06, dCrackerKick, dCrackerSnare, $0C, dCrackerSnare, $04, dCrackerSnare, dCrackerSnare, dCrackerSnare
+	dc.b	$06, dCrackerSnare, dCrackerSnare, dCrackerSnare, dCrackerTimpaniHi, dCrackerTimpaniHi, dCrackerTimpaniMid, dCrackerTimpaniLow
 	smpsReturn
 
 HyperHyper_Voices:

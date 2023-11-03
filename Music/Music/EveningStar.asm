@@ -425,9 +425,9 @@ EveningStar_Call0D:
 
 ; DAC Data
 EveningStar_DAC:
-	dc.b	nRst, $18, dSnareS3
+	dc.b	nRst, $18, dCrackerKick
 	smpsLoop            $00, $07, EveningStar_DAC
-	dc.b	dSnareS3, $0C, dHighTom, $08, $04, dMidTomS3, $08, dLowTomS3, $04, dFloorTomS3, $08, $04
+	dc.b	dCrackerKick, $0C, dCrackerSnare, $08, $04, dCrackerTimpaniHi, $08, dCrackerTimpaniMid, $04, dCrackerTimpaniLow, $08, $04
 
 EveningStar_Loop00:
 	smpsCall            EveningStar_Call00
@@ -436,7 +436,7 @@ EveningStar_Loop00:
 EveningStar_Loop01:
 	smpsCall            EveningStar_Call00
 	smpsLoop            $00, $03, EveningStar_Loop01
-	dc.b	dSnareS3, $0C, dSnareS3, dHighTom, $14, $04, nRst, $18, nRst, $08, dHighTom, $04
+	dc.b	dCrackerKick, $0C, dCrackerKick, dCrackerSnare, $14, $04, nRst, $18, nRst, $08, dCrackerSnare, $04
 	dc.b	$08, $04
 
 EveningStar_Loop02:
@@ -445,8 +445,8 @@ EveningStar_Loop02:
 	smpsJump            EveningStar_Loop00
 
 EveningStar_Call00:
-	dc.b	dSnareS3, $0C, dSnareS3, dHighTom, $24, dSnareS3, $0C, dHighTom, $08, dMidTomS3, $04, dLowTomS3
-	dc.b	$08, dFloorTomS3, $04
+	dc.b	dCrackerKick, $0C, dCrackerKick, dCrackerSnare, $24, dCrackerKick, $0C, dCrackerSnare, $08, dCrackerTimpaniHi, $04, dCrackerTimpaniMid
+	dc.b	$08, dCrackerTimpaniLow, $04
 	smpsReturn
 
 EveningStar_Voices:

@@ -341,29 +341,29 @@ Moonrise_Call0A:
 
 ; DAC Data
 Moonrise_DAC:
-	dc.b	dSnareS3, $30, dSnareS3, dSnareS3, dSnareS3, $06, dSnareS3, dHighTom, dSnareS3, dMidTomS3, dMidTomS3, dLowTomS3
-	dc.b	dFloorTomS3, dSnareS3, $30, dSnareS3, dSnareS3, dSnareS3, $06, dHighTom, $04, dHighTom, dHighTom, dHighTom
-	dc.b	$06, dHighTom, dHighTom, dHighTom, dHighTom
+	dc.b	dCrackerKick, $30, dCrackerKick, dCrackerKick, dCrackerKick, $06, dCrackerKick, dCrackerSnare, dCrackerKick, dCrackerTimpaniHi, dCrackerTimpaniHi, dCrackerTimpaniMid
+	dc.b	dCrackerTimpaniLow, dCrackerKick, $30, dCrackerKick, dCrackerKick, dCrackerKick, $06, dCrackerSnare, $04, dCrackerSnare, dCrackerSnare, dCrackerSnare
+	dc.b	$06, dCrackerSnare, dCrackerSnare, dCrackerSnare, dCrackerSnare
 
 Moonrise_Jump00:
 	smpsCall            Moonrise_Call00
 	smpsCall            Moonrise_Call01
 	smpsCall            Moonrise_Call00
-	dc.b	dSnareS3, $12, $06, dHighTom, $18, dSnareS3, $06, $0C, $06, dHighTom, $12, $06
+	dc.b	dCrackerKick, $12, $06, dCrackerSnare, $18, dCrackerKick, $06, $0C, $06, dCrackerSnare, $12, $06
 	smpsCall            Moonrise_Call00
 	smpsCall            Moonrise_Call01
 	smpsCall            Moonrise_Call00
-	dc.b	dSnareS3, $12, $06, dHighTom, $18, dSnareS3, $06, dSnareS3, dHighTom, $04, dHighTom, dHighTom
-	dc.b	dHighTom, $06, dHighTom, dHighTom, dHighTom
+	dc.b	dCrackerKick, $12, $06, dCrackerSnare, $18, dCrackerKick, $06, dCrackerKick, dCrackerSnare, $04, dCrackerSnare, dCrackerSnare
+	dc.b	dCrackerSnare, $06, dCrackerSnare, dCrackerSnare, dCrackerSnare
 	smpsJump            Moonrise_Jump00
 
 Moonrise_Call00:
-	dc.b	dSnareS3, $12, $06, dHighTom, $18
+	dc.b	dCrackerKick, $12, $06, dCrackerSnare, $18
 	smpsLoop            $00, $02, Moonrise_Call00
 	smpsReturn
 
 Moonrise_Call01:
-	dc.b	dSnareS3, $12, $06, dHighTom, $18, dSnareS3, $06, $0C, $06, dHighTom, $18
+	dc.b	dCrackerKick, $12, $06, dCrackerSnare, $18, dCrackerKick, $06, $0C, $06, dCrackerSnare, $18
 	smpsReturn
 
 Moonrise_Voices:

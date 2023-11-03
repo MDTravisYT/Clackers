@@ -189,18 +189,18 @@ Walkin_Loop03:
 
 ; DAC Data
 Walkin_DAC:
-	dc.b	dSnareS3, $0C, dHighTom, dHighTom, dHighTom, $08, $04
+	dc.b	dCrackerKick, $0C, dCrackerSnare, dCrackerSnare, dCrackerSnare, $08, $04
 
 Walkin_Loop00:
 	smpsCall            Walkin_Call00
-	dc.b	dSnareS3, $18, dHighTom, dSnareS3, dHighTom, $14, $04
+	dc.b	dCrackerKick, $18, dCrackerSnare, dCrackerKick, dCrackerSnare, $14, $04
 	smpsCall            Walkin_Call00
-	dc.b	dSnareS3, $18, dHighTom, dSnareS3, dHighTom, $08, $04, $08, $04
+	dc.b	dCrackerKick, $18, dCrackerSnare, dCrackerKick, dCrackerSnare, $08, $04, $08, $04
 	smpsLoop            $00, $02, Walkin_Loop00
 	smpsJump            Walkin_Loop00
 
 Walkin_Call00:
-	dc.b	dSnareS3, $18, dHighTom, dSnareS3, dHighTom, $14, $04
+	dc.b	dCrackerKick, $18, dCrackerSnare, dCrackerKick, dCrackerSnare, $14, $04
 	smpsReturn
 
 Walkin_Voices:

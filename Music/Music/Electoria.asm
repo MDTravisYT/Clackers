@@ -785,8 +785,8 @@ Electoria_Call0D:
 
 ; DAC Data
 Electoria_DAC:
-	dc.b	dHighTom, $06, nRst, dHighTom, dHighTom, nRst, dHighTom, dHighTom, dSnareS3, dHighTom, dMidTomS3, dLowTomS3
-	dc.b	dHighTom, dHighTom, dLowTomS3, dFloorTomS3, dHighTom
+	dc.b	dCrackerSnare, $06, nRst, dCrackerSnare, dCrackerSnare, nRst, dCrackerSnare, dCrackerSnare, dCrackerKick, dCrackerSnare, dCrackerTimpaniHi, dCrackerTimpaniMid
+	dc.b	dCrackerSnare, dCrackerSnare, dCrackerTimpaniMid, dCrackerTimpaniLow, dCrackerSnare
 
 Electoria_Loop00:
 	smpsCall            Electoria_Call00
@@ -807,7 +807,7 @@ Electoria_Loop02:
 	smpsCall            Electoria_Call01
 	smpsLoop            $00, $03, Electoria_Loop02
 	smpsCall            Electoria_Call00
-	dc.b	dHighTom, $04, dHighTom, dHighTom, dHighTom, $06, dHighTom, dHighTom, dHighTom, dHighTom, dHighTom, nRst
+	dc.b	dCrackerSnare, $04, dCrackerSnare, dCrackerSnare, dCrackerSnare, $06, dCrackerSnare, dCrackerSnare, dCrackerSnare, dCrackerSnare, dCrackerSnare, nRst
 	dc.b	$30
 
 Electoria_Loop03:
@@ -826,7 +826,7 @@ Electoria_Loop04:
 	smpsCall            Electoria_Call00
 	smpsCall            Electoria_Call01
 	smpsCall            Electoria_Call00
-	dc.b	dSnareS3, $06, dHighTom, $12, dHighTom, dSnareS3, $06, nRst, $30
+	dc.b	dCrackerKick, $06, dCrackerSnare, $12, dCrackerSnare, dCrackerKick, $06, nRst, $30
 	smpsCall            Electoria_Call00
 	smpsCall            Electoria_Call01
 	smpsCall            Electoria_Call00
@@ -834,21 +834,21 @@ Electoria_Loop04:
 	smpsJump            Electoria_Loop01
 
 Electoria_Call00:
-	dc.b	dSnareS3, $0C, dSnareS3, dHighTom, nRst, $06, dHighTom, nRst, dHighTom, dSnareS3, nRst, dHighTom
+	dc.b	dCrackerKick, $0C, dCrackerKick, dCrackerSnare, nRst, $06, dCrackerSnare, nRst, dCrackerSnare, dCrackerKick, nRst, dCrackerSnare
 	dc.b	$18
 	smpsReturn
 
 Electoria_Call01:
-	dc.b	dSnareS3, $06, dHighTom, $12, dHighTom, dSnareS3, $06, nRst, dHighTom, dSnareS3, nRst, dHighTom
+	dc.b	dCrackerKick, $06, dCrackerSnare, $12, dCrackerSnare, dCrackerKick, $06, nRst, dCrackerSnare, dCrackerKick, nRst, dCrackerSnare
 	dc.b	$18
 	smpsReturn
 
 Electoria_Call02:
-	dc.b	dLowTomS3, $0C, $0C, $0C, $06, $06, nRst, dLowTomS3, dLowTomS3, $0C, dLowTomS3, dLowTomS3
+	dc.b	dCrackerTimpaniMid, $0C, $0C, $0C, $06, $06, nRst, dCrackerTimpaniMid, dCrackerTimpaniMid, $0C, dCrackerTimpaniMid, dCrackerTimpaniMid
 	smpsReturn
 
 Electoria_Call03:
-	dc.b	nRst, $06, dHighTom, $12, dHighTom, $18, nRst, $06, dHighTom, $12, dHighTom, $18
+	dc.b	nRst, $06, dCrackerSnare, $12, dCrackerSnare, $18, nRst, $06, dCrackerSnare, $12, dCrackerSnare, $18
 	smpsReturn
 
 Electoria_Voices:
