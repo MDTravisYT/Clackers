@@ -17870,7 +17870,7 @@ GTO_CheckTime:						; Offset: 0000EC02
 GTO_GameOver:						; Offset: 0000EC20
 		move.b	#$86,d0					; set music $86 to d0 (Game Over music)
 		jsr	(PlayMusic).l				; play song
-		move.w	#$300,d0				; set delay time to $300
+		move.w	#$100,d0				; set delay time to $300
 
 GTO_Loop:						; Offset: 0000EC2E
 		bclr	#7,($FFFFFFC9).w			; do the lag
