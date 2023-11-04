@@ -17838,34 +17838,32 @@ loc_EBC8:
 ; ---------------------------------------------------------------------------
 
 GameTimeOver:						; Offset: 0000EBE0
-		rts
-		tst.w	($FFFFD834).w				; check if level is not Techno Tower
-		beq.s	GTO_CheckTime				; if so, branch
-		movea.w	($FFFFD862).w,a0			; load Sonic's object RAM into a0
-		cmpi.w	#$8F,$C(a0)				; is Sonic at position $8F or below on Y-axis?
-		bcc.s	GTO_CheckTime			; if yes, branch
-	if	Combi	=	1
-		movea.w	($FFFFD864).w,a0			; load Tails' object RAM into a0
-		cmpi.w	#$8F,$C(a0)				; is Tails at position $8F or below on Y-axis?
-		bcc.s	GTO_CheckTime				; if not, branch
-	else
-	endif
+;	;	rts
+;		tst.w	($FFFFD834).w				; check if level is not Techno Tower
+;		beq.s	GTO_CheckTime				; if so, branch
+;		movea.w	($FFFFD862).w,a0			; load Sonic's object RAM into a0
+;		cmpi.w	#$8F,$C(a0)				; is Sonic at position $8F or below on Y-axis?
+;		bcc.s	GTO_CheckTime			; if yes, branch
+;	if	Combi	=	1
+;		movea.w	($FFFFD864).w,a0			; load Tails' object RAM into a0
+;		cmpi.w	#$8F,$C(a0)				; is Tails at position $8F or below on Y-axis?
+;		bcc.s	GTO_CheckTime				; if not, branch
+;	else
+;	endif
+;
 
-GTO_GoToGameOver:					; Offset: 0000EBFE
-		bra.w	GTO_GameOver				; go to game over
-; ===========================================================================
 
 GTO_CheckTime:						; Offset: 0000EC02
 		tst.w	$26(a6)					; check if $FFFFD882 is set
-		bne.s	GTO_GoToGameOver			; if so, branch
+		bne.s	GTO_GameOver			; if so, branch
 		move.w	$24(a6),d7				; move the timer itself into d7
 		addq.w	#1,d7					; add 1 to centi-seconds timer
 		cmpi.w	#$2D00,d7				; is timer showing 3:00:00?
 		bhi.s	GTO_GameOver				; if yes, branch
-		tst.w	($FFFFD834).w				; is level Techno Tower?
+	;	tst.w	($FFFFD834).w				; is level Techno Tower?
 		bne.s	GTO_UpdateTime				; if yes, branch
-		cmpi.w	#$F00,d7				; is timer showing 1:00:00?
-		bls.s	GTO_UpdateTime				; if not branch, branch
+	;	cmpi.w	#$F00,d7				; is timer showing 1:00:00?
+	;	bls.s	GTO_UpdateTime				; if not branch, branch
 
 GTO_GameOver:						; Offset: 0000EC20
 		move.b	#$86,d0					; set music $86 to d0 (Game Over music)
@@ -17884,10 +17882,12 @@ GTO_LagLoop:						; Offset: 0000EC34
 		clr.w	($FFFFD824).w				; clear sub game-mode flag
 		move.w	($FFFFD834).w,d0			; get level ID
 		addq.w	#1,d0					; add 1 to it
-		andi.w	#1,d0					; and it by 1
+	;	andi.w	#1,d0					; and it by 1
 		move.w	d0,($FFFFD834).w			; put the result back
 		clr.w	($FFFFD836).w				; clear a "Press Start" releated flag
-		move.w	#$08,($FFFFD822).w			; set game mode to $10 (field)
+	;	addi.w	#1,($FFFFD834).w			; go to next world
+		move.w	#$0001,($FFFFD836).w			; set Level/Act/Field ID to 1
+	;	move.w	#$0018,($FFFFD822).w			; set Screen/Game mode to Level
 		movea.l	($00000000).w,sp			; set stack pointer to location 00000000			; do...
 		jmp	MainProg_Loop				; jump to Main game array
 

@@ -1,4 +1,4 @@
- AS V1.42 Beta [Bld 251] - Source File Music.asm - Page 1 - 11/3/2023 21:57:52
+ AS V1.42 Beta [Bld 251] - Source File Music.asm - Page 1 - 11/4/2023 2:31:17
 
 
     1/       0 :                        z80_ptr function x,(x)<<8&$FF00|(x)>>8&$7F|$80
@@ -16620,7 +16620,7 @@
 (1)  640/    BCB0 : 2617 1485                           dc.b    vcTL4|vcTLMask4        ,vcTL3|vcTLMask3        ,vcTL2|vcTLMask2        ,vcTL1|vcTLMask1
 (1)  641/    BCB4 :                     
 (1)  642/    BCB4 :                     
- AS V1.42 Beta [Bld 251] - Source File Music.asm - Page 2 - 11/3/2023 21:57:52
+ AS V1.42 Beta [Bld 251] - Source File Music.asm - Page 2 - 11/4/2023 2:31:18
 
 
   Symbol Table (* = unused):
@@ -16632,7 +16632,7 @@
 *CFM6 :                           6 - | *CNOISE :                        E0 - |
 *CONSTPI :        3.141592653589793 - | *CPSG1 :                         80 - |
 *CPSG2 :                         A0 - | *CPSG3 :                         C0 - |
-*DATE :                 "11/3/2023" - | *DCRACKERHAA :                   87 - |
+*DATE :                 "11/4/2023" - | *DCRACKERHAA :                   87 - |
  DCRACKERKICK :                  81 - | *DCRACKERLESSGO :                86 - |
  DCRACKERSNARE :                 82 - |  DCRACKERTIMPANIHI :             83 - |
  DCRACKERTIMPANILOW :            85 - |  DCRACKERTIMPANIMID :            84 - |
@@ -16900,7 +16900,7 @@
  THISHORIZON_LOOP03 :          BBC5 C |  THISHORIZON_PSG1 :            BB04 C |
  THISHORIZON_PSG2 :            BB2E C |  THISHORIZON_PSG3 :            BB6D C |
 *THISHORIZON_PWM1 :            BBC1 C |  THISHORIZON_PWM2 :            BBD7 C |
- THISHORIZON_VOICES :          BC37 C | *TIME :                  "21:57:52" - |
+ THISHORIZON_VOICES :          BC37 C | *TIME :                   "2:31:17" - |
 *TRACENUM :                       0 - | *TRUE :                           1 - |
 *USE_S2_SAMPLES :                 1 - | *USE_S3D_SAMPLES :                1 - |
 *USE_S3_SAMPLES :                 1 - | *USE_SK_SAMPLES :                 1 - |
@@ -16949,7 +16949,7 @@
     630 symbols
     129 unused symbols
 
- AS V1.42 Beta [Bld 251] - Source File Music.asm - Page 3 - 11/3/2023 21:57:52
+ AS V1.42 Beta [Bld 251] - Source File Music.asm - Page 3 - 11/4/2023 2:31:18
 
 
   Defined Macros:
@@ -17007,7 +17007,7 @@ _MOVE                                 | _TST
 
      98 macros
 
- AS V1.42 Beta [Bld 251] - Source File Music.asm - Page 4 - 11/3/2023 21:57:52
+ AS V1.42 Beta [Bld 251] - Source File Music.asm - Page 4 - 11/4/2023 2:31:18
 
 
   Defined Functions:
@@ -17021,7 +17021,7 @@ SIGNEXTEND                            | SIGNMASK
 BIT                                   | CHKOP                                
 NOTZ80                                | Z80_PTR                              
 
- AS V1.42 Beta [Bld 251] - Source File Music.asm - Page 5 - 11/3/2023 21:57:52
+ AS V1.42 Beta [Bld 251] - Source File Music.asm - Page 5 - 11/4/2023 2:31:18
 
 
   Code Pages:
@@ -17031,7 +17031,7 @@ STANDARD (0 changed characters)
 
 1 code page
 
-0.41 seconds assembly time
+0.37 seconds assembly time
 
    7267 lines source file
   28735 lines incl. macro expansions
