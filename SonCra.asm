@@ -15167,46 +15167,46 @@ RO_ValidObj:
 ; ---------------------------------------------------------------------------
 
 RO_Routines:
-		bra.w	Object00				; Object 00 - Red Springs (Facing right)
-		bra.w	loc_D394				; Object 02 - Red Sprints (Facing up)
-		bra.w	loc_D484				; Object 04 - Red Sprints (Facing left)
-		bra.w	loc_D574				; Object 06
-		bra.w	ObjGoal					; Object 08 - Red Sprints (Facing up)
-		bra.w	loc_D660				; Object 0A uhhmmm... fuck
-		bra.w	loc_D770				; Object 0C
-		bra.w	loc_D884				; Object 0E
-		bra.w	loc_D990				; Object 10
-		bra.w	locret_E2BC				; Object 12
-		bra.w	loc_E2BE				; Object 14
-		bra.w	locret_E352				; Object 16
-		bra.w	locret_E354				; Object 18
-		bra.w	loc_DAA0				; Object 1A
-		bra.w	loc_DB8C				; Object 1C
-		bra.w	loc_DC7C				; Object 1E
-		bra.w	loc_DD6C				; Object 20
-		bra.w	loc_DE58				; Object 22
-		bra.w	loc_DF68				; Object 24
-		bra.w	loc_E07C				; Object 26
-		bra.w	loc_E188				; Object 28
-		bra.w	loc_E4FE				; Object 2A
-		bra.w	loc_E5A6				; Object 2C
-		bra.w	loc_E64E				; Object 2E
-		bra.w	loc_E6F6				; Object 30
-		bra.w	loc_E79E				; Object 32
-		bra.w	loc_E846				; Object 34
-		bra.w	loc_E8EE				; Object 36
-		bra.w	loc_E996				; Object 38
-		bra.w	loc_E356				; Object 3A
-		bra.w	loc_E45A				; Object 3C
-		bra.w	locret_E4FA				; Object 3E
-		bra.w	locret_E4FC				; Object 40
+		bra.w	Obj_RedSpring_Right		; Object 00 - Red Spring Right
+		bra.w	Obj_RedSpring_Left		; Object 04 - Red Spring Left
+		bra.w	Obj_RedSpring_Up		; Object 08 - Red Spring Up
+		bra.w	Obj_RedSpring_Down		; Object 0C - Red Spring Down
+		bra.w	locret_EBAC				; Object 10 - Nothing
+		bra.w	Obj_DiagRedSprng_RU		; Object 14 - Diagonal Red Spring Right Up
+		bra.w	Obj_DiagRedSprng_LU		; Object 18 - Diagonal Red Spring Left Up
+		bra.w	Obj_DiagRedSprng_RD		; Object 1C - Diagonal Red Spring Right Down
+		bra.w	Obj_DiagRedSprng_LD		; Object 20 - Diagonal Red Spring Left Up
+		bra.w	locret_E2BC				; Object 24 - Nothing
+		bra.w	Obj_LostRings			; Object 28 - Lost Rings
+		bra.w	locret_E352				; Object 2C - Nothing
+		bra.w	locret_E354				; Object 30 - Nothing
+		bra.w	Obj_YelSpring_Right		; Object 34 - Yellow Spring Right
+		bra.w	Obj_YelSpring_Left		; Object 38 - Yellow Spring Left
+		bra.w	Obj_YelSpring_Up		; Object 3C - Yellow Spring Up
+		bra.w	Obj_YelSpring_Down		; Object 40 - Yellow Spring Down
+		bra.w	Obj_DiagYelSprng_RU		; Object 44 - Diagonal Yellow Spring Right Up
+		bra.w	Obj_DiagYelSprng_LU		; Object 48 - Diagonal Yellow Spring Left Up
+		bra.w	Obj_DiagYelSprng_RD		; Object 4C - Diagonal Yellow Spring Right Down
+		bra.w	Obj_DiagYelSprng_LD		; Object 50 - Diagonal Yellow Spring Left Up
+		bra.w	Obj_SpikesUp			; Object 54 - Spikes Up
+		bra.w	Obj_SpikesDown			; Object 58 - Spikes Down
+		bra.w	Obj_SpikesRight			; Object 5C - Spikes Right
+		bra.w	Obj_SpikesLeft			; Object 60 - Spikes Left
+		bra.w	Obj_DiagSpik_RU			; Object 64 - Diagonal Springs Right Up
+		bra.w	Obj_DiagSpik_LU			; Object 68 - Diagonal Springs Left Up
+		bra.w	Obj_DiagSpik_RD			; Object 6C - Diagonal Springs Right Down
+		bra.w	Obj_DiagSpik_LD			; Object 70 - Diagonal Springs Left Down
+		bra.w	loc_E356				; Object 74 - some sort of path swapper
+		bra.w	loc_E45A				; Object 78 - some sort of path swapper
+		bra.w	locret_E4FA				; Object 7C - Nothing
+		bra.w	locret_E4FC				; Object 80 - Nothing
 ; ---------------------------------------------------------------------------
 ; ===========================================================================
 ; ---------------------------------------------------------------------------
 ; Object 00 - Red Springs (Facing right)
 ; ---------------------------------------------------------------------------
 
-Object00:
+Obj_RedSpring_Right:
 		moveq	#$07,d0
 		bclr	d0,$28(a6)
 		beq.s	Obj00_SonicChk
@@ -15288,7 +15288,7 @@ Obj00_SpriteOK:
 ; ===========================================================================
 ; ---------------------------------------------------------------------------
 
-loc_D394:				; CODE XREF: ROM:0000D228j
+Obj_RedSpring_Left:				; CODE XREF: ROM:0000D228j
 		moveq	#7,d0
 		bclr	d0,$28(a6)
 		beq.s	loc_D3C2
@@ -15373,7 +15373,7 @@ locret_D482:
 		rts
 ; ---------------------------------------------------------------------------
 
-loc_D484:				; CODE XREF: ROM:0000D22Cj
+Obj_RedSpring_Up:				; CODE XREF: ROM:0000D22Cj
 		moveq	#7,d0
 		bclr	d0,$28(a6)
 		beq.s	loc_D4B2
@@ -15459,7 +15459,7 @@ locret_D572:				; CODE XREF: ROM:0000D56Cj
 		rts
 ; ---------------------------------------------------------------------------
 
-loc_D574:				; CODE XREF: ROM:0000D230j
+Obj_RedSpring_Down:				; CODE XREF: ROM:0000D230j
 		moveq	#7,d0
 		bclr	d0,$28(a6)
 		beq.s	loc_D5A2
@@ -15542,7 +15542,7 @@ locret_D65E:				; CODE XREF: ROM:0000D658j
 		rts
 ; ---------------------------------------------------------------------------
 
-loc_D660:				; CODE XREF: ROM:0000D238j
+Obj_DiagRedSprng_RU:				; CODE XREF: ROM:0000D238j
 		moveq	#7,d0
 		bclr	d0,$28(a6)
 		beq.s	loc_D68E
@@ -15636,7 +15636,7 @@ locret_D76E:				; CODE XREF: ROM:0000D768j
 		rts
 ; ---------------------------------------------------------------------------
 
-loc_D770:				; CODE XREF: ROM:0000D23Cj
+Obj_DiagRedSprng_LU:				; CODE XREF: ROM:0000D23Cj
 		moveq	#7,d0
 		bclr	d0,$28(a6)
 		beq.s	loc_D79E
@@ -15732,7 +15732,7 @@ locret_D882:				; CODE XREF: ROM:0000D87Cj
 		rts
 ; ---------------------------------------------------------------------------
 
-loc_D884:				; CODE XREF: ROM:0000D240j
+Obj_DiagRedSprng_RD:				; CODE XREF: ROM:0000D240j
 		moveq	#7,d0
 		bclr	d0,$28(a6)
 		beq.s	loc_D8B2
@@ -15824,7 +15824,7 @@ locret_D98E:				; CODE XREF: ROM:0000D988j
 		rts
 ; ---------------------------------------------------------------------------
 
-loc_D990:				; CODE XREF: ROM:0000D244j
+Obj_DiagRedSprng_LD:				; CODE XREF: ROM:0000D244j
 		moveq	#7,d0
 		bclr	d0,$28(a6)
 		beq.s	loc_D9BE
@@ -15918,7 +15918,7 @@ locret_DA9E:				; CODE XREF: ROM:0000DA98j
 		rts
 ; ---------------------------------------------------------------------------
 
-loc_DAA0:				; CODE XREF: ROM:0000D258j
+Obj_YelSpring_Right:				; CODE XREF: ROM:0000D258j
 		moveq	#7,d0
 		bclr	d0,$28(a6)
 		beq.s	loc_DACE
@@ -16001,7 +16001,7 @@ locret_DB8A:				; CODE XREF: ROM:0000DB84j
 ; ---------------------------------------------------------------------------
 ; Object coding for Spring
 
-loc_DB8C:
+Obj_YelSpring_Left:
 		moveq	#7,d0					; prepare bits 0000 0111
 		bclr	d0,$28(a6)				; clear those bits
 		beq.s	loc_DBBA				; if any of those were set, branch
@@ -16085,7 +16085,7 @@ locret_DC7A:				; CODE XREF: ROM:0000DC74j
 		rts
 ; ---------------------------------------------------------------------------
 
-loc_DC7C:				; CODE XREF: ROM:0000D260j
+Obj_YelSpring_Up:				; CODE XREF: ROM:0000D260j
 		moveq	#7,d0
 		bclr	d0,$28(a6)
 		beq.s	loc_DCAA
@@ -16169,7 +16169,7 @@ locret_DD6A:				; CODE XREF: ROM:0000DD64j
 		rts
 ; ---------------------------------------------------------------------------
 
-loc_DD6C:				; CODE XREF: ROM:0000D264j
+Obj_YelSpring_Down:				; CODE XREF: ROM:0000D264j
 		moveq	#7,d0
 		bclr	d0,$28(a6)
 		beq.s	loc_DD9A
@@ -16251,7 +16251,7 @@ locret_DE56:				; CODE XREF: ROM:0000DE50j
 		rts
 ; ---------------------------------------------------------------------------
 
-loc_DE58:				; CODE XREF: ROM:0000D268j
+Obj_DiagYelSprng_RU:				; CODE XREF: ROM:0000D268j
 		moveq	#7,d0
 		bclr	d0,$28(a6)
 		beq.s	loc_DE86
@@ -16345,7 +16345,7 @@ locret_DF66:				; CODE XREF: ROM:0000DF60j
 		rts
 ; ---------------------------------------------------------------------------
 
-loc_DF68:				; CODE XREF: ROM:0000D26Cj
+Obj_DiagYelSprng_LU:				; CODE XREF: ROM:0000D26Cj
 		moveq	#7,d0
 		bclr	d0,$28(a6)
 		beq.s	loc_DF96
@@ -16441,7 +16441,7 @@ locret_E07A:				; CODE XREF: ROM:0000E074j
 		rts
 ; ---------------------------------------------------------------------------
 
-loc_E07C:				; CODE XREF: ROM:0000D270j
+Obj_DiagYelSprng_RD:				; CODE XREF: ROM:0000D270j
 		moveq	#7,d0
 		bclr	d0,$28(a6)
 		beq.s	loc_E0AA
@@ -16533,7 +16533,7 @@ locret_E186:				; CODE XREF: ROM:0000E180j
 		rts
 ; ---------------------------------------------------------------------------
 
-loc_E188:				; CODE XREF: ROM:0000D274j
+Obj_DiagYelSprng_LD:				; CODE XREF: ROM:0000D274j
 		moveq	#7,d0
 		bclr	d0,$28(a6)
 		beq.s	loc_E1B6
@@ -16652,7 +16652,7 @@ locret_E2BC:				; CODE XREF: ROM:0000D248j
 		rts
 ; ---------------------------------------------------------------------------
 
-loc_E2BE:				; CODE XREF: ROM:0000D24Cj
+Obj_LostRings:				; CODE XREF: ROM:0000D24Cj
 		subq.w	#1,$26(a6)
 		bne.s	loc_E2C8
 		jmp	sub_1980
@@ -16965,7 +16965,7 @@ locret_E4FC:				; CODE XREF: ROM:0000D2A4j
 		rts
 ; ---------------------------------------------------------------------------
 
-loc_E4FE:				; CODE XREF: ROM:0000D278j
+Obj_SpikesUp:				; CODE XREF: ROM:0000D278j
 		moveq	#7,d0
 		bclr	d0,$28(a6)
 		beq.s	loc_E526
@@ -17030,7 +17030,7 @@ locret_E5A4:				; CODE XREF: ROM:0000E59Ej
 		rts
 ; ---------------------------------------------------------------------------
 
-loc_E5A6:				; CODE XREF: ROM:0000D27Cj
+Obj_SpikesDown:				; CODE XREF: ROM:0000D27Cj
 		moveq	#7,d0
 		bclr	d0,$28(a6)
 		beq.s	loc_E5CE
@@ -17095,7 +17095,7 @@ locret_E64C:				; CODE XREF: ROM:0000E646j
 		rts
 ; ---------------------------------------------------------------------------
 
-loc_E64E:				; CODE XREF: ROM:0000D280j
+Obj_SpikesRight:				; CODE XREF: ROM:0000D280j
 		moveq	#7,d0
 		bclr	d0,$28(a6)
 		beq.s	loc_E676
@@ -17221,7 +17221,7 @@ GoalRout6:				; CODE XREF: ROM:0000E6EEj
 		rts
 ; ---------------------------------------------------------------------------
 
-loc_E6F6:				; CODE XREF: ROM:0000D284j
+Obj_SpikesLeft:				; CODE XREF: ROM:0000D284j
 		moveq	#7,d0
 		bclr	d0,$28(a6)
 		beq.s	loc_E71E
@@ -17286,7 +17286,7 @@ locret_E79C:				; CODE XREF: ROM:0000E796j
 		rts
 ; ---------------------------------------------------------------------------
 
-loc_E79E:				; CODE XREF: ROM:0000D288j
+Obj_DiagSpik_RU:				; CODE XREF: ROM:0000D288j
 		moveq	#7,d0
 		bclr	d0,$28(a6)
 		beq.s	loc_E7C6
@@ -17351,7 +17351,7 @@ locret_E844:				; CODE XREF: ROM:0000E83Ej
 		rts
 ; ---------------------------------------------------------------------------
 
-loc_E846:				; CODE XREF: ROM:0000D28Cj
+Obj_DiagSpik_LU:				; CODE XREF: ROM:0000D28Cj
 		moveq	#7,d0
 		bclr	d0,$28(a6)
 		beq.s	loc_E86E
@@ -17416,7 +17416,7 @@ locret_E8EC:				; CODE XREF: ROM:0000E8E6j
 		rts
 ; ---------------------------------------------------------------------------
 
-loc_E8EE:				; CODE XREF: ROM:0000D290j
+Obj_DiagSpik_RD:				; CODE XREF: ROM:0000D290j
 		moveq	#7,d0
 		bclr	d0,$28(a6)
 		beq.s	loc_E916
@@ -17481,7 +17481,7 @@ locret_E994:				; CODE XREF: ROM:0000E98Ej
 		rts
 ; ---------------------------------------------------------------------------
 
-loc_E996:				; CODE XREF: ROM:0000D294j
+Obj_DiagSpik_LD:				; CODE XREF: ROM:0000D294j
 		moveq	#7,d0
 		bclr	d0,$28(a6)
 		beq.s	loc_E9BE
@@ -20210,69 +20210,34 @@ unk_42364:		dc.b $FF,$A0,$FF,$AC,$FF,$B8
 ; AAAA = changes exactly what object is being placed (This cannot be an odd value or the engine will crash)
 ;
 SpringRed_Right		=	$00
-SpringRed_Up		=	$02
 SpringRed_Left		=	$04
-; AAAA -> 06	=	Blank
-SpringRed_Up_Dupe	=	$08	;	identical to 02
-; AAAA -> 0A	=	Blank
+SpringRed_Up		=	$08
 SpringRed_Down		=	$0C
-; AAAA -> 0E	=	Blank
-;
-; AAAA -> 10	=	Blank
-DiagRedSprngLU		=	$12
+;					=	$10
 DiagRedSprngRU		=	$14
-; AAAA -> 16	=	(Crashes)
-DiagRedSprngLU_2	=	$18
-; AAAA -> 1A	=	(Crashes)
+DiagRedSprngLU		=	$18
 DiagRedSprngRD		=	$1C
-; AAAA -> 1E	=	(Crashes)
-;
 DiagRedSprngLD		=	$20
-; AAAA -> 22	=	(Crashes)
-; AAAA -> 24	=	Blank
-; AAAA -> 26	=	(Crashes)
+;					=	$24
 LostRing			=	$28
-; AAAA -> 2A	=	(Crashes)
-; AAAA -> 2C	=	Blank
-; AAAA -> 2E	=	Blank
-;
-; AAAA -> 30	=	Blank
-; AAAA -> 32	=	(Crashes)
+;					=	$2C
+;					=	$30
 SpringYel_Right		=	$34
-DiagYelSprngRU		=	$36
 SpringYel_Left		=	$38
-DiagYelSprngRU_2	=	$3A
 SpringYel_Up		=	$3C
-DiagYelSprngRU_3	=	$3E
-;
 SpringYel_Down		=	$40
-DiagYelSprngRU_4	=	$42
-DiagYelSprngRU_5	=	$44
-; AAAA -> 46	=	(Crashes)
+DiagYelSprngRU		=	$44
 DiagYelSprngLU		=	$48
-; AAAA -> 4A	=	(Crashes)
 DiagYelSprngRD		=	$4C
-; AAAA -> 4E	=	(Crashes)
-;
 DiagYelSprngLD		=	$50
-Spikes_Up			=	$52
-Spikes_Up_2			=	$54
-Spikes_DownBuggy	=	$56
+Spikes_Up			=	$54
 Spikes_Down			=	$58
-; AAAA -> 5A	=	(Crashes)
 Spikes_Right		=	$5C
-; AAAA -> 5E	=	(Crashes)
-;
 Spikes_Left			=	$60
-; AAAA -> 62	=	(Crashes)
 DiagSpik_RU			=	$64
-DiagSpik_LU			=	$66
-DiagSpik_LU_2		=	$68
-DiagSpik_LD			=	$6A
+DiagSpik_LU			=	$68
 DiagSpik_RD			=	$6C
-; AAAA -> 6E	=	(Crashes)
-;
-DiagSpik_LD_2		=	$70
+DiagSpik_LD			=	$70
 ;
 ; AAAA -> 72 or Higher=	These are either pathswappers, blank, invalid, gliches of previous objects, lag the engine, or crash (as far as I've seen)
 ;			note: some pathswappers crash on TTZ (Not sure why though)
@@ -20299,26 +20264,26 @@ Objpos_TTZ:
 	ObjLayout	$0488,	$0850,	SpringRed_Right
 	ObjLayout	$0513,	$070D,	DiagRedSprngRU
 	ObjLayout	$0513,	$060D,	DiagRedSprngRU
-	ObjLayout	$07CD,	$076D,	DiagRedSprngLU_2
-	ObjLayout	$07CD,	$068D,	DiagRedSprngLU_2
-	ObjLayout	$07CD,	$058D,	DiagRedSprngLU_2
-	ObjLayout	$0610,	$09F0,	Spikes_Up_2
-	ObjLayout	$0450,	$0810,	Spikes_Up_2
-	ObjLayout	$0190,	$0170,	Spikes_Up_2
-	ObjLayout	$0670,	$0170,	Spikes_Up_2
-	ObjLayout	$07D0,	$01F0,	Spikes_Up_2
+	ObjLayout	$07CD,	$076D,	DiagRedSprngLU
+	ObjLayout	$07CD,	$068D,	DiagRedSprngLU
+	ObjLayout	$07CD,	$058D,	DiagRedSprngLU
+	ObjLayout	$0610,	$09F0,	Spikes_Up
+	ObjLayout	$0450,	$0810,	Spikes_Up
+	ObjLayout	$0190,	$0170,	Spikes_Up
+	ObjLayout	$0670,	$0170,	Spikes_Up
+	ObjLayout	$07D0,	$01F0,	Spikes_Up
 	ObjLayout	$0330,	$0770,	Spikes_Down
 	ObjLayout	$0350,	$0770,	Spikes_Down
 	ObjLayout	$0370,	$0770,	Spikes_Down
 	ObjLayout	$0038,	$0280,	DiagSpik_RU
-	ObjLayout	$07B0,	$0C98,	SpringRed_Up_Dupe
+	ObjLayout	$07B0,	$0C98,	SpringRed_Up
 	ObjLayout	$0030,	$0B70,	DiagRedSprngRU
-	ObjLayout	$0370,	$0738,	SpringRed_Up_Dupe
-	ObjLayout	$07D0,	$0C98,	SpringRed_Up_Dupe
-	ObjLayout	$0790,	$0C98,	SpringRed_Up_Dupe
+	ObjLayout	$0370,	$0738,	SpringRed_Up
+	ObjLayout	$07D0,	$0C98,	SpringRed_Up
+	ObjLayout	$0790,	$0C98,	SpringRed_Up
 	ObjLayout	$00B0,	$0B78,	SpringYel_Up
 	ObjLayout	$0034,	$06ED,	DiagRedSprngRU
-	ObjLayout	$0400,	$0060,	10
+	ObjLayout	$0400,	$0060,	$2C
 	ObjLayout_End
 	even
 ; ---------------------------------------------------------------------------
