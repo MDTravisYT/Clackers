@@ -8996,7 +8996,7 @@ UZ02_FG_StartLocCam:					; Offset: 00009CB0
 		dc.w	$0015					; X starting location
 		dc.w	$01E0					; Y starting location
 		dc.b	$40					; Level Size - MDT
-		dc.b	$20					; Level Size - MDT
+		dc.b	$10					; Level Size - MDT
 		dc.b	$10
 		dc.b	$20
 		dc.w	($0800/$20)				; V-Ram address to write the level art to
@@ -9006,13 +9006,13 @@ UZ02_FG_StartLocCam:					; Offset: 00009CB0
 		dc.w	$0000
 
 UZ02_ArtLocs:						; Offset: 00009CA8
-		dc.l	ARTNEM_IIZ8x8_FG
+		dc.l	ARTNEM_FLRA8x8_FG
 		dc.l	ARTNEM_IIZ8x8_BG
 		
 UZ02_MapFGLocs:						; Offset: 00009CC2
 		dc.l	MAPENI_FLRA16x16_FG
 		dc.l	MAPENI_FLRA128x128_FG
-		dc.l	MAPENI_IIZLayout_FG
+		dc.l	MAPENI_FLRALayout_FG
 		dc.l	COL_IIZPrimary
 		dc.l	COL_IIZSecondary
 		
@@ -20739,4 +20739,12 @@ MAPENI_FLRA128x128_FG:
 ; ---------------------------------------------------------------------------
 MAPENI_FLRA16x16_FG:
 	incbin  EnigmaComp\MapeniFLRA16x16FG.bin		; 128x128 chunks for TTZ FG
+	even
+; ---------------------------------------------------------------------------
+MAPENI_FLRALayout_FG:
+	incbin  EnigmaComp\MapeniFLRALayoutFG.bin		; Layout for TTZ FG
+	even
+; ---------------------------------------------------------------------------
+ARTNEM_FLRA8x8_FG:
+	incbin	 NemesisComp\ArtnemFLRA8x8FG.bin			; 8x8 tiles for TTZ FG
 	even
