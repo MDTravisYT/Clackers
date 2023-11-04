@@ -7142,7 +7142,7 @@ Levels:							; Offset: 00008896
 		movem.l	(sp)+,a0				; reload a0 data from stack
 		lea	Levels_VDPRegData(pc),a0		; load VDP register setup values
 		jsr	StoreVDPRegisters			; save VDP register data to ram spaces
-		move.b	#$81,d0					; load BGM 81
+		move.b	#$89,d0					; load BGM 81
 		cmpi.w	#0,($FFFFD834).w				; is level SSZ?
 		beq.s	TT_PlayMusic				; if yes, branch
 		cmpi.w	#1,($FFFFD834).w				; is level TTZ?
@@ -8949,6 +8949,73 @@ U2Z_Act05:						; Offset: 00009BF0
 ; ---------------------------------------------------------------------------
 
 U3Z_Act01:						; Offset: 00009BF2
+		move.w	($FFFFD82C).w,d0			; load level event counter
+		jmp	UZ02_Events(pc,d0.w)			; jump to correct event routine
+		
+UZ02_Events:
+		bra.w	UZ02_StartUp				; 00
+		bra.w	TTZ01_StartLevel			; 04
+		bra.w	UZ01_RunLevel				; 08
+		
+UZ02_StartUp:
+		move	#$2700,sr				; set the status register (disable interrupts)
+		lea	($FFFFC9DE).w,a1			; load address of positions and sizes ram (FG)
+		lea	PAL_IsolatedIsland(pc),a0	; load TTZ palette
+		lea	($FFFFD424).w,a2			; load palette buffer address to a2
+		bsr.w	LoadHalfPalette				; dump the palette to the buffer
+		lea	UZ02_FG_StartLocCam(pc),a0		; load level FG setup data address to a0
+		lea	($FFFFD816).w,a2			; load address of V-Ram plane A storage
+		bsr.w	LoadLevelPositionAndSize		; save the positions and sizes of the level
+		movea.l	a1,a0					; copy address of positions and sizes ram to a0
+		lea	UZ02_ArtLocs(pc),a2			; load address of level compressed art locations
+		bsr.w	DMA_NemLevelArtLoad			; decompress and DMA transfer art
+		lea	($FFFFC9DE).w,a0			; load address of positions and sizes ram
+		move.l	#$00FF0D08,$28(a0)			; set ram address to decompress the map data to
+		lea	UZ02_MapFGLocs(pc),a2			; load level map/collision data address to a2
+		bsr.w	EniLevelMapLoad				; decompress and dump mappings
+		move.l	a1,($FFFFCA46).w			; ??? stores the end address of the FG layout, but for what reason?
+		bsr.w	LoadCollisionPaths			; load collision data
+		lea	TTZ_BG_StartLocCam(pc),a0		; load level BG setup data address to a0
+		lea	($FFFFCA1E).w,a1			; load address of positions and sizes ram (BG)
+		move.w	#$104,$1E(a1)
+		lea	($FFFFD818).w,a2			; load address of V-Ram plane B storage
+	;	bsr.w	LoadLevelPositionAndSize		; save the positions and sizes of the level
+	;	movea.l	a1,a0					; copy address of positions and sizes ram to a0
+	;	lea	TTZ_MapBGLocs(pc),a2			; load level map/collision data address to a2
+	;	bsr.w	EniLevelMapLoad				; decompress and dump mappings
+	;	move.l	a1,($FFFFFBC0).w			; ??? stores the end address of the BG layout, but for what reason?
+	;	movea.l	a0,a1					; copy address of positions and sizes ram back to a0
+	;	lea	($00FF0B84).l,a3			; load BG horizontal map plane buffer address
+	;	lea	($00FF0C86).l,a4			; load BG vertical map plane buffer address
+		bsr.w	DrawScreen_Full				; draw the entire screen/planes (For BG only)
+		move	#$2300,sr				; set the status register (enable interrupts)
+		addq.w	#$04,($FFFFD82C).w			; increase level event counter
+		rts						; return
+		
+UZ02_FG_StartLocCam:					; Offset: 00009CB0
+		dc.w	$0015					; X starting location
+		dc.w	$01E0					; Y starting location
+		dc.b	$40					; Level Size - MDT
+		dc.b	$20					; Level Size - MDT
+		dc.b	$10
+		dc.b	$20
+		dc.w	($0800/$20)				; V-Ram address to write the level art to
+		dc.w	$1EC0					; Maximum X display area
+		dc.w	$0000
+		dc.w	$2000					; Maximum Y display area
+		dc.w	$0000
+
+UZ02_ArtLocs:						; Offset: 00009CA8
+		dc.l	ARTNEM_IIZ8x8_FG
+		dc.l	ARTNEM_IIZ8x8_BG
+		
+UZ02_MapFGLocs:						; Offset: 00009CC2
+		dc.l	MAPENI_FLRA16x16_FG
+		dc.l	MAPENI_FLRA128x128_FG
+		dc.l	MAPENI_IIZLayout_FG
+		dc.l	COL_IIZPrimary
+		dc.l	COL_IIZSecondary
+		
 		rts
 
 ; ===========================================================================
@@ -20626,79 +20693,7 @@ Map_TailsFields:
 	include	"PLCMAPANI\MAP_TailsFields.asm"
 ; ---------------------------------------------------------------------------
 ; ===========================================================================
-; ---------------------------------------------------------------------------
-; Unknown Data
-; ---------------------------------------------------------------------------
-; Data Location (00068FD6 - 0006AC5F)
-; Striped out
-; UnkData_00068FD6:
-		incbin	"UnknownCodes\UnknownData_00068FD6.bin"
 
-; ===========================================================================
-; ---------------------------------------------------------------------------
-; Align to $0006C000, Unknown Data
-; ---------------------------------------------------------------------------
-AU01:		dcb.b ($0006C000+AlignValue)-AU01,$FF		; Aligned
-; ---------------------------------------------------------------------------
-; Data Location (0006C000 - 0006CE07)
-; Striped out
-; UnkData_0006C000:
-		incbin	"UnknownCodes\UnknownData_0006C000.bin"
-
-; ===========================================================================
-; ---------------------------------------------------------------------------
-; Unknown Data
-; ---------------------------------------------------------------------------
-; Data Location (0006CE08 - 0006D1FF)
-; Striped out
-; UnkData_0006CE08:
-		incbin	"UnknownCodes\UnknownData_0006CE08.bin"
-
-; ===========================================================================
-; ---------------------------------------------------------------------------
-; Align to $00070000, Unknown Data
-; ---------------------------------------------------------------------------
-AU02:		dcb.b ($00070000+AlignValue)-AU02,$FF		; Aligned
-; ---------------------------------------------------------------------------
-; Data Location (00070000 - 00071813)
-; Striped out
-; UnkData_00070000:
-		incbin	"UnknownCodes\UnknownData_00070000.bin"
-
-; ===========================================================================
-; ---------------------------------------------------------------------------
-; Align to $00072000, Unknown Data
-; ---------------------------------------------------------------------------
-AU03:		dcb.b ($00072000+AlignValue)-AU03,$FF		; Aligned
-; ---------------------------------------------------------------------------
-; Data Location (00072000 - 00072763)
-; Striped out
-; UnkData_00072000:
-		incbin	"UnknownCodes\UnknownData_00072000.bin"
-
-; ===========================================================================
-; ---------------------------------------------------------------------------
-; Align to $00074000, Unknown Data
-; ---------------------------------------------------------------------------
-AU04:		dcb.b ($00074000+AlignValue)-AU04,$FF		; Aligned
-; ---------------------------------------------------------------------------
-; Data Location (00074000 - 0007562F)
-; Striped out
-; UnkData_00074000:
-		incbin	"UnknownCodes\UnknownData_00074000.bin"
-
-; ===========================================================================
-; ---------------------------------------------------------------------------
-; Align to $00076000, Unknown Data
-; ---------------------------------------------------------------------------
-AU05:		dcb.b ($00076000+AlignValue)-AU05,$FF		; Aligned
-; ---------------------------------------------------------------------------
-; Data Location (00076000 - 00076703)
-; Striped out
-; UnkData_00076000:
-		incbin	"UnknownCodes\UnknownData_00076000.bin"
-
-; ===========================================================================
 ; ---------------------------------------------------------------------------
 ; Uncompressed Art - Sonic
 ; ---------------------------------------------------------------------------
@@ -20719,46 +20714,7 @@ ARTUNC_SonicField:
 		incbin  Uncompressed\ArtuncSonicField.bin
 		even
 
-; ===========================================================================
-; ---------------------------------------------------------------------------
-; Unknown Data
-; ---------------------------------------------------------------------------
-; Data Location (00093B20 - 0009562F)
-; Striped out
-; UnkData_00093B20:
-		incbin	"UnknownCodes\UnknownData_00093B20.bin"
 
-; ===========================================================================
-; ---------------------------------------------------------------------------
-; Aligned to $00096000, Unknown Data
-; ---------------------------------------------------------------------------
-AU07:		dcb.b ($00096000+AlignValue)-AU07,$FF		; Aligned
-; ---------------------------------------------------------------------------
-; Data Location (00096000 - 00096703)
-; Striped out
-; UnkData_00096000:
-		incbin	"UnknownCodes\UnknownData_00096000.bin"
-
-; ===========================================================================
-; ---------------------------------------------------------------------------
-; Aligned to $00098000, Uncompressed Art - Unknown Unused Small Hud Patterns
-; ---------------------------------------------------------------------------
-AU08:		dcb.b ($00098000+AlignValue)-AU08,$FF		; Aligned
-; ---------------------------------------------------------------------------
-ARTUNC_UnknownHud:
-		incbin	"Uncompressed\Artunc_UnknownHud.bin"
-		even
-
-; ===========================================================================
-; ---------------------------------------------------------------------------
-; Unknown Data
-; ---------------------------------------------------------------------------
-; Data Location (00098740 - 0009FFFF)
-; Striped out
-; UnkData_00098740:
-		incbin	"UnknownCodes\UnknownData_00098740.bin"
-
-; ===========================================================================
 ; ---------------------------------------------------------------------------
 ; Aligned to $000A0000, Uncompressed Art - Tails
 ; ---------------------------------------------------------------------------
@@ -20767,18 +20723,7 @@ AU08_B:		dcb.b ($000A0000+AlignValue)-AU08_B,$FF		; Aligned
 ARTUNC_Tails:	incbin	Uncompressed\ArtuncTails.bin
 		even
 
-; ===========================================================================
-; ---------------------------------------------------------------------------
-; Align to $000AC000, Unknown Data
-; ---------------------------------------------------------------------------
-AU09:		dcb.b ($000AC000+AlignValue)-AU09,$FF		; Aligned
-; ---------------------------------------------------------------------------
-; Data Location (000AC000 - 000AD1F9)
-; Striped out
-; UnkData_000AC000:
-		incbin	"UnknownCodes\UnknownData_000AC000.bin"
 
-; ===========================================================================
 ; ---------------------------------------------------------------------------
 ; Aligned to $000B0000, Uncompressed Art - Tails Field
 ; ---------------------------------------------------------------------------
@@ -20787,165 +20732,11 @@ AU0A:		dcb.b ($000B0000+AlignValue)-AU0A,$FF		; Aligned
 ARTUNC_TailsField:
 		incbin  Uncompressed\ArtuncTailsField.bin
 		even
-
-; ===========================================================================
 ; ---------------------------------------------------------------------------
-; Unknown Data
+MAPENI_FLRA128x128_FG:
+	incbin  EnigmaComp\MapeniFLRA128x128FG.bin		; 128x128 chunks for TTZ FG
+	even
 ; ---------------------------------------------------------------------------
-; Data Location (000B3820 - 000B562F)
-; Striped out
-; UnkData_000B3820:
-		incbin	"UnknownCodes\UnknownData_000B3820.bin"
-
-; ===========================================================================
-; ---------------------------------------------------------------------------
-; Align to $000B6000, Unknown Data
-; ---------------------------------------------------------------------------
-AU0B:		dcb.b ($000B6000+AlignValue)-AU0B,$FF		; Aligned
-; ---------------------------------------------------------------------------
-; Data Location (000B6000 - 000B6703)
-; Striped out
-; UnkData_000B6000:
-		incbin	"UnknownCodes\UnknownData_000B6000.bin"
-
-; ===========================================================================
-; ---------------------------------------------------------------------------
-; Align to $000C0000, Unknown Data
-; ---------------------------------------------------------------------------
-AU0C:		dcb.b ($000C0000+AlignValue)-AU0C,$FF		; Aligned
-; ---------------------------------------------------------------------------
-; Data Location (000C0000 - 000CA887)
-; Striped out
-; UnkData_000C0000:
-		incbin	"UnknownCodes\UnknownData_000C0000.bin"
-
-; ===========================================================================
-; ---------------------------------------------------------------------------
-; Align to $000CC000, Unknown Data
-; ---------------------------------------------------------------------------
-AU0D:		dcb.b ($000CC000+AlignValue)-AU0D,$FF		; Aligned
-; ---------------------------------------------------------------------------
-; Data Location (000CC000 - 000D58BF)
-; Striped out
-; UnkData_000CC000:
-		incbin	"UnknownCodes\UnknownData_000CC000.bin"
-
-; ===========================================================================
-; ---------------------------------------------------------------------------
-; Align to $000D6000, Unknown Data
-; ---------------------------------------------------------------------------
-AU0E:		dcb.b ($000D6000+AlignValue)-AU0E,$FF		; Aligned
-; ---------------------------------------------------------------------------
-; Data Location (000D6000 - 000D6703)
-; Striped out
-; UnkData_000D6000:
-		incbin	"UnknownCodes\UnknownData_000D6000.bin"
-
-; ===========================================================================
-; ---------------------------------------------------------------------------
-; Align to $000D8000, Unknown Data
-; ---------------------------------------------------------------------------
-AU0F:		dcb.b ($000D8000+AlignValue)-AU0F,$FF		; Aligned
-; ---------------------------------------------------------------------------
-; Data Location (000D8000 - 000DA3FF)
-; Striped out
-; UnkData_000D8000:
-		incbin	"UnknownCodes\UnknownData_000D8000.bin"
-
-; ===========================================================================
-; ---------------------------------------------------------------------------
-; Align to $000E0000, Unknown Data
-; ---------------------------------------------------------------------------
-AU10:		dcb.b ($000E0000+AlignValue)-AU10,$FF		; Aligned
-; ---------------------------------------------------------------------------
-; Data Location (000E0000 - 000E3067)
-; Striped out
-; UnkData_000E0000:
-		incbin	"UnknownCodes\UnknownData_000E0000.bin"
-
-; ===========================================================================
-; ---------------------------------------------------------------------------
-; Align to $000E4000, Unknown Data
-; ---------------------------------------------------------------------------
-AU11:		dcb.b ($000E4000+AlignValue)-AU11,$FF		; Aligned
-; ---------------------------------------------------------------------------
-; Data Location (000E4000 - 000E4EC7)
-; Striped out
-; UnkData_000E4000:
-		incbin	"UnknownCodes\UnknownData_000E4000.bin"
-
-; ===========================================================================
-; ---------------------------------------------------------------------------
-; Align to $000E6000, Unknown Data
-; ---------------------------------------------------------------------------
-AU12:		dcb.b ($000E6000+AlignValue)-AU12,$FF		; Aligned
-; ---------------------------------------------------------------------------
-; Data Location (000E6000 - 000EAC5F)
-; Striped out
-; UnkData_000E6000:
-		incbin	"UnknownCodes\UnknownData_000E6000.bin"
-
-; ===========================================================================
-; ---------------------------------------------------------------------------
-; Align to $000EC000, Unknown Data
-; ---------------------------------------------------------------------------
-AU13:		dcb.b ($000EC000+AlignValue)-AU13,$FF		; Aligned
-; ---------------------------------------------------------------------------
-; Data Location (000EC000 - 000ED1FF)
-; Striped out
-; UnkData_000EC000:
-		incbin	"UnknownCodes\UnknownData_000EC000.bin"
-
-; ===========================================================================
-; ---------------------------------------------------------------------------
-; Align to $000F0000, Unknown Data
-; ---------------------------------------------------------------------------
-AU14:		dcb.b ($000F0000+AlignValue)-AU14,$FF		; Aligned
-; ---------------------------------------------------------------------------
-; Data Location (000F0000 - 000F1813)
-; Striped out
-; UnkData_000F0000:
-		incbin	"UnknownCodes\UnknownData_000F0000.bin"
-
-; ===========================================================================
-; ---------------------------------------------------------------------------
-; Align to $000F2000, Unknown Data
-; ---------------------------------------------------------------------------
-AU15:		dcb.b ($000F2000+AlignValue)-AU15,$FF		; Aligned
-; ---------------------------------------------------------------------------
-; Data Location (000F2000 - 000F2763)
-; Striped out
-; UnkData_000F2000:
-		incbin	"UnknownCodes\UnknownData_000F2000.bin"
-
-; ===========================================================================
-; ---------------------------------------------------------------------------
-; Align to $000F4000, Unknown Data
-; ---------------------------------------------------------------------------
-AU16:		dcb.b ($000F4000+AlignValue)-AU16,$FF		; Aligned
-; ---------------------------------------------------------------------------
-; Data Location (000F4000 - 000F562F)
-; Striped out
-; UnkData_000F4000:
-		incbin	"UnknownCodes\UnknownData_000F4000.bin"
-
-; ===========================================================================
-; ---------------------------------------------------------------------------
-; Align to $000F6000, Unknown Data
-; ---------------------------------------------------------------------------
-AU17:		dcb.b ($000F6000+AlignValue)-AU17,$FF		; Aligned
-; ---------------------------------------------------------------------------
-; Data Location (000F6000 - 000F6703)
-; Striped out
-; UnkData_000F6000:
-		incbin	"UnknownCodes\UnknownData_000F6000.bin"
-
-; ===========================================================================
-; ---------------------------------------------------------------------------
-; Align to $00100000, End Of Rom
-; ---------------------------------------------------------------------------
-ALEND		dcb.b ($00100000+AlignValue)-ALEND,$FF		; Aligned
-RomFinish:
-		END
-
-; ===========================================================================
+MAPENI_FLRA16x16_FG:
+	incbin  EnigmaComp\MapeniFLRA16x16FG.bin		; 128x128 chunks for TTZ FG
+	even
