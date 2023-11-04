@@ -9016,8 +9016,8 @@ UZ02_MapFGLocs:						; Offset: 00009CC2
 		dc.l	MAPENI_FLRA16x16_FG
 		dc.l	MAPENI_FLRA128x128_FG
 		dc.l	MAPENI_FLRALayout_FG
-		dc.l	COL_IIZPrimary
-		dc.l	COL_IIZSecondary
+		dc.l	COL_FLRAPrimary
+		dc.l	COL_FLRASecondary
 		
 PAL_Flora:				; Offset: 00009CF0
 		incbin  Palettes\PalFlora.bin
@@ -20757,4 +20757,12 @@ MAPENI_FLRALayout_FG:
 ; ---------------------------------------------------------------------------
 ARTNEM_FLRA8x8_FG:
 	incbin	 NemesisComp\ArtnemFLRA8x8FG.bin			; 8x8 tiles for TTZ FG
+	even
+; ---------------------------------------------------------------------------
+COL_FLRAPrimary:	
+	incbin	Collision\ColFLRAPrimary.bin			; Primary Collisions for TTZ
+	even
+; ---------------------------------------------------------------------------
+COL_FLRASecondary:
+	incbin	 Collision\ColFLRASecondary.bin			; Secondary Collisions for TTZ
 	even
