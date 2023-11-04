@@ -20251,10 +20251,10 @@ DiagSpik_LD			=	$70
 ;			note: some pathswappers crash on TTZ (Not sure why though)
 ; ---------------------------------------------------------------------------
 ; ===========================================================================
-ObjLayout:	macro	x,	y,	o
+ObjLayout:	macro	x,	y,	o,	s
 		dc.w	x,	y
 		dc.b	$00,	o
-		dc.w	$FFFF
+		dc.w	s
 		endm
 ObjLayout_End:	macro	
 		dc.w	$FFFF
@@ -20267,31 +20267,31 @@ Objpos_SSZ:
 Objpos_TTZ:
 	;dc.w	$0100,$0E00,$0000,$FFFF
 	
-	ObjLayout	$03F0,	$0298,	SpringYel_Up
-	ObjLayout	$0410,	$0298,	SpringYel_Up
-	ObjLayout	$0488,	$0850,	SpringRed_Right
-	ObjLayout	$0513,	$070D,	DiagRedSprngRU
-	ObjLayout	$0513,	$060D,	DiagRedSprngRU
-	ObjLayout	$07CD,	$076D,	DiagRedSprngLU
-	ObjLayout	$07CD,	$068D,	DiagRedSprngLU
-	ObjLayout	$07CD,	$058D,	DiagRedSprngLU
-	ObjLayout	$0610,	$09F0,	Spikes_Up
-	ObjLayout	$0450,	$0810,	Spikes_Up
-	ObjLayout	$0190,	$0170,	Spikes_Up
-	ObjLayout	$0670,	$0170,	Spikes_Up
-	ObjLayout	$07D0,	$01F0,	Spikes_Up
-	ObjLayout	$0330,	$0770,	Spikes_Down
-	ObjLayout	$0350,	$0770,	Spikes_Down
-	ObjLayout	$0370,	$0770,	Spikes_Down
-	ObjLayout	$0038,	$0280,	DiagSpik_RU
-	ObjLayout	$07B0,	$0C98,	SpringRed_Up
-	ObjLayout	$0030,	$0B70,	DiagRedSprngRU
-	ObjLayout	$0370,	$0738,	SpringRed_Up
-	ObjLayout	$07D0,	$0C98,	SpringRed_Up
-	ObjLayout	$0790,	$0C98,	SpringRed_Up
-	ObjLayout	$00B0,	$0B78,	SpringYel_Up
-	ObjLayout	$0034,	$06ED,	DiagRedSprngRU
-	ObjLayout	$0400,	$0060,	Goal
+	ObjLayout	$03F0,	$0298,	SpringYel_Up,    $FFFF
+	ObjLayout	$0410,	$0298,	SpringYel_Up,    $FFFF
+	ObjLayout	$0488,	$0850,	SpringRed_Right, $FFFF
+	ObjLayout	$0513,	$070D,	DiagRedSprngRU,  $FFFF
+	ObjLayout	$0513,	$060D,	DiagRedSprngRU,  $FFFF
+	ObjLayout	$07CD,	$076D,	DiagRedSprngLU,  $FFFF
+	ObjLayout	$07CD,	$068D,	DiagRedSprngLU,  $FFFF
+	ObjLayout	$07CD,	$058D,	DiagRedSprngLU,  $FFFF
+	ObjLayout	$0610,	$09F0,	Spikes_Up,       $FFFF
+	ObjLayout	$0450,	$0810,	Spikes_Up,       $FFFF
+	ObjLayout	$0190,	$0170,	Spikes_Up,       $FFFF
+	ObjLayout	$0670,	$0170,	Spikes_Up,       $FFFF
+	ObjLayout	$07D0,	$01F0,	Spikes_Up,       $FFFF
+	ObjLayout	$0330,	$0770,	Spikes_Down,     $FFFF
+	ObjLayout	$0350,	$0770,	Spikes_Down,     $FFFF
+	ObjLayout	$0370,	$0770,	Spikes_Down,     $FFFF
+	ObjLayout	$0038,	$0280,	DiagSpik_RU,     $FFFF
+	ObjLayout	$07B0,	$0C98,	SpringRed_Up,    $FFFF
+	ObjLayout	$0030,	$0B70,	DiagRedSprngRU,  $FFFF
+	ObjLayout	$0370,	$0738,	SpringRed_Up,    $FFFF
+	ObjLayout	$07D0,	$0C98,	SpringRed_Up,    $FFFF
+	ObjLayout	$0790,	$0C98,	SpringRed_Up,    $FFFF
+	ObjLayout	$00B0,	$0B78,	SpringYel_Up,    $FFFF
+	ObjLayout	$0034,	$06ED,	DiagRedSprngRU,  $FFFF
+	ObjLayout	$0400,	$0060,	Goal,			 $FFFF
 	ObjLayout_End
 	even
 ; ---------------------------------------------------------------------------
