@@ -1,152 +1,174 @@
-GameOver_Header:
+Mus8E_Sonic_Got_Through_Header:
 	smpsHeaderStartSong 3
-	smpsHeaderVoice     GameOver_Voices
+	smpsHeaderVoice     Mus8E_Sonic_Got_Through_Voices
 	smpsHeaderChan      $06, $03
-	smpsHeaderTempo     $01, $04
+	smpsHeaderTempo     $02, $55
 
-	smpsHeaderDAC       GameOver_DAC
-	smpsHeaderFM        GameOver_FM1,	$E8, $0A
-	smpsHeaderFM        GameOver_FM2,	$F4, $0F
-	smpsHeaderFM        GameOver_FM3,	$F4, $0F
-	smpsHeaderFM        GameOver_FM4,	$F4, $0D
-	smpsHeaderFM        GameOver_FM5,	$DC, $16
-	smpsHeaderPSG       GameOver_PSG1,	$D0, $03, $03, $00
-	smpsHeaderPSG       GameOver_PSG2,	$DC, $06, $03, $00
-	smpsHeaderPSG       GameOver_PSG3,	$DC, $00, $00, sTone_03
+	smpsHeaderDAC       Mus8E_Sonic_Got_Through_DAC
+	smpsHeaderFM        Mus8E_Sonic_Got_Through_FM1,	$F4, $0A
+	smpsHeaderFM        Mus8E_Sonic_Got_Through_FM2,	$DC, $0A
+	smpsHeaderFM        Mus8E_Sonic_Got_Through_FM3,	$F4, $15
+	smpsHeaderFM        Mus8E_Sonic_Got_Through_FM4,	$F4, $15
+	smpsHeaderFM        Mus8E_Sonic_Got_Through_FM5,	$F4, $14
+	smpsHeaderPSG       Mus8E_Sonic_Got_Through_PSG1,	$D0, $05, $00, sTone_05
+	smpsHeaderPSG       Mus8E_Sonic_Got_Through_PSG2,	$DC, $07, $00, sTone_05
+	smpsHeaderPSG       Mus8E_Sonic_Got_Through_PSG3,	$DC, $00, $00, sTone_04
 
 ; FM1 Data
-GameOver_FM1:
+Mus8E_Sonic_Got_Through_FM1:
 	smpsSetvoice        $00
-	smpsModSet          $20, $01, $04, $05
-	dc.b	nRst, $18, nCs6, $24, nRst, $0C, nCs6, nRst, nD6, $24, nB5, $3C
-	dc.b	nCs6, $0C, nRst, nCs6, nRst, nCs6, nRst, nA5, nRst, nG5, $24, nB5
-	dc.b	$18, nRst, $24, nC6, $08, nRst, nC6, nB5, $0C, nRst, nBb5, nRst
-	dc.b	nA5, nRst
-	smpsModSet          $28, $01, $18, $05
-	dc.b	nAb5, $60, smpsNoAttack, $60
+
+; PSG1 Data
+Mus8E_Sonic_Got_Through_PSG1:
+	dc.b	nRst, $06, nG4, nA4, nB4, nC5, nD5, nE5, nF5, nG5, $0C, nB6
+	dc.b	$02, smpsNoAttack, nC7, $01, nB6, $03, nG6
+	smpsModSet          $0C, $01, $08, $04
+	dc.b	nA6, $33
 	smpsStop
 
 ; FM2 Data
-GameOver_FM2:
+Mus8E_Sonic_Got_Through_FM2:
 	smpsSetvoice        $01
-	dc.b	nRst, $01, nE7, $0C, nRst, nE7, nRst, nCs7, nRst, nCs7, nRst, nD7
-	dc.b	$2A, nD7, $36, nE7, $0C, nRst, nE7, nRst, nCs7, nRst, nCs7, nRst
-	dc.b	nG7, $2A, nG7, $36
+	smpsNoteFill        $0B
+	smpsNop             $01
+	dc.b	nG5, $03, nG5, nG4, $06, nG4, nG5, $03, nG5, nG4, $06, nG4
+	dc.b	nG5, $03, nG5, nRst, $06, nRst, $0C, nG4, $09
+	smpsNoteFill        $00
+	dc.b	nA4, $33
+	smpsNop             $01
 	smpsStop
 
 ; FM3 Data
-GameOver_FM3:
-	smpsSetvoice        $01
-	dc.b	nCs7, $18, nCs7, nA6, nA6, nB6, $2A, nB6, $36, nCs7, $18, nCs7
-	dc.b	nA6, nA6, nD7, $2A, nD7, $36
+Mus8E_Sonic_Got_Through_FM3:
+	smpsPan             panLeft, $00
+	smpsSetvoice        $02
+	smpsNoteFill        $06
+	dc.b	nC6, $03, nC6, nRst, $0C, nC6, $03, nC6, nRst, $0C, nC6, $03
+	dc.b	nC6, nRst, $12
+	smpsNoteFill        $00
+	dc.b	nC6, $09, nD6, $33
 	smpsStop
 
 ; FM4 Data
-GameOver_FM4:
+Mus8E_Sonic_Got_Through_FM4:
+	smpsPan             panRight, $00
 	smpsSetvoice        $02
-	smpsFade            $01
-	dc.b	nA3, $0C, nRst, nA3, nRst, nE3, nRst, nE3, nRst, nG3, $2A, nFs3
-	dc.b	$18, nG3, $06, nFs3, $18, nA3, $0C, nRst, nA3, nRst, nE3, nRst
-	dc.b	nE3, nRst, nD4, $2A, nCs4, $18, nD4, $06, nCs4, $18, nA3, $08
-	dc.b	nRst, nA3, nAb3, $0C, nRst, nG3, nRst, nFs3, nRst, nFs3, $60, smpsNoAttack
-	dc.b	$60
+	smpsNoteFill        $06
+	dc.b	nA5, $03, nA5, nRst, $0C, nA5, $03, nA5, nRst, $0C, nA5, $03
+	dc.b	nA5, nRst, $12
+	smpsNoteFill        $00
+	dc.b	nA5, $09, nB5, $33
 	smpsStop
 
 ; FM5 Data
-GameOver_FM5:
+Mus8E_Sonic_Got_Through_FM5:
 	smpsSetvoice        $03
-	dc.b	nRst, $60, nD7, $24, nRst, $06, nD7, $36, nRst, $60, nG7, $24
-	dc.b	nRst, $06, nG7, $36
-	smpsStop
-
-; PSG1 Data
-GameOver_PSG1:
-	smpsStop
+	smpsModSet          $0D, $01, $02, $05
 
 ; PSG2 Data
-GameOver_PSG2:
-	smpsStop
+Mus8E_Sonic_Got_Through_PSG2:
+	dc.b	nG5, $06, nC6, nB5, nG5, nC6, nB5, nG5, nC6, nB5, $0C, nC6
+	dc.b	$09, nB5, $33
 
 ; PSG3 Data
-GameOver_PSG3:
+Mus8E_Sonic_Got_Through_PSG3:
 	smpsStop
 
 ; DAC Data
-GameOver_DAC:
-	dc.b	nRst, $30, dCrackerKick
-	smpsLoop            $00, $04, GameOver_DAC
+Mus8E_Sonic_Got_Through_DAC:
+	dc.b	dCrackerSnare, $03, dCrackerSnare, dCrackerKick, $06, dCrackerKick, dCrackerSnare, $03, dCrackerSnare, dCrackerKick, $06, dCrackerKick
+	dc.b	dCrackerSnare, $03, dCrackerSnare, dCrackerTimpaniHi, dCrackerTimpaniHi, dCrackerTimpaniLow, dCrackerTimpaniLow, $03, dCrackerTimpaniLow, dCrackerTimpaniLow, dCrackerSnare, $09
+	dc.b	$33
 	smpsStop
 
-GameOver_Voices:
+Mus8E_Sonic_Got_Through_Voices:
 ;	Voice $00
-;	$3A
-;	$51, $08, $51, $02, 	$1E, $1E, $1E, $10, 	$1F, $1F, $1F, $0F
-;	$00, $00, $00, $02, 	$0F, $0F, $0F, $1F, 	$18, $24, $22, $81
-	smpsVcAlgorithm     $02
-	smpsVcFeedback      $07
-	smpsVcUnusedBits    $00
-	smpsVcDetune        $00, $05, $00, $05
-	smpsVcCoarseFreq    $02, $01, $08, $01
-	smpsVcRateScale     $00, $00, $00, $00
-	smpsVcAttackRate    $10, $1E, $1E, $1E
-	smpsVcAmpMod        $00, $00, $00, $00
-	smpsVcDecayRate1    $0F, $1F, $1F, $1F
-	smpsVcDecayRate2    $02, $00, $00, $00
-	smpsVcDecayLevel    $01, $00, $00, $00
-	smpsVcReleaseRate   $0F, $0F, $0F, $0F
-	smpsVcTotalLevel    $01, $22, $24, $18
-
-;	Voice $01
-;	$3C
-;	$33, $30, $73, $70, 	$94, $9F, $96, $9F, 	$12, $00, $14, $0F
-;	$04, $0A, $04, $0D, 	$2F, $0F, $4F, $2F, 	$33, $80, $1A, $80
-	smpsVcAlgorithm     $04
-	smpsVcFeedback      $07
-	smpsVcUnusedBits    $00
-	smpsVcDetune        $07, $07, $03, $03
-	smpsVcCoarseFreq    $00, $03, $00, $03
-	smpsVcRateScale     $02, $02, $02, $02
-	smpsVcAttackRate    $1F, $16, $1F, $14
-	smpsVcAmpMod        $00, $00, $00, $00
-	smpsVcDecayRate1    $0F, $14, $00, $12
-	smpsVcDecayRate2    $0D, $04, $0A, $04
-	smpsVcDecayLevel    $02, $04, $00, $02
-	smpsVcReleaseRate   $0F, $0F, $0F, $0F
-	smpsVcTotalLevel    $00, $1A, $00, $33
-
-;	Voice $02
-;	$3A
-;	$01, $07, $01, $01, 	$8E, $8E, $8D, $53, 	$0E, $0E, $0E, $03
-;	$00, $00, $00, $07, 	$1F, $FF, $1F, $0F, 	$1C, $28, $27, $80
-	smpsVcAlgorithm     $02
+;	$3D
+;	$01, $02, $00, $01, 	$1F, $0E, $0E, $0E, 	$07, $1F, $1F, $1F
+;	$00, $00, $00, $00, 	$1F, $0F, $0F, $0F, 	$17, $8D, $8C, $8C
+	smpsVcAlgorithm     $05
 	smpsVcFeedback      $07
 	smpsVcUnusedBits    $00
 	smpsVcDetune        $00, $00, $00, $00
-	smpsVcCoarseFreq    $01, $01, $07, $01
-	smpsVcRateScale     $01, $02, $02, $02
-	smpsVcAttackRate    $13, $0D, $0E, $0E
+	smpsVcCoarseFreq    $01, $00, $02, $01
+	smpsVcRateScale     $00, $00, $00, $00
+	smpsVcAttackRate    $0E, $0E, $0E, $1F
 	smpsVcAmpMod        $00, $00, $00, $00
-	smpsVcDecayRate1    $03, $0E, $0E, $0E
-	smpsVcDecayRate2    $07, $00, $00, $00
-	smpsVcDecayLevel    $00, $01, $0F, $01
+	smpsVcDecayRate1    $1F, $1F, $1F, $07
+	smpsVcDecayRate2    $00, $00, $00, $00
+	smpsVcDecayLevel    $00, $00, $00, $01
 	smpsVcReleaseRate   $0F, $0F, $0F, $0F
-	smpsVcTotalLevel    $00, $27, $28, $1C
+	smpsVcTotalLevel    $0C, $0C, $0D, $17
+
+;	Voice $01
+;	$3A
+;	$61, $3C, $14, $31, 	$9C, $DB, $9C, $DA, 	$04, $09, $04, $03
+;	$03, $01, $03, $00, 	$1F, $0F, $0F, $0F, 	$21, $47, $31, $80
+	smpsVcAlgorithm     $02
+	smpsVcFeedback      $07
+	smpsVcUnusedBits    $00
+	smpsVcDetune        $03, $01, $03, $06
+	smpsVcCoarseFreq    $01, $04, $0C, $01
+	smpsVcRateScale     $03, $02, $03, $02
+	smpsVcAttackRate    $1A, $1C, $1B, $1C
+	smpsVcAmpMod        $00, $00, $00, $00
+	smpsVcDecayRate1    $03, $04, $09, $04
+	smpsVcDecayRate2    $00, $03, $01, $03
+	smpsVcDecayLevel    $00, $00, $00, $01
+	smpsVcReleaseRate   $0F, $0F, $0F, $0F
+	smpsVcTotalLevel    $00, $31, $47, $21
+
+;	Voice $02
+;	$3D
+;	$01, $01, $01, $01, 	$8E, $52, $14, $4C, 	$08, $08, $0E, $03
+;	$00, $00, $00, $00, 	$1F, $1F, $1F, $1F, 	$1B, $80, $80, $9B
+	smpsVcAlgorithm     $05
+	smpsVcFeedback      $07
+	smpsVcUnusedBits    $00
+	smpsVcDetune        $00, $00, $00, $00
+	smpsVcCoarseFreq    $01, $01, $01, $01
+	smpsVcRateScale     $01, $00, $01, $02
+	smpsVcAttackRate    $0C, $14, $12, $0E
+	smpsVcAmpMod        $00, $00, $00, $00
+	smpsVcDecayRate1    $03, $0E, $08, $08
+	smpsVcDecayRate2    $00, $00, $00, $00
+	smpsVcDecayLevel    $01, $01, $01, $01
+	smpsVcReleaseRate   $0F, $0F, $0F, $0F
+	smpsVcTotalLevel    $1B, $00, $00, $1B
 
 ;	Voice $03
-;	$1F
-;	$66, $31, $53, $22, 	$1C, $98, $1F, $1F, 	$12, $0F, $0F, $0F
-;	$00, $00, $00, $00, 	$FF, $0F, $0F, $0F, 	$8C, $8D, $8A, $8B
-	smpsVcAlgorithm     $07
-	smpsVcFeedback      $03
+;	$3D
+;	$01, $01, $01, $01, 	$8E, $52, $14, $4C, 	$08, $08, $0E, $03
+;	$00, $00, $00, $00, 	$1F, $1F, $1F, $1F, 	$1B, $80, $80, $9B
+	smpsVcAlgorithm     $05
+	smpsVcFeedback      $07
 	smpsVcUnusedBits    $00
-	smpsVcDetune        $02, $05, $03, $06
-	smpsVcCoarseFreq    $02, $03, $01, $06
-	smpsVcRateScale     $00, $00, $02, $00
-	smpsVcAttackRate    $1F, $1F, $18, $1C
+	smpsVcDetune        $00, $00, $00, $00
+	smpsVcCoarseFreq    $01, $01, $01, $01
+	smpsVcRateScale     $01, $00, $01, $02
+	smpsVcAttackRate    $0C, $14, $12, $0E
 	smpsVcAmpMod        $00, $00, $00, $00
-	smpsVcDecayRate1    $0F, $0F, $0F, $12
+	smpsVcDecayRate1    $03, $0E, $08, $08
 	smpsVcDecayRate2    $00, $00, $00, $00
-	smpsVcDecayLevel    $00, $00, $00, $0F
+	smpsVcDecayLevel    $01, $01, $01, $01
 	smpsVcReleaseRate   $0F, $0F, $0F, $0F
-	smpsVcTotalLevel    $0B, $0A, $0D, $0C
+	smpsVcTotalLevel    $1B, $00, $00, $1B
 
+; Unused voice
+;	Voice $04
+;	$3D
+;	$01, $02, $02, $02, 	$10, $50, $50, $50, 	$07, $08, $08, $08
+;	$01, $00, $00, $00, 	$2F, $1F, $1F, $1F, 	$1C, $82, $82, $82
+	smpsVcAlgorithm     $05
+	smpsVcFeedback      $07
+	smpsVcUnusedBits    $00
+	smpsVcDetune        $00, $00, $00, $00
+	smpsVcCoarseFreq    $02, $02, $02, $01
+	smpsVcRateScale     $01, $01, $01, $00
+	smpsVcAttackRate    $10, $10, $10, $10
+	smpsVcAmpMod        $00, $00, $00, $00
+	smpsVcDecayRate1    $08, $08, $08, $07
+	smpsVcDecayRate2    $00, $00, $00, $01
+	smpsVcDecayLevel    $01, $01, $01, $02
+	smpsVcReleaseRate   $0F, $0F, $0F, $0F
+	smpsVcTotalLevel    $82, $82, $82, $1C
