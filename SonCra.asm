@@ -7563,7 +7563,7 @@ LULEA_ArtList:						; Offset: 00008CBA
 Levels_LoadPalette:					; Offset: 00008CCE
 		moveq	#$00,d1					; clear d1
 		move.w	($FFFFD834).w,d1			; load Zone/World ID
-		andi.w	#$0001,d1				; get only Zone's 0 and 1
+;		andi.w	#$0001,d1				; get only Zone's 0 and 1
 		lsl.l	#$01,d1					; multiply by 2
 		jmp	LLPal_Levels(pc,d1.w)			; jump to correct routine
 
@@ -7572,6 +7572,9 @@ Levels_LoadPalette:					; Offset: 00008CCE
 LLPal_Levels:						; Offset: 00008CDE
 		bra.s	LLPal_SSZ				; 00
 		bra.s	LLPal_TTZ				; 02
+		bra.s	LLPal_SSZ				; 00
+		bra.s	LLPal_SSZ				; 00
+		rts
 ; ---------------------------------------------------------------------------
 ; ===========================================================================
 ; ---------------------------------------------------------------------------
@@ -8960,7 +8963,7 @@ UZ02_Events:
 UZ02_StartUp:
 		move	#$2700,sr				; set the status register (disable interrupts)
 		lea	($FFFFC9DE).w,a1			; load address of positions and sizes ram (FG)
-		lea	PAL_IsolatedIsland(pc),a0	; load TTZ palette
+		lea	PAL_Flora(pc),a0	; load TTZ palette
 		lea	($FFFFD424).w,a2			; load palette buffer address to a2
 		bsr.w	LoadHalfPalette				; dump the palette to the buffer
 		lea	UZ02_FG_StartLocCam(pc),a0		; load level FG setup data address to a0
@@ -9015,6 +9018,10 @@ UZ02_MapFGLocs:						; Offset: 00009CC2
 		dc.l	MAPENI_FLRALayout_FG
 		dc.l	COL_IIZPrimary
 		dc.l	COL_IIZSecondary
+		
+PAL_Flora:				; Offset: 00009CF0
+		incbin  Palettes\PalFlora.bin
+		even
 		
 		rts
 
@@ -18101,6 +18108,9 @@ Levels_LoadPalCycleObjects:				; Offset: 0000ED26
 LLPCO_Levels:						; Offset: 0000ED30
 		bra.s	LLPCO_SSZ
 		bra.s	LLPCO_TTZ
+		bra.s	LLPCO_SSZ
+		bra.s	LLPCO_SSZ
+		rts
 ; ---------------------------------------------------------------------------
 ; ===========================================================================
 ; ---------------------------------------------------------------------------
