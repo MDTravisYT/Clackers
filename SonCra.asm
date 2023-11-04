@@ -8891,7 +8891,7 @@ UZ01_FG_StartLocCam:					; Offset: 00009CB0
 		dc.b	$10
 		dc.b	$20
 		dc.w	($0800/$20)				; V-Ram address to write the level art to
-		dc.w	$7FFF					; Maximum X display area
+		dc.w	$1EC0					; Maximum X display area
 		dc.w	$0000
 		dc.w	$2000					; Maximum Y display area
 		dc.w	$0000
