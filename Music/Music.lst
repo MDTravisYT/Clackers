@@ -1,4 +1,4 @@
- AS V1.42 Beta [Bld 251] - Source File Music.asm - Page 1 - 11/3/2023 20:59:9
+ AS V1.42 Beta [Bld 251] - Source File Music.asm - Page 1 - 11/3/2023 21:47:27
 
 
     1/       0 :                        z80_ptr function x,(x)<<8&$FF00|(x)>>8&$7F|$80
@@ -16529,7 +16529,7 @@
 (1)  640/    BCB3 : 2617 1485                           dc.b    vcTL4|vcTLMask4        ,vcTL3|vcTLMask3        ,vcTL2|vcTLMask2        ,vcTL1|vcTLMask1
 (1)  641/    BCB7 :                     
 (1)  642/    BCB7 :                     
- AS V1.42 Beta [Bld 251] - Source File Music.asm - Page 2 - 11/3/2023 20:59:9
+ AS V1.42 Beta [Bld 251] - Source File Music.asm - Page 2 - 11/3/2023 21:47:27
 
 
   Symbol Table (* = unused):
@@ -16806,7 +16806,7 @@
  THISHORIZON_LOOP03 :          BBC8 C |  THISHORIZON_PSG1 :            BB07 C |
  THISHORIZON_PSG2 :            BB31 C |  THISHORIZON_PSG3 :            BB70 C |
 *THISHORIZON_PWM1 :            BBC4 C |  THISHORIZON_PWM2 :            BBDA C |
- THISHORIZON_VOICES :          BC3A C | *TIME :                   "20:59:8" - |
+ THISHORIZON_VOICES :          BC3A C | *TIME :                  "21:47:26" - |
 *TRACENUM :                       0 - | *TRUE :                           1 - |
 *USE_S2_SAMPLES :                 1 - | *USE_S3D_SAMPLES :                1 - |
 *USE_S3_SAMPLES :                 1 - | *USE_SK_SAMPLES :                 1 - |
@@ -16855,7 +16855,7 @@
     630 symbols
     124 unused symbols
 
- AS V1.42 Beta [Bld 251] - Source File Music.asm - Page 3 - 11/3/2023 20:59:9
+ AS V1.42 Beta [Bld 251] - Source File Music.asm - Page 3 - 11/3/2023 21:47:27
 
 
   Defined Macros:
@@ -16913,7 +16913,7 @@ _MOVE                                 | _TST
 
      98 macros
 
- AS V1.42 Beta [Bld 251] - Source File Music.asm - Page 4 - 11/3/2023 20:59:9
+ AS V1.42 Beta [Bld 251] - Source File Music.asm - Page 4 - 11/3/2023 21:47:27
 
 
   Defined Functions:
@@ -16927,7 +16927,7 @@ SIGNEXTEND                            | SIGNMASK
 BIT                                   | CHKOP                                
 NOTZ80                                | Z80_PTR                              
 
- AS V1.42 Beta [Bld 251] - Source File Music.asm - Page 5 - 11/3/2023 20:59:9
+ AS V1.42 Beta [Bld 251] - Source File Music.asm - Page 5 - 11/3/2023 21:47:27
 
 
   Code Pages:
@@ -16937,7 +16937,7 @@ STANDARD (0 changed characters)
 
 1 code page
 
-0.37 seconds assembly time
+0.35 seconds assembly time
 
    7245 lines source file
   28548 lines incl. macro expansions

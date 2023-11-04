@@ -7503,6 +7503,10 @@ Levels_LoadEssentialArt:				; Offset: 00008C30
 		lea	(ARTNEM_SpikesHoz).l,a0			; load compress "Horizontal Spikes" art address
 		move.l	#$77E00001,($C00004).l			; set VDP V-Ram address and modes
 		jsr	NemDec					; decompress and dump
+		move	#$2700,sr				; set the status register (disable interrupts)
+		lea	(ARTNEM_Goal).l,a0			; load compress "Horizontal Spikes" art address
+		move.l	#$49000002,($C00004).l			; set VDP V-Ram address and modes
+		jsr	NemDec					; decompress and dump
 
 LLEA_NotForSSZ:						; Offset: 00008C7E
 		rts						; return
@@ -15171,7 +15175,7 @@ RO_Routines:
 		bra.w	Obj_RedSpring_Left		; Object 04 - Red Spring Left
 		bra.w	Obj_RedSpring_Up		; Object 08 - Red Spring Up
 		bra.w	Obj_RedSpring_Down		; Object 0C - Red Spring Down
-		bra.w	locret_EBAC				; Object 10 - Nothing
+		bra.w	ObjGoal					; Object 10 - Nothing
 		bra.w	Obj_DiagRedSprng_RU		; Object 14 - Diagonal Red Spring Right Up
 		bra.w	Obj_DiagRedSprng_LU		; Object 18 - Diagonal Red Spring Left Up
 		bra.w	Obj_DiagRedSprng_RD		; Object 1C - Diagonal Red Spring Right Down
@@ -17165,7 +17169,7 @@ ObjGoal:				; CODE XREF: ROM:0000D280j
 		bclr	d0,$28(a6)
 		beq.s	GoalRout1
 		move.l	#Map_SpikesLR,$10(a6)
-		move.w	#$23BF,$20(a6)
+		move.w	#$430,$20(a6)
 		move.w	#$8080,4(a6)
 		move.b	#$10,$22(a6)
 		move.b	#$10,$23(a6)
@@ -20176,6 +20180,10 @@ ARTNEM_SpikesVer:
 	incbin	NemesisComp\ArtnemSpikesVertical.bin		; Vertical Spikes
 	even
 ; ---------------------------------------------------------------------------
+ARTNEM_Goal:
+	incbin	NemesisComp\ArtnemGoal.bin		; Vertical Spikes
+	even
+; ---------------------------------------------------------------------------
 ; ===========================================================================
 ; ---------------------------------------------------------------------------
 ; Sprite Mappings - "Sprngs" and "Spikes" Objects
@@ -20213,7 +20221,7 @@ SpringRed_Right		=	$00
 SpringRed_Left		=	$04
 SpringRed_Up		=	$08
 SpringRed_Down		=	$0C
-;					=	$10
+Goal				=	$10
 DiagRedSprngRU		=	$14
 DiagRedSprngLU		=	$18
 DiagRedSprngRD		=	$1C
@@ -20283,7 +20291,7 @@ Objpos_TTZ:
 	ObjLayout	$0790,	$0C98,	SpringRed_Up
 	ObjLayout	$00B0,	$0B78,	SpringYel_Up
 	ObjLayout	$0034,	$06ED,	DiagRedSprngRU
-	ObjLayout	$0400,	$0060,	$2C
+	ObjLayout	$0400,	$0060,	Goal
 	ObjLayout_End
 	even
 ; ---------------------------------------------------------------------------
