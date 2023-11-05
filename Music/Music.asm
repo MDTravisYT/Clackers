@@ -29,3 +29,4 @@ use_sk_samples			= 1
 		include		"Music/SpeedOfSound.asm"
 		include		"Music/DoorIntoSummer.asm"
 		include		"Music/ThisHorizon.asm"
+		include		"Music/TestSong.asm"

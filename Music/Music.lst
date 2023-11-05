@@ -1,4 +1,4 @@
- AS V1.42 Beta [Bld 251] - Source File Music.asm - Page 1 - 11/4/2023 20:10:5
+ AS V1.42 Beta [Bld 251] - Source File Music.asm - Page 1 - 11/4/2023 21:21:43
 
 
     1/       0 :                        z80_ptr function x,(x)<<8&$FF00|(x)>>8&$7F|$80
@@ -16620,7 +16620,1291 @@
 (1)  640/    BCB0 : 2617 1485                           dc.b    vcTL4|vcTLMask4        ,vcTL3|vcTLMask3        ,vcTL2|vcTLMask2        ,vcTL1|vcTLMask1
 (1)  641/    BCB4 :                     
 (1)  642/    BCB4 :                     
- AS V1.42 Beta [Bld 251] - Source File Music.asm - Page 2 - 11/4/2023 20:10:5
+   32/    BCB4 :                        		include		"Music/TestSong.asm"
+(1)    1/    BCB4 :                     TestSong_Header:
+(1)    2/    BCB4 : (MACRO)             	smpsHeaderStartSong 3
+(1)    2/    BCB4 :                     
+(1)    2/    BCB4 : =$3                 SourceDriver set 3
+(1)    2/    BCB4 :                     
+(1)    2/    BCB4 : =$0                 SourceSMPS2ASM set 0
+(1)    2/    BCB4 :                     
+(1)    2/    BCB4 : =$BCB4              songStart set *
+(1)    2/    BCB4 :                     
+(1)    2/    BCB4 :                     
+(1)    3/    BCB4 : (MACRO)             	smpsHeaderVoice     TestSong_Voices
+(1)    3/    BCB4 : 77C7                                dc.w    z80_ptr(TESTSONG_VOICES)
+(1)    4/    BCB6 : (MACRO)             	smpsHeaderChan      $03, $02
+(1)    4/    BCB6 : 0302                        dc.b    $03,$02
+(1)    5/    BCB8 : (MACRO)             	smpsHeaderTempo     $02, $33
+(1)    5/    BCB8 : 02                          dc.b    $02
+(1)    5/    BCB9 :  (MACRO-2)                  convertMainTempoMod $33
+(1)    5/    BCB9 : 33                                  dc.b    $33
+(1)    6/    BCBA :                     
+(1)    7/    BCBA : (MACRO)             	smpsHeaderDAC       TestSong_DAC
+(1)    7/    BCBA :  (MACRO-2)                  CheckedChannelPointer TESTSONG_DAC
+(1)    7/    BCBA : 76C7                                dc.w    z80_ptr(TESTSONG_DAC)
+(1)    7/    BCBC : 0000                                dc.w    $00
+(1)    8/    BCBE : (MACRO)             	smpsHeaderFM        TestSong_FM1,	$00, $0B
+(1)    8/    BCBE :  (MACRO-2)                  CheckedChannelPointer TESTSONG_FM1
+(1)    8/    BCBE : D2BC                                dc.w    z80_ptr(TESTSONG_FM1)
+(1)    8/    BCC0 : 000B                        dc.b    $00,$0B
+(1)    9/    BCC2 : (MACRO)             	smpsHeaderFM        TestSong_FM2,	$00, $17
+(1)    9/    BCC2 :  (MACRO-2)                  CheckedChannelPointer TESTSONG_FM2
+(1)    9/    BCC2 : E0BE                                dc.w    z80_ptr(TESTSONG_FM2)
+(1)    9/    BCC4 : 0017                        dc.b    $00,$17
+(1)   10/    BCC6 : (MACRO)             	smpsHeaderPSG       TestSong_PSG1,	$0C, $00, $00, sTone_05
+(1)   10/    BCC6 :  (MACRO-2)                  CheckedChannelPointer TESTSONG_PSG1
+(1)   10/    BCC6 : 68C5                                dc.w    z80_ptr(TESTSONG_PSG1)
+(1)   10/    BCC8 :  (MACRO-2)                  PSGPitchConvert $0C
+(1)   10/    BCC8 : 0C                                  dc.b    $0C
+(1)   10/    BCC9 : 0000 05                     dc.b    $00,$00,STONE_05
+(1)   11/    BCCC : (MACRO)             	smpsHeaderPSG       TestSong_PSG2,	$0C, $00, $00, $00
+(1)   11/    BCCC :  (MACRO-2)                  CheckedChannelPointer TESTSONG_PSG2
+(1)   11/    BCCC : 45C6                                dc.w    z80_ptr(TESTSONG_PSG2)
+(1)   11/    BCCE :  (MACRO-2)                  PSGPitchConvert $0C
+(1)   11/    BCCE : 0C                                  dc.b    $0C
+(1)   11/    BCCF : 0000 00                     dc.b    $00,$00,$00
+(1)   12/    BCD2 :                     
+(1)   13/    BCD2 :                     ; FM1 Data
+(1)   14/    BCD2 :                     TestSong_FM1:
+(1)   15/    BCD2 : (MACRO)             	smpsPan             panCenter, $00
+(1)   15/    BCD2 : =$0                 panNone set $00
+(1)   15/    BCD2 : =$40                panRight set $40
+(1)   15/    BCD2 : =$80                panLeft set $80
+(1)   15/    BCD2 : =$C0                panCentre set $C0
+(1)   15/    BCD2 : =$C0                panCenter set $C0 ; silly Americans :U
+(1)   15/    BCD2 : E0C0                        dc.b $E0,PANCENTER+$00
+(1)   16/    BCD4 : (MACRO)             	smpsSetvoice        $03
+(1)   16/    BCD4 :  (MACRO-2)                  smpsFMvoice $03
+(1)   16/    BCD4 : EF03                                dc.b    $EF,$03
+(1)   17/    BCD6 : (MACRO)             	smpsAlterVol        $05
+(1)   17/    BCD6 : E605                        dc.b    $E6,$05
+(1)   18/    BCD8 : C409 C314 8007 C209 	dc.b	nG5, $09, nFs5, $14, nRst, $07, nF5, $09, nE5, $16, nRst, $05
+             BCE0 : C116 8005         
+(1)   19/    BCE4 : C009 BF0A 8002      	dc.b	nEb5, $09, nD5, $0A, nRst, $02
+(1)   20/    BCEA : (MACRO)             	smpsAlterVol        $FD
+(1)   20/    BCEA : E6FD                        dc.b    $E6,$FD
+(1)   21/    BCEC : C406 807F 29        	dc.b	nG5, $06, nRst, $7F, $29
+(1)   22/    BCF1 : (MACRO)             	smpsAlterVol        $FC
+(1)   22/    BCF1 : E6FC                        dc.b    $E6,$FC
+(1)   23/    BCF3 : C403 C203 BF03 BD03 	dc.b	nG5, $03, nF5, $03, nD5, $03, nC5, $03, nBb4, $03, nG4, $03
+             BCFB : BB03 B803         
+(1)   24/    BCFF : (MACRO)             	smpsAlterVol        $01
+(1)   24/    BCFF : E601                        dc.b    $E6,$01
+(1)   25/    BD01 : B609 B803 8009 BC0C 	dc.b	nF4, $09, nG4, $03, nRst, $09, nB4, $0C, nG4, $03, nRst, $0C
+             BD09 : B803 800C         
+(1)   26/    BD0D : B609 B503 8003 B603 	dc.b	nF4, $09, nE4, $03, nRst, $03, nF4, $03, nA4, $03, nRst, $03
+             BD15 : BA03 8003         
+(1)   27/    BD19 : B80F 8003 B603 B803 	dc.b	nG4, $0F, nRst, $03, nF4, $03, nG4, $03, nB4, $09, nG4, $03
+             BD21 : BC09 B803         
+(1)   28/    BD25 : 8042 C403 C203 BF03 	dc.b	nRst, $42, nG5, $03, nF5, $03, nD5, $03, nC5, $03, nBb4, $03
+             BD2D : BD03 BB03         
+(1)   29/    BD31 : B803 B609 B803 8009 	dc.b	nG4, $03, nF4, $09, nG4, $03, nRst, $09, nB4, $0C, nC5, $03
+             BD39 : BC0C BD03         
+(1)   30/    BD3D : 800C BF09 B803 8003 	dc.b	nRst, $0C, nD5, $09, nG4, $03, nRst, $03, nG4, $03, nF4, $03
+             BD45 : B803 B603         
+(1)   31/    BD49 : 8003 B812 BA03 BB03 	dc.b	nRst, $03, nG4, $12, nA4, $03, nBb4, $03, nB4, $1B, nRst, $36
+             BD51 : BC1B 8036         
+(1)   32/    BD55 : B803 8003 B606 B806 	dc.b	nG4, $03, nRst, $03, nF4, $06, nG4, $06, nC5, $09, nA4, $08
+             BD5D : BD09 BA08         
+(1)   33/    BD61 : 8001 BD06 BD01      	dc.b	nRst, $01, nC5, $06, nC5, $01
+(1)   34/    BD67 : (MACRO)             	smpsAlterNote       $0F
+(1)   34/    BD67 :  (MACRO-2)                  smpsDetune      $0F
+(1)   34/    BD67 : E10F                        dc.b    $E1,$0F
+(1)   35/    BD69 : E7BE 01             	dc.b	smpsNoAttack, nCs5, $01
+(1)   36/    BD6C : (MACRO)             	smpsAlterNote       $00
+(1)   36/    BD6C :  (MACRO-2)                  smpsDetune      $00
+(1)   36/    BD6C : E100                        dc.b    $E1,$00
+(1)   37/    BD6E : E7BF 07B8 0580 04BF 	dc.b	smpsNoAttack, nD5, $07, nG4, $05, nRst, $04, nD5, $03, nE5, $03, nF5
+             BD76 : 03C1 03C2         
+(1)   38/    BD7A : 09BF 09C2 0580 01C4 	dc.b	$09, nD5, $09, nF5, $05, nRst, $01, nG5, $01
+             BD82 : 01               
+(1)   39/    BD83 : (MACRO)             	smpsAlterNote       $17
+(1)   39/    BD83 :  (MACRO-2)                  smpsDetune      $17
+(1)   39/    BD83 : E117                        dc.b    $E1,$17
+(1)   40/    BD85 : E701                	dc.b	smpsNoAttack, $01
+(1)   41/    BD87 : (MACRO)             	smpsAlterNote       $00
+(1)   41/    BD87 :  (MACRO-2)                  smpsDetune      $00
+(1)   41/    BD87 : E100                        dc.b    $E1,$00
+(1)   42/    BD89 : E7C6 07C4 09BD 0980 	dc.b	smpsNoAttack, nA5, $07, nG5, $09, nC5, $09, nRst, $03, nG4, $03, nRst
+             BD91 : 03B8 0380         
+(1)   43/    BD95 : 03BA 03BD 0380 03BD 	dc.b	$03, nA4, $03, nC5, $03, nRst, $03, nC5, $01
+             BD9D : 01               
+(1)   44/    BD9E : (MACRO)             	smpsAlterNote       $0F
+(1)   44/    BD9E :  (MACRO-2)                  smpsDetune      $0F
+(1)   44/    BD9E : E10F                        dc.b    $E1,$0F
+(1)   45/    BDA0 : E701                	dc.b	smpsNoAttack, $01
+(1)   46/    BDA2 : (MACRO)             	smpsAlterNote       $00
+(1)   46/    BDA2 :  (MACRO-2)                  smpsDetune      $00
+(1)   46/    BDA2 : E100                        dc.b    $E1,$00
+(1)   47/    BDA4 : E7BF 0F80 04BD 03BF 	dc.b	smpsNoAttack, nD5, $0F, nRst, $04, nC5, $03, nD5, $03, nF5, $08, nRst
+             BDAC : 03C2 0880         
+(1)   48/    BDB0 : 01BF 0880 01C2 06C6 	dc.b	$01, nD5, $08, nRst, $01, nF5, $06, nA5, $06, nRst, $06, nBb5
+             BDB8 : 0680 06C7         
+(1)   49/    BDBC : 01                  	dc.b	$01
+(1)   50/    BDBD : (MACRO)             	smpsAlterNote       $1C
+(1)   50/    BDBD :  (MACRO-2)                  smpsDetune      $1C
+(1)   50/    BDBD : E11C                        dc.b    $E1,$1C
+(1)   51/    BDBF : E701                	dc.b	smpsNoAttack, $01
+(1)   52/    BDC1 : (MACRO)             	smpsAlterNote       $00
+(1)   52/    BDC1 :  (MACRO-2)                  smpsDetune      $00
+(1)   52/    BDC1 : E100                        dc.b    $E1,$00
+(1)   53/    BDC3 : E7C9 04B8 06BD 09BA 	dc.b	smpsNoAttack, nC6, $04, nG4, $06, nC5, $09, nA4, $08, nRst, $01, nC5
+             BDCB : 0880 01BD         
+(1)   54/    BDCF : 06BD 01             	dc.b	$06, nC5, $01
+(1)   55/    BDD2 : (MACRO)             	smpsAlterNote       $0F
+(1)   55/    BDD2 :  (MACRO-2)                  smpsDetune      $0F
+(1)   55/    BDD2 : E10F                        dc.b    $E1,$0F
+(1)   56/    BDD4 : E7BE 01             	dc.b	smpsNoAttack, nCs5, $01
+(1)   57/    BDD7 : (MACRO)             	smpsAlterNote       $00
+(1)   57/    BDD7 :  (MACRO-2)                  smpsDetune      $00
+(1)   57/    BDD7 : E100                        dc.b    $E1,$00
+(1)   58/    BDD9 : E7BF 07B8 0580 04BF 	dc.b	smpsNoAttack, nD5, $07, nG4, $05, nRst, $04, nD5, $03, nE5, $03, nF5
+             BDE1 : 03C1 03C2         
+(1)   59/    BDE5 : 09BF 09C2 0580 01C6 	dc.b	$09, nD5, $09, nF5, $05, nRst, $01, nA5, $09, nG5, $09, nC5
+             BDED : 09C4 09BD         
+(1)   60/    BDF1 : 1480 01BC 03BD 03BF 	dc.b	$14, nRst, $01, nB4, $03, nC5, $03, nD5, $11, nRst, $01, nC5
+             BDF9 : 1180 01BD         
+(1)   61/    BDFD : 03BF 03C4 01        	dc.b	$03, nD5, $03, nG5, $01
+(1)   62/    BE02 : (MACRO)             	smpsAlterNote       $17
+(1)   62/    BE02 :  (MACRO-2)                  smpsDetune      $17
+(1)   62/    BE02 : E117                        dc.b    $E1,$17
+(1)   63/    BE04 : E7C5 01             	dc.b	smpsNoAttack, nAb5, $01
+(1)   64/    BE07 : (MACRO)             	smpsAlterNote       $00
+(1)   64/    BE07 :  (MACRO-2)                  smpsDetune      $00
+(1)   64/    BE07 : E100                        dc.b    $E1,$00
+(1)   65/    BE09 : E7C6 04C4 1F80 05BD 	dc.b	smpsNoAttack, nA5, $04, nG5, $1F, nRst, $05, nC5, $03, nD5, $03, nG5
+             BE11 : 03BF 03C4         
+(1)   66/    BE15 : 0380 03C2 0380 06C1 	dc.b	$03, nRst, $03, nF5, $03, nRst, $06, nE5, $03, nRst, $06, nD5
+             BE1D : 0380 06BF         
+(1)   67/    BE21 : 0E80 01C4 09BB 02E7 	dc.b	$0E, nRst, $01, nG5, $09, nBb4, $02, smpsNoAttack, nB4, $01, smpsNoAttack, nC5
+             BE29 : BC01 E7BD         
+(1)   68/    BE2D : 1780 04B8 0380 03BA 	dc.b	$17, nRst, $04, nG4, $03, nRst, $03, nA4, $03, nRst, $03, nC5
+             BE35 : 0380 03BD         
+(1)   69/    BE39 : 03C6 03C4 0380 03C2 	dc.b	$03, nA5, $03, nG5, $03, nRst, $03, nF5, $03, nRst, $06, nE5
+             BE41 : 0380 06C1         
+(1)   70/    BE45 : 0380 06BF 0E80 01C4 	dc.b	$03, nRst, $06, nD5, $0E, nRst, $01, nG5, $09, nG5, $01
+             BE4D : 09C4 01            
+(1)   71/    BE50 : (MACRO)             	smpsAlterNote       $17
+(1)   71/    BE50 :  (MACRO-2)                  smpsDetune      $17
+(1)   71/    BE50 : E117                        dc.b    $E1,$17
+(1)   72/    BE52 : E701                	dc.b	smpsNoAttack, $01
+(1)   73/    BE54 : (MACRO)             	smpsAlterNote       $00
+(1)   73/    BE54 :  (MACRO-2)                  smpsDetune      $00
+(1)   73/    BE54 : E100                        dc.b    $E1,$00
+(1)   74/    BE56 : E7C6 0F80 01BF 03C6 	dc.b	smpsNoAttack, nA5, $0F, nRst, $01, nD5, $03, nA5, $03, nG5, $0D, nRst
+             BE5E : 03C4 0D80         
+(1)   75/    BE62 : 05BD 03BF 03C4 0380 	dc.b	$05, nC5, $03, nD5, $03, nG5, $03, nRst, $03, nF5, $03, nRst
+             BE6A : 03C2 0380         
+(1)   76/    BE6E : 06C1 0380 06BF 0E80 	dc.b	$06, nE5, $03, nRst, $06, nD5, $0E, nRst, $01, nG5, $09, nC5
+             BE76 : 01C4 09BD         
+(1)   77/    BE7A : 06B8 03BA 03BD 03B8 	dc.b	$06, nG4, $03, nA4, $03, nC5, $03, nG4, $02, nAb4, $02, nA4
+             BE82 : 02B9 02BA         
+(1)   78/    BE86 : 02BD 03BF 06BB 03BD 	dc.b	$02, nC5, $03, nD5, $06, nBb4, $03, nC5, $03, nD5, $03, nE5
+             BE8E : 03BF 03C1         
+(1)   79/    BE92 : 03BD 03BF 03C1 0380 	dc.b	$03, nC5, $03, nD5, $03, nE5, $03, nRst, $03, nF5, $03, nRst
+             BE9A : 03C2 0380         
+(1)   80/    BE9E : 06C1 0380 06BF 0380 	dc.b	$06, nE5, $03, nRst, $06, nD5, $03, nRst, $06, nC5, $03, nRst
+             BEA6 : 06BD 0380         
+(1)   81/    BEAA : 06C6 0480 02C2 02E7 	dc.b	$06, nA5, $04, nRst, $02, nF5, $02, smpsNoAttack, nFs5, $01, smpsNoAttack, nG5
+             BEB2 : C301 E7C4         
+(1)   82/    BEB6 : 0B80 01C6 0B80 01C7 	dc.b	$0B, nRst, $01, nA5, $0B, nRst, $01, nBb5, $09, nC6, $03, nRst
+             BEBE : 09C9 0380         
+(1)   83/    BEC2 : 06C4 0B80 01C1 08BF 	dc.b	$06, nG5, $0B, nRst, $01, nE5, $08, nD5, $02, nCs5, $02, nC5
+             BECA : 02BE 02BD         
+(1)   84/    BECE : 16                  	dc.b	$16
+(1)   85/    BECF : (MACRO)             	smpsAlterVol        $FF
+(1)   85/    BECF : E6FF                        dc.b    $E6,$FF
+(1)   86/    BED1 : E705 C403           	dc.b	smpsNoAttack, $05, nG5, $03
+(1)   87/    BED5 : (MACRO)             	smpsPan             panCenter, $00
+(1)   87/    BED5 : =$0                 panNone set $00
+(1)   87/    BED5 : =$40                panRight set $40
+(1)   87/    BED5 : =$80                panLeft set $80
+(1)   87/    BED5 : =$C0                panCentre set $C0
+(1)   87/    BED5 : =$C0                panCenter set $C0 ; silly Americans :U
+(1)   87/    BED5 : E0C0                        dc.b $E0,PANCENTER+$00
+(1)   88/    BED7 : (MACRO)             	smpsSetvoice        $03
+(1)   88/    BED7 :  (MACRO-2)                  smpsFMvoice $03
+(1)   88/    BED7 : EF03                                dc.b    $EF,$03
+(1)   89/    BED9 : 800E                	dc.b	nRst, $0E
+(1)   90/    BEDB : (MACRO)             	smpsPan             panCenter, $00
+(1)   90/    BEDB : =$0                 panNone set $00
+(1)   90/    BEDB : =$40                panRight set $40
+(1)   90/    BEDB : =$80                panLeft set $80
+(1)   90/    BEDB : =$C0                panCentre set $C0
+(1)   90/    BEDB : =$C0                panCenter set $C0 ; silly Americans :U
+(1)   90/    BEDB : E0C0                        dc.b $E0,PANCENTER+$00
+(1)   91/    BEDD : (MACRO)             	smpsSetvoice        $03
+(1)   91/    BEDD :  (MACRO-2)                  smpsFMvoice $03
+(1)   91/    BEDD : EF03                                dc.b    $EF,$03
+(1)   92/    BEDF : (MACRO)             	smpsStop
+(1)   92/    BEDF : F2                          dc.b    $F2
+(1)   93/    BEE0 :                     
+(1)   94/    BEE0 :                     ; FM2 Data
+(1)   95/    BEE0 :                     TestSong_FM2:
+(1)   96/    BEE0 : (MACRO)             	smpsPan             panCenter, $00
+(1)   96/    BEE0 : =$0                 panNone set $00
+(1)   96/    BEE0 : =$40                panRight set $40
+(1)   96/    BEE0 : =$80                panLeft set $80
+(1)   96/    BEE0 : =$C0                panCentre set $C0
+(1)   96/    BEE0 : =$C0                panCenter set $C0 ; silly Americans :U
+(1)   96/    BEE0 : E0C0                        dc.b $E0,PANCENTER+$00
+(1)   97/    BEE2 : (MACRO)             	smpsSetvoice        $04
+(1)   97/    BEE2 :  (MACRO-2)                  smpsFMvoice $04
+(1)   97/    BEE2 : EF04                                dc.b    $EF,$04
+(1)   98/    BEE4 : 8060 AA02 8001 AC02 	dc.b	nRst, $60, nF3, $02, nRst, $01, nG3, $02, nRst, $01, nD4, $02
+             BEEC : 8001 B302         
+(1)   99/    BEF0 : 8001 AA02 8001 AC02 	dc.b	nRst, $01, nF3, $02, nRst, $01, nG3, $02, nRst, $01, nD4, $02
+             BEF8 : 8001 B302         
+(1)  100/    BEFC : 8001 AA02 8001      	dc.b	nRst, $01, nF3, $02, nRst, $01
+(1)  101/    BF02 : (MACRO)             	smpsPan             panCenter, $00
+(1)  101/    BF02 : =$0                 panNone set $00
+(1)  101/    BF02 : =$40                panRight set $40
+(1)  101/    BF02 : =$80                panLeft set $80
+(1)  101/    BF02 : =$C0                panCentre set $C0
+(1)  101/    BF02 : =$C0                panCenter set $C0 ; silly Americans :U
+(1)  101/    BF02 : E0C0                        dc.b $E0,PANCENTER+$00
+(1)  102/    BF04 : AC02 8001 B302 8001 	dc.b	nG3, $02, nRst, $01, nD4, $02, nRst, $01, nF3, $02, nRst, $01
+             BF0C : AA02 8001         
+(1)  103/    BF10 : AC02 8001 B302 8001 	dc.b	nG3, $02, nRst, $01, nD4, $02, nRst, $01, nF3, $02, nRst, $01
+             BF18 : AA02 8001         
+(1)  104/    BF1C : AC02 8001 B302 8001 	dc.b	nG3, $02, nRst, $01, nD4, $02, nRst, $01
+(1)  105/    BF24 : (MACRO)             	smpsPan             panLeft, $00
+(1)  105/    BF24 : =$0                 panNone set $00
+(1)  105/    BF24 : =$40                panRight set $40
+(1)  105/    BF24 : =$80                panLeft set $80
+(1)  105/    BF24 : =$C0                panCentre set $C0
+(1)  105/    BF24 : =$C0                panCenter set $C0 ; silly Americans :U
+(1)  105/    BF24 : E080                        dc.b $E0,PANLEFT+$00
+(1)  106/    BF26 : AA02 8001           	dc.b	nF3, $02, nRst, $01
+(1)  107/    BF2A : (MACRO)             	smpsAlterVol        $FC
+(1)  107/    BF2A : E6FC                        dc.b    $E6,$FC
+(1)  108/    BF2C : AC02 8001 B302 8001 	dc.b	nG3, $02, nRst, $01, nD4, $02, nRst, $01, nF3, $02, nRst, $01
+             BF34 : AA02 8001         
+(1)  109/    BF38 : AC02 8001 B302 8001 	dc.b	nG3, $02, nRst, $01, nD4, $02, nRst, $01, nF3, $02, nRst, $01
+             BF40 : AA02 8001         
+(1)  110/    BF44 : AC02 8001           	dc.b	nG3, $02, nRst, $01
+(1)  111/    BF48 : (MACRO)             	smpsPan             panCenter, $00
+(1)  111/    BF48 : =$0                 panNone set $00
+(1)  111/    BF48 : =$40                panRight set $40
+(1)  111/    BF48 : =$80                panLeft set $80
+(1)  111/    BF48 : =$C0                panCentre set $C0
+(1)  111/    BF48 : =$C0                panCenter set $C0 ; silly Americans :U
+(1)  111/    BF48 : E0C0                        dc.b $E0,PANCENTER+$00
+(1)  112/    BF4A : B302 8001           	dc.b	nD4, $02, nRst, $01
+(1)  113/    BF4E : (MACRO)             	smpsAlterVol        $04
+(1)  113/    BF4E : E604                        dc.b    $E6,$04
+(1)  114/    BF50 : AA02 8001 AC02 8001 	dc.b	nF3, $02, nRst, $01, nG3, $02, nRst, $01, nD4, $02, nRst, $01
+             BF58 : B302 8001         
+(1)  115/    BF5C : AA02 8001 AC02 8001 	dc.b	nF3, $02, nRst, $01, nG3, $02, nRst, $01, nD4, $02, nRst, $01
+             BF64 : B302 8001         
+(1)  116/    BF68 : AA02 8001           	dc.b	nF3, $02, nRst, $01
+(1)  117/    BF6C : (MACRO)             	smpsPan             panCenter, $00
+(1)  117/    BF6C : =$0                 panNone set $00
+(1)  117/    BF6C : =$40                panRight set $40
+(1)  117/    BF6C : =$80                panLeft set $80
+(1)  117/    BF6C : =$C0                panCentre set $C0
+(1)  117/    BF6C : =$C0                panCenter set $C0 ; silly Americans :U
+(1)  117/    BF6C : E0C0                        dc.b $E0,PANCENTER+$00
+(1)  118/    BF6E : AC02 8001 B302 8001 	dc.b	nG3, $02, nRst, $01, nD4, $02, nRst, $01, nF3, $02, nRst, $01
+             BF76 : AA02 8001         
+(1)  119/    BF7A : AC02 8001 B302 8001 	dc.b	nG3, $02, nRst, $01, nD4, $02, nRst, $01, nF3, $02, nRst, $01
+             BF82 : AA02 8001         
+(1)  120/    BF86 : AC02 8001 B302 8001 	dc.b	nG3, $02, nRst, $01, nD4, $02, nRst, $01
+(1)  121/    BF8E : (MACRO)             	smpsPan             panCenter, $00
+(1)  121/    BF8E : =$0                 panNone set $00
+(1)  121/    BF8E : =$40                panRight set $40
+(1)  121/    BF8E : =$80                panLeft set $80
+(1)  121/    BF8E : =$C0                panCentre set $C0
+(1)  121/    BF8E : =$C0                panCenter set $C0 ; silly Americans :U
+(1)  121/    BF8E : E0C0                        dc.b $E0,PANCENTER+$00
+(1)  122/    BF90 : AA02 8001 AC02 8001 	dc.b	nF3, $02, nRst, $01, nG3, $02, nRst, $01, nD4, $02, nRst, $01
+             BF98 : B302 8001         
+(1)  123/    BF9C : AA02 8001 AC02 8001 	dc.b	nF3, $02, nRst, $01, nG3, $02, nRst, $01, nD4, $02, nRst, $01
+             BFA4 : B302 8001         
+(1)  124/    BFA8 : AA02 8001 AC02 8001 	dc.b	nF3, $02, nRst, $01, nG3, $02, nRst, $01
+(1)  125/    BFB0 : (MACRO)             	smpsPan             panRight, $00
+(1)  125/    BFB0 : =$0                 panNone set $00
+(1)  125/    BFB0 : =$40                panRight set $40
+(1)  125/    BFB0 : =$80                panLeft set $80
+(1)  125/    BFB0 : =$C0                panCentre set $C0
+(1)  125/    BFB0 : =$C0                panCenter set $C0 ; silly Americans :U
+(1)  125/    BFB0 : E040                        dc.b $E0,PANRIGHT+$00
+(1)  126/    BFB2 : B302 8001           	dc.b	nD4, $02, nRst, $01
+(1)  127/    BFB6 : (MACRO)             	smpsAlterVol        $FC
+(1)  127/    BFB6 : E6FC                        dc.b    $E6,$FC
+(1)  128/    BFB8 : AA02 8001 AC02 8001 	dc.b	nF3, $02, nRst, $01, nG3, $02, nRst, $01, nD4, $02, nRst, $01
+             BFC0 : B302 8001         
+(1)  129/    BFC4 : AA02 8001 AC02 8001 	dc.b	nF3, $02, nRst, $01, nG3, $02, nRst, $01, nD4, $02, nRst, $01
+             BFCC : B302 8001         
+(1)  130/    BFD0 : AA02 8001           	dc.b	nF3, $02, nRst, $01
+(1)  131/    BFD4 : (MACRO)             	smpsPan             panCenter, $00
+(1)  131/    BFD4 : =$0                 panNone set $00
+(1)  131/    BFD4 : =$40                panRight set $40
+(1)  131/    BFD4 : =$80                panLeft set $80
+(1)  131/    BFD4 : =$C0                panCentre set $C0
+(1)  131/    BFD4 : =$C0                panCenter set $C0 ; silly Americans :U
+(1)  131/    BFD4 : E0C0                        dc.b $E0,PANCENTER+$00
+(1)  132/    BFD6 : AC02 8001           	dc.b	nG3, $02, nRst, $01
+(1)  133/    BFDA : (MACRO)             	smpsAlterVol        $04
+(1)  133/    BFDA : E604                        dc.b    $E6,$04
+(1)  134/    BFDC : B302 8001 AA02 8001 	dc.b	nD4, $02, nRst, $01, nF3, $02, nRst, $01, nG3, $02, nRst, $01
+             BFE4 : AC02 8001         
+(1)  135/    BFE8 : B302 8001 AA02 8001 	dc.b	nD4, $02, nRst, $01, nF3, $02, nRst, $01, nG3, $02, nRst, $01
+             BFF0 : AC02 8001         
+(1)  136/    BFF4 : B002 8001           	dc.b	nB3, $02, nRst, $01
+(1)  137/    BFF8 : (MACRO)             	smpsPan             panCenter, $00
+(1)  137/    BFF8 : =$0                 panNone set $00
+(1)  137/    BFF8 : =$40                panRight set $40
+(1)  137/    BFF8 : =$80                panLeft set $80
+(1)  137/    BFF8 : =$C0                panCentre set $C0
+(1)  137/    BFF8 : =$C0                panCenter set $C0 ; silly Americans :U
+(1)  137/    BFF8 : E0C0                        dc.b $E0,PANCENTER+$00
+(1)  138/    BFFA : B302 8001 AA02 8001 	dc.b	nD4, $02, nRst, $01, nF3, $02, nRst, $01, nG3, $02, nRst, $01
+             C002 : AC02 8001         
+(1)  139/    C006 : B302 8001 AA02 8001 	dc.b	nD4, $02, nRst, $01, nF3, $02, nRst, $01, nG3, $02, nRst, $01
+             C00E : AC02 8001         
+(1)  140/    C012 : B302 8001 AA02 8001 	dc.b	nD4, $02, nRst, $01, nF3, $02, nRst, $01
+(1)  141/    C01A : (MACRO)             	smpsPan             panCenter, $00
+(1)  141/    C01A : =$0                 panNone set $00
+(1)  141/    C01A : =$40                panRight set $40
+(1)  141/    C01A : =$80                panLeft set $80
+(1)  141/    C01A : =$C0                panCentre set $C0
+(1)  141/    C01A : =$C0                panCenter set $C0 ; silly Americans :U
+(1)  141/    C01A : E0C0                        dc.b $E0,PANCENTER+$00
+(1)  142/    C01C : AC02 8001 B302 8001 	dc.b	nG3, $02, nRst, $01, nD4, $02, nRst, $01, nF3, $02, nRst, $01
+             C024 : AA02 8001         
+(1)  143/    C028 : AC02 8001 B302 8001 	dc.b	nG3, $02, nRst, $01, nD4, $02, nRst, $01, nF3, $02, nRst, $01
+             C030 : AA02 8001         
+(1)  144/    C034 : AC02 8001 B302 8001 	dc.b	nG3, $02, nRst, $01, nD4, $02, nRst, $01
+(1)  145/    C03C : (MACRO)             	smpsPan             panLeft, $00
+(1)  145/    C03C : =$0                 panNone set $00
+(1)  145/    C03C : =$40                panRight set $40
+(1)  145/    C03C : =$80                panLeft set $80
+(1)  145/    C03C : =$C0                panCentre set $C0
+(1)  145/    C03C : =$C0                panCenter set $C0 ; silly Americans :U
+(1)  145/    C03C : E080                        dc.b $E0,PANLEFT+$00
+(1)  146/    C03E : AA02 8001           	dc.b	nF3, $02, nRst, $01
+(1)  147/    C042 : (MACRO)             	smpsAlterVol        $FC
+(1)  147/    C042 : E6FC                        dc.b    $E6,$FC
+(1)  148/    C044 : AC02 8001 B302 8001 	dc.b	nG3, $02, nRst, $01, nD4, $02, nRst, $01, nF3, $02, nRst, $01
+             C04C : AA02 8001         
+(1)  149/    C050 : AC02 8001 B302 8001 	dc.b	nG3, $02, nRst, $01, nD4, $02, nRst, $01, nF3, $02, nRst, $01
+             C058 : AA02 8001         
+(1)  150/    C05C : AC02 8001           	dc.b	nG3, $02, nRst, $01
+(1)  151/    C060 : (MACRO)             	smpsPan             panCenter, $00
+(1)  151/    C060 : =$0                 panNone set $00
+(1)  151/    C060 : =$40                panRight set $40
+(1)  151/    C060 : =$80                panLeft set $80
+(1)  151/    C060 : =$C0                panCentre set $C0
+(1)  151/    C060 : =$C0                panCenter set $C0 ; silly Americans :U
+(1)  151/    C060 : E0C0                        dc.b $E0,PANCENTER+$00
+(1)  152/    C062 : B302 8001           	dc.b	nD4, $02, nRst, $01
+(1)  153/    C066 : (MACRO)             	smpsAlterVol        $04
+(1)  153/    C066 : E604                        dc.b    $E6,$04
+(1)  154/    C068 : AA02 8001 AC02 8001 	dc.b	nF3, $02, nRst, $01, nG3, $02, nRst, $01, nD4, $02, nRst, $01
+             C070 : B302 8001         
+(1)  155/    C074 : AA02 8001 AC02 8001 	dc.b	nF3, $02, nRst, $01, nG3, $02, nRst, $01, nD4, $02, nRst, $01
+             C07C : B302 8001         
+(1)  156/    C080 : AA02 8001           	dc.b	nF3, $02, nRst, $01
+(1)  157/    C084 : (MACRO)             	smpsPan             panCenter, $00
+(1)  157/    C084 : =$0                 panNone set $00
+(1)  157/    C084 : =$40                panRight set $40
+(1)  157/    C084 : =$80                panLeft set $80
+(1)  157/    C084 : =$C0                panCentre set $C0
+(1)  157/    C084 : =$C0                panCenter set $C0 ; silly Americans :U
+(1)  157/    C084 : E0C0                        dc.b $E0,PANCENTER+$00
+(1)  158/    C086 : AC02 8001 B302 8001 	dc.b	nG3, $02, nRst, $01, nD4, $02, nRst, $01, nF3, $02, nRst, $01
+             C08E : AA02 8001         
+(1)  159/    C092 : AC02 8001 B302 8001 	dc.b	nG3, $02, nRst, $01, nD4, $02, nRst, $01, nF3, $02, nRst, $01
+             C09A : AA02 8001         
+(1)  160/    C09E : AC02 8001 B302 8001 	dc.b	nG3, $02, nRst, $01, nD4, $02, nRst, $01
+(1)  161/    C0A6 : (MACRO)             	smpsPan             panCenter, $00
+(1)  161/    C0A6 : =$0                 panNone set $00
+(1)  161/    C0A6 : =$40                panRight set $40
+(1)  161/    C0A6 : =$80                panLeft set $80
+(1)  161/    C0A6 : =$C0                panCentre set $C0
+(1)  161/    C0A6 : =$C0                panCenter set $C0 ; silly Americans :U
+(1)  161/    C0A6 : E0C0                        dc.b $E0,PANCENTER+$00
+(1)  162/    C0A8 : AA02 8001 AC02 8001 	dc.b	nF3, $02, nRst, $01, nG3, $02, nRst, $01, nD4, $02, nRst, $01
+             C0B0 : B302 8001         
+(1)  163/    C0B4 : AA02 8001 AC02 8001 	dc.b	nF3, $02, nRst, $01, nG3, $02, nRst, $01, nD4, $02, nRst, $01
+             C0BC : B302 8001         
+(1)  164/    C0C0 : AA02 8001 AC02 8001 	dc.b	nF3, $02, nRst, $01, nG3, $02, nRst, $01
+(1)  165/    C0C8 : (MACRO)             	smpsPan             panRight, $00
+(1)  165/    C0C8 : =$0                 panNone set $00
+(1)  165/    C0C8 : =$40                panRight set $40
+(1)  165/    C0C8 : =$80                panLeft set $80
+(1)  165/    C0C8 : =$C0                panCentre set $C0
+(1)  165/    C0C8 : =$C0                panCenter set $C0 ; silly Americans :U
+(1)  165/    C0C8 : E040                        dc.b $E0,PANRIGHT+$00
+(1)  166/    C0CA : B302 8001           	dc.b	nD4, $02, nRst, $01
+(1)  167/    C0CE : (MACRO)             	smpsAlterVol        $FC
+(1)  167/    C0CE : E6FC                        dc.b    $E6,$FC
+(1)  168/    C0D0 : AA02 8001 AC02 8001 	dc.b	nF3, $02, nRst, $01, nG3, $02, nRst, $01, nD4, $02, nRst, $01
+             C0D8 : B302 8001         
+(1)  169/    C0DC : AA02 8001 AC02 8001 	dc.b	nF3, $02, nRst, $01, nG3, $02, nRst, $01, nD4, $02, nRst, $01
+             C0E4 : B302 8001         
+(1)  170/    C0E8 : AA02 8001           	dc.b	nF3, $02, nRst, $01
+(1)  171/    C0EC : (MACRO)             	smpsPan             panCenter, $00
+(1)  171/    C0EC : =$0                 panNone set $00
+(1)  171/    C0EC : =$40                panRight set $40
+(1)  171/    C0EC : =$80                panLeft set $80
+(1)  171/    C0EC : =$C0                panCentre set $C0
+(1)  171/    C0EC : =$C0                panCenter set $C0 ; silly Americans :U
+(1)  171/    C0EC : E0C0                        dc.b $E0,PANCENTER+$00
+(1)  172/    C0EE : AC02 8001           	dc.b	nG3, $02, nRst, $01
+(1)  173/    C0F2 : (MACRO)             	smpsAlterVol        $04
+(1)  173/    C0F2 : E604                        dc.b    $E6,$04
+(1)  174/    C0F4 : B302 8001 AA02 8001 	dc.b	nD4, $02, nRst, $01, nF3, $02, nRst, $01, nG3, $02, nRst, $01
+             C0FC : AC02 8001         
+(1)  175/    C100 : B302 8001 AA02 8001 	dc.b	nD4, $02, nRst, $01, nF3, $02, nRst, $01, nG3, $02, nRst, $01
+             C108 : AC02 8001         
+(1)  176/    C10C : B002 8001           	dc.b	nB3, $02, nRst, $01
+(1)  177/    C110 : (MACRO)             	smpsPan             panCenter, $00
+(1)  177/    C110 : =$0                 panNone set $00
+(1)  177/    C110 : =$40                panRight set $40
+(1)  177/    C110 : =$80                panLeft set $80
+(1)  177/    C110 : =$C0                panCentre set $C0
+(1)  177/    C110 : =$C0                panCenter set $C0 ; silly Americans :U
+(1)  177/    C110 : E0C0                        dc.b $E0,PANCENTER+$00
+(1)  178/    C112 : B302 8001 AA02 8001 	dc.b	nD4, $02, nRst, $01, nF3, $02, nRst, $01, nG3, $02, nRst, $01
+             C11A : AC02 8001         
+(1)  179/    C11E : B302 8001 AA02 8001 	dc.b	nD4, $02, nRst, $01, nF3, $02, nRst, $01, nG3, $02, nRst, $01
+             C126 : AC02 8001         
+(1)  180/    C12A : B302 8001 AA02 8001 	dc.b	nD4, $02, nRst, $01, nF3, $02, nRst, $01
+(1)  181/    C132 : (MACRO)             	smpsPan             panCenter, $00
+(1)  181/    C132 : =$0                 panNone set $00
+(1)  181/    C132 : =$40                panRight set $40
+(1)  181/    C132 : =$80                panLeft set $80
+(1)  181/    C132 : =$C0                panCentre set $C0
+(1)  181/    C132 : =$C0                panCenter set $C0 ; silly Americans :U
+(1)  181/    C132 : E0C0                        dc.b $E0,PANCENTER+$00
+(1)  182/    C134 : AC02 8001 B302 8001 	dc.b	nG3, $02, nRst, $01, nD4, $02, nRst, $01, nF3, $02, nRst, $01
+             C13C : AA02 8001         
+(1)  183/    C140 : AC02 8001 B302 8001 	dc.b	nG3, $02, nRst, $01, nD4, $02, nRst, $01, nF3, $02, nRst, $01
+             C148 : AA02 8001         
+(1)  184/    C14C : AC02 8001 B302 8001 	dc.b	nG3, $02, nRst, $01, nD4, $02, nRst, $01
+(1)  185/    C154 : (MACRO)             	smpsPan             panLeft, $00
+(1)  185/    C154 : =$0                 panNone set $00
+(1)  185/    C154 : =$40                panRight set $40
+(1)  185/    C154 : =$80                panLeft set $80
+(1)  185/    C154 : =$C0                panCentre set $C0
+(1)  185/    C154 : =$C0                panCenter set $C0 ; silly Americans :U
+(1)  185/    C154 : E080                        dc.b $E0,PANLEFT+$00
+(1)  186/    C156 : AA02 8001           	dc.b	nF3, $02, nRst, $01
+(1)  187/    C15A : (MACRO)             	smpsAlterVol        $FC
+(1)  187/    C15A : E6FC                        dc.b    $E6,$FC
+(1)  188/    C15C : AC02 8001 B302 8001 	dc.b	nG3, $02, nRst, $01, nD4, $02, nRst, $01, nF3, $02, nRst, $01
+             C164 : AA02 8001         
+(1)  189/    C168 : AC02 8001 B302 8001 	dc.b	nG3, $02, nRst, $01, nD4, $02, nRst, $01, nF3, $02, nRst, $01
+             C170 : AA02 8001         
+(1)  190/    C174 : AC02 8001           	dc.b	nG3, $02, nRst, $01
+(1)  191/    C178 : (MACRO)             	smpsPan             panCenter, $00
+(1)  191/    C178 : =$0                 panNone set $00
+(1)  191/    C178 : =$40                panRight set $40
+(1)  191/    C178 : =$80                panLeft set $80
+(1)  191/    C178 : =$C0                panCentre set $C0
+(1)  191/    C178 : =$C0                panCenter set $C0 ; silly Americans :U
+(1)  191/    C178 : E0C0                        dc.b $E0,PANCENTER+$00
+(1)  192/    C17A : B302 8001           	dc.b	nD4, $02, nRst, $01
+(1)  193/    C17E : (MACRO)             	smpsAlterVol        $04
+(1)  193/    C17E : E604                        dc.b    $E6,$04
+(1)  194/    C180 : AA02 8001 AC02 8001 	dc.b	nF3, $02, nRst, $01, nG3, $02, nRst, $01, nD4, $02, nRst, $01
+             C188 : B302 8001         
+(1)  195/    C18C : AA02 8001 AC02 8001 	dc.b	nF3, $02, nRst, $01, nG3, $02, nRst, $01, nD4, $02, nRst, $01
+             C194 : B302 8001         
+(1)  196/    C198 : AA02 8001           	dc.b	nF3, $02, nRst, $01
+(1)  197/    C19C : (MACRO)             	smpsPan             panCenter, $00
+(1)  197/    C19C : =$0                 panNone set $00
+(1)  197/    C19C : =$40                panRight set $40
+(1)  197/    C19C : =$80                panLeft set $80
+(1)  197/    C19C : =$C0                panCentre set $C0
+(1)  197/    C19C : =$C0                panCenter set $C0 ; silly Americans :U
+(1)  197/    C19C : E0C0                        dc.b $E0,PANCENTER+$00
+(1)  198/    C19E : AC02 8001 B302 8001 	dc.b	nG3, $02, nRst, $01, nD4, $02, nRst, $01, nF3, $02, nRst, $01
+             C1A6 : AA02 8001         
+(1)  199/    C1AA : AC02 8001 B302 8001 	dc.b	nG3, $02, nRst, $01, nD4, $02, nRst, $01, nF3, $02, nRst, $01
+             C1B2 : AA02 8001         
+(1)  200/    C1B6 : AC02 8001 B302 8001 	dc.b	nG3, $02, nRst, $01, nD4, $02, nRst, $01
+(1)  201/    C1BE : (MACRO)             	smpsPan             panCenter, $00
+(1)  201/    C1BE : =$0                 panNone set $00
+(1)  201/    C1BE : =$40                panRight set $40
+(1)  201/    C1BE : =$80                panLeft set $80
+(1)  201/    C1BE : =$C0                panCentre set $C0
+(1)  201/    C1BE : =$C0                panCenter set $C0 ; silly Americans :U
+(1)  201/    C1BE : E0C0                        dc.b $E0,PANCENTER+$00
+(1)  202/    C1C0 : AA02 8001 AC02 8001 	dc.b	nF3, $02, nRst, $01, nG3, $02, nRst, $01, nD4, $02, nRst, $01
+             C1C8 : B302 8001         
+(1)  203/    C1CC : AA02 8001 AC02 8001 	dc.b	nF3, $02, nRst, $01, nG3, $02, nRst, $01, nD4, $02, nRst, $01
+             C1D4 : B302 8001         
+(1)  204/    C1D8 : AA02 8001 AC02 8001 	dc.b	nF3, $02, nRst, $01, nG3, $02, nRst, $01
+(1)  205/    C1E0 : (MACRO)             	smpsPan             panRight, $00
+(1)  205/    C1E0 : =$0                 panNone set $00
+(1)  205/    C1E0 : =$40                panRight set $40
+(1)  205/    C1E0 : =$80                panLeft set $80
+(1)  205/    C1E0 : =$C0                panCentre set $C0
+(1)  205/    C1E0 : =$C0                panCenter set $C0 ; silly Americans :U
+(1)  205/    C1E0 : E040                        dc.b $E0,PANRIGHT+$00
+(1)  206/    C1E2 : B302 8001           	dc.b	nD4, $02, nRst, $01
+(1)  207/    C1E6 : (MACRO)             	smpsAlterVol        $FC
+(1)  207/    C1E6 : E6FC                        dc.b    $E6,$FC
+(1)  208/    C1E8 : AA02 8001 AC02 8001 	dc.b	nF3, $02, nRst, $01, nG3, $02, nRst, $01, nD4, $02, nRst, $01
+             C1F0 : B302 8001         
+(1)  209/    C1F4 : AA02 8001 AC02 8001 	dc.b	nF3, $02, nRst, $01, nG3, $02, nRst, $01, nD4, $02, nRst, $01
+             C1FC : B302 8001         
+(1)  210/    C200 : AA02 8001           	dc.b	nF3, $02, nRst, $01
+(1)  211/    C204 : (MACRO)             	smpsPan             panCenter, $00
+(1)  211/    C204 : =$0                 panNone set $00
+(1)  211/    C204 : =$40                panRight set $40
+(1)  211/    C204 : =$80                panLeft set $80
+(1)  211/    C204 : =$C0                panCentre set $C0
+(1)  211/    C204 : =$C0                panCenter set $C0 ; silly Americans :U
+(1)  211/    C204 : E0C0                        dc.b $E0,PANCENTER+$00
+(1)  212/    C206 : AC02 8001           	dc.b	nG3, $02, nRst, $01
+(1)  213/    C20A : (MACRO)             	smpsAlterVol        $04
+(1)  213/    C20A : E604                        dc.b    $E6,$04
+(1)  214/    C20C : B302 8001 AA02 8001 	dc.b	nD4, $02, nRst, $01, nF3, $02, nRst, $01, nG3, $02, nRst, $01
+             C214 : AC02 8001         
+(1)  215/    C218 : B302 8001 AA02 8001 	dc.b	nD4, $02, nRst, $01, nF3, $02, nRst, $01, nG3, $02, nRst, $01
+             C220 : AC02 8001         
+(1)  216/    C224 : B002 8001           	dc.b	nB3, $02, nRst, $01
+(1)  217/    C228 : (MACRO)             	smpsPan             panCenter, $00
+(1)  217/    C228 : =$0                 panNone set $00
+(1)  217/    C228 : =$40                panRight set $40
+(1)  217/    C228 : =$80                panLeft set $80
+(1)  217/    C228 : =$C0                panCentre set $C0
+(1)  217/    C228 : =$C0                panCenter set $C0 ; silly Americans :U
+(1)  217/    C228 : E0C0                        dc.b $E0,PANCENTER+$00
+(1)  218/    C22A : B302 8001 A502 8001 	dc.b	nD4, $02, nRst, $01, nC3, $02, nRst, $01, nG3, $02, nRst, $01
+             C232 : AC02 8001         
+(1)  219/    C236 : B102 8001 AC02 8001 	dc.b	nC4, $02, nRst, $01, nG3, $02, nRst, $01, nC3, $02, nRst, $01
+             C23E : A502 8001         
+(1)  220/    C242 : AC02 8001 B102 8001 	dc.b	nG3, $02, nRst, $01, nC4, $02, nRst, $01, nG3, $02, nRst, $01
+             C24A : AC02 8001         
+(1)  221/    C24E : A502 8001 AC02 8001 	dc.b	nC3, $02, nRst, $01, nG3, $02, nRst, $01, nC4, $02, nRst, $01
+             C256 : B102 8001         
+(1)  222/    C25A : AC02 8001 A502 8001 	dc.b	nG3, $02, nRst, $01, nC3, $02, nRst, $01, nG3, $02, nRst, $01
+             C262 : AC02 8001         
+(1)  223/    C266 : B102 8001 AC02 8001 	dc.b	nC4, $02, nRst, $01, nG3, $02, nRst, $01, nC3, $02, nRst, $01
+             C26E : A502 8001         
+(1)  224/    C272 : AC02 8001 B102 8001 	dc.b	nG3, $02, nRst, $01, nC4, $02, nRst, $01, nG3, $02, nRst, $01
+             C27A : AC02 8001         
+(1)  225/    C27E : A502 8001 AC02 8001 	dc.b	nC3, $02, nRst, $01, nG3, $02, nRst, $01, nC4, $02, nRst, $01
+             C286 : B102 8001         
+(1)  226/    C28A : AC02 8001 A502 8001 	dc.b	nG3, $02, nRst, $01, nC3, $02, nRst, $01, nG3, $02, nRst, $01
+             C292 : AC02 8001         
+(1)  227/    C296 : B102 8001 AC02 8001 	dc.b	nC4, $02, nRst, $01, nG3, $02, nRst, $01, nC3, $02, nRst, $01
+             C29E : A502 8001         
+(1)  228/    C2A2 : B102 8001 AC02 8001 	dc.b	nC4, $02, nRst, $01, nG3, $02, nRst, $01, nC3, $02, nRst, $01
+             C2AA : A502 8001         
+(1)  229/    C2AE : A502 8001 AC02 8001 	dc.b	nC3, $02, nRst, $01, nG3, $02, nRst, $01, nC4, $02, nRst, $01
+             C2B6 : B102 8001         
+(1)  230/    C2BA : AC02 8001 A502 8001 	dc.b	nG3, $02, nRst, $01, nC3, $02, nRst, $01, nG3, $02, nRst, $01
+             C2C2 : AC02 8001         
+(1)  231/    C2C6 : B102 8001 AC02 8001 	dc.b	nC4, $02, nRst, $01, nG3, $02, nRst, $01, nC3, $02, nRst, $01
+             C2CE : A502 8001         
+(1)  232/    C2D2 : AC02 8001 B102 8001 	dc.b	nG3, $02, nRst, $01, nC4, $02, nRst, $01, nG3, $02, nRst, $01
+             C2DA : AC02 8001         
+(1)  233/    C2DE : A502 8001 AC02 8001 	dc.b	nC3, $02, nRst, $01, nG3, $02, nRst, $01, nC4, $02, nRst, $01
+             C2E6 : B102 8001         
+(1)  234/    C2EA : AC02 8001 A502 8001 	dc.b	nG3, $02, nRst, $01, nC3, $02, nRst, $01, nG3, $02, nRst, $01
+             C2F2 : AC02 8001         
+(1)  235/    C2F6 : B102 8001 AC02 8001 	dc.b	nC4, $02, nRst, $01, nG3, $02, nRst, $01, nC3, $02, nRst, $01
+             C2FE : A502 8001         
+(1)  236/    C302 : AC02 8001 B102 8001 	dc.b	nG3, $02, nRst, $01, nC4, $02, nRst, $01, nG3, $02, nRst, $01
+             C30A : AC02 8001         
+(1)  237/    C30E : A502 8001 AC02 8001 	dc.b	nC3, $02, nRst, $01, nG3, $02, nRst, $01, nC4, $02, nRst, $01
+             C316 : B102 8001         
+(1)  238/    C31A : AC02 8001 A502 8001 	dc.b	nG3, $02, nRst, $01, nC3, $02, nRst, $01, nC4, $02, nRst, $01
+             C322 : B102 8001         
+(1)  239/    C326 : AC02 8001 A502 8001 	dc.b	nG3, $02, nRst, $01, nC3, $02, nRst, $01, nC3, $02, nRst, $01
+             C32E : A502 8001         
+(1)  240/    C332 : AC02 8001 B102 8001 	dc.b	nG3, $02, nRst, $01, nC4, $02, nRst, $01, nG3, $02, nRst, $01
+             C33A : AC02 8001         
+(1)  241/    C33E : A502 8001 AC02 8001 	dc.b	nC3, $02, nRst, $01, nG3, $02, nRst, $01, nC4, $02, nRst, $01
+             C346 : B102 8001         
+(1)  242/    C34A : AC02 8001 A502 8001 	dc.b	nG3, $02, nRst, $01, nC3, $02, nRst, $01, nG3, $02, nRst, $01
+             C352 : AC02 8001         
+(1)  243/    C356 : B102 8001 AC02 8001 	dc.b	nC4, $02, nRst, $01, nG3, $02, nRst, $01, nC3, $02, nRst, $01
+             C35E : A502 8001         
+(1)  244/    C362 : AC02 8001 B102 8001 	dc.b	nG3, $02, nRst, $01, nC4, $02, nRst, $01, nG3, $02, nRst, $01
+             C36A : AC02 8001         
+(1)  245/    C36E : A502 8001 AC02 8001 	dc.b	nC3, $02, nRst, $01, nG3, $02, nRst, $01, nC4, $02, nRst, $01
+             C376 : B102 8001         
+(1)  246/    C37A : AC02 8001 A502 8001 	dc.b	nG3, $02, nRst, $01, nC3, $02, nRst, $01, nG3, $02, nRst, $01
+             C382 : AC02 8001         
+(1)  247/    C386 : B102 8001 AC02 8001 	dc.b	nC4, $02, nRst, $01, nG3, $02, nRst, $01, nC3, $02, nRst, $01
+             C38E : A502 8001         
+(1)  248/    C392 : AC02 8001 B102 8001 	dc.b	nG3, $02, nRst, $01, nC4, $02, nRst, $01, nG3, $02, nRst, $01
+             C39A : AC02 8001         
+(1)  249/    C39E : A502 8001 B102 8001 	dc.b	nC3, $02, nRst, $01, nC4, $02, nRst, $01, nG3, $02, nRst, $01
+             C3A6 : AC02 8001         
+(1)  250/    C3AA : A502 8001 A502 8001 	dc.b	nC3, $02, nRst, $01, nC3, $02, nRst, $01, nG3, $02, nRst, $01
+             C3B2 : AC02 8001         
+(1)  251/    C3B6 : B102 8001 AC02 8001 	dc.b	nC4, $02, nRst, $01, nG3, $02, nRst, $01, nC3, $02, nRst, $01
+             C3BE : A502 8001         
+(1)  252/    C3C2 : AC02 8001 B102 8001 	dc.b	nG3, $02, nRst, $01, nC4, $02, nRst, $01, nG3, $02, nRst, $01
+             C3CA : AC02 8001         
+(1)  253/    C3CE : A502 8001 AC02 8001 	dc.b	nC3, $02, nRst, $01, nG3, $02, nRst, $01, nC4, $02, nRst, $01
+             C3D6 : B102 8001         
+(1)  254/    C3DA : AC02 8001 A502 8001 	dc.b	nG3, $02, nRst, $01, nC3, $02, nRst, $01, nG3, $02, nRst, $01
+             C3E2 : AC02 8001         
+(1)  255/    C3E6 : B102 8001 AC02 8001 	dc.b	nC4, $02, nRst, $01, nG3, $02, nRst, $01, nC3, $02, nRst, $01
+             C3EE : A502 8001         
+(1)  256/    C3F2 : AC02 8001 B102 8001 	dc.b	nG3, $02, nRst, $01, nC4, $02, nRst, $01, nG3, $02, nRst, $01
+             C3FA : AC02 8001         
+(1)  257/    C3FE : A502 8001 AC02 8001 	dc.b	nC3, $02, nRst, $01, nG3, $02, nRst, $01, nC4, $02, nRst, $01
+             C406 : B102 8001         
+(1)  258/    C40A : A502 8046           	dc.b	nC3, $02, nRst, $46
+(1)  259/    C40E : (MACRO)             	smpsPan             panCenter, $00
+(1)  259/    C40E : =$0                 panNone set $00
+(1)  259/    C40E : =$40                panRight set $40
+(1)  259/    C40E : =$80                panLeft set $80
+(1)  259/    C40E : =$C0                panCentre set $C0
+(1)  259/    C40E : =$C0                panCenter set $C0 ; silly Americans :U
+(1)  259/    C40E : E0C0                        dc.b $E0,PANCENTER+$00
+(1)  260/    C410 : 03A5 0280 01AA 0280 	dc.b	$03, nC3, $02, nRst, $01, nF3, $02, nRst, $01, nC4, $02, nRst
+             C418 : 01B1 0280         
+(1)  261/    C41C : 01A5 0280 01AA 0280 	dc.b	$01, nC3, $02, nRst, $01, nF3, $02, nRst, $01, nC4, $02, nRst
+             C424 : 01B1 0280         
+(1)  262/    C428 : 01A5 0280 01AA 0280 	dc.b	$01, nC3, $02, nRst, $01, nF3, $02, nRst, $01, nC4, $02, nRst
+             C430 : 01B1 0280         
+(1)  263/    C434 : 01A5 0280 01AA 0280 	dc.b	$01, nC3, $02, nRst, $01, nF3, $02, nRst, $01, nC4, $02, nRst
+             C43C : 01B1 0280         
+(1)  264/    C440 : 01A5 0280 01AA 0280 	dc.b	$01, nC3, $02, nRst, $01, nF3, $02, nRst, $01, nC4, $02, nRst
+             C448 : 01B1 0280         
+(1)  265/    C44C : 01A5 0280 2E        	dc.b	$01, nC3, $02, nRst, $2E
+(1)  266/    C451 : (MACRO)             	smpsPan             panCenter, $00
+(1)  266/    C451 : =$0                 panNone set $00
+(1)  266/    C451 : =$40                panRight set $40
+(1)  266/    C451 : =$80                panLeft set $80
+(1)  266/    C451 : =$C0                panCentre set $C0
+(1)  266/    C451 : =$C0                panCenter set $C0 ; silly Americans :U
+(1)  266/    C451 : E0C0                        dc.b $E0,PANCENTER+$00
+(1)  267/    C453 : 03A5 0280 01AA 0280 	dc.b	$03, nC3, $02, nRst, $01, nF3, $02, nRst, $01, nC4, $02, nRst
+             C45B : 01B1 0280         
+(1)  268/    C45F : 01A5 0280 01AA 0280 	dc.b	$01, nC3, $02, nRst, $01, nF3, $02, nRst, $01, nC4, $02, nRst
+             C467 : 01B1 0280         
+(1)  269/    C46B : 01A5 0280 01AA 0280 	dc.b	$01, nC3, $02, nRst, $01, nF3, $02, nRst, $01, nC4, $02, nRst
+             C473 : 01B1 0280         
+(1)  270/    C477 : 01A5 0280 01AA 0280 	dc.b	$01, nC3, $02, nRst, $01, nF3, $02, nRst, $01, nC4, $02, nRst
+             C47F : 01B1 0280         
+(1)  271/    C483 : 01A5 0280 01AA 0280 	dc.b	$01, nC3, $02, nRst, $01, nF3, $02, nRst, $01, nC4, $02, nRst
+             C48B : 01B1 0280         
+(1)  272/    C48F : 01A5 0280 2E        	dc.b	$01, nC3, $02, nRst, $2E
+(1)  273/    C494 : (MACRO)             	smpsPan             panCenter, $00
+(1)  273/    C494 : =$0                 panNone set $00
+(1)  273/    C494 : =$40                panRight set $40
+(1)  273/    C494 : =$80                panLeft set $80
+(1)  273/    C494 : =$C0                panCentre set $C0
+(1)  273/    C494 : =$C0                panCenter set $C0 ; silly Americans :U
+(1)  273/    C494 : E0C0                        dc.b $E0,PANCENTER+$00
+(1)  274/    C496 : 03A5 0280 01AA 0280 	dc.b	$03, nC3, $02, nRst, $01, nF3, $02, nRst, $01, nC4, $02, nRst
+             C49E : 01B1 0280         
+(1)  275/    C4A2 : 01A5 0280 01AA 0280 	dc.b	$01, nC3, $02, nRst, $01, nF3, $02, nRst, $01, nC4, $02, nRst
+             C4AA : 01B1 0280         
+(1)  276/    C4AE : 01A5 0280 01AA 0280 	dc.b	$01, nC3, $02, nRst, $01, nF3, $02, nRst, $01, nC4, $02, nRst
+             C4B6 : 01B1 0280         
+(1)  277/    C4BA : 01A5 0280 01AA 0280 	dc.b	$01, nC3, $02, nRst, $01, nF3, $02, nRst, $01, nC4, $02, nRst
+             C4C2 : 01B1 0280         
+(1)  278/    C4C6 : 01A5 0280 01AA 0280 	dc.b	$01, nC3, $02, nRst, $01, nF3, $02, nRst, $01, nC4, $02, nRst
+             C4CE : 01B1 0280         
+(1)  279/    C4D2 : 01A5 0280 2E        	dc.b	$01, nC3, $02, nRst, $2E
+(1)  280/    C4D7 : (MACRO)             	smpsPan             panCenter, $00
+(1)  280/    C4D7 : =$0                 panNone set $00
+(1)  280/    C4D7 : =$40                panRight set $40
+(1)  280/    C4D7 : =$80                panLeft set $80
+(1)  280/    C4D7 : =$C0                panCentre set $C0
+(1)  280/    C4D7 : =$C0                panCenter set $C0 ; silly Americans :U
+(1)  280/    C4D7 : E0C0                        dc.b $E0,PANCENTER+$00
+(1)  281/    C4D9 : 03AA 0280 01AC 0280 	dc.b	$03, nF3, $02, nRst, $01, nG3, $02, nRst, $01, nBb3, $02, nRst
+             C4E1 : 01AF 0280         
+(1)  282/    C4E5 : 01B3 0280 01AA 0280 	dc.b	$01, nD4, $02, nRst, $01, nF3, $02, nRst, $01, nG3, $02, nRst
+             C4ED : 01AC 0280         
+(1)  283/    C4F1 : 01AF 0280 01B3 0280 	dc.b	$01, nBb3, $02, nRst, $01, nD4, $02, nRst, $01, nF3, $02, nRst
+             C4F9 : 01AA 0280         
+(1)  284/    C4FD : 01AC 0280 01AF 0280 	dc.b	$01, nG3, $02, nRst, $01, nBb3, $02, nRst, $01, nD4, $02, nRst
+             C505 : 01B3 0280         
+(1)  285/    C509 : 01AA 0280 01AC 0280 	dc.b	$01, nF3, $02, nRst, $01, nG3, $02, nRst, $01, nBb3, $02, nRst
+             C511 : 01AF 0280         
+(1)  286/    C515 : 01                  	dc.b	$01
+(1)  287/    C516 : (MACRO)             	smpsPan             panCenter, $00
+(1)  287/    C516 : =$0                 panNone set $00
+(1)  287/    C516 : =$40                panRight set $40
+(1)  287/    C516 : =$80                panLeft set $80
+(1)  287/    C516 : =$C0                panCentre set $C0
+(1)  287/    C516 : =$C0                panCenter set $C0 ; silly Americans :U
+(1)  287/    C516 : E0C0                        dc.b $E0,PANCENTER+$00
+(1)  288/    C518 : B302 8001 AA02 8001 	dc.b	nD4, $02, nRst, $01, nF3, $02, nRst, $01, nG3, $02, nRst, $01
+             C520 : AC02 8001         
+(1)  289/    C524 : B102 8001 B302 8001 	dc.b	nC4, $02, nRst, $01, nD4, $02, nRst, $01, nF3, $02, nRst, $01
+             C52C : AA02 8001         
+(1)  290/    C530 : AC02 8001 B102 8001 	dc.b	nG3, $02, nRst, $01, nC4, $02, nRst, $01, nD4, $02, nRst, $01
+             C538 : B302 8001         
+(1)  291/    C53C : AA02 8001 AC02 8001 	dc.b	nF3, $02, nRst, $01, nG3, $02, nRst, $01, nC4, $02, nRst, $01
+             C544 : B102 8001         
+(1)  292/    C548 : B302 8001 AA02 8001 	dc.b	nD4, $02, nRst, $01, nF3, $02, nRst, $01, nG3, $02, nRst, $01
+             C550 : AC02 8001         
+(1)  293/    C554 : B302 8001           	dc.b	nD4, $02, nRst, $01
+(1)  294/    C558 : (MACRO)             	smpsPan             panCenter, $00
+(1)  294/    C558 : =$0                 panNone set $00
+(1)  294/    C558 : =$40                panRight set $40
+(1)  294/    C558 : =$80                panLeft set $80
+(1)  294/    C558 : =$C0                panCentre set $C0
+(1)  294/    C558 : =$C0                panCenter set $C0 ; silly Americans :U
+(1)  294/    C558 : E0C0                        dc.b $E0,PANCENTER+$00
+(1)  295/    C55A : AC02 8001           	dc.b	nG3, $02, nRst, $01
+(1)  296/    C55E : (MACRO)             	smpsPan             panCenter, $00
+(1)  296/    C55E : =$0                 panNone set $00
+(1)  296/    C55E : =$40                panRight set $40
+(1)  296/    C55E : =$80                panLeft set $80
+(1)  296/    C55E : =$C0                panCentre set $C0
+(1)  296/    C55E : =$C0                panCenter set $C0 ; silly Americans :U
+(1)  296/    C55E : E0C0                        dc.b $E0,PANCENTER+$00
+(1)  297/    C560 : (MACRO)             	smpsSetvoice        $04
+(1)  297/    C560 :  (MACRO-2)                  smpsFMvoice $04
+(1)  297/    C560 : EF04                                dc.b    $EF,$04
+(1)  298/    C562 : 0E                  	dc.b	$0E
+(1)  299/    C563 : (MACRO)             	smpsPan             panCenter, $00
+(1)  299/    C563 : =$0                 panNone set $00
+(1)  299/    C563 : =$40                panRight set $40
+(1)  299/    C563 : =$80                panLeft set $80
+(1)  299/    C563 : =$C0                panCentre set $C0
+(1)  299/    C563 : =$C0                panCenter set $C0 ; silly Americans :U
+(1)  299/    C563 : E0C0                        dc.b $E0,PANCENTER+$00
+(1)  300/    C565 : (MACRO)             	smpsSetvoice        $04
+(1)  300/    C565 :  (MACRO-2)                  smpsFMvoice $04
+(1)  300/    C565 : EF04                                dc.b    $EF,$04
+(1)  301/    C567 : (MACRO)             	smpsStop
+(1)  301/    C567 : F2                          dc.b    $F2
+(1)  302/    C568 :                     
+(1)  303/    C568 :                     ; PSG1 Data
+(1)  304/    C568 :                     TestSong_PSG1:
+(1)  305/    C568 : (MACRO)             	smpsPSGAlterVol     $01
+(1)  305/    C568 : EC01                        dc.b    $EC,$01
+(1)  306/    C56A : A008 8001 9F18 8003 	dc.b	nG2, $08, nRst, $01, nFs2, $18, nRst, $03, nF2, $08, nRst, $01
+             C572 : 9E08 8001         
+(1)  307/    C576 : 9D17 8004 9C08 8001 	dc.b	nE2, $17, nRst, $04, nEb2, $08, nRst, $01, nFs2, $0C, nRst, $7F
+             C57E : 9F0C 807F         
+(1)  308/    C582 : 7F49                	dc.b	$7F, $49
+(1)  309/    C584 : (MACRO)             	smpsPSGAlterVol     $02
+(1)  309/    C584 : EC02                        dc.b    $EC,$02
+(1)  310/    C586 : A003 9E03 A003 A409 	dc.b	nG2, $03, nF2, $03, nG2, $03, nB2, $09, nG2, $03, nRst, $7F
+             C58E : A003 807F         
+(1)  311/    C592 : 239E 0380 06A0 03A2 	dc.b	$23, nF2, $03, nRst, $06, nG2, $03, nA2, $03, nBb2, $03, nB2
+             C59A : 03A3 03A4         
+(1)  312/    C59E : 1B80 24A5 0680 12A5 	dc.b	$1B, nRst, $24, nC3, $06, nRst, $12, nC3, $06, nRst, $12, nC3
+             C5A6 : 0680 12A5         
+(1)  313/    C5AA : 0680 12A5 0680 12A5 	dc.b	$06, nRst, $12, nC3, $06, nRst, $12, nC3, $06, nRst, $12, nC3
+             C5B2 : 0680 12A5         
+(1)  314/    C5B6 : 0680 12A5 0680 12A5 	dc.b	$06, nRst, $12, nC3, $06, nRst, $12, nC3, $06, nRst, $12, nC3
+             C5BE : 0680 12A5         
+(1)  315/    C5C2 : 0680 12A5 0680 12A5 	dc.b	$06, nRst, $12, nC3, $06, nRst, $12, nC3, $06, nRst, $12, nC3
+             C5CA : 0680 12A5         
+(1)  316/    C5CE : 0680 12A5 0680 12A5 	dc.b	$06, nRst, $12, nC3, $06, nRst, $12, nC3, $06, nRst, $2D
+             C5D6 : 0680 2D            
+(1)  317/    C5D9 : (MACRO)             	smpsPSGAlterVol     $FD
+(1)  317/    C5D9 : ECFD                        dc.b    $EC,$FD
+(1)  318/    C5DB : A503 A703 AC03 8003 	dc.b	nC3, $03, nD3, $03, nG3, $03, nRst, $03, nF3, $03, nRst, $06
+             C5E3 : AA03 8006         
+(1)  319/    C5E7 : A904 8005 A70F AC09 	dc.b	nE3, $04, nRst, $05, nD3, $0F, nG3, $09, nC3, $1B, nRst, $1B
+             C5EF : A51B 801B         
+(1)  320/    C5F3 : AA03 8006 A904 8005 	dc.b	nF3, $03, nRst, $06, nE3, $04, nRst, $05, nD3, $0F, nG3, $09
+             C5FB : A70F AC09         
+(1)  321/    C5FF : AE1B 800F A503 A703 	dc.b	nA3, $1B, nRst, $0F, nC3, $03, nD3, $03, nG3, $03, nRst, $03
+             C607 : AC03 8003         
+(1)  322/    C60B : AA03 8006 A904 8005 	dc.b	nF3, $03, nRst, $06, nE3, $04, nRst, $05, nD3, $0F, nG3, $09
+             C613 : A70F AC09         
+(1)  323/    C617 : A51B 801B AA03 8006 	dc.b	nC3, $1B, nRst, $1B, nF3, $03, nRst, $06, nE3, $03, nRst, $06
+             C61F : A903 8006         
+(1)  324/    C623 : A703 8006 A503 8006 	dc.b	nD3, $03, nRst, $06, nC3, $03, nRst, $06, nA3, $05, nRst, $01
+             C62B : AE05 8001         
+(1)  325/    C62F : AC1B 8006 A503 8003 	dc.b	nG3, $1B, nRst, $06, nC3, $03, nRst, $03, nD3, $03, nRst, $03
+             C637 : A703 8003         
+(1)  326/    C63B : AC03 8033           	dc.b	nG3, $03, nRst, $33
+(1)  327/    C63F : (MACRO)             	smpsPSGvoice        sTone_05
+(1)  327/    C63F : F505                        dc.b    $F5,STONE_05
+(1)  328/    C641 : 0E                  	dc.b	$0E
+(1)  329/    C642 : (MACRO)             	smpsPSGvoice        sTone_05
+(1)  329/    C642 : F505                        dc.b    $F5,STONE_05
+(1)  330/    C644 : (MACRO)             	smpsStop
+(1)  330/    C644 : F2                          dc.b    $F2
+(1)  331/    C645 :                     
+(1)  332/    C645 :                     ; PSG2 Data
+(1)  333/    C645 :                     TestSong_PSG2:
+(1)  334/    C645 : (MACRO)             	smpsPSGAlterVol     $03
+(1)  334/    C645 : EC03                        dc.b    $EC,$03
+(1)  335/    C647 : 9808 8001 9619 8002 	dc.b	nB1, $08, nRst, $01, nA1, $19, nRst, $02, nA1, $08, nRst, $01
+             C64F : 9608 8001         
+(1)  336/    C653 : 9418 8003 9408 8001 	dc.b	nG1, $18, nRst, $03, nG1, $08, nRst, $01, nA1, $0C, nRst, $7F
+             C65B : 960C 807F         
+(1)  337/    C65F : 7F49                	dc.b	$7F, $49
+(1)  338/    C661 : (MACRO)             	smpsPSGAlterVol     $01
+(1)  338/    C661 : EC01                        dc.b    $EC,$01
+(1)  339/    C663 : 9403 9203 9403 9809 	dc.b	nG1, $03, nF1, $03, nG1, $03, nB1, $09, nG1, $03, nRst, $7F
+             C66B : 9403 807F         
+(1)  340/    C66F : 2392 0380 0694 0396 	dc.b	$23, nF1, $03, nRst, $06, nG1, $03, nA1, $03, nBb1, $03, nB1
+             C677 : 0397 0398         
+(1)  341/    C67B : 1B80 1E99 0380 0999 	dc.b	$1B, nRst, $1E, nC2, $03, nRst, $09, nC2, $03, nRst, $06, nC2
+             C683 : 0380 0699         
+(1)  342/    C687 : 0280 0199 0280 0A99 	dc.b	$02, nRst, $01, nC2, $02, nRst, $0A, nC2, $03, nRst, $09, nC2
+             C68F : 0380 0999         
+(1)  343/    C693 : 0380 0999 0380 0699 	dc.b	$03, nRst, $09, nC2, $03, nRst, $06, nC2, $02, nRst, $01, nC2
+             C69B : 0280 0199         
+(1)  344/    C69F : 0280 0A99 0380 0999 	dc.b	$02, nRst, $0A, nC2, $03, nRst, $09, nC2, $03, nRst, $09, nC2
+             C6A7 : 0380 0999         
+(1)  345/    C6AB : 0380 0699 0280 0199 	dc.b	$03, nRst, $06, nC2, $02, nRst, $01, nC2, $02, nRst, $0A, nC2
+             C6B3 : 0280 0A99         
+(1)  346/    C6B7 : 0380 0999 0380 0999 	dc.b	$03, nRst, $09, nC2, $03, nRst, $09, nC2, $03, nRst, $06, nC2
+             C6BF : 0380 0699         
+(1)  347/    C6C3 : 0280 0199 0280 0A99 	dc.b	$02, nRst, $01, nC2, $02, nRst, $0A, nC2, $03, nRst, $09, nC2
+             C6CB : 0380 0999         
+(1)  348/    C6CF : 0380 0999 0380 0699 	dc.b	$03, nRst, $09, nC2, $03, nRst, $06, nC2, $02, nRst, $01, nC2
+             C6D7 : 0280 0199         
+(1)  349/    C6DB : 0280 0A99 0380 0999 	dc.b	$02, nRst, $0A, nC2, $03, nRst, $09, nC2, $03, nRst, $09, nC2
+             C6E3 : 0380 0999         
+(1)  350/    C6E7 : 0380 0699 0280 0199 	dc.b	$03, nRst, $06, nC2, $02, nRst, $01, nC2, $02, nRst, $0A, nC2
+             C6EF : 0280 0A99         
+(1)  351/    C6F3 : 0380 0999 0380 0999 	dc.b	$03, nRst, $09, nC2, $03, nRst, $09, nC2, $03, nRst, $06, nC2
+             C6FB : 0380 0699         
+(1)  352/    C6FF : 0280 0199 0280 0A99 	dc.b	$02, nRst, $01, nC2, $02, nRst, $0A, nC2, $03, nRst, $2A
+             C707 : 0380 2A            
+(1)  353/    C70A : (MACRO)             	smpsPSGAlterVol     $FE
+(1)  353/    C70A : ECFE                        dc.b    $EC,$FE
+(1)  354/    C70C : 9903 9B03 A003 8003 	dc.b	nC2, $03, nD2, $03, nG2, $03, nRst, $03, nF2, $03, nRst, $06
+             C714 : 9E03 8006         
+(1)  355/    C718 : 9D04 8005 9B0F A009 	dc.b	nE2, $04, nRst, $05, nD2, $0F, nG2, $09, nC2, $1B, nRst, $1B
+             C720 : 991B 801B         
+(1)  356/    C724 : 9E03 8006 9D04 8005 	dc.b	nF2, $03, nRst, $06, nE2, $04, nRst, $05, nD2, $0F, nG2, $09
+             C72C : 9B0F A009         
+(1)  357/    C730 : A21B 800F 9903 9B03 	dc.b	nA2, $1B, nRst, $0F, nC2, $03, nD2, $03, nG2, $03, nRst, $03
+             C738 : A003 8003         
+(1)  358/    C73C : 9E03 8006 9D04 8005 	dc.b	nF2, $03, nRst, $06, nE2, $04, nRst, $05, nD2, $0F, nG2, $09
+             C744 : 9B0F A009         
+(1)  359/    C748 : 991B 801B 9E03 8006 	dc.b	nC2, $1B, nRst, $1B, nF2, $03, nRst, $06, nE2, $03, nRst, $06
+             C750 : 9D03 8006         
+(1)  360/    C754 : 9B03 8006 9903 8006 	dc.b	nD2, $03, nRst, $06, nC2, $03, nRst, $06, nA2, $05, nRst, $01
+             C75C : A205 8001         
+(1)  361/    C760 : A01B 8006 9903 8003 	dc.b	nG2, $1B, nRst, $06, nC2, $03, nRst, $03, nD2, $03, nRst, $03
+             C768 : 9B03 8003         
+(1)  362/    C76C : A003 8033           	dc.b	nG2, $03, nRst, $33
+(1)  363/    C770 : (MACRO)             	smpsPSGvoice        $00
+(1)  363/    C770 : F500                        dc.b    $F5,$00
+(1)  364/    C772 : 0E                  	dc.b	$0E
+(1)  365/    C773 : (MACRO)             	smpsPSGvoice        $00
+(1)  365/    C773 : F500                        dc.b    $F5,$00
+(1)  366/    C775 : (MACRO)             	smpsStop
+(1)  366/    C775 : F2                          dc.b    $F2
+(1)  367/    C776 :                     
+(1)  368/    C776 :                     ; DAC Data
+(1)  369/    C776 :                     TestSong_DAC:
+(1)  370/    C776 : (MACRO)             	smpsStop
+(1)  370/    C776 : F2                          dc.b    $F2
+(1)  371/    C777 :                     
+(1)  372/    C777 :                     TestSong_Voices:
+(1)  373/    C777 :                     ;	Voice $00
+(1)  374/    C777 :                     ;	$3A
+(1)  375/    C777 :                     ;	$71, $0C, $33, $01, 	$1C, $16, $1D, $1F, 	$04, $06, $04, $08
+(1)  376/    C777 :                     ;	$00, $01, $03, $00, 	$16, $17, $16, $A6, 	$25, $2F, $25, $00
+(1)  377/    C777 : (MACRO)             	smpsVcAlgorithm     $02
+(1)  377/    C777 : =$2                 vcAlgorithm set $02
+(1)  378/    C777 : (MACRO)             	smpsVcFeedback      $07
+(1)  378/    C777 : =$7                 vcFeedback set $07
+(1)  379/    C777 : (MACRO)             	smpsVcUnusedBits    $00
+(1)  379/    C777 : =$0                 vcUnusedBits set $00
+(1)  379/    C777 : =$0                 vcD1R1Unk set 0
+(1)  379/    C777 : =$0                 vcD1R2Unk set 0
+(1)  379/    C777 : =$0                 vcD1R3Unk set 0
+(1)  379/    C777 : =$0                 vcD1R4Unk set 0
+(1)  380/    C777 : (MACRO)             	smpsVcDetune        $00, $03, $00, $07
+(1)  380/    C777 : =$0                 vcDT1 set $00
+(1)  380/    C777 : =$3                 vcDT2 set $03
+(1)  380/    C777 : =$0                 vcDT3 set $00
+(1)  380/    C777 : =$7                 vcDT4 set $07
+(1)  381/    C777 : (MACRO)             	smpsVcCoarseFreq    $01, $03, $0C, $01
+(1)  381/    C777 : =$1                 vcCF1 set $01
+(1)  381/    C777 : =$3                 vcCF2 set $03
+(1)  381/    C777 : =$C                 vcCF3 set $0C
+(1)  381/    C777 : =$1                 vcCF4 set $01
+(1)  382/    C777 : (MACRO)             	smpsVcRateScale     $00, $00, $00, $00
+(1)  382/    C777 : =$0                 vcRS1 set $00
+(1)  382/    C777 : =$0                 vcRS2 set $00
+(1)  382/    C777 : =$0                 vcRS3 set $00
+(1)  382/    C777 : =$0                 vcRS4 set $00
+(1)  383/    C777 : (MACRO)             	smpsVcAttackRate    $1F, $1D, $16, $1C
+(1)  383/    C777 : =$1F                vcAR1 set $1F
+(1)  383/    C777 : =$1D                vcAR2 set $1D
+(1)  383/    C777 : =$16                vcAR3 set $16
+(1)  383/    C777 : =$1C                vcAR4 set $1C
+(1)  384/    C777 : (MACRO)             	smpsVcAmpMod        $00, $00, $00, $00
+(1)  384/    C777 : =$0                 vcAM1 set $00<<5
+(1)  384/    C777 : =$0                 vcAM2 set $00<<5
+(1)  384/    C777 : =$0                 vcAM3 set $00<<5
+(1)  384/    C777 : =$0                 vcAM4 set $00<<5
+(1)  385/    C777 : (MACRO)             	smpsVcDecayRate1    $08, $04, $06, $04
+(1)  385/    C777 : =$8                 vcD1R1 set $08
+(1)  385/    C777 : =$4                 vcD1R2 set $04
+(1)  385/    C777 : =$6                 vcD1R3 set $06
+(1)  385/    C777 : =$4                 vcD1R4 set $04
+(1)  386/    C777 : (MACRO)             	smpsVcDecayRate2    $00, $03, $01, $00
+(1)  386/    C777 : =$0                 vcD2R1 set $00
+(1)  386/    C777 : =$3                 vcD2R2 set $03
+(1)  386/    C777 : =$1                 vcD2R3 set $01
+(1)  386/    C777 : =$0                 vcD2R4 set $00
+(1)  387/    C777 : (MACRO)             	smpsVcDecayLevel    $0A, $01, $01, $01
+(1)  387/    C777 : =$A                 vcDL1 set $0A
+(1)  387/    C777 : =$1                 vcDL2 set $01
+(1)  387/    C777 : =$1                 vcDL3 set $01
+(1)  387/    C777 : =$1                 vcDL4 set $01
+(1)  388/    C777 : (MACRO)             	smpsVcReleaseRate   $06, $06, $07, $06
+(1)  388/    C777 : =$6                 vcRR1 set $06
+(1)  388/    C777 : =$6                 vcRR2 set $06
+(1)  388/    C777 : =$7                 vcRR3 set $07
+(1)  388/    C777 : =$6                 vcRR4 set $06
+(1)  389/    C777 : (MACRO)             	smpsVcTotalLevel    $00, $25, $2F, $25
+(1)  389/    C777 : =$0                 vcTL1 set $00
+(1)  389/    C777 : =$25                vcTL2 set $25
+(1)  389/    C777 : =$2F                vcTL3 set $2F
+(1)  389/    C777 : =$25                vcTL4 set $25
+(1)  389/    C777 : 3A                          dc.b    (vcUnusedBits<<6)+(vcFeedback<<3)+vcAlgorithm
+(1)  389/    C778 :                     ;   0     1     2     3     4     5     6     7
+(1)  389/    C778 :                     ;%1000,%1000,%1000,%1000,%1010,%1110,%1110,%1111
+(1)  389/    C778 : =$0                 vcTLMask4 set ((vcAlgorithm==7)<<7)
+(1)  389/    C778 : =$0                 vcTLMask3 set ((vcAlgorithm>=4)<<7)
+(1)  389/    C778 : =$0                 vcTLMask2 set ((vcAlgorithm>=5)<<7)
+(1)  389/    C778 : =$80                vcTLMask1 set $80
+(1)  389/    C778 :                     
+(1)  389/    C778 :                     
+(1)  389/    C778 : 710C 3301                           dc.b    (vcDT4<<4)+vcCF4       ,(vcDT3<<4)+vcCF3       ,(vcDT2<<4)+vcCF2       ,(vcDT1<<4)+vcCF1
+(1)  389/    C77C : 1C16 1D1F                           dc.b    (vcRS4<<6)+vcAR4       ,(vcRS3<<6)+vcAR3       ,(vcRS2<<6)+vcAR2       ,(vcRS1<<6)+vcAR1
+(1)  389/    C780 : 0406 0408                           dc.b    vcAM4|vcD1R4|vcD1R4Unk ,vcAM3|vcD1R3|vcD1R3Unk ,vcAM2|vcD1R2|vcD1R2Unk ,vcAM1|vcD1R1|vcD1R1Unk
+(1)  389/    C784 : 0001 0300                           dc.b    vcD2R4                 ,vcD2R3                 ,vcD2R2                 ,vcD2R1
+(1)  389/    C788 : 1617 16A6                           dc.b    (vcDL4<<4)+vcRR4       ,(vcDL3<<4)+vcRR3       ,(vcDL2<<4)+vcRR2       ,(vcDL1<<4)+vcRR1
+(1)  389/    C78C : 252F 2580                           dc.b    vcTL4|vcTLMask4        ,vcTL3|vcTLMask3        ,vcTL2|vcTLMask2        ,vcTL1|vcTLMask1
+(1)  390/    C790 :                     
+(1)  391/    C790 :                     ;	Voice $01
+(1)  392/    C790 :                     ;	$3A
+(1)  393/    C790 :                     ;	$71, $0C, $33, $01, 	$1C, $16, $1D, $1F, 	$04, $06, $04, $08
+(1)  394/    C790 :                     ;	$00, $01, $03, $00, 	$16, $17, $16, $A6, 	$25, $2F, $25, $00
+(1)  395/    C790 : (MACRO)             	smpsVcAlgorithm     $02
+(1)  395/    C790 : =$2                 vcAlgorithm set $02
+(1)  396/    C790 : (MACRO)             	smpsVcFeedback      $07
+(1)  396/    C790 : =$7                 vcFeedback set $07
+(1)  397/    C790 : (MACRO)             	smpsVcUnusedBits    $00
+(1)  397/    C790 : =$0                 vcUnusedBits set $00
+(1)  397/    C790 : =$0                 vcD1R1Unk set 0
+(1)  397/    C790 : =$0                 vcD1R2Unk set 0
+(1)  397/    C790 : =$0                 vcD1R3Unk set 0
+(1)  397/    C790 : =$0                 vcD1R4Unk set 0
+(1)  398/    C790 : (MACRO)             	smpsVcDetune        $00, $03, $00, $07
+(1)  398/    C790 : =$0                 vcDT1 set $00
+(1)  398/    C790 : =$3                 vcDT2 set $03
+(1)  398/    C790 : =$0                 vcDT3 set $00
+(1)  398/    C790 : =$7                 vcDT4 set $07
+(1)  399/    C790 : (MACRO)             	smpsVcCoarseFreq    $01, $03, $0C, $01
+(1)  399/    C790 : =$1                 vcCF1 set $01
+(1)  399/    C790 : =$3                 vcCF2 set $03
+(1)  399/    C790 : =$C                 vcCF3 set $0C
+(1)  399/    C790 : =$1                 vcCF4 set $01
+(1)  400/    C790 : (MACRO)             	smpsVcRateScale     $00, $00, $00, $00
+(1)  400/    C790 : =$0                 vcRS1 set $00
+(1)  400/    C790 : =$0                 vcRS2 set $00
+(1)  400/    C790 : =$0                 vcRS3 set $00
+(1)  400/    C790 : =$0                 vcRS4 set $00
+(1)  401/    C790 : (MACRO)             	smpsVcAttackRate    $1F, $1D, $16, $1C
+(1)  401/    C790 : =$1F                vcAR1 set $1F
+(1)  401/    C790 : =$1D                vcAR2 set $1D
+(1)  401/    C790 : =$16                vcAR3 set $16
+(1)  401/    C790 : =$1C                vcAR4 set $1C
+(1)  402/    C790 : (MACRO)             	smpsVcAmpMod        $00, $00, $00, $00
+(1)  402/    C790 : =$0                 vcAM1 set $00<<5
+(1)  402/    C790 : =$0                 vcAM2 set $00<<5
+(1)  402/    C790 : =$0                 vcAM3 set $00<<5
+(1)  402/    C790 : =$0                 vcAM4 set $00<<5
+(1)  403/    C790 : (MACRO)             	smpsVcDecayRate1    $08, $04, $06, $04
+(1)  403/    C790 : =$8                 vcD1R1 set $08
+(1)  403/    C790 : =$4                 vcD1R2 set $04
+(1)  403/    C790 : =$6                 vcD1R3 set $06
+(1)  403/    C790 : =$4                 vcD1R4 set $04
+(1)  404/    C790 : (MACRO)             	smpsVcDecayRate2    $00, $03, $01, $00
+(1)  404/    C790 : =$0                 vcD2R1 set $00
+(1)  404/    C790 : =$3                 vcD2R2 set $03
+(1)  404/    C790 : =$1                 vcD2R3 set $01
+(1)  404/    C790 : =$0                 vcD2R4 set $00
+(1)  405/    C790 : (MACRO)             	smpsVcDecayLevel    $0A, $01, $01, $01
+(1)  405/    C790 : =$A                 vcDL1 set $0A
+(1)  405/    C790 : =$1                 vcDL2 set $01
+(1)  405/    C790 : =$1                 vcDL3 set $01
+(1)  405/    C790 : =$1                 vcDL4 set $01
+(1)  406/    C790 : (MACRO)             	smpsVcReleaseRate   $06, $06, $07, $06
+(1)  406/    C790 : =$6                 vcRR1 set $06
+(1)  406/    C790 : =$6                 vcRR2 set $06
+(1)  406/    C790 : =$7                 vcRR3 set $07
+(1)  406/    C790 : =$6                 vcRR4 set $06
+(1)  407/    C790 : (MACRO)             	smpsVcTotalLevel    $00, $25, $2F, $25
+(1)  407/    C790 : =$0                 vcTL1 set $00
+(1)  407/    C790 : =$25                vcTL2 set $25
+(1)  407/    C790 : =$2F                vcTL3 set $2F
+(1)  407/    C790 : =$25                vcTL4 set $25
+(1)  407/    C790 : 3A                          dc.b    (vcUnusedBits<<6)+(vcFeedback<<3)+vcAlgorithm
+(1)  407/    C791 :                     ;   0     1     2     3     4     5     6     7
+(1)  407/    C791 :                     ;%1000,%1000,%1000,%1000,%1010,%1110,%1110,%1111
+(1)  407/    C791 : =$0                 vcTLMask4 set ((vcAlgorithm==7)<<7)
+(1)  407/    C791 : =$0                 vcTLMask3 set ((vcAlgorithm>=4)<<7)
+(1)  407/    C791 : =$0                 vcTLMask2 set ((vcAlgorithm>=5)<<7)
+(1)  407/    C791 : =$80                vcTLMask1 set $80
+(1)  407/    C791 :                     
+(1)  407/    C791 :                     
+(1)  407/    C791 : 710C 3301                           dc.b    (vcDT4<<4)+vcCF4       ,(vcDT3<<4)+vcCF3       ,(vcDT2<<4)+vcCF2       ,(vcDT1<<4)+vcCF1
+(1)  407/    C795 : 1C16 1D1F                           dc.b    (vcRS4<<6)+vcAR4       ,(vcRS3<<6)+vcAR3       ,(vcRS2<<6)+vcAR2       ,(vcRS1<<6)+vcAR1
+(1)  407/    C799 : 0406 0408                           dc.b    vcAM4|vcD1R4|vcD1R4Unk ,vcAM3|vcD1R3|vcD1R3Unk ,vcAM2|vcD1R2|vcD1R2Unk ,vcAM1|vcD1R1|vcD1R1Unk
+(1)  407/    C79D : 0001 0300                           dc.b    vcD2R4                 ,vcD2R3                 ,vcD2R2                 ,vcD2R1
+(1)  407/    C7A1 : 1617 16A6                           dc.b    (vcDL4<<4)+vcRR4       ,(vcDL3<<4)+vcRR3       ,(vcDL2<<4)+vcRR2       ,(vcDL1<<4)+vcRR1
+(1)  407/    C7A5 : 252F 2580                           dc.b    vcTL4|vcTLMask4        ,vcTL3|vcTLMask3        ,vcTL2|vcTLMask2        ,vcTL1|vcTLMask1
+(1)  408/    C7A9 :                     
+(1)  409/    C7A9 :                     ;	Voice $02
+(1)  410/    C7A9 :                     ;	$04
+(1)  411/    C7A9 :                     ;	$71, $41, $31, $31, 	$12, $12, $12, $12, 	$00, $00, $00, $00
+(1)  412/    C7A9 :                     ;	$00, $00, $00, $00, 	$0F, $0F, $0F, $0F, 	$23, $00, $23, $00
+(1)  413/    C7A9 : (MACRO)             	smpsVcAlgorithm     $04
+(1)  413/    C7A9 : =$4                 vcAlgorithm set $04
+(1)  414/    C7A9 : (MACRO)             	smpsVcFeedback      $00
+(1)  414/    C7A9 : =$0                 vcFeedback set $00
+(1)  415/    C7A9 : (MACRO)             	smpsVcUnusedBits    $00
+(1)  415/    C7A9 : =$0                 vcUnusedBits set $00
+(1)  415/    C7A9 : =$0                 vcD1R1Unk set 0
+(1)  415/    C7A9 : =$0                 vcD1R2Unk set 0
+(1)  415/    C7A9 : =$0                 vcD1R3Unk set 0
+(1)  415/    C7A9 : =$0                 vcD1R4Unk set 0
+(1)  416/    C7A9 : (MACRO)             	smpsVcDetune        $03, $03, $04, $07
+(1)  416/    C7A9 : =$3                 vcDT1 set $03
+(1)  416/    C7A9 : =$3                 vcDT2 set $03
+(1)  416/    C7A9 : =$4                 vcDT3 set $04
+(1)  416/    C7A9 : =$7                 vcDT4 set $07
+(1)  417/    C7A9 : (MACRO)             	smpsVcCoarseFreq    $01, $01, $01, $01
+(1)  417/    C7A9 : =$1                 vcCF1 set $01
+(1)  417/    C7A9 : =$1                 vcCF2 set $01
+(1)  417/    C7A9 : =$1                 vcCF3 set $01
+(1)  417/    C7A9 : =$1                 vcCF4 set $01
+(1)  418/    C7A9 : (MACRO)             	smpsVcRateScale     $00, $00, $00, $00
+(1)  418/    C7A9 : =$0                 vcRS1 set $00
+(1)  418/    C7A9 : =$0                 vcRS2 set $00
+(1)  418/    C7A9 : =$0                 vcRS3 set $00
+(1)  418/    C7A9 : =$0                 vcRS4 set $00
+(1)  419/    C7A9 : (MACRO)             	smpsVcAttackRate    $12, $12, $12, $12
+(1)  419/    C7A9 : =$12                vcAR1 set $12
+(1)  419/    C7A9 : =$12                vcAR2 set $12
+(1)  419/    C7A9 : =$12                vcAR3 set $12
+(1)  419/    C7A9 : =$12                vcAR4 set $12
+(1)  420/    C7A9 : (MACRO)             	smpsVcAmpMod        $00, $00, $00, $00
+(1)  420/    C7A9 : =$0                 vcAM1 set $00<<5
+(1)  420/    C7A9 : =$0                 vcAM2 set $00<<5
+(1)  420/    C7A9 : =$0                 vcAM3 set $00<<5
+(1)  420/    C7A9 : =$0                 vcAM4 set $00<<5
+(1)  421/    C7A9 : (MACRO)             	smpsVcDecayRate1    $00, $00, $00, $00
+(1)  421/    C7A9 : =$0                 vcD1R1 set $00
+(1)  421/    C7A9 : =$0                 vcD1R2 set $00
+(1)  421/    C7A9 : =$0                 vcD1R3 set $00
+(1)  421/    C7A9 : =$0                 vcD1R4 set $00
+(1)  422/    C7A9 : (MACRO)             	smpsVcDecayRate2    $00, $00, $00, $00
+(1)  422/    C7A9 : =$0                 vcD2R1 set $00
+(1)  422/    C7A9 : =$0                 vcD2R2 set $00
+(1)  422/    C7A9 : =$0                 vcD2R3 set $00
+(1)  422/    C7A9 : =$0                 vcD2R4 set $00
+(1)  423/    C7A9 : (MACRO)             	smpsVcDecayLevel    $00, $00, $00, $00
+(1)  423/    C7A9 : =$0                 vcDL1 set $00
+(1)  423/    C7A9 : =$0                 vcDL2 set $00
+(1)  423/    C7A9 : =$0                 vcDL3 set $00
+(1)  423/    C7A9 : =$0                 vcDL4 set $00
+(1)  424/    C7A9 : (MACRO)             	smpsVcReleaseRate   $0F, $0F, $0F, $0F
+(1)  424/    C7A9 : =$F                 vcRR1 set $0F
+(1)  424/    C7A9 : =$F                 vcRR2 set $0F
+(1)  424/    C7A9 : =$F                 vcRR3 set $0F
+(1)  424/    C7A9 : =$F                 vcRR4 set $0F
+(1)  425/    C7A9 : (MACRO)             	smpsVcTotalLevel    $00, $23, $00, $23
+(1)  425/    C7A9 : =$0                 vcTL1 set $00
+(1)  425/    C7A9 : =$23                vcTL2 set $23
+(1)  425/    C7A9 : =$0                 vcTL3 set $00
+(1)  425/    C7A9 : =$23                vcTL4 set $23
+(1)  425/    C7A9 : 04                          dc.b    (vcUnusedBits<<6)+(vcFeedback<<3)+vcAlgorithm
+(1)  425/    C7AA :                     ;   0     1     2     3     4     5     6     7
+(1)  425/    C7AA :                     ;%1000,%1000,%1000,%1000,%1010,%1110,%1110,%1111
+(1)  425/    C7AA : =$0                 vcTLMask4 set ((vcAlgorithm==7)<<7)
+(1)  425/    C7AA : =$80                vcTLMask3 set ((vcAlgorithm>=4)<<7)
+(1)  425/    C7AA : =$0                 vcTLMask2 set ((vcAlgorithm>=5)<<7)
+(1)  425/    C7AA : =$80                vcTLMask1 set $80
+(1)  425/    C7AA :                     
+(1)  425/    C7AA :                     
+(1)  425/    C7AA : 7141 3131                           dc.b    (vcDT4<<4)+vcCF4       ,(vcDT3<<4)+vcCF3       ,(vcDT2<<4)+vcCF2       ,(vcDT1<<4)+vcCF1
+(1)  425/    C7AE : 1212 1212                           dc.b    (vcRS4<<6)+vcAR4       ,(vcRS3<<6)+vcAR3       ,(vcRS2<<6)+vcAR2       ,(vcRS1<<6)+vcAR1
+(1)  425/    C7B2 : 0000 0000                           dc.b    vcAM4|vcD1R4|vcD1R4Unk ,vcAM3|vcD1R3|vcD1R3Unk ,vcAM2|vcD1R2|vcD1R2Unk ,vcAM1|vcD1R1|vcD1R1Unk
+(1)  425/    C7B6 : 0000 0000                           dc.b    vcD2R4                 ,vcD2R3                 ,vcD2R2                 ,vcD2R1
+(1)  425/    C7BA : 0F0F 0F0F                           dc.b    (vcDL4<<4)+vcRR4       ,(vcDL3<<4)+vcRR3       ,(vcDL2<<4)+vcRR2       ,(vcDL1<<4)+vcRR1
+(1)  425/    C7BE : 2380 2380                           dc.b    vcTL4|vcTLMask4        ,vcTL3|vcTLMask3        ,vcTL2|vcTLMask2        ,vcTL1|vcTLMask1
+(1)  426/    C7C2 :                     
+(1)  427/    C7C2 :                     ;	Voice $03
+(1)  428/    C7C2 :                     ;	$04
+(1)  429/    C7C2 :                     ;	$71, $41, $31, $31, 	$12, $12, $12, $12, 	$00, $00, $00, $00
+(1)  430/    C7C2 :                     ;	$00, $00, $00, $00, 	$0F, $0F, $0F, $0F, 	$23, $00, $23, $00
+(1)  431/    C7C2 : (MACRO)             	smpsVcAlgorithm     $04
+(1)  431/    C7C2 : =$4                 vcAlgorithm set $04
+(1)  432/    C7C2 : (MACRO)             	smpsVcFeedback      $00
+(1)  432/    C7C2 : =$0                 vcFeedback set $00
+(1)  433/    C7C2 : (MACRO)             	smpsVcUnusedBits    $00
+(1)  433/    C7C2 : =$0                 vcUnusedBits set $00
+(1)  433/    C7C2 : =$0                 vcD1R1Unk set 0
+(1)  433/    C7C2 : =$0                 vcD1R2Unk set 0
+(1)  433/    C7C2 : =$0                 vcD1R3Unk set 0
+(1)  433/    C7C2 : =$0                 vcD1R4Unk set 0
+(1)  434/    C7C2 : (MACRO)             	smpsVcDetune        $03, $03, $04, $07
+(1)  434/    C7C2 : =$3                 vcDT1 set $03
+(1)  434/    C7C2 : =$3                 vcDT2 set $03
+(1)  434/    C7C2 : =$4                 vcDT3 set $04
+(1)  434/    C7C2 : =$7                 vcDT4 set $07
+(1)  435/    C7C2 : (MACRO)             	smpsVcCoarseFreq    $01, $01, $01, $01
+(1)  435/    C7C2 : =$1                 vcCF1 set $01
+(1)  435/    C7C2 : =$1                 vcCF2 set $01
+(1)  435/    C7C2 : =$1                 vcCF3 set $01
+(1)  435/    C7C2 : =$1                 vcCF4 set $01
+(1)  436/    C7C2 : (MACRO)             	smpsVcRateScale     $00, $00, $00, $00
+(1)  436/    C7C2 : =$0                 vcRS1 set $00
+(1)  436/    C7C2 : =$0                 vcRS2 set $00
+(1)  436/    C7C2 : =$0                 vcRS3 set $00
+(1)  436/    C7C2 : =$0                 vcRS4 set $00
+(1)  437/    C7C2 : (MACRO)             	smpsVcAttackRate    $12, $12, $12, $12
+(1)  437/    C7C2 : =$12                vcAR1 set $12
+(1)  437/    C7C2 : =$12                vcAR2 set $12
+(1)  437/    C7C2 : =$12                vcAR3 set $12
+(1)  437/    C7C2 : =$12                vcAR4 set $12
+(1)  438/    C7C2 : (MACRO)             	smpsVcAmpMod        $00, $00, $00, $00
+(1)  438/    C7C2 : =$0                 vcAM1 set $00<<5
+(1)  438/    C7C2 : =$0                 vcAM2 set $00<<5
+(1)  438/    C7C2 : =$0                 vcAM3 set $00<<5
+(1)  438/    C7C2 : =$0                 vcAM4 set $00<<5
+(1)  439/    C7C2 : (MACRO)             	smpsVcDecayRate1    $00, $00, $00, $00
+(1)  439/    C7C2 : =$0                 vcD1R1 set $00
+(1)  439/    C7C2 : =$0                 vcD1R2 set $00
+(1)  439/    C7C2 : =$0                 vcD1R3 set $00
+(1)  439/    C7C2 : =$0                 vcD1R4 set $00
+(1)  440/    C7C2 : (MACRO)             	smpsVcDecayRate2    $00, $00, $00, $00
+(1)  440/    C7C2 : =$0                 vcD2R1 set $00
+(1)  440/    C7C2 : =$0                 vcD2R2 set $00
+(1)  440/    C7C2 : =$0                 vcD2R3 set $00
+(1)  440/    C7C2 : =$0                 vcD2R4 set $00
+(1)  441/    C7C2 : (MACRO)             	smpsVcDecayLevel    $00, $00, $00, $00
+(1)  441/    C7C2 : =$0                 vcDL1 set $00
+(1)  441/    C7C2 : =$0                 vcDL2 set $00
+(1)  441/    C7C2 : =$0                 vcDL3 set $00
+(1)  441/    C7C2 : =$0                 vcDL4 set $00
+(1)  442/    C7C2 : (MACRO)             	smpsVcReleaseRate   $0F, $0F, $0F, $0F
+(1)  442/    C7C2 : =$F                 vcRR1 set $0F
+(1)  442/    C7C2 : =$F                 vcRR2 set $0F
+(1)  442/    C7C2 : =$F                 vcRR3 set $0F
+(1)  442/    C7C2 : =$F                 vcRR4 set $0F
+(1)  443/    C7C2 : (MACRO)             	smpsVcTotalLevel    $00, $23, $00, $23
+(1)  443/    C7C2 : =$0                 vcTL1 set $00
+(1)  443/    C7C2 : =$23                vcTL2 set $23
+(1)  443/    C7C2 : =$0                 vcTL3 set $00
+(1)  443/    C7C2 : =$23                vcTL4 set $23
+(1)  443/    C7C2 : 04                          dc.b    (vcUnusedBits<<6)+(vcFeedback<<3)+vcAlgorithm
+(1)  443/    C7C3 :                     ;   0     1     2     3     4     5     6     7
+(1)  443/    C7C3 :                     ;%1000,%1000,%1000,%1000,%1010,%1110,%1110,%1111
+(1)  443/    C7C3 : =$0                 vcTLMask4 set ((vcAlgorithm==7)<<7)
+(1)  443/    C7C3 : =$80                vcTLMask3 set ((vcAlgorithm>=4)<<7)
+(1)  443/    C7C3 : =$0                 vcTLMask2 set ((vcAlgorithm>=5)<<7)
+(1)  443/    C7C3 : =$80                vcTLMask1 set $80
+(1)  443/    C7C3 :                     
+(1)  443/    C7C3 :                     
+(1)  443/    C7C3 : 7141 3131                           dc.b    (vcDT4<<4)+vcCF4       ,(vcDT3<<4)+vcCF3       ,(vcDT2<<4)+vcCF2       ,(vcDT1<<4)+vcCF1
+(1)  443/    C7C7 : 1212 1212                           dc.b    (vcRS4<<6)+vcAR4       ,(vcRS3<<6)+vcAR3       ,(vcRS2<<6)+vcAR2       ,(vcRS1<<6)+vcAR1
+(1)  443/    C7CB : 0000 0000                           dc.b    vcAM4|vcD1R4|vcD1R4Unk ,vcAM3|vcD1R3|vcD1R3Unk ,vcAM2|vcD1R2|vcD1R2Unk ,vcAM1|vcD1R1|vcD1R1Unk
+(1)  443/    C7CF : 0000 0000                           dc.b    vcD2R4                 ,vcD2R3                 ,vcD2R2                 ,vcD2R1
+(1)  443/    C7D3 : 0F0F 0F0F                           dc.b    (vcDL4<<4)+vcRR4       ,(vcDL3<<4)+vcRR3       ,(vcDL2<<4)+vcRR2       ,(vcDL1<<4)+vcRR1
+(1)  443/    C7D7 : 2380 2380                           dc.b    vcTL4|vcTLMask4        ,vcTL3|vcTLMask3        ,vcTL2|vcTLMask2        ,vcTL1|vcTLMask1
+(1)  444/    C7DB :                     
+(1)  445/    C7DB :                     ;	Voice $04
+(1)  446/    C7DB :                     ;	$3B
+(1)  447/    C7DB :                     ;	$3A, $31, $71, $74, 	$DF, $1F, $1F, $DF, 	$00, $0A, $0A, $05
+(1)  448/    C7DB :                     ;	$00, $05, $05, $03, 	$0F, $5F, $1F, $5F, 	$32, $1E, $0F, $00
+(1)  449/    C7DB : (MACRO)             	smpsVcAlgorithm     $03
+(1)  449/    C7DB : =$3                 vcAlgorithm set $03
+(1)  450/    C7DB : (MACRO)             	smpsVcFeedback      $07
+(1)  450/    C7DB : =$7                 vcFeedback set $07
+(1)  451/    C7DB : (MACRO)             	smpsVcUnusedBits    $00
+(1)  451/    C7DB : =$0                 vcUnusedBits set $00
+(1)  451/    C7DB : =$0                 vcD1R1Unk set 0
+(1)  451/    C7DB : =$0                 vcD1R2Unk set 0
+(1)  451/    C7DB : =$0                 vcD1R3Unk set 0
+(1)  451/    C7DB : =$0                 vcD1R4Unk set 0
+(1)  452/    C7DB : (MACRO)             	smpsVcDetune        $07, $07, $03, $03
+(1)  452/    C7DB : =$7                 vcDT1 set $07
+(1)  452/    C7DB : =$7                 vcDT2 set $07
+(1)  452/    C7DB : =$3                 vcDT3 set $03
+(1)  452/    C7DB : =$3                 vcDT4 set $03
+(1)  453/    C7DB : (MACRO)             	smpsVcCoarseFreq    $04, $01, $01, $0A
+(1)  453/    C7DB : =$4                 vcCF1 set $04
+(1)  453/    C7DB : =$1                 vcCF2 set $01
+(1)  453/    C7DB : =$1                 vcCF3 set $01
+(1)  453/    C7DB : =$A                 vcCF4 set $0A
+(1)  454/    C7DB : (MACRO)             	smpsVcRateScale     $03, $00, $00, $03
+(1)  454/    C7DB : =$3                 vcRS1 set $03
+(1)  454/    C7DB : =$0                 vcRS2 set $00
+(1)  454/    C7DB : =$0                 vcRS3 set $00
+(1)  454/    C7DB : =$3                 vcRS4 set $03
+(1)  455/    C7DB : (MACRO)             	smpsVcAttackRate    $1F, $1F, $1F, $1F
+(1)  455/    C7DB : =$1F                vcAR1 set $1F
+(1)  455/    C7DB : =$1F                vcAR2 set $1F
+(1)  455/    C7DB : =$1F                vcAR3 set $1F
+(1)  455/    C7DB : =$1F                vcAR4 set $1F
+(1)  456/    C7DB : (MACRO)             	smpsVcAmpMod        $00, $00, $00, $00
+(1)  456/    C7DB : =$0                 vcAM1 set $00<<5
+(1)  456/    C7DB : =$0                 vcAM2 set $00<<5
+(1)  456/    C7DB : =$0                 vcAM3 set $00<<5
+(1)  456/    C7DB : =$0                 vcAM4 set $00<<5
+(1)  457/    C7DB : (MACRO)             	smpsVcDecayRate1    $05, $0A, $0A, $00
+(1)  457/    C7DB : =$5                 vcD1R1 set $05
+(1)  457/    C7DB : =$A                 vcD1R2 set $0A
+(1)  457/    C7DB : =$A                 vcD1R3 set $0A
+(1)  457/    C7DB : =$0                 vcD1R4 set $00
+(1)  458/    C7DB : (MACRO)             	smpsVcDecayRate2    $03, $05, $05, $00
+(1)  458/    C7DB : =$3                 vcD2R1 set $03
+(1)  458/    C7DB : =$5                 vcD2R2 set $05
+(1)  458/    C7DB : =$5                 vcD2R3 set $05
+(1)  458/    C7DB : =$0                 vcD2R4 set $00
+(1)  459/    C7DB : (MACRO)             	smpsVcDecayLevel    $05, $01, $05, $00
+(1)  459/    C7DB : =$5                 vcDL1 set $05
+(1)  459/    C7DB : =$1                 vcDL2 set $01
+(1)  459/    C7DB : =$5                 vcDL3 set $05
+(1)  459/    C7DB : =$0                 vcDL4 set $00
+(1)  460/    C7DB : (MACRO)             	smpsVcReleaseRate   $0F, $0F, $0F, $0F
+(1)  460/    C7DB : =$F                 vcRR1 set $0F
+(1)  460/    C7DB : =$F                 vcRR2 set $0F
+(1)  460/    C7DB : =$F                 vcRR3 set $0F
+(1)  460/    C7DB : =$F                 vcRR4 set $0F
+(1)  461/    C7DB : (MACRO)             	smpsVcTotalLevel    $00, $0F, $1E, $32
+(1)  461/    C7DB : =$0                 vcTL1 set $00
+(1)  461/    C7DB : =$F                 vcTL2 set $0F
+(1)  461/    C7DB : =$1E                vcTL3 set $1E
+(1)  461/    C7DB : =$32                vcTL4 set $32
+(1)  461/    C7DB : 3B                          dc.b    (vcUnusedBits<<6)+(vcFeedback<<3)+vcAlgorithm
+(1)  461/    C7DC :                     ;   0     1     2     3     4     5     6     7
+(1)  461/    C7DC :                     ;%1000,%1000,%1000,%1000,%1010,%1110,%1110,%1111
+(1)  461/    C7DC : =$0                 vcTLMask4 set ((vcAlgorithm==7)<<7)
+(1)  461/    C7DC : =$0                 vcTLMask3 set ((vcAlgorithm>=4)<<7)
+(1)  461/    C7DC : =$0                 vcTLMask2 set ((vcAlgorithm>=5)<<7)
+(1)  461/    C7DC : =$80                vcTLMask1 set $80
+(1)  461/    C7DC :                     
+(1)  461/    C7DC :                     
+(1)  461/    C7DC : 3A31 7174                           dc.b    (vcDT4<<4)+vcCF4       ,(vcDT3<<4)+vcCF3       ,(vcDT2<<4)+vcCF2       ,(vcDT1<<4)+vcCF1
+(1)  461/    C7E0 : DF1F 1FDF                           dc.b    (vcRS4<<6)+vcAR4       ,(vcRS3<<6)+vcAR3       ,(vcRS2<<6)+vcAR2       ,(vcRS1<<6)+vcAR1
+(1)  461/    C7E4 : 000A 0A05                           dc.b    vcAM4|vcD1R4|vcD1R4Unk ,vcAM3|vcD1R3|vcD1R3Unk ,vcAM2|vcD1R2|vcD1R2Unk ,vcAM1|vcD1R1|vcD1R1Unk
+(1)  461/    C7E8 : 0005 0503                           dc.b    vcD2R4                 ,vcD2R3                 ,vcD2R2                 ,vcD2R1
+(1)  461/    C7EC : 0F5F 1F5F                           dc.b    (vcDL4<<4)+vcRR4       ,(vcDL3<<4)+vcRR3       ,(vcDL2<<4)+vcRR2       ,(vcDL1<<4)+vcRR1
+(1)  461/    C7F0 : 321E 0F80                           dc.b    vcTL4|vcTLMask4        ,vcTL3|vcTLMask3        ,vcTL2|vcTLMask2        ,vcTL1|vcTLMask1
+(1)  462/    C7F4 :                     
+(1)  463/    C7F4 :                     
+ AS V1.42 Beta [Bld 251] - Source File Music.asm - Page 2 - 11/4/2023 21:21:44
 
 
   Symbol Table (* = unused):
@@ -16784,7 +18068,7 @@
  NA6 :                           D2 - | *NA7 :                           DE - |
 *NAB0 :                          89 - |  NAB1 :                          95 - |
  NAB2 :                          A1 - |  NAB3 :                          AD - |
- NAB4 :                          B9 - | *NAB5 :                          C5 - |
+ NAB4 :                          B9 - |  NAB5 :                          C5 - |
 *NAB6 :                          D1 - | *NAB7 :                          DD - |
 *NB0 :                           8C - |  NB1 :                           98 - |
  NB2 :                           A4 - |  NB3 :                           B0 - |
@@ -16792,7 +18076,7 @@
  NB6 :                           D4 - | *NBB0 :                          8B - |
  NBB1 :                          97 - |  NBB2 :                          A3 - |
  NBB3 :                          AF - |  NBB4 :                          BB - |
-*NBB5 :                          C7 - |  NBB6 :                          D3 - |
+ NBB5 :                          C7 - |  NBB6 :                          D3 - |
 *NBB7 :                          DF - |  NC0 :                           81 - |
 *NC1 :                           8D - |  NC2 :                           99 - |
  NC3 :                           A5 - |  NC4 :                           B1 - |
@@ -16843,7 +18127,7 @@
 *SMPSPITCH07LO :                 AC - | *SMPSPITCH08HI :                 60 - |
 *SMPSPITCH08LO :                 A0 - | *SMPSPITCH09HI :                 6C - |
 *SMPSPITCH09LO :                 94 - | *SMPSPITCH10HI :                 78 - |
-*SMPSPITCH10LO :                 88 - |  SONGSTART :                   B769 - |
+*SMPSPITCH10LO :                 88 - |  SONGSTART :                   BCB4 - |
  SONICDRIVERVER :                 3 - |  SOURCEDRIVER :                   3 - |
  SOURCESMPS2ASM :                 0 - |  SPEEDOFSOUND_CALL02 :         9CE4 C |
  SPEEDOFSOUND_CALL03 :         9D1C C |  SPEEDOFSOUND_CALL05 :         A4A4 C |
@@ -16891,65 +18175,68 @@
 *STONE_22 :                      22 - | *STONE_23 :                      23 - |
  STONE_24 :                      24 - | *STONE_25 :                      25 - |
 *STONE_26 :                      26 - | *STONE_27 :                      27 - |
- THISHORIZON_CALL03 :          BC1B C | *THISHORIZON_CALL06 :          BAEC C |
-*THISHORIZON_DAC :             B799 C |  THISHORIZON_FM1 :             B79A C |
- THISHORIZON_FM2 :             B80D C |  THISHORIZON_FM3 :             B887 C |
- THISHORIZON_FM4 :             B9B4 C |  THISHORIZON_FM5 :             BA1E C |
-*THISHORIZON_FM6 :             BAEB C | *THISHORIZON_HEADER :          B769 C |
- THISHORIZON_JUMP01 :          BBEA C | *THISHORIZON_LOOP02 :          BBD7 C |
- THISHORIZON_LOOP03 :          BBC5 C |  THISHORIZON_PSG1 :            BB04 C |
- THISHORIZON_PSG2 :            BB2E C |  THISHORIZON_PSG3 :            BB6D C |
-*THISHORIZON_PWM1 :            BBC1 C |  THISHORIZON_PWM2 :            BBD7 C |
- THISHORIZON_VOICES :          BC37 C | *TIME :                   "20:10:5" - |
-*TRACENUM :                       0 - | *TRUE :                           1 - |
-*USE_S2_SAMPLES :                 1 - | *USE_S3D_SAMPLES :                1 - |
-*USE_S3_SAMPLES :                 1 - | *USE_SK_SAMPLES :                 1 - |
- VCALGORITHM :                    0 - |  VCAM1 :                          0 - |
- VCAM2 :                          0 - |  VCAM3 :                          0 - |
- VCAM4 :                          0 - |  VCAR1 :                         1F - |
- VCAR2 :                         1F - |  VCAR3 :                         12 - |
- VCAR4 :                         1F - |  VCCF1 :                          1 - |
- VCCF2 :                          2 - |  VCCF3 :                          7 - |
- VCCF4 :                          4 - |  VCD1R1 :                         C - |
- VCD1R1UNK :                      0 - |  VCD1R2 :                         4 - |
- VCD1R2UNK :                      0 - |  VCD1R3 :                         1 - |
- VCD1R3UNK :                      0 - |  VCD1R4 :                         4 - |
- VCD1R4UNK :                      0 - |  VCD2R1 :                         0 - |
- VCD2R2 :                         1 - |  VCD2R3 :                         1 - |
- VCD2R4 :                         1 - |  VCDL1 :                          1 - |
- VCDL2 :                          1 - |  VCDL3 :                          1 - |
- VCDL4 :                          1 - |  VCDT1 :                          7 - |
- VCDT2 :                          1 - |  VCDT3 :                          4 - |
- VCDT4 :                          4 - |  VCFEEDBACK :                     5 - |
- VCRR1 :                          F - |  VCRR2 :                          F - |
- VCRR3 :                          F - |  VCRR4 :                          F - |
- VCRS1 :                          0 - |  VCRS2 :                          0 - |
- VCRS3 :                          0 - |  VCRS4 :                          0 - |
- VCTL1 :                          5 - |  VCTL2 :                         14 - |
- VCTL3 :                         17 - |  VCTL4 :                         26 - |
- VCTLMASK1 :                     80 - |  VCTLMASK2 :                      0 - |
- VCTLMASK3 :                      0 - |  VCTLMASK4 :                      0 - |
- VCUNUSEDBITS :                   0 - | *VERSION :                     142F - |
- WALKIN_CALL00 :               8B54 C |  WALKIN_CALL01 :               8AB1 C |
- WALKIN_CALL02 :               8AC0 C |  WALKIN_CALL03 :               89F2 C |
- WALKIN_CALL04 :               8900 C |  WALKIN_CALL05 :               88C5 C |
- WALKIN_CALL06 :               8B01 C |  WALKIN_CALL07 :               88F1 C |
- WALKIN_DAC :                  8B2F C |  WALKIN_FM1 :                  88A3 C |
- WALKIN_FM2 :                  88E5 C |  WALKIN_FM3 :                  897C C |
- WALKIN_FM4 :                  8A19 C |  WALKIN_FM5 :                  8A96 C |
-*WALKIN_HEADER :               8873 C |  WALKIN_JUMP00 :               8982 C |
- WALKIN_JUMP01 :               88E9 C |  WALKIN_JUMP02 :               88B2 C |
- WALKIN_JUMP03 :               8AD8 C |  WALKIN_LOOP00 :               8B36 C |
- WALKIN_LOOP01 :               8A9A C |  WALKIN_LOOP02 :               8A1F C |
- WALKIN_LOOP03 :               8B0F C |  WALKIN_LOOP04 :               8AE6 C |
- WALKIN_PSG1 :                 8ACF C |  WALKIN_PSG2 :                 8AE2 C |
- WALKIN_PSG3 :                 8B0B C |  WALKIN_VOICES :               8B5C C |
- ZEROOFFSETOPTIMIZATION :         0 - |
+ TESTSONG_DAC :                C776 C |  TESTSONG_FM1 :                BCD2 C |
+ TESTSONG_FM2 :                BEE0 C | *TESTSONG_HEADER :             BCB4 C |
+ TESTSONG_PSG1 :               C568 C |  TESTSONG_PSG2 :               C645 C |
+ TESTSONG_VOICES :             C777 C |  THISHORIZON_CALL03 :          BC1B C |
+*THISHORIZON_CALL06 :          BAEC C | *THISHORIZON_DAC :             B799 C |
+ THISHORIZON_FM1 :             B79A C |  THISHORIZON_FM2 :             B80D C |
+ THISHORIZON_FM3 :             B887 C |  THISHORIZON_FM4 :             B9B4 C |
+ THISHORIZON_FM5 :             BA1E C | *THISHORIZON_FM6 :             BAEB C |
+*THISHORIZON_HEADER :          B769 C |  THISHORIZON_JUMP01 :          BBEA C |
+*THISHORIZON_LOOP02 :          BBD7 C |  THISHORIZON_LOOP03 :          BBC5 C |
+ THISHORIZON_PSG1 :            BB04 C |  THISHORIZON_PSG2 :            BB2E C |
+ THISHORIZON_PSG3 :            BB6D C | *THISHORIZON_PWM1 :            BBC1 C |
+ THISHORIZON_PWM2 :            BBD7 C |  THISHORIZON_VOICES :          BC37 C |
+*TIME :                  "21:21:43" - | *TRACENUM :                       0 - |
+*TRUE :                           1 - | *USE_S2_SAMPLES :                 1 - |
+*USE_S3D_SAMPLES :                1 - | *USE_S3_SAMPLES :                 1 - |
+*USE_SK_SAMPLES :                 1 - |  VCALGORITHM :                    3 - |
+ VCAM1 :                          0 - |  VCAM2 :                          0 - |
+ VCAM3 :                          0 - |  VCAM4 :                          0 - |
+ VCAR1 :                         1F - |  VCAR2 :                         1F - |
+ VCAR3 :                         1F - |  VCAR4 :                         1F - |
+ VCCF1 :                          4 - |  VCCF2 :                          1 - |
+ VCCF3 :                          1 - |  VCCF4 :                          A - |
+ VCD1R1 :                         5 - |  VCD1R1UNK :                      0 - |
+ VCD1R2 :                         A - |  VCD1R2UNK :                      0 - |
+ VCD1R3 :                         A - |  VCD1R3UNK :                      0 - |
+ VCD1R4 :                         0 - |  VCD1R4UNK :                      0 - |
+ VCD2R1 :                         3 - |  VCD2R2 :                         5 - |
+ VCD2R3 :                         5 - |  VCD2R4 :                         0 - |
+ VCDL1 :                          5 - |  VCDL2 :                          1 - |
+ VCDL3 :                          5 - |  VCDL4 :                          0 - |
+ VCDT1 :                          7 - |  VCDT2 :                          7 - |
+ VCDT3 :                          3 - |  VCDT4 :                          3 - |
+ VCFEEDBACK :                     7 - |  VCRR1 :                          F - |
+ VCRR2 :                          F - |  VCRR3 :                          F - |
+ VCRR4 :                          F - |  VCRS1 :                          3 - |
+ VCRS2 :                          0 - |  VCRS3 :                          0 - |
+ VCRS4 :                          3 - |  VCTL1 :                          0 - |
+ VCTL2 :                          F - |  VCTL3 :                         1E - |
+ VCTL4 :                         32 - |  VCTLMASK1 :                     80 - |
+ VCTLMASK2 :                      0 - |  VCTLMASK3 :                      0 - |
+ VCTLMASK4 :                      0 - |  VCUNUSEDBITS :                   0 - |
+*VERSION :                     142F - |  WALKIN_CALL00 :               8B54 C |
+ WALKIN_CALL01 :               8AB1 C |  WALKIN_CALL02 :               8AC0 C |
+ WALKIN_CALL03 :               89F2 C |  WALKIN_CALL04 :               8900 C |
+ WALKIN_CALL05 :               88C5 C |  WALKIN_CALL06 :               8B01 C |
+ WALKIN_CALL07 :               88F1 C |  WALKIN_DAC :                  8B2F C |
+ WALKIN_FM1 :                  88A3 C |  WALKIN_FM2 :                  88E5 C |
+ WALKIN_FM3 :                  897C C |  WALKIN_FM4 :                  8A19 C |
+ WALKIN_FM5 :                  8A96 C | *WALKIN_HEADER :               8873 C |
+ WALKIN_JUMP00 :               8982 C |  WALKIN_JUMP01 :               88E9 C |
+ WALKIN_JUMP02 :               88B2 C |  WALKIN_JUMP03 :               8AD8 C |
+ WALKIN_LOOP00 :               8B36 C |  WALKIN_LOOP01 :               8A9A C |
+ WALKIN_LOOP02 :               8A1F C |  WALKIN_LOOP03 :               8B0F C |
+ WALKIN_LOOP04 :               8AE6 C |  WALKIN_PSG1 :                 8ACF C |
+ WALKIN_PSG2 :                 8AE2 C |  WALKIN_PSG3 :                 8B0B C |
+ WALKIN_VOICES :               8B5C C |  ZEROOFFSETOPTIMIZATION :         0 - |
 
-    630 symbols
-    129 unused symbols
+    637 symbols
+    128 unused symbols
 
- AS V1.42 Beta [Bld 251] - Source File Music.asm - Page 3 - 11/4/2023 20:10:5
+ AS V1.42 Beta [Bld 251] - Source File Music.asm - Page 3 - 11/4/2023 21:21:44
 
 
   Defined Macros:
@@ -17007,7 +18294,7 @@ _MOVE                                 | _TST
 
      98 macros
 
- AS V1.42 Beta [Bld 251] - Source File Music.asm - Page 4 - 11/4/2023 20:10:5
+ AS V1.42 Beta [Bld 251] - Source File Music.asm - Page 4 - 11/4/2023 21:21:44
 
 
   Defined Functions:
@@ -17021,7 +18308,7 @@ SIGNEXTEND                            | SIGNMASK
 BIT                                   | CHKOP                                
 NOTZ80                                | Z80_PTR                              
 
- AS V1.42 Beta [Bld 251] - Source File Music.asm - Page 5 - 11/4/2023 20:10:5
+ AS V1.42 Beta [Bld 251] - Source File Music.asm - Page 5 - 11/4/2023 21:21:44
 
 
   Code Pages:
@@ -17031,10 +18318,10 @@ STANDARD (0 changed characters)
 
 1 code page
 
-0.38 seconds assembly time
+0.44 seconds assembly time
 
-   7267 lines source file
-  28735 lines incl. macro expansions
+   7731 lines source file
+  30189 lines incl. macro expansions
       2 passes
       0 errors
       0 warnings
