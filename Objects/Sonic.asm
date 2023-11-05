@@ -879,7 +879,7 @@ loc_AA6E:				; CODE XREF: ROM:0000AA5Ej
 ObjSonic_ThrowPartner:				; CODE XREF: ROM:0000A514p
 					; ROM:0000A61Ep ...
 		move.b	$FFFFC93D,d0
-		andi.b	#$50,d0	; 'p'
+		andi.b	#$10,d0	; 'p'
 		beq.s	locret_AAA2
 
 	; Sonic Jump (start)

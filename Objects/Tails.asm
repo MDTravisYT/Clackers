@@ -274,9 +274,10 @@ loc_ADA2:				; CODE XREF: ROM:0000AD8Cj
 loc_ADB8:				; DATA XREF: ROM:0000AB5Co
 		cmpi.l	#$200,$26(a6)
 		beq.s	loc_ADD0
-	;	tst.b	(a5)
-	;	bmi.s	loc_ADE2
-		bsr.w	sub_B35A
+		tst.b	(a5)
+		bmi.s	@ContPartner
+		bsr.w	ObjTails_ThrowPartner
+	@ContPartner:
 		bsr.w	ObjTails_Jump
 		bra.s	loc_ADE2
 ; ---------------------------------------------------------------------------
@@ -381,7 +382,7 @@ locret_AECA:				; CODE XREF: ROM:0000AEB6j
 
 loc_AECC:				; DATA XREF: ROM:0000AE44o
 		bsr.w	sub_CBC0
-		bsr.w	sub_B35A
+		bsr.w	ObjTails_ThrowPartner
 		jsr	sub_C49A
 		jsr	sub_C636
 		bne.s	loc_AEE4
@@ -471,7 +472,7 @@ loc_AF8E:				; CODE XREF: ROM:0000AF7Ej
 
 loc_AF9A:				; DATA XREF: ROM:0000AF2Eo
 		bsr.w	sub_CBC0
-		bsr.w	sub_B35A
+		bsr.w	ObjTails_ThrowPartner
 		jsr	sub_C49A
 		jsr	sub_C636
 		beq.s	locret_AFDE
@@ -797,7 +798,7 @@ loc_B2A8:
 		clr.b	$2A(a6)
 		clr.w	$2C(a6)
 		bsr.w	sub_CBC0
-		bsr.w	sub_B35A
+		bsr.w	ObjTails_ThrowPartner
 		jsr	sub_C49A
 		jsr	sub_C636
 		bne.s	loc_B2EC
@@ -855,10 +856,10 @@ loc_B352:				; CODE XREF: ROM:0000B342j
 ; =============== S U B	R O U T	I N E =======================================
 
 
-sub_B35A:				; CODE XREF: ROM:0000ADC6p
+ObjTails_ThrowPartner:				; CODE XREF: ROM:0000ADC6p
 					; ROM:0000AED0p ...
 		move.b	3(a5),d0
-		andi.b	#$70,d0	; 'p'
+		andi.b	#$10,d0	; 'p'
 		beq.s	locret_B386
 
 	; Tails jump (start)
@@ -871,9 +872,9 @@ sub_B35A:				; CODE XREF: ROM:0000ADC6p
 		andi.b	#$F,2(a5)
 		andi.b	#$F,3(a5)
 
-locret_B386:				; CODE XREF: sub_B35A+8j sub_B35A+12j
+locret_B386:				; CODE XREF: ObjTails_ThrowPartner+8j ObjTails_ThrowPartner+12j
 		rts
-; End of function sub_B35A
+; End of function ObjTails_ThrowPartner
 
 
 ; =============== S U B	R O U T	I N E =======================================
