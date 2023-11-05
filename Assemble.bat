@@ -22,5 +22,6 @@ p2bin Music.p Music.bin -r 0x-0x
 del Music.p
 
 cd ..
-Asm68k.exe /p /o ow+ SonCra.asm, SCBuilt.bin
+Asm68k.exe /p /o ow+ SonCra.asm, SCBuilt.bin, SCBuilt.sym, SCBuilt.lst
+convsym.exe SCBuilt.sym SCBuilt.bin -a
 Pause
