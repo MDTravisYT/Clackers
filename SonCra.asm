@@ -7149,6 +7149,8 @@ Levels:							; Offset: 00008896
 		beq.s	SS_PlayMusic				; if yes, branch
 		cmpi.w	#2,($FFFFD834).w				; is level IIZ?
 		beq.s	II_PlayMusic				; if yes, branch
+		cmpi.w	#3,($FFFFD834).w				; is level Flora?
+		beq.s	II_PlayMusic				; if yes, branch
 		bra.s	LV_PlayMusic
 		
 SS_PlayMusic:
@@ -17597,7 +17599,9 @@ SIR_RB_NoFinish:					; Offset: 0000F8B0
 		cmpi.w	#$0001,($FFFFD834).w
 		beq.s	@LoadTT_Text		
 		cmpi.w	#$0002,($FFFFD834).w
-		beq.s	@LoadII_Text
+		beq.s	@LoadII_Text	
+		cmpi.w	#$0003,($FFFFD834).w
+		beq.s	@LoadFLRA_Text
 		
 		lea	SorryNothing(pc),a1			; fallback if nothing's valid
 		
@@ -17616,6 +17620,9 @@ SIR_RB_NoFinish:					; Offset: 0000F8B0
 		bra.s	@cont
 	@LoadII_Text:
 		lea	II_Text(pc),a1			; load location of "OPTION" letter to a1
+		bra.s	@cont
+	@LoadFLRA_Text:
+		lea	FLRA_Text(pc),a1			; load location of "OPTION" letter to a1
 		bra.s	@cont
 		
 TT_Text:						; Offset: 00009440
@@ -17674,6 +17681,26 @@ II_Text:						; Offset: 00009440
 		dc.w	$0021
 		dc.w	$002E
 		dc.w	$0024
+		dc.w	$0000
+		even
+		rts						; return	
+		
+FLRA_Text:						; Offset: 00009440
+		dc.w	$0030
+		dc.w	$002C
+		dc.w	$0021
+		dc.w	$002E
+		dc.w	$0025
+		dc.w	$0034
+		dc.w	$0000
+		dc.w	$0026
+		dc.w	$002C
+		dc.w	$002F
+		dc.w	$0032
+		dc.w	$0021
+		dc.w	$0000
+		dc.w	$0000
+		dc.w	$0000
 		dc.w	$0000
 		even
 		rts						; return
