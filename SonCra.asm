@@ -15,7 +15,7 @@
 ; Includes
 ; ---------------------------------------------------------------------------
 
-Combi	=	1
+Combi	=	0
 
 		include	"Debugger.asm"
 		include	"SonCraMacro.asm"
@@ -7197,6 +7197,11 @@ Cool2:
 	endif
 
 Levels:							; Offset: 00008896
+		moveq	#$28,d0					; set number of columns to dump
+		moveq	#$20,d1					; set number of rows to dump
+		move.w	#$8002,d2				; set value/tile to dump
+		move.w	($FFFFD816).w,d3			; set V-Ram location to dump to (V-Ram plane A)
+		jsr	MapScreenSingle				; dump to plane map
 		pea	(a0)					; send a0 data to the stack
 		lea	VB_Levels(pc),a0			; load location V-Blank routine to run
 		move.l	a0,($FFFFC832).w			; set to run it during Levels
@@ -7258,7 +7263,6 @@ LV_DumpPalette:						; Offset: 000088D2
 	endif
 		
 LevelLoadRet:
-		jsr	Levels_LoadHudArtSprites		; load hud and pause art/sprite data
 		jsr	Levels_LoadEssentialArt			; load the essential art (springs/spikes)
 		move	#$2300,sr				; set the status register (enable interrupts)
 		jsr	Levels_LoadPalette			; load time of day palette for level
@@ -7268,18 +7272,21 @@ LevelLoadRet:
 ; For SSZ it resets the camera positions for some reason
 ; ---------------------------------------------------------------------------
 
-		tst.w	($FFFFD834).w				; is Zone/World ID set to SSZ?
-		bne.s	Levels_SkipCameraReset			; if not, branch
-		clr.w	($FFFFD830).w				; clear Screen's starting X position
-		clr.w	($FFFFD832).w				; clear Screen's starting Y position
+	;	tst.w	($FFFFD834).w				; is Zone/World ID set to SSZ?
+	;	bne.s	Levels_SkipCameraReset			; if not, branch
+	;	clr.w	($FFFFD830).w				; clear Screen's starting X position
+	;	clr.w	($FFFFD832).w				; clear Screen's starting Y position
+		move.w	($FFFFC9DE).w,	($FFFFFFDE).w
+		move.w	($FFFFC9EE).w,	($FFFFFFEE).w
 		clr.w	($FFFFC9DE).w				; clear Screen's X FG position
 		clr.w	($FFFFC9EE).w				; clear Screen's Y FG position
-		clr.w	($FFFFCA1E).w				; clear Screen's X BG position
-		clr.w	($FFFFCA2E).w				; clear Screen's Y BG position
+	;	clr.w	($FFFFCA1E).w				; clear Screen's X BG position
+	;	clr.w	($FFFFCA2E).w				; clear Screen's Y BG position
 
 ; ---------------------------------------------------------------------------
 
 Levels_SkipCameraReset:					; Offset: 00008968
+
 		bsr.w	ClearScreen_ForTitleCard		; clear the screen for the titlecard
 		ori.w	#$8144,($FFFFC9BA).w			; Turn Display on in VDP register 01's data
 		move.w	($FFFFC9BA).w,($C00004).l		; ...and save to that VDP register
@@ -15483,6 +15490,7 @@ SlideOutRoutines:					; Offset: 0000F574
 		clr.w	d0					; 14 (Unused/skipped)
 
 SOR_Finish:						; Offset: 0000F58A
+		jsr	Levels_LoadHudArtSprites		; load hud and pause art/sprite data
 		rts						; return (Exits title card routine and returns to game)
 
 ; ---------------------------------------------------------------------------
@@ -15548,6 +15556,8 @@ SOR_MB_NoFInish:					; Offset: 0000F5D8
 		move	#$2700,sr				; set status register (disable interrupts)
 		jsr	DumpMapPlaneBuffers			; dump the horizontal buffer to V-Ram map plane
 		move	#$2000,sr				; set status register (enable interrupts)
+		move.w	($FFFFFFDE).w,	($FFFFC9DE).w
+		move.w	($FFFFFFEE).w,	($FFFFC9EE).w
 		rts						; return
 
 ; ===========================================================================
