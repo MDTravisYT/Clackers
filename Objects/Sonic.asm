@@ -45,7 +45,7 @@ loc_A2CC:				; CODE XREF: ROM:0000A2BAj
 		bne.w	loc_A3D2
 
 loc_A2D4:				; CODE XREF: ROM:0000A2CAj
-		move.w	#$FFF4,d0
+		move.w	#$FFF0,d0
 		move.w	$2C(a6),d1
 		beq.s	loc_A2F0
 		bpl.s	loc_A2E4
@@ -53,6 +53,7 @@ loc_A2D4:				; CODE XREF: ROM:0000A2CAj
 		neg.w	d1
 
 loc_A2E4:				; CODE XREF: ROM:0000A2DEj
+		move.w	#$30,$26(a6)	 
 		cmpi.w	#$C,d1
 		bcc.w	loc_A42E
 		clr.w	$2C(a6)
@@ -155,8 +156,8 @@ loc_A3E0:				; CODE XREF: ROM:0000A3DAj
 		move.w	$2C(a6),d2
 		ext.l	d2
 		swap	d2
-		eor.w	d1,d2
-		andi.w	#8,d2
+		eor.w	d2,d1
+		andi.w	#8,d1
 		beq.s	loc_A42A
 		move.w	$2C(a6),d0
 		bpl.s	loc_A412
@@ -190,7 +191,7 @@ loc_A43A:				; CODE XREF: ROM:0000A436j
 		cmpi.w	#$400,d0
 		bcs.s	loc_A44A
 		moveq	#$A,d2
-		andi.w	#$3FF,$28(a6)
+		andi.w	#$1FF,$28(a6)
 		bra.s	loc_A45A
 ; ---------------------------------------------------------------------------
 
