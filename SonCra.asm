@@ -14347,6 +14347,17 @@ GTO_LagLoop:						; Offset: 0000EC34
 		cmpi.w	#$0004,($FFFFD834).w			;	is ID higher than 4?
 		bge.s	JumpToTitle					;	return if so
 		movea.l	($00000000).w,sp			; set stack pointer to location 00000000			; do...
+	
+GameOverFadeTrans:	
+		bclr	#$07,($FFFFFFC9).w			; set to not run this routine til V-Blank has run
+
+GO_Trans_WaitVB:						; Offset: 000074E2
+		tst.b	($FFFFFFC9).w				; is the routine ready to continue?
+		bpl.s	GO_Trans_WaitVB				; if not, loop and recheck
+		moveq	#$01,d0					; set the speed of palette fading
+		jsr	Pal_FadeBlack				; fade the palettes to black
+		bne.w	GameOverFadeTrans				; if fading hasn't finished, branch
+		
 		jmp	MainProg_Loop				; jump to Main game array
 
 GTO_UpdateTime:						; Offset: 0000EC62
