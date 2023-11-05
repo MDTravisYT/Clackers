@@ -4629,6 +4629,8 @@ SS_StackLoc:						; Offset: 000064F2
 SS_WaitVB:						; Offset: 000064FE
 		tst.b	($FFFFFFC9).w				; is the routine ready to continue?
 		bpl.s	SS_WaitVB				; if not, loop and recheck
+		move.b	#$89,d0					; set "fade out" music
+		jsr	(PlayMusic).l				; play music
 		move.w	($FFFFD824).w,d0			; load routine counter to d0
 		jmp	SS_Routines(pc,d0.w)			; jump to correct routine based on the counter
 
@@ -4636,10 +4638,10 @@ SS_WaitVB:						; Offset: 000064FE
 ; ---------------------------------------------------------------------------
 SS_Routines:						; Offset: 0000650C
 		bra.w	SegaScreen				; Sega Screen loop
-	;	bra.w	SegaEffects				; Sega Screen effect to use (Main/Scroll)
-	;	bra.w	SegaPaletteStart			; Sega Screen palette cycling startup routine
-	;	bra.w	SegaPaletteCycle			; Sega Screen palette cycling routine
-	;	bra.w	SegaPaletteFade				; Sega Screen Palette fading/finishing routine
+		bra.w	SegaEffects				; Sega Screen effect to use (Main/Scroll)
+		bra.w	SegaPaletteStart			; Sega Screen palette cycling startup routine
+		bra.w	SegaPaletteCycle			; Sega Screen palette cycling routine
+		bra.w	SegaPaletteFade				; Sega Screen Palette fading/finishing routine
 		bra.w	SegaStartButton				; Sega Screen finish routine (For when the start button is pressed only)
 ; ---------------------------------------------------------------------------
 ; ===========================================================================
