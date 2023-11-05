@@ -6097,7 +6097,7 @@ TSS_Start:						; Offset: 00007512
 		bne.s	TSS_Not1P2P				; if not, branch
 
 TSS_1P2PStart:						; Offset: 00007526
-		move.w	#$0003,($FFFFD834).w			; set Zone/World ID to 1 (dubbed TechnoTowerZone)
+		move.w	#$0001,($FFFFD834).w			; set Zone/World ID to 1 (dubbed TechnoTowerZone)
 		move.w	#$0001,($FFFFD836).w			; set Level/Act/Field ID to 1
 		move.w	#$0018,($FFFFD822).w			; set Screen/Game mode to Level
 		move.b	#$00,($FFFFD89C).w			; set player 1 user mode

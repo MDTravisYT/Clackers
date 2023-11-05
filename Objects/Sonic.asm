@@ -276,8 +276,9 @@ loc_A4F0:				; CODE XREF: ROM:0000A4DAj
 loc_A506:				; DATA XREF: ROM:0000A296o
 		cmpi.l	#$200,$26(a6)
 		beq.s	loc_A51E
-		tst.b	(a5)
-		bmi.s	loc_A530
+	;	tst.b	(a5)
+	;	bmi.s	loc_A530
+		bsr.w	ObjSonic_SummonPartner
 		bsr.w	ObjSonic_ThrowPartner
 		bsr.w	ObjSonic_Jump
 		bra.s	loc_A530
@@ -290,6 +291,24 @@ loc_A51E:				; CODE XREF: ROM:0000A50Ej
 		move.b	#$E,7(a6)
 		rts
 ; ---------------------------------------------------------------------------
+
+ObjSonic_SummonPartner:
+		move.b	$FFFFC93D,d0
+		andi.b	#$40,d0	; 'p'
+		beq.s	SonicSummon_Return
+		
+		movea.w	($FFFFD862).w,a0			; load Sonic's ram address to a0
+		movea.w	($FFFFD864).w,a1			; load Tails's ram address to a1
+		move.w	$08(a0),d0				; load Sonic's X position to d0
+		move.w	$0C(a0),d1				; load Sonic's Y position to d1
+		move.w	$08(a1),d2				; load Tails's X position to d2
+		move.w	$0C(a1),d3				; load Tails's Y position to d3
+		move.w	d0,$08(a1)				; save to Tails's X position
+		move.w	d1,$0C(a1)				; save to Tails's Y position
+		
+		
+SonicSummon_Return:
+		rts
 
 loc_A530:				; CODE XREF: ROM:0000A512j
 					; ROM:0000A51Cj ...
