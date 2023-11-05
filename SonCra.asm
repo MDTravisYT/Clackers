@@ -6090,6 +6090,9 @@ TS_Sel_Above4th:					; Offset: 000074FC
 ; When start is pressed during the Menu
 ; ---------------------------------------------------------------------------
 
+MultiReturn2:
+		rts
+
 TSS_Start:						; Offset: 00007512
 		clr.w	($FFFFD83A).w				; reset Level time of day
 		clr.w	($FFFFD824).w				; reset routine counter
@@ -6099,6 +6102,14 @@ TSS_Start:						; Offset: 00007512
 		bne.s	TSS_Not1P2P				; if not, branch
 
 TSS_1P2PStart:						; Offset: 00007526
+		bclr	#$07,($FFFFFFC9).w			; set to not run this routine til V-Blank has run
+
+TS_1P2PStar_WaitVB:						; Offset: 000074E2
+		tst.b	($FFFFFFC9).w				; is the routine ready to continue?
+		bpl.s	TS_1P2PStar_WaitVB				; if not, loop and recheck
+		moveq	#$01,d0					; set the speed of palette fading
+		jsr	Pal_FadeBlack				; fade the palettes to black
+		bne.w	TSS_1P2PStart				; if fading hasn't finished, branch
 		move.w	#$0001,($FFFFD834).w			; set Zone/World ID to 1 (dubbed TechnoTowerZone)
 		move.w	#$0001,($FFFFD836).w			; set Level/Act/Field ID to 1
 		move.w	#$0018,($FFFFD822).w			; set Screen/Game mode to Level
