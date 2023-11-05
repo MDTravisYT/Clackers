@@ -7476,6 +7476,8 @@ OPL_LevelSizes:						; Offset: 00008C18
 		dc.w	$0FFF					; Max Y size (TTZ)
 		dc.w	$1FFF					; Max X size (TTZ)
 		dc.w	$0FFF					; Max Y size (TTZ)	
+		dc.w	$1FFF					; Max X size (TTZ)
+		dc.w	$0FFF					; Max Y size (TTZ)	
 ; ---------------------------------------------------------------------------
 ; ===========================================================================
 ; ---------------------------------------------------------------------------
@@ -7485,7 +7487,7 @@ OPL_ObjectLists:					; Offset: 00008C20
 		dc.l	Objpos_SSZ
 		dc.l	Objpos_TTZ
 		dc.l	Objpos_IIZ
-		dc.l	Objpos_TTZ
+		dc.l	Objpos_FLRA
 ; ---------------------------------------------------------------------------
 ; ===========================================================================
 ; ---------------------------------------------------------------------------
@@ -16022,6 +16024,11 @@ loc_EBC8:
 ; Game Over at top of level, Time Over and Timer
 ; ---------------------------------------------------------------------------
 
+JumpToTitle:	
+		move.w	#$0008,($FFFFD822).w			; set Screen/Game mode to title screen
+		movea.l	($00000000).w,sp			; set stack pointer to location 00000000			; do...
+		jmp	MainProg_Loop				; jump to Main game array
+
 GameTimeOver:						; Offset: 0000EBE0
 ;	;	rts
 ;		tst.w	($FFFFD834).w				; check if level is not Techno Tower
@@ -16073,6 +16080,8 @@ GTO_LagLoop:						; Offset: 0000EC34
 	;	addi.w	#1,($FFFFD834).w			; go to next world
 		move.w	#$0001,($FFFFD836).w			; set Level/Act/Field ID to 1
 	;	move.w	#$0018,($FFFFD822).w			; set Screen/Game mode to Level
+		cmpi.w	#$0004,($FFFFD834).w			;	is ID higher than 4?
+		bge.s	JumpToTitle					;	return if so
 		movea.l	($00000000).w,sp			; set stack pointer to location 00000000			; do...
 		jmp	MainProg_Loop				; jump to Main game array
 
@@ -18510,6 +18519,9 @@ Objpos_TTZ:
 	
 Objpos_IIZ:
 	incbin	Uncompressed\Objpos_IIZ.bin			; Speed Slider Zone's Object Position
+	even	
+Objpos_FLRA:
+	incbin	Uncompressed\Objpos_FLRA.bin			; Speed Slider Zone's Object Position
 	even
 ; ---------------------------------------------------------------------------
 ; ===========================================================================
