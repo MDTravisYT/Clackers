@@ -7645,7 +7645,7 @@ Levels_LoadPalette:					; Offset: 00008CCE
 ; ---------------------------------------------------------------------------
 LLPal_Levels:						; Offset: 00008CDE
 		bra.s	LLPal_SSZ				; 00
-		bra.s	LLPal_TTZ				; 02
+		bra.s	LLPal_SSZ				; 02
 		bra.s	LLPal_SSZ				; 00
 		bra.s	LLPal_SSZ				; 00
 		rts
@@ -8654,9 +8654,6 @@ TTZ01_Events:						; Offset: 0000988C
 TTZ01_StartUp:						; Offset: 00009898
 		move	#$2700,sr				; set the status register (disable interrupts)
 		lea	($FFFFC9DE).w,a1			; load address of positions and sizes ram (FG)
-		lea	PAL_TechnoTowerZoneUnused(pc),a0	; load TTZ palette
-		lea	($FFFFD424).w,a2			; load palette buffer address to a2
-		bsr.w	LoadHalfPalette				; dump the palette to the buffer
 		lea	TTZ_FG_StartLocCam(pc),a0		; load level FG setup data address to a0
 		lea	($FFFFD816).w,a2			; load address of V-Ram plane A storage
 		bsr.w	LoadLevelPositionAndSize		; save the positions and sizes of the level
@@ -8692,6 +8689,9 @@ TTZ01_StartUp:						; Offset: 00009898
 ; ---------------------------------------------------------------------------
 
 TTZ01_StartLevel:					; Offset: 0000991E
+		jsr		LLPal_TTZ
+	;	lea	($FFFFD424).w,a2			; load palette buffer address to a2
+	;	bsr.w	LoadHalfPalette				; dump the palette to the buffer
 		jsr	TitleCardSlide_Out			; slide title card out
 		addq.w	#$04,($FFFFD82C).w			; increase level event counter
 
@@ -8903,15 +8903,12 @@ U2Z_Act01:						; Offset: 00009BE8
 		
 UZ01_Events:
 		bra.w	UZ01_StartUp				; 00
-		bra.w	TTZ01_StartLevel			; 04
+		bra.w	UZ01_StartLevel			; 04
 		bra.w	UZ01_RunLevel				; 08
 		
 UZ01_StartUp:
 		move	#$2700,sr				; set the status register (disable interrupts)
 		lea	($FFFFC9DE).w,a1			; load address of positions and sizes ram (FG)
-		lea	PAL_IsolatedIsland(pc),a0	; load TTZ palette
-		lea	($FFFFD424).w,a2			; load palette buffer address to a2
-		bsr.w	LoadHalfPalette				; dump the palette to the buffer
 		lea	UZ01_FG_StartLocCam(pc),a0		; load level FG setup data address to a0
 		lea	($FFFFD816).w,a2			; load address of V-Ram plane A storage
 		bsr.w	LoadLevelPositionAndSize		; save the positions and sizes of the level
@@ -8941,6 +8938,12 @@ UZ01_StartUp:
 		addq.w	#$04,($FFFFD82C).w			; increase level event counter
 		rts						; return
 
+UZ01_StartLevel:					; Offset: 0000991E
+		lea	PAL_IsolatedIsland(pc),a0	; load TTZ palette
+		lea	($FFFFD424).w,a2			; load palette buffer address to a2
+		bsr.w	LoadHalfPalette				; dump the palette to the buffer
+		jsr	TitleCardSlide_Out			; slide title card out
+		addq.w	#$04,($FFFFD82C).w			; increase level event counter
 
 UZ01_RunLevel:						; Offset: 00009928
 		movea.w	($FFFFD862).w,a0			; load Sonic's ram address to a0
@@ -9031,15 +9034,12 @@ U3Z_Act01:						; Offset: 00009BF2
 		
 UZ02_Events:
 		bra.w	UZ02_StartUp				; 00
-		bra.w	TTZ01_StartLevel			; 04
-		bra.w	UZ01_RunLevel				; 08
+		bra.w	UZ02_StartLevel			; 04
+		bra.w	UZ02_RunLevel				; 08
 		
 UZ02_StartUp:
 		move	#$2700,sr				; set the status register (disable interrupts)
 		lea	($FFFFC9DE).w,a1			; load address of positions and sizes ram (FG)
-		lea	PAL_Flora(pc),a0	; load TTZ palette
-		lea	($FFFFD424).w,a2			; load palette buffer address to a2
-		bsr.w	LoadHalfPalette				; dump the palette to the buffer
 		lea	UZ02_FG_StartLocCam(pc),a0		; load level FG setup data address to a0
 		lea	($FFFFD816).w,a2			; load address of V-Ram plane A storage
 		bsr.w	LoadLevelPositionAndSize		; save the positions and sizes of the level
@@ -9067,6 +9067,30 @@ UZ02_StartUp:
 		bsr.w	DrawScreen_Full				; draw the entire screen/planes (For BG only)
 		move	#$2300,sr				; set the status register (enable interrupts)
 		addq.w	#$04,($FFFFD82C).w			; increase level event counter
+		rts						; return
+
+UZ02_StartLevel:					; Offset: 0000991E
+		lea	PAL_Flora(pc),a0	; load TTZ palette
+		lea	($FFFFD424).w,a2			; load palette buffer address to a2
+		bsr.w	LoadHalfPalette				; dump the palette to the buffer
+		jsr	TitleCardSlide_Out			; slide title card out
+		addq.w	#$04,($FFFFD82C).w			; increase level event counter
+		
+UZ02_RunLevel:						; Offset: 00009928
+		movea.w	($FFFFD862).w,a0			; load Sonic's ram address to a0
+		lea	($FFFFC9DE).w,a1			; load FG positions and sizes ram to a1
+		lea	($00FF0A00).l,a3			; load FG horizontal map plane buffer address
+		lea	($00FF0B02).l,a4			; load FG vertical map plane buffer address
+		bsr.w	Control_ScreenPosX			; keep X position clean
+		bsr.w	Control_ScreenPosY			; keep Y position clean
+		bsr.w	DrawScreen_Void				; draw FG void sides
+		movea.w	($FFFFD862).w,a0			; load Sonic's ram address to a0
+		lea	($FFFFCA1E).w,a1			; load BG positions and sizes ram to a1
+		lea	($00FF0B84).l,a3			; load BG horizontal map plane buffer address
+		lea	($00FF0C86).l,a4			; load BG vertical map plane buffer address
+	;	bsr.s	ControlTTZ_BGScreenPos			; control TTZ's BG screen position
+	;	bsr.w	Control_ScreenPosY			; keep Y position clean
+	;	jsr	DrawScreen_Void				; draw BG void sides
 		rts						; return
 		
 UZ02_FG_StartLocCam:					; Offset: 00009CB0
@@ -14364,6 +14388,11 @@ GO_Trans_WaitVB:						; Offset: 000074E2
 		moveq	#$01,d0					; set the speed of palette fading
 		jsr	Pal_FadeBlack				; fade the palettes to black
 		bne.w	GameOverFadeTrans				; if fading hasn't finished, branch
+		
+		moveq	#$28,d0					; set number of columns to dump
+		moveq	#$20,d1					; set number of rows to dump
+		move.w	#$8002,d2				; set value/tile to dump
+		move.w	($FFFFD816).w,d3			; set V-Ram location to dump to (V-Ram plane A)
 		
 		jmp	MainProg_Loop				; jump to Main game array
 
