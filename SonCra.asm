@@ -7455,7 +7455,7 @@ Levels_NoPause:						; Offset: 00008BFC
 ObjectPosition_Load:					; Offset: 00008BFE
 		moveq	#$00,d0					; clear d0
 		move.w	($FFFFD834).w,d0			; load Zone/World ID
-		andi.w	#$0001,d0				; make sure only Zones 0 and 1 are useable
+	;	andi.w	#$0001,d0				; make sure only Zones 0 and 1 are useable
 		lsl.l	#$02,d0					; multiply by 4 (long-word)
 		movea.l	OPL_ObjectLists(pc,d0.w),a0		; load Object Position address to use
 		lea	OPL_LevelSizes(pc,d0.w),a1		; load level sizes address
@@ -7472,6 +7472,8 @@ OPL_LevelSizes:						; Offset: 00008C18
 		dc.w	$07FF					; Max Y size (SSZ)
 		dc.w	$07FF					; Max X size (TTZ)
 		dc.w	$0FFF					; Max Y size (TTZ)
+		dc.w	$1FFF					; Max X size (TTZ)
+		dc.w	$0FFF					; Max Y size (TTZ)	
 ; ---------------------------------------------------------------------------
 ; ===========================================================================
 ; ---------------------------------------------------------------------------
@@ -7480,7 +7482,7 @@ OPL_LevelSizes:						; Offset: 00008C18
 OPL_ObjectLists:					; Offset: 00008C20
 		dc.l	Objpos_SSZ
 		dc.l	Objpos_TTZ
-		dc.l	Objpos_SSZ
+		dc.l	Objpos_IIZ
 		dc.l	Objpos_TTZ
 ; ---------------------------------------------------------------------------
 ; ===========================================================================
@@ -18477,6 +18479,10 @@ Objpos_TTZ:
 	ObjLayout	$0034,	$06ED,	DiagRedSprngRU,  $FFFF
 	ObjLayout	$0400,	$0060,	Goal,			 $FFFF
 	ObjLayout_End
+	even
+	
+Objpos_IIZ:
+	incbin	Uncompressed\Objpos_IIZ.bin			; Speed Slider Zone's Object Position
 	even
 ; ---------------------------------------------------------------------------
 ; ===========================================================================
