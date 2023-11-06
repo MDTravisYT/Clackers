@@ -858,6 +858,8 @@ loc_B352:				; CODE XREF: ROM:0000B342j
 
 ObjTails_ThrowPartner:				; CODE XREF: ROM:0000ADC6p
 					; ROM:0000AED0p ...
+		tst.b	(a5)
+		bmi.s	locret_B386
 		move.b	3(a5),d0
 		andi.b	#$10,d0	; 'p'
 		beq.s	locret_B386
