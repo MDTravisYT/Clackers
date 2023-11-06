@@ -4652,24 +4652,14 @@ SS_Routines:						; Offset: 0000650C
 ; ---------------------------------------------------------------------------
 
 SDKSega:
-;		move.b	#bgm_Fade,d0
-;		bsr.w	PlaySound_Special
-;		bsr.w	ClearPLC
-;		bsr.w	PaletteFadeOut
-	;	move.w	($FFFFD81C).w,d0			; load V-Ram horizontal scroll table location to d0
-	;	lsl.l	#$02,d0					; send far left bits to left side
-	;	lsr.w	#$02,d0					; and send the rest back
+		move.b	#$89,d0					; set "fade out" music
+		jsr	(PlayMusic).l				; play music
 		ori.w	#$4000,d0				; set V-Ram write mode (Map location)
 		swap	d0					; swap sides
 		andi.w	#$0003,d0				; clear all except the V-Ram location bits
 		move.l	d0,($C00004).l				; set VDP to V-Ram write mode with location (H-Scroll table)
-	;	move.l	#$00000000,($C00000).l			; reset the FG and BG H-Scroll positions to 0
-	;	move.l	#$40000010,($C00004).l			; set VDP to VS-Ram write mode
-	;	move.l	#$00000000,($C00000).l			; reset the FG and BG V-Scroll positions to 0
 		move	#$2700,sr				; set the status register (disable interrupts)
-;
-;loc_24BC:
-;		bsr.w	ClearScreen
+
 		lea	ARTNEM_SegaLogo(pc),a0		; load Main Menu text art address to a0
 		move.l	#$40000000,($C00004).l			; set VDP location to dump
 		jsr	NemDec					; decompress and dump
@@ -4688,36 +4678,30 @@ SDKSega:
 		
 		move	#$2300,sr				; set the status register (enable interrupts)
 		
-	;	lea	($FFFF0000&$FFFFFF)(pc),a1		; load uncompressed title mappings to a1 (Title Screen "Banner")
-	;	moveq	#$27,d1					; set X loop
-	;	moveq	#$B,d2					; set Y loop
-	;	move.w	#0,d3					; set to use palette line 0 (and to map behind object plane)
-	;	jsr	MapScreen				; map it on screen correctly
+		move.w	#$28,($FFFFF632).w
+		move.w	#0,($FFFFF650+$12).w
+		move.w	#0,($FFFFF650+$10).w
+		move.w	#$B4,($FFFFF614).w
+		move.w	($FFFFF60C).w,d0
+		ori.b	#$40,d0
+		move.w	d0,($C00004).l
 ;
-;		copyTilemap	$FFFF0000&$FFFFFF,$C61C,$B,3
-;
-;		moveq	#palid_SegaBG,d0
-;		bsr.w	PalLoad2
-;		move.w	#$28,(v_pcyc_num).w
-;		move.w	#0,(v_pal_buffer+$12).w
-;		move.w	#0,(v_pal_buffer+$10).w
-;		move.w	#$B4,(v_demolength).w
-;		move.w	($FFFFF60C).w,d0
-;		ori.b	#$40,d0
-;		move.w	d0,($C00004).l
-;
-;loc_2528:
-;		move.b	#2,(v_vbla_routine).w
-;		bsr.w	WaitForVBla
+loc_2528:
+		bclr	#7,($FFFFFFC9).w			; set to not run this routine til V-Blank has run
+
+SSCyc_WaitVB:						; Offset: 000064FE
+		tst.b	($FFFFFFC9).w				; is the routine ready to continue?
+		subi	#$1,($FFFFF614).w
+;		bpl.s	SSCyc_WaitVB				; if not, loop and recheck
+;		jsr	GetControls
 ;		bsr.w	PalCycSega
-;		tst.w	(v_demolength).w
+		cmpi.w	#$B4,($FFFFF614).w
+		beq.s	loc_2544
+		bra.s	loc_2528
+;		andi.b	#$80,($FFFFF605).w
 ;		beq.s	loc_2544
-;		andi.b	#btnStart,(v_jpadpress1).w
-;		beq.s	loc_2528
-;
-;loc_2544:
-;		move.b	#id_Title,(v_gamemode).w
-;		rts
+
+loc_2544:
 		addq.w #$04,($FFFFD824).w ; increase routine counter
 
 MultiReturn:						; Offset: 00006524
