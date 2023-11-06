@@ -15,7 +15,7 @@
 ; Includes
 ; ---------------------------------------------------------------------------
 
-Combi	=	0
+Combi	=	1
 
 		include	"Debugger.asm"
 		include	"SonCraMacro.asm"
@@ -16803,8 +16803,8 @@ Objpos_SSZ:
 Objpos_TTZ:
 	;dc.w	$0100,$0E00,$0000,$FFFF
 	
-	ObjLayout	$03F0,	$0298,	SpringYel_Up,    $FFFF
-	ObjLayout	$0410,	$0298,	SpringYel_Up,    $FFFF
+	ObjLayout	$03F0,	$0298,	SpringRed_Up,    $FFFF
+	ObjLayout	$0410,	$0298,	SpringRed_Up,    $FFFF
 	ObjLayout	$0488,	$0850,	SpringRed_Right, $FFFF
 	ObjLayout	$0513,	$070D,	DiagRedSprngRU,  $FFFF
 	ObjLayout	$0513,	$060D,	DiagRedSprngRU,  $FFFF
