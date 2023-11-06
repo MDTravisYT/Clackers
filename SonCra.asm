@@ -4668,29 +4668,6 @@ SegaStartButton:					; Offset: 000065F6
 		movea.l	($00000000).w,sp			; set stack pointer to location 00000000
 		jmp	MainProg_Loop				; jump to Main game array
 
-; ===========================================================================
-; ---------------------------------------------------------------------------
-; Subroutine to prevent the "TM" on the Sega Screen showing if region is Japan
-; ---------------------------------------------------------------------------
-
-RegionTMCheck:						; Offset: 00006612
-		move.b	($A10001).l,d0				; load machine's I/O information to d0
-		rol.b	#2,d0					; roll left 2 bits (Sending the regional info to the far right)
-		andi.w	#2,d0					; get only the region value that represents JAPAN
-		move.w	RTMC_Colours(pc,d0.w),($FFFFD402).w	; save correct colour to ram
-		rts						; return
-
-; ===========================================================================
-; ---------------------------------------------------------------------------
-RTMC_Colours:						; Offset: 00006626
-		dc.w	$0000					; black colour (to hide the "TM")
-		dc.w	$0EEE					; white colour (to show the "TM")
-		even
-; ---------------------------------------------------------------------------
-; ===========================================================================
-; ---------------------------------------------------------------------------
-; Subroutine to map the large SEGA letters to both map planes (x3 versions)
-; ---------------------------------------------------------------------------
 
 ; ===========================================================================
 ; ---------------------------------------------------------------------------
@@ -4726,45 +4703,6 @@ VB_SegaScreen:						; Offset: 00006EB4
 		movem.l	(sp)+,d0-a6				; reload register data from the stack
 		rte						; return
 
-; ===========================================================================
-; ---------------------------------------------------------------------------
-; Subroutine to take the V-Ram location in d6 and arrange it correctly for
-; MC68000 to set the VDP with.  (i.e. B000 becomes 70000002)
-; ---------------------------------------------------------------------------
-
-VRam_To_MC68:						; Offset: 00006F26
-		move.w	a6,d0					; load V-Ram location to d0
-		lsl.l	#$02,d0					; send far left bits to left side
-		lsr.w	#$02,d0					; and send the rest back
-		ori.w	#$4000,d0				; set V-Ram write mode (Map location)
-		swap	d0					; swap sides
-		andi.w	#$0003,d0				; clear all except the V-Ram location bits
-		rts						; return
-
-; ===========================================================================
-; ---------------------------------------------------------------------------
-; Subroutine to dump Sega Tile Data to VDP's V-Ram
-; ---------------------------------------------------------------------------
-
-SegaToVDP:						; Offset: 00006F38
-		move.l	(a0)+,d0				; load VDP settings to d0
-		move.w	(a0)+,d7				; load no of repeats to d7
-		lea	($C00000).l,a5				; load VDP data port to a5
-		move	sr,-(sp)				; move status register to stack pointer
-		move	#$2700,sr				; set the status register (disable interrupts)
-		move.l	d0,$04(a5)				; set VDP to V-Ram write mode with location
-
-SegatoVDPRep:						; Offset: 00006F4C
-		move.l	(a0)+,(a5)				; dump data to V-Ram
-		move.l	(a0)+,(a5)				; ''
-		move.l	(a0)+,(a5)				; ''
-		move.l	(a0)+,(a5)				; ''
-		move.l	(a0)+,(a5)				; ''
-		move.l	(a0)+,(a5)				; ''
-		move.l	(a0)+,(a5)				; ''
-		move.l	(a0)+,(a5)				; ''
-		dbf	d7,SegatoVDPRep				; repeat tile all tiles are dumped
-		rte						; return
 
 ; ===========================================================================
 ; ---------------------------------------------------------------------------
@@ -6079,6 +6017,10 @@ LV_DumpPalette:						; Offset: 000088D2
 		move.l	(a1)+,(a0)+				; dump two colours to buffer
 		dbf	d1,LV_DumpPalette			; repeat til all colours are dumped
 		move.w	#$0000,(a0)				; clear the first colour in palette line 3
+		move	#$2700,sr				; set the status register (disable interrupts)
+		lea	(ArtnemMainMenusText2).l,a0			; load compress "Horizontal Spikes" art address
+		move.l	#$40000000,($C00004).l			; set VDP V-Ram address and modes
+		jsr	NemDec					; decompress and dump
 		bsr.w	DMA_LoadTitleCardArt			; load title card art to V-Ram
 		bsr.w	DMA_LoadHudArt				; load HUD art to V-Ram
 		andi.w	#$81BC,($FFFFC9BA).w			; Turn Display off in VDP register 01's data
@@ -15508,6 +15450,9 @@ ARTNEM_Goal:
 	incbin	NemesisComp\ArtnemGoal.bin		; Vertical Spikes
 	even
 ; ---------------------------------------------------------------------------
+ArtnemMainMenusText2:
+	incbin	NemesisComp\ArtnemMainMenusText2.bin		; Vertical Spikes
+	even
 ; ===========================================================================
 ; ---------------------------------------------------------------------------
 ; Sprite Mappings - "Sprngs" and "Spikes" Objects
