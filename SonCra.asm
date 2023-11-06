@@ -4723,6 +4723,26 @@ SDKSega:
 MultiReturn:						; Offset: 00006524
 		rts						; return
 
+PalCycSega:
+		subq.w	#1,($FFFFF634).w
+		bpl.s	.locret
+		move.w	#3,($FFFFF634).w
+		move.w	($FFFFF632).w,d0
+		bmi.s	.locret
+		subq.w	#2,($FFFFF632).w
+		lea	(PAL_Segalogo).l,a0
+		lea	($FFFFFB00+4).w,a1
+		adda.w	d0,a0
+		move.l	(a0)+,(a1)+
+		move.l	(a0)+,(a1)+
+		move.l	(a0)+,(a1)+
+		move.l	(a0)+,(a1)+
+		move.l	(a0)+,(a1)+
+		move.w	(a0)+,(a1)+
+
+.locret:
+		rts
+
 ; ===========================================================================
 
 ; ===========================================================================
