@@ -4638,6 +4638,7 @@ SS_WaitVB:						; Offset: 000064FE
 ; ---------------------------------------------------------------------------
 SS_Routines:						; Offset: 0000650C
 		bra.w	SegaScreen				; Sega Screen loop
+		bra.w	SDKSega
 	;	bra.w	SegaEffects				; Sega Screen effect to use (Main/Scroll)
 	;	bra.w	SegaPaletteStart			; Sega Screen palette cycling startup routine
 	;	bra.w	SegaPaletteCycle			; Sega Screen palette cycling routine
@@ -4648,6 +4649,57 @@ SS_Routines:						; Offset: 0000650C
 ; ---------------------------------------------------------------------------
 ; Subroutine to return without doing anything (Used in multiple routines)
 ; ---------------------------------------------------------------------------
+
+SDKSega:
+;		move.b	#bgm_Fade,d0
+;		bsr.w	PlaySound_Special
+;		bsr.w	ClearPLC
+;		bsr.w	PaletteFadeOut
+;		lea	(vdp_control_port).l,a6
+;		move.w	#$8004,(a6)
+;		move.w	#$8230,(a6)
+;		move.w	#$8407,(a6)
+;		move.w	#$8700,(a6)
+;		move.w	#$8B00,(a6)
+;		move.w	(v_vdp_buffer1).w,d0
+;		andi.b	#$BF,d0
+;		move.w	d0,(vdp_control_port).l
+;
+;loc_24BC:
+;		bsr.w	ClearScreen
+;		locVRAM 0
+;		lea	(Nem_SegaLogo).l,a0
+;		bsr.w	NemDec
+;		lea	(v_startofram&$FFFFFF).l,a1
+;		lea	(Eni_SegaLogo).l,a0
+;		move.w	#0,d0
+;		bsr.w	EniDec
+;
+;		copyTilemap	v_startofram&$FFFFFF,$C61C,$B,3
+;
+;		moveq	#palid_SegaBG,d0
+;		bsr.w	PalLoad2
+;		move.w	#$28,(v_pcyc_num).w
+;		move.w	#0,(v_pal_buffer+$12).w
+;		move.w	#0,(v_pal_buffer+$10).w
+;		move.w	#$B4,(v_demolength).w
+;		move.w	(v_vdp_buffer1).w,d0
+;		ori.b	#$40,d0
+;		move.w	d0,(vdp_control_port).l
+;
+;loc_2528:
+;		move.b	#2,(v_vbla_routine).w
+;		bsr.w	WaitForVBla
+;		bsr.w	PalCycSega
+;		tst.w	(v_demolength).w
+;		beq.s	loc_2544
+;		andi.b	#btnStart,(v_jpadpress1).w
+;		beq.s	loc_2528
+;
+;loc_2544:
+;		move.b	#id_Title,(v_gamemode).w
+;		rts
+		addq.w #$04,($FFFFD824).w ; increase routine counter
 
 MultiReturn:						; Offset: 00006524
 		rts						; return
@@ -4709,8 +4761,8 @@ VB_SegaScreen:						; Offset: 00006EB4
 PAL_Segalogo:						; Offset: 00006F62
 		incbin	Palettes\PalSegaLogo.bin		; palettes used in the Sega logo
 		even
-ARTCRA_SegaLogo:					; Offset: 00006FA2
-		incbin	CrackersComp\ArtcraSegaLogo.bin		; compressed Sega patterns
+ARTNEM_SegaLogo:					; Offset: 00006FA2
+		incbin	NemesisComp\SegaLogo.bin		; compressed Sega patterns
 		even
 ; ---------------------------------------------------------------------------
 ; ===========================================================================
