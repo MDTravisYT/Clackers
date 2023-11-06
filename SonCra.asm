@@ -4553,6 +4553,7 @@ SegaScreen:						; Offset: 00006424
 		move.l	a0,($FFFFC832).w			; set to run it during Sega Screen
 		movem.l	(sp)+,a0				; reload a0 data from stack
 		jsr	(Z80Load).l				; load the Z80
+	;	move	#$2700,sr				; set the status register (disable interrupts)
 		lea	SS_VDPRegData(pc),a0			; load VDP register setup values
 		jsr	StoreVDPRegisters			; save VDP register data to ram spaces
 		bra.s	SS_Start				; continue
@@ -4563,8 +4564,8 @@ SS_VDPRegData:						; Offset: 00006442
 		dc.w	$8230					; [Scroll Plane A Map Table VRam address: $C000];
 		dc.w	$8407					; [Scroll Plane B Map Table VRam address: $E000];
 		dc.w	$833C					; [Window Plane A Map Table VRam address: $F000];
-		dc.w	$855C					; [Sprite Plane Map Table VRam address: $B800];
-		dc.w	$8D2F					; [Horizontal Scroll Table VRam address: $BC00];
+		dc.w	$857C					; [Sprite Plane Map Table VRam address: $F800];
+		dc.w	$8D3F					; [Horizontal Scroll Table VRam address: $FC00];
 		dc.w	$8B00					; [External Interrupt Off];[V-Scroll: Full];[H-Scroll: Full];[Line: By Cell];
 		dc.w	$8C81					; [H-Mode: 40 Cell];[Shadow/Hi-Lighting Off];[Interlace Off];
 		dc.w	$9011					; [VDP Screen Map Size: Vertical Size 64 Cell/Horizontal Size 64 Cell];
@@ -4655,27 +4656,42 @@ SDKSega:
 ;		bsr.w	PlaySound_Special
 ;		bsr.w	ClearPLC
 ;		bsr.w	PaletteFadeOut
-;		lea	(vdp_control_port).l,a6
-;		move.w	#$8004,(a6)
-;		move.w	#$8230,(a6)
-;		move.w	#$8407,(a6)
-;		move.w	#$8700,(a6)
-;		move.w	#$8B00,(a6)
-;		move.w	(v_vdp_buffer1).w,d0
-;		andi.b	#$BF,d0
-;		move.w	d0,(vdp_control_port).l
+		move.w	($FFFFD81C).w,d0			; load V-Ram horizontal scroll table location to d0
+		lsl.l	#$02,d0					; send far left bits to left side
+		lsr.w	#$02,d0					; and send the rest back
+		ori.w	#$4000,d0				; set V-Ram write mode (Map location)
+		swap	d0					; swap sides
+		andi.w	#$0003,d0				; clear all except the V-Ram location bits
+		move.l	d0,($C00004).l				; set VDP to V-Ram write mode with location (H-Scroll table)
+		move.l	#$00000000,($C00000).l			; reset the FG and BG H-Scroll positions to 0
+		move.l	#$40000010,($C00004).l			; set VDP to VS-Ram write mode
+		move.l	#$00000000,($C00000).l			; reset the FG and BG V-Scroll positions to 0
 ;
 ;loc_24BC:
 ;		bsr.w	ClearScreen
-;		locVRAM 0
-;		lea	(Nem_SegaLogo).l,a0
-;		bsr.w	NemDec
-;		lea	(v_startofram&$FFFFFF).l,a1
-;		lea	(Eni_SegaLogo).l,a0
-;		move.w	#0,d0
-;		bsr.w	EniDec
+		lea	ARTNEM_SegaLogo(pc),a0		; load Main Menu text art address to a0
+		move.l	#$40000000,($C00004).l			; set VDP location to dump
+		jsr	NemDec					; decompress and dump
+		move.l	#$40000003,d0				; prepare VDP settings
+		
+		lea	($FFFF0000&$FFFFFF).l,a1
+		lea	(MAPENI_SegaLogo).l,a0
+		move.w	#0,d0
+		bsr.w	EniDec
+		
+		lea	($FFFF0000&$FFFFFF).l,a1
+		move.l	#$40000000+(($C61C&$3FFF)<<16)+(($C61C&$C000)>>14),d0
+		moveq	#$27,d1
+		moveq	#$B,d2
+		bsr.w	MapScreen
+		
+	;	lea	($FFFF0000&$FFFFFF)(pc),a1		; load uncompressed title mappings to a1 (Title Screen "Banner")
+	;	moveq	#$27,d1					; set X loop
+	;	moveq	#$B,d2					; set Y loop
+	;	move.w	#0,d3					; set to use palette line 0 (and to map behind object plane)
+	;	jsr	MapScreen				; map it on screen correctly
 ;
-;		copyTilemap	v_startofram&$FFFFFF,$C61C,$B,3
+;		copyTilemap	$FFFF0000&$FFFFFF,$C61C,$B,3
 ;
 ;		moveq	#palid_SegaBG,d0
 ;		bsr.w	PalLoad2
@@ -4683,9 +4699,9 @@ SDKSega:
 ;		move.w	#0,(v_pal_buffer+$12).w
 ;		move.w	#0,(v_pal_buffer+$10).w
 ;		move.w	#$B4,(v_demolength).w
-;		move.w	(v_vdp_buffer1).w,d0
+;		move.w	($FFFFF60C).w,d0
 ;		ori.b	#$40,d0
-;		move.w	d0,(vdp_control_port).l
+;		move.w	d0,($C00004).l
 ;
 ;loc_2528:
 ;		move.b	#2,(v_vbla_routine).w
@@ -4763,6 +4779,9 @@ PAL_Segalogo:						; Offset: 00006F62
 		even
 ARTNEM_SegaLogo:					; Offset: 00006FA2
 		incbin	NemesisComp\SegaLogo.bin		; compressed Sega patterns
+		even
+MAPENI_SegaLogo:
+		incbin	EnigmaComp\MapeniSegaLogo.bin
 		even
 ; ---------------------------------------------------------------------------
 ; ===========================================================================
