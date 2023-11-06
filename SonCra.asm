@@ -4656,17 +4656,16 @@ SDKSega:
 ;		bsr.w	PlaySound_Special
 ;		bsr.w	ClearPLC
 ;		bsr.w	PaletteFadeOut
-	;	move.w	($FFFFD81C).w,d0			; load V-Ram horizontal scroll table location to d0
-	;	lsl.l	#$02,d0					; send far left bits to left side
-	;	lsr.w	#$02,d0					; and send the rest back
+		move.w	($FFFFD81C).w,d0			; load V-Ram horizontal scroll table location to d0
+		lsl.l	#$02,d0					; send far left bits to left side
+		lsr.w	#$02,d0					; and send the rest back
 		ori.w	#$4000,d0				; set V-Ram write mode (Map location)
 		swap	d0					; swap sides
 		andi.w	#$0003,d0				; clear all except the V-Ram location bits
 		move.l	d0,($C00004).l				; set VDP to V-Ram write mode with location (H-Scroll table)
-	;	move.l	#$00000000,($C00000).l			; reset the FG and BG H-Scroll positions to 0
-	;	move.l	#$40000010,($C00004).l			; set VDP to VS-Ram write mode
-	;	move.l	#$00000000,($C00000).l			; reset the FG and BG V-Scroll positions to 0
-		move	#$2700,sr				; set the status register (disable interrupts)
+		move.l	#$00000000,($C00000).l			; reset the FG and BG H-Scroll positions to 0
+		move.l	#$40000010,($C00004).l			; set VDP to VS-Ram write mode
+		move.l	#$00000000,($C00000).l			; reset the FG and BG V-Scroll positions to 0
 ;
 ;loc_24BC:
 ;		bsr.w	ClearScreen
@@ -4682,11 +4681,9 @@ SDKSega:
 		
 		lea	($FFFF0000&$FFFFFF).l,a1
 		move.l	#$40000000+(($C61C&$3FFF)<<16)+(($C61C&$C000)>>14),d0
-		moveq	#$B,d1
-		moveq	#$3,d2
+		moveq	#$27,d1
+		moveq	#$B,d2
 		bsr.w	MapScreen
-		
-		move	#$2300,sr				; set the status register (enable interrupts)
 		
 	;	lea	($FFFF0000&$FFFFFF)(pc),a1		; load uncompressed title mappings to a1 (Title Screen "Banner")
 	;	moveq	#$27,d1					; set X loop
@@ -15074,10 +15071,10 @@ TTZ_AniTileLocs:dc.l	$001023E0
 		dc.l	ARTUNC_TTZAnimatedFanFG1
 		dc.l	ARTUNC_TTZAnimatedFanFG2
 		dc.l	$02040200
-		dc.l	ARTUNC_TTZAnimatedTurbineBG1
-		dc.l	ARTUNC_TTZAnimatedTurbineBG2
-		dc.l	ARTUNC_TTZAnimatedTurbineBG3
 		dc.l	ARTUNC_TTZAnimatedTurbineBG4
+		dc.l	ARTUNC_TTZAnimatedTurbineBG4+$400
+		dc.l	ARTUNC_TTZAnimatedTurbineBG4+$800
+		dc.l	ARTUNC_TTZAnimatedTurbineBG4+$C00
 ; ---------------------------------------------------------------------------
 ; ===========================================================================
 ; ---------------------------------------------------------------------------
