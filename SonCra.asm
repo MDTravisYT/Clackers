@@ -4592,13 +4592,6 @@ SS_Start:						; Offset: 0000645A
 		moveq	#$00,d2					; set value to dump
 		move.w	($FFFFD818).w,d3			; set V-Ram location to dump to
 		jsr	MapScreenSingle				; dump the value to V-Ram (Clear plane B)
-		lea	PAL_Segalogo(pc),a0			; load Sega Palette address to a0
-		lea	($FFFFD3E4).w,a1			; load temp palette buffer location to a1
-		movem.l	(a0)+,d0-d7				; load first 10 colours to registers d0 to d7
-		movem.l	d0-d7,(a1)				; ...and save to temp palette buffer
-		lea	$20(a1),a1				; advance 10 colours in buffer
-		movem.l	(a0)+,d0-d7				; load next 10 colours to registers d0 to d7
-		movem.l	d0-d7,(a1)				; ...and save to temp palette buffer
 ;		bsr.w	SEGA_LoadArt				; dump the different sized pixel tiles for the SEGA screen effect
 		move.l	#$00000F01,d0				; set sprite XXXX YY ZZ (XXXX = Y position/YY = shape/ZZ = priority)
 		moveq	#$01,d1					; set sprite XXXX YYYY (XXXX = V-Ram location/YYYY = X position)
@@ -4630,8 +4623,6 @@ SS_StackLoc:						; Offset: 000064F2
 SS_WaitVB:						; Offset: 000064FE
 		tst.b	($FFFFFFC9).w				; is the routine ready to continue?
 		bpl.s	SS_WaitVB				; if not, loop and recheck
-		move.b	#$89,d0					; set "fade out" music
-		jsr	(PlayMusic).l				; play music
 		move.w	($FFFFD824).w,d0			; load routine counter to d0
 		jmp	SS_Routines(pc,d0.w)			; jump to correct routine based on the counter
 
@@ -4652,8 +4643,14 @@ SS_Routines:						; Offset: 0000650C
 ; ---------------------------------------------------------------------------
 
 SDKSega:
-		move.b	#$89,d0					; set "fade out" music
-		jsr	(PlayMusic).l				; play music
+		lea	PAL_Segalogo(pc),a0			; load Sega Palette address to a0
+		lea	($FFFFD3E4).w,a1			; load temp palette buffer location to a1
+		movem.l	(a0)+,d0-d7				; load first 10 colours to registers d0 to d7
+		movem.l	d0-d7,(a1)				; ...and save to temp palette buffer
+		lea	$20(a1),a1				; advance 10 colours in buffer
+		movem.l	(a0)+,d0-d7				; load next 10 colours to registers d0 to d7
+		movem.l	d0-d7,(a1)				; ...and save to temp palette buffer
+
 		ori.w	#$4000,d0				; set V-Ram write mode (Map location)
 		swap	d0					; swap sides
 		andi.w	#$0003,d0				; clear all except the V-Ram location bits
@@ -4681,7 +4678,7 @@ SDKSega:
 		move.w	#$28,($FFFFF632).w
 		move.w	#0,($FFFFF650+$12).w
 		move.w	#0,($FFFFF650+$10).w
-		move.w	#$B4,($FFFFF614).w
+	;	move.w	#$60,($FFFFF614).w
 		move.w	($FFFFF60C).w,d0
 		ori.b	#$40,d0
 		move.w	d0,($C00004).l
@@ -4695,8 +4692,8 @@ SSCyc_WaitVB:						; Offset: 000064FE
 ;		bpl.s	SSCyc_WaitVB				; if not, loop and recheck
 ;		jsr	GetControls
 ;		bsr.w	PalCycSega
-		cmpi.w	#$B4,($FFFFF614).w
-		beq.s	loc_2544
+		cmpi.w	#$1,($FFFFF614).w
+		bge.s	loc_2544
 		bra.s	loc_2528
 ;		andi.b	#$80,($FFFFF605).w
 ;		beq.s	loc_2544
