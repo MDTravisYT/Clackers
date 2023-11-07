@@ -688,23 +688,15 @@ DMAWD_WaitZ80:						; Offset: 0000064E
 ; ---------------------------------------------------------------------------
 
 Pal_FadeBlack:						; Offset: 000006CC
-		move.b	($FFFFD4E4).w,d1			; load overall delay time
-		bne.s	PFB_Continue				; if time has been set, it's already during fade, so branch
-		move.b	d0,($FFFFD4E4).w			; set overall delay time
-		move.b	d0,($FFFFD4E6).w			; set current frame delay time
-		move.b	#$08,($FFFFD4E5).w			; set number of frames to fade for
 
-PFB_Continue:						; Offset: 000006E0
-		subq.b	#1,($FFFFD4E6).w			; decrease delay time
-		beq.s	PFB_FadeFrame				; if finished, branch
-		rts						; return (skip a frame of fading)
+PFB_FadeFrame:
+		bclr	#$7,($FFFFFFC9).w			; set to not run this routine til V-Blank has run
 
-PFB_FadeFrame:						; Offset: 000006E8
-		move.b	($FFFFD4E4).w,($FFFFD4E6).w		; reset delay time for next fade
-		bsr.s	PFB_FadeBuffer				; process fading
-		subq.b	#$01,($FFFFD4E5).w			; decrease frame counter
-		bne.s	PFB_NotFinished				; if not finished, branch
-		move.b	#$00,($FFFFD4E4).w			; clear overall delay time (finished fading)
+Fade_WaitVB:						; Offset: 000064FE
+		tst.b	($FFFFFFC9).w				; is the routine ready to continue?
+		bpl.s	Fade_WaitVB				; if not, loop and recheck
+		bsr.s	PFB_FadeBuffer
+		dbf	d4,	PFB_FadeFrame
 
 PFB_NotFinished:					; Offset: 000006FC
 		rts						; return
@@ -730,33 +722,33 @@ PFB_NextColour:						; Offset: 00000708
 ; ---------------------------------------------------------------------------
 
 PFB_DecreaseColour:					; Offset: 0000072C
-.dered:
+dered:
 		move.w	(a0),d2
-		beq.s	.next
+		beq.s	next
 		move.w	d2,d1
 		andi.w	#$E,d1
-		beq.s	.degreen
+		beq.s	degreen
 		subq.w	#2,(a0)+	; decrease red value
 		rts	
 ; ===========================================================================
 
-.degreen:
+degreen:
 		move.w	d2,d1
 		andi.w	#$E0,d1
-		beq.s	.deblue
+		beq.s	deblue
 		subi.w	#$20,(a0)+	; decrease green value
 		rts	
 ; ===========================================================================
 
-.deblue:
+deblue:
 		move.w	d2,d1
 		andi.w	#$E00,d1
-		beq.s	.next
+		beq.s	next
 		subi.w	#$200,(a0)+	; decrease blue	value
 		rts	
 ; ===========================================================================
 
-.next:
+next:
 		addq.w	#2,a0
 		rts						; return
 
