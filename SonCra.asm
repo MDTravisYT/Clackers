@@ -719,21 +719,9 @@ PFB_FadeBuffer:							; Offset: 000006FE
 		subq.w	#$01,d3					; subtract 1 (most likely for the dbf instruction)
 
 PFB_NextColour:						; Offset: 00000708
-		move.w	(a0),d2					; load colour
-		move.w	d2,d0					; copy colour to d0
+	;	move.w	(a0),d2					; load colour
+	;	move.w	d2,d0					; copy colour to d0
 		bsr.s	PFB_DecreaseColour			; process red
-		move.w	d0,d1					; save to d1
-		move.w	d2,d0					; reload colour
-		lsr.w	#$04,d0					; get green value
-		bsr.s	PFB_DecreaseColour			; process green
-		lsl.w	#$04,d0					; align to green space
-		or.w	d0,d1					; save with red
-		move.w	d2,d0					; reload colour
-		lsr.w	#$08,d0					; get blue value
-		bsr.s	PFB_DecreaseColour			; process blue
-		lsl.w	#$08,d0					; align to blue space
-		or.w	d0,d1					; save with red and green
-		move.w	d1,(a0)+				; save new colour
 		dbf	d3,PFB_NextColour			; repeat til all colours processed
 		rts						; return
 
@@ -742,11 +730,34 @@ PFB_NextColour:						; Offset: 00000708
 ; ---------------------------------------------------------------------------
 
 PFB_DecreaseColour:					; Offset: 0000072C
-		andi.w	#$000F,d0				; check colour selected and clear rest
-		beq.s	PFB_ColourFinished			; if it has reached 00, branch
-		subq.w	#$02,d0					; decrease colour
+.dered:
+		move.w	(a0),d2
+		beq.s	.next
+		move.w	d2,d1
+		andi.w	#$E,d1
+		beq.s	.degreen
+		subq.w	#2,(a0)+	; decrease red value
+		rts	
+; ===========================================================================
 
-PFB_ColourFinished:					; Offset: 00000734
+.degreen:
+		move.w	d2,d1
+		andi.w	#$E0,d1
+		beq.s	.deblue
+		subi.w	#$20,(a0)+	; decrease green value
+		rts	
+; ===========================================================================
+
+.deblue:
+		move.w	d2,d1
+		andi.w	#$E00,d1
+		beq.s	.next
+		subi.w	#$200,(a0)+	; decrease blue	value
+		rts	
+; ===========================================================================
+
+.next:
+		addq.w	#2,a0
 		rts						; return
 
 ; ===========================================================================
