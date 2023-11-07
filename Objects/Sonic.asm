@@ -294,10 +294,13 @@ loc_A51E:				; CODE XREF: ROM:0000A50Ej
 ; ---------------------------------------------------------------------------
 
 ObjSonic_Roll:
-;		cmpi.w	#$180,$2C(a6)
-;		blo.s	.ret
-;		RaiseError	"Sonic has reached rolling speed"
-;	.ret:
+		cmpi.w	#$180,$2C(a6)
+		blo.s	.rts
+		move.b	$FFFFC93C,d0
+		andi.b	#$02,d0	; 'p'
+		beq.s	.rts
+		move.w	#$12,$26(a6)
+	.rts:
 		rts
 
 ObjSonic_SummonPartner:
