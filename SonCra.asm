@@ -715,14 +715,14 @@ PFB_NotFinished:					; Offset: 000006FC
 
 PFB_FadeBuffer:							; Offset: 000006FE
 		lea	($FFFFD3E4).w,a0			; load palette buffer address
-		move.w	#$0040,d3				; set repeat times
-		subq.w	#$01,d3					; subtract 1 (most likely for the dbf instruction)
+		move.w	#$0040,d0				; set repeat times
+	;	adda.w	d0,a0
+	;	subq.w	#$01,d0					; subtract 1 (most likely for the dbf instruction)
 
 PFB_NextColour:						; Offset: 00000708
-	;	move.w	(a0),d2					; load colour
 	;	move.w	d2,d0					; copy colour to d0
 		bsr.s	PFB_DecreaseColour			; process red
-		dbf	d3,PFB_NextColour			; repeat til all colours processed
+		dbf	d0,PFB_NextColour			; repeat til all colours processed
 		rts						; return
 
 ; ---------------------------------------------------------------------------
