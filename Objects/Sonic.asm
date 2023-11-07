@@ -17,7 +17,7 @@ SonicIndex:                           ; DATA XREF: ROM:0000A27E↑o
                 dc.w loc_A67C-SonicIndex
                 dc.w loc_A72E-SonicIndex
                 dc.w locret_A992-SonicIndex
-                dc.w loc_A994-SonicIndex
+                dc.w ObjSonic_Spindash-SonicIndex
                 dc.w loc_A9C8-SonicIndex
                 dc.w loc_AA46-SonicIndex
 ; ---------------------------------------------------------------------------
@@ -276,6 +276,7 @@ loc_A4F0:				; CODE XREF: ROM:0000A4DAj
 loc_A506:				; DATA XREF: ROM:0000A296o
 		cmpi.l	#$200,$26(a6)
 		beq.s	loc_A51E
+		bsr.w	ObjSonic_Roll
 	;	tst.b	(a5)
 	;	bmi.s	loc_A530
 		bsr.w	ObjSonic_SummonPartner
@@ -291,6 +292,13 @@ loc_A51E:				; CODE XREF: ROM:0000A50Ej
 		move.b	#$E,7(a6)
 		rts
 ; ---------------------------------------------------------------------------
+
+ObjSonic_Roll:
+;		cmpi.w	#$180,$2C(a6)
+;		blo.s	.ret
+;		RaiseError	"Sonic has reached rolling speed"
+;	.ret:
+		rts
 
 ObjSonic_SummonPartner:
 		move.b	$FFFFC93D,d0
@@ -782,7 +790,8 @@ loc_B250_B:
 		move.l	d0,$1C(a6)
 		rts
 ; ---------------------------------------------------------------------------
-loc_A994:
+
+ObjSonic_Spindash:
 		cmpi.b	#1,($FFFFFFFF)
 		beq.s	@cont
 		move.b	#$A2,d0

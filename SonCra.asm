@@ -4634,7 +4634,7 @@ SS_WaitVB:						; Offset: 000064FE
 ; ---------------------------------------------------------------------------
 SS_Routines:						; Offset: 0000650C
 		bra.w	SegaScreen				; Sega Screen loop
-		bra.w	SDKSega
+	;	bra.w	SDKSega
 	;	bra.w	SegaEffects				; Sega Screen effect to use (Main/Scroll)
 	;	bra.w	SegaPaletteStart			; Sega Screen palette cycling startup routine
 	;	bra.w	SegaPaletteCycle			; Sega Screen palette cycling routine
@@ -4959,11 +4959,11 @@ TSS_Start:						; Offset: 00007512
 		bne.s	TSS_Not1P2P				; if not, branch
 
 TSS_1P2PStart:						; Offset: 00007526
+	;	moveq	#$01,d0					; set the speed of palette fading
+	;	jsr	Pal_FadeBlack				; fade the palettes to black
+	;	bne.w	MultiReturn2				; if fading hasn't finished, branch
 		move.w	#$0001,($FFFFD834).w			; set Zone/World ID to 1 (dubbed TechnoTowerZone)
 		move.w	#$0001,($FFFFD836).w			; set Level/Act/Field ID to 1
-	;	moveq	#$01,d0					; set the speed of palette fading
-		jsr	Pal_FadeBlack				; fade the palettes to black
-	;	bne.w	MultiReturn2				; if fading hasn't finished, branch
 		move.w	#$0018,($FFFFD822).w			; set Screen/Game mode to Level
 		move.b	#$00,($FFFFD89C).w			; set player 1 user mode
 		tst.w	d0					; is the selection "1P START"?
@@ -7931,6 +7931,11 @@ UZ02_StartUp:
 		rts						; return
 
 UZ02_StartLevel:					; Offset: 0000991E
+		moveq	#$28,d0					; set number of columns to dump
+		moveq	#$20,d1					; set number of rows to dump
+		move.w	#$0040,d2				; set value/tile to dump
+		move.w	($FFFFD818).w,d3			; set V-Ram location to dump to (V-Ram plane A)
+		jsr	MapScreenSingle				; dump to plane map122222
 		lea	PAL_Flora(pc),a0	; load TTZ palette
 		lea	($FFFFD424).w,a2			; load palette buffer address to a2
 		bsr.w	LoadHalfPalette				; dump the palette to the buffer
