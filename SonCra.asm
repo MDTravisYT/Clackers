@@ -688,6 +688,7 @@ DMAWD_WaitZ80:						; Offset: 0000064E
 ; ---------------------------------------------------------------------------
 
 Pal_FadeBlack:						; Offset: 000006CC
+		clr.w	$FFFFD3E4
 
 PFB_FadeFrame:
 		bclr	#$7,($FFFFFFC9).w			; set to not run this routine til V-Blank has run
@@ -4695,9 +4696,9 @@ SSCyc_WaitVB:						; Offset: 000064FE
 ;		bpl.s	SSCyc_WaitVB				; if not, loop and recheck
 ;		jsr	GetControls
 ;		bsr.w	PalCycSega
-		cmpi.w	#$1,($FFFFF614).w
-		bge.s	loc_2544
-		bra.s	loc_2528
+	;	cmpi.w	#$1,($FFFFF614).w
+	;	bge.s	loc_2544
+	;	bra.s	loc_2528
 ;		andi.b	#$80,($FFFFF605).w
 ;		beq.s	loc_2544
 
@@ -4735,9 +4736,7 @@ PalCycSega:
 ; ---------------------------------------------------------------------------
 
 SegaStartButton:					; Offset: 000065F6
-		moveq	#$01,d0					; set the speed of palette fading
 		jsr	Pal_FadeBlack				; fade the palettes to black
-		bne.w	MultiReturn				; if fading hasn't finished, branch
 		move.w	#$0008,($FFFFD822).w			; set Screen/Game mode to title screen
 		clr.l	($FFFFD824).w				; clear routine counter
 		movea.l	($00000000).w,sp			; set stack pointer to location 00000000
@@ -4817,8 +4816,8 @@ TS_StartUp:						; Offset: 00007366
 		move.l	a0,($FFFFC832).w			; set to run it during Title Screen
 		movem.l	(sp)+,a0				; reload a0 data from stack
 		move	#$2700,sr				; set the status register (disable interrupts)
-		lea	TS_VDPRegData(pc),a0			; load VDP register setup values
-		jsr	StoreVDPRegisters			; save VDP register data to ram spaces
+	;	lea	TS_VDPRegData(pc),a0			; load VDP register setup values
+	;	jsr	StoreVDPRegisters			; save VDP register data to ram spaces
 		bra.s	TS_Start				; continue
 
 ; ===========================================================================
@@ -4960,16 +4959,11 @@ TSS_Start:						; Offset: 00007512
 		bne.s	TSS_Not1P2P				; if not, branch
 
 TSS_1P2PStart:						; Offset: 00007526
-		bclr	#$07,($FFFFFFC9).w			; set to not run this routine til V-Blank has run
-
-TS_1P2PStar_WaitVB:						; Offset: 000074E2
-		tst.b	($FFFFFFC9).w				; is the routine ready to continue?
-		bpl.s	TS_1P2PStar_WaitVB				; if not, loop and recheck
-		moveq	#$01,d0					; set the speed of palette fading
-		jsr	Pal_FadeBlack				; fade the palettes to black
-		bne.w	TSS_1P2PStart				; if fading hasn't finished, branch
 		move.w	#$0001,($FFFFD834).w			; set Zone/World ID to 1 (dubbed TechnoTowerZone)
 		move.w	#$0001,($FFFFD836).w			; set Level/Act/Field ID to 1
+	;	moveq	#$01,d0					; set the speed of palette fading
+		jsr	Pal_FadeBlack				; fade the palettes to black
+	;	bne.w	MultiReturn2				; if fading hasn't finished, branch
 		move.w	#$0018,($FFFFD822).w			; set Screen/Game mode to Level
 		move.b	#$00,($FFFFD89C).w			; set player 1 user mode
 		tst.w	d0					; is the selection "1P START"?
@@ -7801,6 +7795,11 @@ UZ01_StartUp:
 		rts						; return
 
 UZ01_StartLevel:					; Offset: 0000991E
+		moveq	#$28,d0					; set number of columns to dump
+		moveq	#$20,d1					; set number of rows to dump
+		move.w	#$0040,d2				; set value/tile to dump
+		move.w	($FFFFD818).w,d3			; set V-Ram location to dump to (V-Ram plane A)
+		jsr	MapScreenSingle				; dump to plane map
 		lea	PAL_IsolatedIsland(pc),a0	; load TTZ palette
 		lea	($FFFFD424).w,a2			; load palette buffer address to a2
 		bsr.w	LoadHalfPalette				; dump the palette to the buffer
