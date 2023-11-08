@@ -4952,7 +4952,6 @@ MultiReturn2:
 		rts
 
 TSS_Start:						; Offset: 00007512
-		jsr		Pal_FadeBlack				; fade the palettes to black
 		clr.w	($FFFFD83A).w				; reset Level time of day
 		clr.w	($FFFFD824).w				; reset routine counter
 		move.w	($FFFFD826).w,d0			; load selection to d0
@@ -4961,6 +4960,7 @@ TSS_Start:						; Offset: 00007512
 		bne.s	TSS_Not1P2P				; if not, branch
 
 TSS_1P2PStart:						; Offset: 00007526
+		jsr		Pal_FadeBlack				; fade the palettes to black
 		move.w	#$0001,($FFFFD834).w			; set Zone/World ID to 1 (dubbed TechnoTowerZone)
 		move.w	#$0001,($FFFFD836).w			; set Level/Act/Field ID to 1
 		move.w	#$0018,($FFFFD822).w			; set Screen/Game mode to Level
