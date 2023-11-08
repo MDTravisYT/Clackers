@@ -689,6 +689,7 @@ DMAWD_WaitZ80:						; Offset: 0000064E
 
 Pal_FadeBlack:						; Offset: 000006CC
 		clr.w	$FFFFD3E4
+		moveq	#$15,d4
 
 PFB_FadeFrame:
 		bclr	#$7,($FFFFFFC9).w			; set to not run this routine til V-Blank has run
@@ -4736,7 +4737,7 @@ PalCycSega:
 ; ---------------------------------------------------------------------------
 
 SegaStartButton:					; Offset: 000065F6
-		jsr	Pal_FadeBlack				; fade the palettes to black
+		jsr		Pal_FadeBlack				; fade the palettes to black
 		move.w	#$0008,($FFFFD822).w			; set Screen/Game mode to title screen
 		clr.l	($FFFFD824).w				; clear routine counter
 		movea.l	($00000000).w,sp			; set stack pointer to location 00000000
@@ -4951,6 +4952,7 @@ MultiReturn2:
 		rts
 
 TSS_Start:						; Offset: 00007512
+		jsr		Pal_FadeBlack				; fade the palettes to black
 		clr.w	($FFFFD83A).w				; reset Level time of day
 		clr.w	($FFFFD824).w				; reset routine counter
 		move.w	($FFFFD826).w,d0			; load selection to d0
@@ -4959,9 +4961,6 @@ TSS_Start:						; Offset: 00007512
 		bne.s	TSS_Not1P2P				; if not, branch
 
 TSS_1P2PStart:						; Offset: 00007526
-	;	moveq	#$01,d0					; set the speed of palette fading
-	;	jsr	Pal_FadeBlack				; fade the palettes to black
-	;	bne.w	MultiReturn2				; if fading hasn't finished, branch
 		move.w	#$0001,($FFFFD834).w			; set Zone/World ID to 1 (dubbed TechnoTowerZone)
 		move.w	#$0001,($FFFFD836).w			; set Level/Act/Field ID to 1
 		move.w	#$0018,($FFFFD822).w			; set Screen/Game mode to Level
