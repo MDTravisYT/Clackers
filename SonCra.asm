@@ -4954,9 +4954,9 @@ MultiReturn2:
 TSS_Start:						; Offset: 00007512
 		clr.w	($FFFFD83A).w				; reset Level time of day
 		clr.w	($FFFFD824).w				; reset routine counter
-		move.w	($FFFFD826).w,d0			; load selection to d0
+		move.w	($FFFFD826).w,d3			; load selection to d0
 		beq.s	TSS_1P2PStart				; if it's at the 1st selection, branch
-		cmpi.w	#1,d0					; is it at the second selection?
+		cmpi.w	#1,d3					; is it at the second selection?
 		bne.s	TSS_Not1P2P				; if not, branch
 
 TSS_1P2PStart:						; Offset: 00007526
@@ -4965,7 +4965,7 @@ TSS_1P2PStart:						; Offset: 00007526
 		move.w	#$0001,($FFFFD836).w			; set Level/Act/Field ID to 1
 		move.w	#$0018,($FFFFD822).w			; set Screen/Game mode to Level
 		move.b	#$00,($FFFFD89C).w			; set player 1 user mode
-		tst.w	d0					; is the selection "1P START"?
+		tst.w	d3					; is the selection "1P START"?
 		bne.s	TSS_2PStart				; if not, branch
 		move.b	#%11111111,($FFFFD8AC).w			; set player 2 CPU mode
 		rts						; return
@@ -5068,7 +5068,7 @@ Fields:							; Offset: 00007E08
 		movem.l	(sp)+,a0				; reload a0 data from stack
 		lea	Fields_VDPRegData(pc),a0		; load VDP register setup values
 		jsr	StoreVDPRegisters			; save VDP register data to ram spaces
-		move.b	#$81,d0					; load BGM 81
+		move.b	#$8A,d0					; load BGM 81
 		jsr	(PlayMusic).l				; Play BGM
 		lea	PAL_PrimaryColours_Field(pc),a0		; load primary Field palettes address to a0
 		lea	($FFFFD3E4).w,a1			; load palette buffer to a1
