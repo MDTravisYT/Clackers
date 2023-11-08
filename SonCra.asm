@@ -14820,16 +14820,16 @@ TT_Text:						; Offset: 00009440
 		dc.w	$002F
 		dc.w	$0032
 		dc.w	$0034
-		dc.w	$0000
+		dc.w	$800A
 		dc.w	$0028
 		dc.w	$002F
 		dc.w	$0034
 		dc.w	$0025
 		dc.w	$002C
-		dc.w	$0000
-		dc.w	$0000
-		dc.w	$0000
-		dc.w	$0000
+		dc.w	$800A
+		dc.w	$800A
+		dc.w	$800A
+		dc.w	$800A
 		even
 		rts						; return
 
@@ -14843,17 +14843,17 @@ SS_Text:						; Offset: 00009440
 		dc.w	$0025
 		dc.w	$002E
 		dc.w	$0034
-		dc.w	$0000
+		dc.w	$800A
 		dc.w	$0030
 		dc.w	$0021
 		dc.w	$0032
 		dc.w	$002B
-		dc.w	$0000
-		dc.w	$0000
+		dc.w	$800A
+		dc.w	$800A
 		even
 		rts						; return
 		
-II_Text:						; Offset: 00009440
+II_Text:						; Offset: 800A9440
 		dc.w	$0029
 		dc.w	$0033
 		dc.w	$002F
@@ -14862,34 +14862,34 @@ II_Text:						; Offset: 00009440
 		dc.w	$0034
 		dc.w	$0025
 		dc.w	$0024
-		dc.w	$0000
+		dc.w	$800A
 		dc.w	$0029
 		dc.w	$0033
 		dc.w	$002C
 		dc.w	$0021
 		dc.w	$002E
 		dc.w	$0024
-		dc.w	$0000
+		dc.w	$800A
 		even
 		rts						; return	
 		
-FLRA_Text:						; Offset: 00009440
+FLRA_Text:						; Offset: 800A9440
 		dc.w	$0030
 		dc.w	$002C
 		dc.w	$0021
 		dc.w	$002E
 		dc.w	$0025
 		dc.w	$0034
-		dc.w	$0000
+		dc.w	$800A
 		dc.w	$0026
 		dc.w	$002C
 		dc.w	$002F
 		dc.w	$0032
 		dc.w	$0021
-		dc.w	$0000
-		dc.w	$0000
-		dc.w	$0000
-		dc.w	$0000
+		dc.w	$800A
+		dc.w	$800A
+		dc.w	$800A
+		dc.w	$800A
 		even
 		rts						; return
 
