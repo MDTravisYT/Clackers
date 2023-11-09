@@ -57,6 +57,8 @@ Obj04_TailsChk:
 		bra.s	Obj04_ChkAni					;	continue to check animation
 
 Obj04_TalSetAni:
+		move.b	#$A8,d0							;	set SFX ID
+		jsr		Play_Sound						;	play SFX
 		ori.w	#$01,$2A(a6)					;	set flags to animate spring
 		move.l	#$000F0000,d1					;	set the power of the spring
 		neg.l	d1								;	clear d1
