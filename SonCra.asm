@@ -11663,7 +11663,6 @@ loc_CB82:				; CODE XREF: SpeedToPos+4Ej SpeedToPos+56j ...
 		rts
 ; End of function SpeedToPos
 
-
 ; ===========================================================================
 ; ---------------------------------------------------------------------------
 ; Subroutine to set sonic as hurt
@@ -12324,7 +12323,7 @@ RO_Routines:
 		bra.w	Obj_DiagRedSprng_LU		; Object 18 - Diagonal Red Spring Left Up
 		bra.w	Obj_DiagRedSprng_RD		; Object 1C - Diagonal Red Spring Right Down
 		bra.w	Obj_DiagRedSprng_LD		; Object 20 - Diagonal Red Spring Left Up
-		bra.w	NullObj					; Object 24 - Nothing
+		bra.w	ObjMonitor					; Object 24 - Nothing
 		bra.w	Obj_LostRings			; Object 28 - Lost Rings
 		bra.w	NullObj					; Object 2C - Nothing
 		bra.w	NullObj					; Object 30 - Nothing
@@ -12355,6 +12354,7 @@ NullObj:
 	rts
 
 	include		"Objects/Goal.asm"
+	include		"Objects/Monitor.asm"
 	include		"Objects/Red Spring Right.asm"
 	include		"Objects/Red Spring Left.asm"
 	include		"Objects/Red Spring Up.asm"
@@ -15576,7 +15576,7 @@ DiagRedSprngRU		=	$14
 DiagRedSprngLU		=	$18
 DiagRedSprngRD		=	$1C
 DiagRedSprngLD		=	$20
-;					=	$24
+Monitor				=	$24
 LostRing			=	$28
 ;					=	$2C
 ;					=	$30
@@ -15642,7 +15642,7 @@ Objpos_TTZ:
 	ObjLayout	$00B0,	$0B78,	SpringYel_Up,    $FFFF
 	ObjLayout	$0034,	$06ED,	DiagRedSprngRU,  $FFFF
 	ObjLayout	$0400,	$0060,	Goal,			 $FFFF
-	ObjLayout	$0180, 	$0E50,	Goal,			 $FFFF
+	ObjLayout	$0180, 	$0E50,	Monitor,		 $FFFF
 	ObjLayout_End
 	even
 	
