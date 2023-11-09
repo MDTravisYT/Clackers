@@ -86,7 +86,7 @@ loc_E28C:				; CODE XREF: ROM:0000E26Ej
 					; ROM:0000E284j
 		bsr.w	SpriteScreenCheck
 		bcc.s	locret_E296
-		bsr.w	DeleteObject
+		bsr.w	DeleteSprite
 
 locret_E296:				; CODE XREF: ROM:0000E290j
 		rts

@@ -84,7 +84,7 @@ loc_D984:				; CODE XREF: ROM:0000D966j
 					; ROM:0000D97Cj
 		bsr.w	SpriteScreenCheck
 		bcc.s	locret_D98E
-		bsr.w	DeleteObject
+		bsr.w	DeleteSprite
 
 locret_D98E:				; CODE XREF: ROM:0000D988j
 		rts

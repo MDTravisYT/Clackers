@@ -53,7 +53,7 @@ GoalRout5:				; CODE XREF: ROM:0000E6BEj
 					; ROM:0000E6E0j
 		bsr.w	SpriteScreenCheck
 		bcc.s	GoalRout6
-		bsr.w	DeleteObject
+		bsr.w	DeleteSprite
 
 GoalRout6:				; CODE XREF: ROM:0000E6EEj
 		rts

@@ -78,7 +78,7 @@ Obj00_ChkAni:
 Obj00_ChkSprite:
 		bsr.w	SpriteScreenCheck			; check if sprite is within the screen areas
 		bcc.s	Obj00_SpriteOK				; if so, branch
-		bsr.w	DeleteObject				; remove sprite from table (I think)
+		bsr.w	DeleteSprite				; remove sprite from table (I think)
 
 Obj00_SpriteOK:
 		rts						; return

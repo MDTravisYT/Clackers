@@ -74,7 +74,7 @@ loc_DB80:				; CODE XREF: ROM:0000DB62j
 					; ROM:0000DB78j
 		bsr.w	SpriteScreenCheck
 		bcc.s	locret_DB8A
-		bsr.w	DeleteObject
+		bsr.w	DeleteSprite
 
 locret_DB8A:				; CODE XREF: ROM:0000DB84j
 		rts

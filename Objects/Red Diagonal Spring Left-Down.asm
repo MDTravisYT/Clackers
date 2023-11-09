@@ -86,7 +86,7 @@ loc_DA94:				; CODE XREF: ROM:0000DA76j
 					; ROM:0000DA8Cj
 		bsr.w	SpriteScreenCheck
 		bcc.s	locret_DA9E
-		bsr.w	DeleteObject
+		bsr.w	DeleteSprite
 
 locret_DA9E:				; CODE XREF: ROM:0000DA98j
 		rts

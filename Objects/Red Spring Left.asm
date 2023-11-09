@@ -77,7 +77,7 @@ loc_D452:				; CODE XREF: ROM:0000D418j
 loc_D478:
 		bsr.w	SpriteScreenCheck
 		bcc.s	locret_D482
-		bsr.w	DeleteObject
+		bsr.w	DeleteSprite
 
 locret_D482:
 		rts

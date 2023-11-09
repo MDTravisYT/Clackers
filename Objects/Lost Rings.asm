@@ -1,7 +1,7 @@
 Obj_LostRings:				; CODE XREF: ROM:0000D24Cj
 		subq.w	#1,$26(a6)
 		bne.s	loc_E2C8
-		jmp	sub_1980
+		jmp	DeleteObject
 ; ---------------------------------------------------------------------------
 
 loc_E2C8:				; CODE XREF: ROM:0000E2C2j
@@ -83,7 +83,7 @@ loc_E37C:				; CODE XREF: ROM:0000E35Aj
 					; ROM:0000E374j
 		jsr	SpriteScreenCheck
 		bcc.s	loc_E38A
-		jmp	DeleteObject
+		jmp	DeleteSprite
 ; ---------------------------------------------------------------------------
 
 loc_E38A:				; CODE XREF: ROM:0000E382j
@@ -231,7 +231,7 @@ loc_E480:				; CODE XREF: ROM:0000E45Ej
 					; ROM:0000E478j
 		jsr	SpriteScreenCheck
 		bcc.s	loc_E48E
-		jmp	DeleteObject
+		jmp	DeleteSprite
 ; ---------------------------------------------------------------------------
 
 loc_E48E:				; CODE XREF: ROM:0000E486j

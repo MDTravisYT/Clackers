@@ -15,7 +15,7 @@
 ; Includes
 ; ---------------------------------------------------------------------------
 
-Combi	=	1
+Combi	=	0
 
 		include	"Debugger.asm"
 		include	"SonCraMacro.asm"
@@ -3136,7 +3136,7 @@ Val_Unk:	dc.b $00,$00
 ; 
 ; ---------------------------------------------------------------------------
 
-sub_1980:
+DeleteObject:
 		move.l	a1,-(sp)
 		tst.w	(a6)
 		bpl.s	loc_198E
@@ -12435,7 +12435,7 @@ loc_E59A:				; CODE XREF: ROM:0000E56Ej
 					; ROM:0000E590j
 		bsr.w	SpriteScreenCheck
 		bcc.s	locret_E5A4
-		bsr.w	DeleteObject
+		bsr.w	DeleteSprite
 
 locret_E5A4:				; CODE XREF: ROM:0000E59Ej
 		rts
@@ -12500,7 +12500,7 @@ loc_E642:				; CODE XREF: ROM:0000E616j
 					; ROM:0000E638j
 		bsr.w	SpriteScreenCheck
 		bcc.s	locret_E64C
-		bsr.w	DeleteObject
+		bsr.w	DeleteSprite
 
 locret_E64C:				; CODE XREF: ROM:0000E646j
 		rts
@@ -12565,7 +12565,7 @@ loc_E6EA:				; CODE XREF: ROM:0000E6BEj
 					; ROM:0000E6E0j
 		bsr.w	SpriteScreenCheck
 		bcc.s	locret_E6F4
-		bsr.w	DeleteObject
+		bsr.w	DeleteSprite
 
 locret_E6F4:				; CODE XREF: ROM:0000E6EEj
 		rts
@@ -12631,7 +12631,7 @@ loc_E792:				; CODE XREF: ROM:0000E766j
 					; ROM:0000E788j
 		bsr.w	SpriteScreenCheck
 		bcc.s	locret_E79C
-		bsr.w	DeleteObject
+		bsr.w	DeleteSprite
 
 locret_E79C:				; CODE XREF: ROM:0000E796j
 		rts
@@ -12696,7 +12696,7 @@ loc_E83A:				; CODE XREF: ROM:0000E80Ej
 					; ROM:0000E830j
 		bsr.w	SpriteScreenCheck
 		bcc.s	locret_E844
-		bsr.w	DeleteObject
+		bsr.w	DeleteSprite
 
 locret_E844:				; CODE XREF: ROM:0000E83Ej
 		rts
@@ -12761,7 +12761,7 @@ loc_E8E2:				; CODE XREF: ROM:0000E8B6j
 					; ROM:0000E8D8j
 		bsr.w	SpriteScreenCheck
 		bcc.s	locret_E8EC
-		bsr.w	DeleteObject
+		bsr.w	DeleteSprite
 
 locret_E8EC:				; CODE XREF: ROM:0000E8E6j
 		rts
@@ -12826,7 +12826,7 @@ loc_E98A:				; CODE XREF: ROM:0000E95Ej
 					; ROM:0000E980j
 		bsr.w	SpriteScreenCheck
 		bcc.s	locret_E994
-		bsr.w	DeleteObject
+		bsr.w	DeleteSprite
 
 locret_E994:				; CODE XREF: ROM:0000E98Ej
 		rts
@@ -12891,7 +12891,7 @@ loc_EA32:				; CODE XREF: ROM:0000EA06j
 					; ROM:0000EA28j
 		bsr.w	SpriteScreenCheck
 		bcc.s	locret_EA3C
-		bsr.w	DeleteObject
+		bsr.w	DeleteSprite
 
 locret_EA3C:				; CODE XREF: ROM:0000EA36j
 		rts
@@ -13976,14 +13976,14 @@ CSRL_SetupFinished:					; Offset: 0000F284
 ; =============== S U B	R O U T	I N E =======================================
 
 
-DeleteObject:				; CODE XREF: ROM:0000D38Ep
+DeleteSprite:				; CODE XREF: ROM:0000D38Ep
 					; ROM:0000D47Ep ...
 		move.w	$24(a6),d0
 		lea	($FFFFD8F2).w,a0
 		move.b	#2,(a0,d0.w)
-		jsr	sub_1980
+		jsr	DeleteObject
 		rts
-; End of function DeleteObject
+; End of function DeleteSprite
 
 
 ; =============== S U B	R O U T	I N E =======================================
@@ -14013,7 +14013,7 @@ loc_F2A8:				; CODE XREF: ROM:loc_F320p
 		move.b	(a1,d0.w),d1
 		andi.b	#$F0,d1
 		move.b	d1,(a1,d0.w)
-		jsr	sub_1980
+		jsr	DeleteObject
 		rts
 
 ; ===========================================================================
@@ -15642,6 +15642,7 @@ Objpos_TTZ:
 	ObjLayout	$00B0,	$0B78,	SpringYel_Up,    $FFFF
 	ObjLayout	$0034,	$06ED,	DiagRedSprngRU,  $FFFF
 	ObjLayout	$0400,	$0060,	Goal,			 $FFFF
+	ObjLayout	$0180, 	$0E50,	Goal,			 $FFFF
 	ObjLayout_End
 	even
 	

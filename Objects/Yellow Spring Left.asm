@@ -79,7 +79,7 @@ loc_DC70:				; CODE XREF: ROM:0000DC52j
 					; ROM:0000DC68j
 		bsr.w	SpriteScreenCheck
 		bcc.s	locret_DC7A
-		bsr.w	DeleteObject
+		bsr.w	DeleteSprite
 
 locret_DC7A:				; CODE XREF: ROM:0000DC74j
 		rts
