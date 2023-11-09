@@ -18,8 +18,10 @@ MonitorRout1:				; CODE XREF: ROM:0000E654j
 		move.w	8(a0),d2
 		move.w	$C(a0),d3
 		bsr.w	Distance_GetSet
-		cmpi.w	#8,d4
-		blo.s	MonitorRout2
+		cmpi.w	#$07,d4							;	is object on top side, above and closer to character on X?
+		beq.s	MonitorRout2					;	if so, branch
+		cmpi.w	#$06,d4							;	is object on top side, below and closer to character on X?
+		beq.s	MonitorRout2					;	if so, branch
 		bra.s	MonitorRout3
 ; ---------------------------------------------------------------------------
 
@@ -40,8 +42,10 @@ MonitorRout3:				; CODE XREF: ROM:0000E684j
 		move.w	8(a0),d2
 		move.w	$C(a0),d3
 		bsr.w	Distance_GetSet
-		cmpi.w	#8,d4
-		blo.s	MonitorRout4
+		cmpi.w	#$07,d4							;	is object on top side, above and closer to character on X?
+		beq.s	MonitorRout4					;	if so, branch
+		cmpi.w	#$06,d4							;	is object on top side, below and closer to character on X?
+		beq.s	MonitorRout4					;	if so, branch
 		bra.s	MonitorRout5
 ; ---------------------------------------------------------------------------
 
