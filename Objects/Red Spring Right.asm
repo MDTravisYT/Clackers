@@ -31,8 +31,8 @@ Obj00_SonicChk:
 		bra.s	Obj00_TailsChk				; continue to check tails
 
 Obj00_SonSetAni:
-		move.b	#$A8,d0
-		jsr		Play_Sound
+		move.b	#$A8,d0						; set SFX ID
+		jsr		Play_Sound					; play SFX
 		ori.w	#$01,$2A(a6)				; set flag to animate spring
 		move.l	#$000F0000,d0				; set the power of the spring
 		moveq	#$00,d1					; clear d1
@@ -56,6 +56,8 @@ Obj00_TailsChk:
 		bra.s	Obj00_ChkAni				; continue to check animation
 
 Obj00_TalSetAni:
+		move.b	#$A8,d0							;	set SFX ID
+		jsr		Play_Sound						;	play SFX
 		ori.w	#$01,$2A(a6)				; set flag to animate spring
 		move.l	#$000F0000,d0				; set the power of the spring
 		moveq	#$00,d1					; clear d1
