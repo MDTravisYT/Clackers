@@ -38,7 +38,7 @@ loc_E1F4:				; CODE XREF: ROM:0000E1DEj
 		move.l	#$32985,d0
 		move.l	#$32985,d1
 		neg.l	d0
-		jsr	(loc_CB1C).l
+		jsr	(SpeedToPos).l
 
 loc_E20E:				; CODE XREF: ROM:0000E1C4j
 					; ROM:0000E1F2j
@@ -68,7 +68,7 @@ loc_E24C:				; CODE XREF: ROM:0000E236j
 		move.l	#$32985,d0
 		move.l	#$32985,d1
 		neg.l	d0
-		jsr	(loc_CB1C).l
+		jsr	(SpeedToPos).l
 
 loc_E266:				; CODE XREF: ROM:0000E21Cj
 					; ROM:0000E24Aj

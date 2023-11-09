@@ -36,7 +36,7 @@ Obj00_SonSetAni:
 		ori.w	#$01,$2A(a6)				; set flag to animate spring
 		move.l	#$000F0000,d0				; set the power of the spring
 		moveq	#$00,d1					; clear d1
-		jsr	(loc_CB1C).l
+		jsr	(SpeedToPos).l
 ; ---------------------------------------------------------------------------
 
 Obj00_TailsChk:
@@ -61,7 +61,7 @@ Obj00_TalSetAni:
 		ori.w	#$01,$2A(a6)				; set flag to animate spring
 		move.l	#$000F0000,d0				; set the power of the spring
 		moveq	#$00,d1					; clear d1
-		jsr	(loc_CB1C).l
+		jsr	(SpeedToPos).l
 ; ---------------------------------------------------------------------------
 
 Obj00_ChkAni:

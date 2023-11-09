@@ -37,7 +37,7 @@ Obj04_SonSetAni:
 		move.l	#$000F0000,d1					;	set the power of the spring
 		neg.l	d1								;	clear d1
 		moveq	#$00,d0
-		jsr	(loc_CB1C).l
+		jsr	(SpeedToPos).l
 ; ---------------------------------------------------------------------------
 
 Obj04_TailsChk:				
@@ -63,7 +63,7 @@ Obj04_TalSetAni:
 		move.l	#$000F0000,d1					;	set the power of the spring
 		neg.l	d1								;	clear d1
 		moveq	#$00,d0
-		jsr	(loc_CB1C).l
+		jsr	(SpeedToPos).l
 ; ---------------------------------------------------------------------------
 
 Obj04_ChkAni:				

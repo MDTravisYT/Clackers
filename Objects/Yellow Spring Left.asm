@@ -35,7 +35,7 @@ loc_DBEC:				; CODE XREF: ROM:0000DBE2j
 		move.l	#ARTUNC_Tails,d0 ; "\x0E윸0Eº̜x0E²ª\x0E¹2\x0E»I\x0E넮´»컬»\x0E˜x0Ẹ윦x01\x1E\x1E"...
 		neg.l	d0
 		moveq	#0,d1
-		jsr	(loc_CB1C).l
+		jsr	(SpeedToPos).l
 
 loc_DC02:				; CODE XREF: ROM:0000DBC8j
 					; ROM:0000DBEAj
@@ -61,7 +61,7 @@ loc_DC34:				; CODE XREF: ROM:0000DC2Aj
 		move.l	#ARTUNC_Tails,d0 ; "\x0E윸0Eº̜x0E²ª\x0E¹2\x0E»I\x0E넮´»컬»\x0E˜x0Ẹ윦x01\x1E\x1E"...
 		neg.l	d0
 		moveq	#0,d1
-		jsr	(loc_CB1C).l
+		jsr	(SpeedToPos).l
 
 loc_DC4A:				; CODE XREF: ROM:0000DC10j
 					; ROM:0000DC32j

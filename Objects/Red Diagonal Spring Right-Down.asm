@@ -37,7 +37,7 @@ loc_D8F0:				; CODE XREF: ROM:0000D8DAj
 		ori.w	#1,$2A(a6)
 		move.l	#$A8F98,d0
 		move.l	#$A8F98,d1
-		jsr	(loc_CB1C).l
+		jsr	(SpeedToPos).l
 
 loc_D908:				; CODE XREF: ROM:0000D8C0j
 					; ROM:0000D8EEj
@@ -66,7 +66,7 @@ loc_D946:				; CODE XREF: ROM:0000D930j
 		ori.w	#1,$2A(a6)
 		move.l	#$A8F98,d0
 		move.l	#$A8F98,d1
-		jsr	(loc_CB1C).l
+		jsr	(SpeedToPos).l
 
 loc_D95E:				; CODE XREF: ROM:0000D916j
 					; ROM:0000D944j

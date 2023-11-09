@@ -34,7 +34,7 @@ loc_D3F4:				; CODE XREF: ROM:0000D3EAj
 		move.l	#$F0000,d0
 		neg.l	d0
 		moveq	#0,d1
-		jsr	(loc_CB1C).l
+		jsr	(SpeedToPos).l
 
 loc_D40A:				; CODE XREF: ROM:0000D3D0j
 					; ROM:0000D3F2j
@@ -60,7 +60,7 @@ loc_D43C:				; CODE XREF: ROM:0000D432j
 		move.l	#$F0000,d0
 		neg.l	d0
 		moveq	#0,d1
-		jsr	(loc_CB1C).l
+		jsr	(SpeedToPos).l
 
 loc_D452:				; CODE XREF: ROM:0000D418j
 					; ROM:0000D43Aj

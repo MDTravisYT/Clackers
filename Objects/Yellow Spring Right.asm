@@ -31,7 +31,7 @@ loc_DB00:				; CODE XREF: ROM:0000DAF6j
 		ori.w	#1,$2A(a6)
 		move.l	#ARTUNC_Tails,d0 ; "\x0E윸0Eº̜x0E²ª\x0E¹2\x0E»I\x0E넮´»컬»\x0E˜x0Ẹ윦x01\x1E\x1E"...
 		moveq	#0,d1
-		jsr	(loc_CB1C).l
+		jsr	(SpeedToPos).l
 
 loc_DB14:				; CODE XREF: ROM:0000DADCj
 					; ROM:0000DAFEj
@@ -56,7 +56,7 @@ loc_DB46:				; CODE XREF: ROM:0000DB3Cj
 		ori.w	#1,$2A(a6)
 		move.l	#ARTUNC_Tails,d0 ; "\x0E윸0Eº̜x0E²ª\x0E¹2\x0E»I\x0E넮´»컬»\x0E˜x0Ẹ윦x01\x1E\x1E"...
 		moveq	#0,d1
-		jsr	(loc_CB1C).l
+		jsr	(SpeedToPos).l
 
 loc_DB5A:				; CODE XREF: ROM:0000DB22j
 					; ROM:0000DB44j

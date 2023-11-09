@@ -11610,7 +11610,7 @@ loc_CB14:
 
 ; SOme sort of Speed to Position subroutine
 
-loc_CB1C:
+SpeedToPos:
 		move.l	d2,-(sp)
 		move.l	$18(a0),d2
 		add.l	d2,d0
@@ -11619,7 +11619,7 @@ loc_CB1C:
 		eor.l	d0,d2
 		sub.l	d2,d0
 
-loc_CB2C:				; CODE XREF: loc_CB1C+Aj
+loc_CB2C:				; CODE XREF: SpeedToPos+Aj
 		tst.l	d0
 		bpl.s	loc_CB40
 		cmpi.l	#$FFF00000,d0
@@ -11628,12 +11628,12 @@ loc_CB2C:				; CODE XREF: loc_CB1C+Aj
 		bra.s	loc_CB4E
 ; ---------------------------------------------------------------------------
 
-loc_CB40:				; CODE XREF: loc_CB1C+12j
+loc_CB40:				; CODE XREF: SpeedToPos+12j
 		cmpi.l	#$100000,d0
 		bcs.s	loc_CB4E
 		move.l	#$100000,d0
 
-loc_CB4E:				; CODE XREF: loc_CB1C+1Aj loc_CB1C+22j ...
+loc_CB4E:				; CODE XREF: SpeedToPos+1Aj SpeedToPos+22j ...
 		move.l	d0,$18(a0)
 		move.l	$1C(a0),d2
 		add.l	d2,d1
@@ -11642,7 +11642,7 @@ loc_CB4E:				; CODE XREF: loc_CB1C+1Aj loc_CB1C+22j ...
 		eor.l	d1,d2
 		sub.l	d2,d1
 
-loc_CB60:				; CODE XREF: loc_CB1C+3Ej
+loc_CB60:				; CODE XREF: SpeedToPos+3Ej
 		tst.l	d1
 		bpl.s	loc_CB74
 		cmpi.l	#$FFF00000,d1
@@ -11651,17 +11651,17 @@ loc_CB60:				; CODE XREF: loc_CB1C+3Ej
 		bra.s	loc_CB82
 ; ---------------------------------------------------------------------------
 
-loc_CB74:				; CODE XREF: loc_CB1C+46j
+loc_CB74:				; CODE XREF: SpeedToPos+46j
 		cmpi.l	#$100000,d1
 		bcs.s	loc_CB82
 		move.l	#$100000,d1
 
-loc_CB82:				; CODE XREF: loc_CB1C+4Ej loc_CB1C+56j ...
+loc_CB82:				; CODE XREF: SpeedToPos+4Ej SpeedToPos+56j ...
 		move.l	d1,$1C(a0)
 		move.b	#8,7(a0)
 		move.l	(sp)+,d2
 		rts
-; End of function loc_CB1C
+; End of function SpeedToPos
 
 
 ; ===========================================================================

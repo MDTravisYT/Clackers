@@ -39,7 +39,7 @@ loc_D7DC:				; CODE XREF: ROM:0000D7C6j
 		move.l	#$A8F98,d1
 		neg.l	d0
 		neg.l	d1
-		jsr	(loc_CB1C).l
+		jsr	(SpeedToPos).l
 
 loc_D7F8:				; CODE XREF: ROM:0000D7ACj
 					; ROM:0000D7DAj
@@ -70,7 +70,7 @@ loc_D836:				; CODE XREF: ROM:0000D820j
 		move.l	#$A8F98,d1
 		neg.l	d0
 		neg.l	d1
-		jsr	(loc_CB1C).l
+		jsr	(SpeedToPos).l
 
 loc_D852:				; CODE XREF: ROM:0000D806j
 					; ROM:0000D834j
