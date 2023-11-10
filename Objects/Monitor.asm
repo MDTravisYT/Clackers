@@ -138,8 +138,10 @@ MonitorRout2:
 	;	jsr	(DeleteObject).l
 		rts
 
-MonitorRout3:				; CODE XREF: ROM:0000E684j
-					; ROM:0000E6A6j
+MonitorRout3:
+		move.w	$2A(a6),d0                      ; load flags to d0
+		btst	#0,d0                           ; was the animation flag set?
+		bne.s	Anim_Monitor                 ; if so, branch
 		movea.w	($FFFFD864).w,a0
 		move.w	#$F,d0
 		jsr	(SolidObject).l
@@ -156,10 +158,12 @@ MonitorRout3:				; CODE XREF: ROM:0000E684j
 		bra.s	Anim_Monitor
 ; ---------------------------------------------------------------------------
 
-MonitorRout4:				; CODE XREF: ROM:0000E6D8j
-					; ROM:0000E6DEj
-		moveq	#1,d0
-		jsr	(GTO_GameOver).l
+MonitorRout4:
+		ori.w	#$01,$2A(a6)					;	set flag to animate
+		bclr	#$00,$25(a0)
+		move.l	#$FFFB0000,$1C(a0)
+	;	jsr	(DeleteObject).l
+		rts
 		
 Anim_Monitor:
 		move.w	$2A(a6),d0                      ; load flags to d0
