@@ -112,6 +112,9 @@ ObjMonitor:				; CODE XREF: ROM:0000D280j
 		move.b	#$10,$23(a6)
 
 MonitorRout1:				; CODE XREF: ROM:0000E654j
+		move.w	$2A(a6),d0                      ; load flags to d0
+		btst	#0,d0                           ; was the animation flag set?
+		bne.s	MonitorRout3                 ; if so, branch
 		movea.w	($FFFFD862).w,a0
 		move.w	#$F,d0
 		jsr	(SolidObject).l
