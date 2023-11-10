@@ -6089,8 +6089,8 @@ LV_DumpPalette:						; Offset: 000088D2
 		dbf	d1,LV_DumpPalette			; repeat til all colours are dumped
 		move.w	#$0000,(a0)				; clear the first colour in palette line 3
 		move	#$2700,sr				; set the status register (disable interrupts)
-		lea	(ARTNEM_Monitor).l,a0			; load compress "Horizontal Spikes" art address
-		move.l	#$42000000,($C00004).l			; set VDP V-Ram address and modes
+		lea	(ArtnemRHZ_TitleCard).l,a0			; load compress "Horizontal Spikes" art address
+		move.l	#$42200000,($C00004).l			; set VDP V-Ram address and modes
 		jsr	NemDec					; decompress and dump
 		bsr.w	DMA_LoadTitleCardArt			; load title card art to V-Ram
 		bsr.w	DMA_LoadHudArt				; load HUD art to V-Ram
@@ -15472,8 +15472,8 @@ ARTNEM_Monitor:
 	incbin	NemesisComp\ArtnemMonitors.bin		; Vertical Spikes
 	even
 ; ---------------------------------------------------------------------------
-ArtnemMainMenusText2:
-	incbin	NemesisComp\ArtnemMainMenusText2.bin		; Vertical Spikes
+ArtnemRHZ_TitleCard:
+	incbin	NemesisComp\ArtnemRHZ_TitleCard.bin		; Vertical Spikes
 	even
 ; ===========================================================================
 ; ---------------------------------------------------------------------------
