@@ -80,7 +80,7 @@ Map_Monitor:
 		dc.b	$0D,$00,$00,$5E,$F0,$FF
 	
 ANI_Monitor:
-	dc.w	$7000,$0201,$0202,$0203,$0204,$0205,$0206,$0207,$0208,$0209,$020A,$020B,$020C,$020D,$020E,$020F,$7010,$8080
+	dc.w	$0200,$0201,$0202,$0203,$0204,$0205,$0206,$0207,$0208,$0209,$020A,$020B,$020C,$020D,$020E,$020F,$7F10,$7F10,$7F10,$7F10,$7F10,$7F10,$7F10,$7F10,$7F10,$7F10,$8080
 	
 Def_Monitor:
 	dc.w	MapMon_Still-Def_Monitor
@@ -129,9 +129,10 @@ MonitorRout1:				; CODE XREF: ROM:0000E654j
 ; ---------------------------------------------------------------------------
 
 MonitorRout2:
+		ori.w	#$01,$2A(a6)					;	set flag to animate
 		bclr	#$00,$25(a0)
 		move.l	#$FFFB0000,$1C(a0)
-		jsr	(DeleteObject).l
+	;	jsr	(DeleteObject).l
 		rts
 
 MonitorRout3:				; CODE XREF: ROM:0000E684j
@@ -139,7 +140,7 @@ MonitorRout3:				; CODE XREF: ROM:0000E684j
 		movea.w	($FFFFD864).w,a0
 		move.w	#$F,d0
 		jsr	(SolidObject).l
-		beq.s	MonitorRout5
+		beq.s	Anim_Monitor
 		move.w	8(a6),d0
 		move.w	$C(a6),d1
 		move.w	8(a0),d2
@@ -149,20 +150,23 @@ MonitorRout3:				; CODE XREF: ROM:0000E684j
 		beq.s	MonitorRout4					;	if so, branch
 		cmpi.w	#$06,d4							;	is object on top side, below and closer to character on X?
 		beq.s	MonitorRout4					;	if so, branch
-		bra.s	MonitorRout5
+		bra.s	Anim_Monitor
 ; ---------------------------------------------------------------------------
 
 MonitorRout4:				; CODE XREF: ROM:0000E6D8j
 					; ROM:0000E6DEj
 		moveq	#1,d0
 		jsr	(GTO_GameOver).l
-
-MonitorRout5:				; CODE XREF: ROM:0000E6BEj
-					; ROM:0000E6E0j
+		
+Anim_Monitor:
+		move.w	$2A(a6),d0                      ; load flags to d0
+		btst	#0,d0                           ; was the animation flag set?
+		beq.s	MonitorRout5                 ; if not, branch
 		lea	(Def_Monitor).l,a0
 		lea	(ANI_Monitor).l,a1			; load spring's Animation script
 		bsr.w	AnimateSprite				; animate the spring
-					
+
+MonitorRout5:			
 		bsr.w	SpriteScreenCheck
 		bcc.s	MonitorRout6
 		bsr.w	DeleteSprite
