@@ -538,7 +538,7 @@ loc_A72E:
 ; ---------------------------------------------------------------------------
 
 loc_A738:				; CODE XREF: ROM:0000A734j
-		move.w	obX(a6),8(a4)
+		move.w	obX(a6),obX(a4)
 		move.w	obY(a6),d0
 		subi.w	#$20,d0	; ' '
 		move.w	d0,obY(a4)
@@ -728,7 +728,7 @@ loc_A8F8:				; CODE XREF: ROM:0000A8EAj
 		ext.l	d1
 		asl.l	#5,d0
 		asl.l	#5,d1
-		add.l	d0,8(a4)
+		add.l	d0,obX(a4)
 		add.l	d1,obY(a4)
 		add.l	$18(a6),d0
 		add.l	obYVel(a6),d1

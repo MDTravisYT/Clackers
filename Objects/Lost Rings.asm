@@ -17,10 +17,10 @@ loc_E2C8:				; CODE XREF: ROM:0000E2C2j
 		move.l	d6,obYVel(a6)
 
 loc_E2E6:				; CODE XREF: ROM:0000E2D4j
-		move.w	d0,8(a6)
+		move.w	d0,obX(a6)
 		move.w	d1,obY(a6)
 		move.l	$18(a6),d0
-		add.l	d0,8(a6)
+		add.l	d0,obX(a6)
 		move.l	obYVel(a6),d0
 		addi.l	#$1800,d0
 		move.l	d0,obYVel(a6)
