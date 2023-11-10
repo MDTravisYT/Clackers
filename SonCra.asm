@@ -6324,6 +6324,7 @@ Levels_Pause:						; Offset: 00008B7E
 		andi.b	#$70,d0					; get only if A, B or C have been pressed
 		cmpi.b	#$70,d0					; were A, B or C been held BEFORE start was pressed?
 		bne.s	Levels_NoReset				; if not, branch
+		jsr	Pal_FadeBlack				; fade the palettes to black
 		move	#$2700,sr				; set the status register (disable interrupts)
 		suba.l	a0,a0					; decrease a0 from itself (clears a0 more quickly)
 		movea.l	(a0)+,sp				; reset the stack pointer location
@@ -15604,6 +15605,9 @@ Objpos_TTZ:
 	ObjLayout	$0034,	$06ED,	DiagRedSprngRU,  $FFFF
 	ObjLayout	$0400,	$0060,	Goal,			 $FFFF
 	ObjLayout	$0140, 	$0E50,	Monitor,		 $FFFF
+	ObjLayout	$0160, 	$0E50,	Monitor,		 $FFFF
+	ObjLayout	$0180, 	$0E50,	Monitor,		 $FFFF
+	ObjLayout	$01A0, 	$0E50,	Monitor,		 $FFFF
 	ObjLayout_End
 	even
 	
