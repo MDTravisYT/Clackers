@@ -15508,8 +15508,8 @@ ArtnemFLRA_TitleCard:
 ; ---------------------------------------------------------------------------
 
 unk_42358:		dc.b $FF,$64,$FF,$70,$FF,$7C		; LR Red spring
-unk_4235E:		dc.b $FF,$82,$FF,$8E,$FF,$9A
-unk_42364:		dc.b $FF,$A0,$FF,$AC,$FF,$B8
+unk_4235E:		dc.b $FF,$64,$FF,$70,$FF,$7C
+unk_42364:		dc.b $FF,$64,$FF,$70,$FF,$7C
 
 ; ===========================================================================
 ; ---------------------------------------------------------------------------
@@ -15603,7 +15603,7 @@ Objpos_TTZ:
 	ObjLayout	$00B0,	$0B78,	SpringYel_Up,    $FFFF
 	ObjLayout	$0034,	$06ED,	DiagRedSprngRU,  $FFFF
 	ObjLayout	$0400,	$0060,	Goal,			 $FFFF
-	ObjLayout	$0180, 	$0E50,	Monitor,		 $FFFF
+	ObjLayout	$0140, 	$0E50,	Monitor,		 $FFFF
 	ObjLayout_End
 	even
 	

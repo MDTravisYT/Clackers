@@ -1,4 +1,22 @@
-Map_Monitor:		dc.b	$0F,$F0,$00,$4E,$F0,$FF
+Map_Monitor:
+;	$SS   = Shape and size of sprite piece
+;	$YY   = Y position of sprite piece
+;	$TTTT = Tile to read in VRam
+;	$XX   = X position of sprite piece
+;	$ZZ   = whether it's the last map to use in the sprite or not (00 Include next map in sprite/FF End of sprite)
+;	dc.b	$SS,$YY,$TT,$TT,$XX,$ZZ
+	MapMon_Still:
+		dc.b	$0F,$F0,$00,$4E,$F0,$FF
+	MapMon_Ex1:
+		dc.b	$05,$F8,$00,$46,$F8,$00
+		dc.b	$0F,$F0,$00,$4E,$F0,$FF
+	
+ANI_Monitor:
+	dc.w	$1000,$1001,$8080
+	
+Def_Monitor:
+	dc.w	MapMon_Still-ANI_Monitor_2
+	dc.w	MapMon_Ex1-ANI_Monitor_2
 
 ObjMonitor:				; CODE XREF: ROM:0000D280j
 		moveq	#7,d0
@@ -58,6 +76,10 @@ MonitorRout4:				; CODE XREF: ROM:0000E6D8j
 
 MonitorRout5:				; CODE XREF: ROM:0000E6BEj
 					; ROM:0000E6E0j
+		lea	(Def_Monitor).l,a0
+		lea	(ANI_Monitor).l,a1			; load spring's Animation script
+		bsr.w	AnimateSprite				; animate the spring
+					
 		bsr.w	SpriteScreenCheck
 		bcc.s	MonitorRout6
 		bsr.w	DeleteSprite
