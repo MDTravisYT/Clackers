@@ -7266,7 +7266,6 @@ SSZ01_StartUp:						; Offset: 0000967C
 		lea	(ArtnemAPZ_TitleCard).l,a0			; load compress "Horizontal Spikes" art address
 		move.l	#$42200000,($C00004).l			; set VDP V-Ram address and modes
 		jsr	NemDec					; decompress and dump
-		move	#$2700,sr				; set the status register (disable interrupts)
 		lea	($FFFFC9DE).w,a1			; load address of positions and sizes ram (FG)
 		move.w	#$0104,$1E(a1)
 		lea	PAL_SpeedSliderZone(pc),a0		; load SSZ palette
@@ -7770,6 +7769,9 @@ UZ01_Events:
 		
 UZ01_StartUp:
 		move	#$2700,sr				; set the status register (disable interrupts)
+		lea	(ArtnemIIZ_TitleCard).l,a0			; load compress "Horizontal Spikes" art address
+		move.l	#$42200000,($C00004).l			; set VDP V-Ram address and modes
+		jsr	NemDec					; decompress and dump
 		lea	($FFFFC9DE).w,a1			; load address of positions and sizes ram (FG)
 		lea	UZ01_FG_StartLocCam(pc),a0		; load level FG setup data address to a0
 		lea	($FFFFD816).w,a2			; load address of V-Ram plane A storage
@@ -15481,6 +15483,10 @@ ArtnemRHZ_TitleCard:
 ; ---------------------------------------------------------------------------
 ArtnemAPZ_TitleCard:
 	incbin	NemesisComp\ArtnemAPZ_TitleCard.bin		; Vertical Spikes
+	even
+; ---------------------------------------------------------------------------
+ArtnemIIZ_TitleCard:
+	incbin	NemesisComp\ArtnemIIZ_TitleCard.bin		; Vertical Spikes
 	even
 ; ===========================================================================
 ; ---------------------------------------------------------------------------
