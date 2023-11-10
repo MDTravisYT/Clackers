@@ -9,27 +9,27 @@ loc_E2C8:				; CODE XREF: ROM:0000E2C2j
 		move.w	$C(a6),d1
 		jsr	sub_1DA8
 		beq.s	loc_E2E6
-		move.l	$1C(a6),d6
+		move.l	obYVel(a6),d6
 		neg.l	d6
 		move.l	d6,d7
 		asr.l	#2,d7
 		sub.l	d7,d6
-		move.l	d6,$1C(a6)
+		move.l	d6,obYVel(a6)
 
 loc_E2E6:				; CODE XREF: ROM:0000E2D4j
 		move.w	d0,8(a6)
 		move.w	d1,$C(a6)
 		move.l	$18(a6),d0
 		add.l	d0,8(a6)
-		move.l	$1C(a6),d0
+		move.l	obYVel(a6),d0
 		addi.l	#$1800,d0
-		move.l	d0,$1C(a6)
+		move.l	d0,obYVel(a6)
 		add.l	d0,$C(a6)
 		move.w	($FFFFF000).l,d0
 		andi.w	#$C,d0
 		add.w	d0,d0
 		lea	word_E334(pc,d0.w),a0
-		move.l	a0,$10(a6)
+		move.l	a0,obMap(a6)
 		btst	#6,5(a6)
 		beq.s	loc_E32C
 		bclr	#7,5(a6)
@@ -69,8 +69,8 @@ loc_E356:				; CODE XREF: ROM:0000D298j
 		tst.b	$28(a6)
 		bne.s	loc_E37C
 		move.w	#0,4(a6)
-		move.w	#$2020,$22(a6)
-		move.l	#$E376,$10(a6)
+		move.w	#$2020,obWidth(a6)
+		move.l	#$E376,obMap(a6)
 		addq.b	#1,$28(a6)
 		bra.s	loc_E37C
 ; ---------------------------------------------------------------------------
@@ -217,8 +217,8 @@ loc_E45A:				; CODE XREF: ROM:0000D29Cj
 		tst.b	$28(a6)
 		bne.s	loc_E480
 		move.w	#0,4(a6)
-		move.w	#$2020,$22(a6)
-		move.l	#$E47A,$10(a6)
+		move.w	#$2020,obWidth(a6)
+		move.l	#$E47A,obMap(a6)
 		addq.b	#1,$28(a6)
 		bra.s	loc_E480
 ; ---------------------------------------------------------------------------

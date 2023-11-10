@@ -2,12 +2,12 @@ Obj_YelSpring_Down:				; CODE XREF: ROM:0000D264j
 		moveq	#7,d0
 		bclr	d0,$28(a6)
 		beq.s	loc_DD9A
-		move.l	#Map_SpringUp,$10(a6)
-		move.w	#$3407,$20(a6)
+		move.l	#Map_SpringUp,obMap(a6)
+		move.w	#$3407,obVRAM(a6)
 		move.w	#$8080,4(a6)
-		move.b	#$10,$22(a6)
-		move.b	#8,$23(a6)
-		move.w	#0,$2A(a6)
+		move.b	#$10,obWidth(a6)
+		move.b	#8,obHeight(a6)
+		move.w	#0,obFlags(a6)
 
 loc_DD9A:				; CODE XREF: ROM:0000DD72j
 		movea.w	($FFFFD862).w,a0
@@ -28,7 +28,7 @@ loc_DD9A:				; CODE XREF: ROM:0000DD72j
 
 loc_DDCC:				; CODE XREF: ROM:0000DDC2j
 					; ROM:0000DDC8j
-		ori.w	#1,$2A(a6)
+		ori.w	#1,obFlags(a6)
 		move.l	#ARTUNC_Tails,d1 ; "\x0E윸0Eº̜x0E²ª\x0E¹2\x0E»I\x0E넮´»컬»\x0E˜x0Ẹ윦x01\x1E\x1E"...
 		moveq	#0,d0
 		jsr	(SpeedToPos).l
@@ -53,14 +53,14 @@ loc_DDE0:				; CODE XREF: ROM:0000DDA8j
 
 loc_DE12:				; CODE XREF: ROM:0000DE08j
 					; ROM:0000DE0Ej
-		ori.w	#1,$2A(a6)
+		ori.w	#1,obFlags(a6)
 		move.l	#ARTUNC_Tails,d1 ; "\x0E윸0Eº̜x0E²ª\x0E¹2\x0E»I\x0E넮´»컬»\x0E˜x0Ẹ윦x01\x1E\x1E"...
 		moveq	#0,d0
 		jsr	(SpeedToPos).l
 
 loc_DE26:				; CODE XREF: ROM:0000DDEEj
 					; ROM:0000DE10j
-		move.w	$2A(a6),d0
+		move.w	obFlags(a6),d0
 		btst	#0,d0
 		beq.s	loc_DE4C
 		lea	(unk_4235E).l,a0
@@ -68,7 +68,7 @@ loc_DE26:				; CODE XREF: ROM:0000DDEEj
 		bsr.w	AnimateSprite
 		cmpi.b	#$FF,d0
 		bne.s	loc_DE4C
-		andi.w	#$FFFE,$2A(a6)
+		andi.w	#$FFFE,obFlags(a6)
 
 loc_DE4C:				; CODE XREF: ROM:0000DE2Ej
 					; ROM:0000DE44j

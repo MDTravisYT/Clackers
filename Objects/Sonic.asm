@@ -1,5 +1,5 @@
 SonicMain:				; DATA XREF: ROM:off_A1CEo
-		move.w	#$C10,$22(a6)
+		move.w	#$C10,obWidth(a6)
 		moveq	#0,d0
 		move.b	7(a6),d0
 		pea	loc_C746(pc)
@@ -27,7 +27,7 @@ loc_A296:                               ; DATA XREF: ROM:0000A284↑o
 		bset	#0,$25(a6)
 		bclr	#4,$25(a6)
 		clr.l	$18(a6)
-		clr.l	$1C(a6)
+		clr.l	obYVel(a6)
 		cmpi.w	#$1A,$26(a6)
 		beq.w	loc_A4B4
 		tst.b	(a5)
@@ -62,15 +62,15 @@ loc_A2F0:				; CODE XREF: ROM:0000A2DCj
 		btst	#3,$25(a6)
 		sne	d0
 		andi.b	#8,d0
-		move.b	d0,$20(a6)
+		move.b	d0,obVRAM(a6)
 		move.b	#$A,($FFFFFAE8).w
-		move.b	$2A(a6),d0
+		move.b	obFlags(a6),d0
 		addi.b	#$10,d0
 		cmpi.b	#$20,d0	; ' '
 		bcc.s	loc_A38A
 		move.w	8(a6),d0
 		moveq	#0,d1
-		move.b	$23(a6),d1
+		move.b	obHeight(a6),d1
 		add.w	$C(a6),d1
 		move.w	$24(a6),d4
 		andi.w	#2,d4
@@ -79,9 +79,9 @@ loc_A2F0:				; CODE XREF: ROM:0000A2DCj
 		bne.s	loc_A38A
 		btst	#3,$25(a6)
 		bne.s	loc_A356
-		move.b	#8,$20(a6)
+		move.b	#8,obVRAM(a6)
 		moveq	#0,d3
-		move.b	$22(a6),d3
+		move.b	obWidth(a6),d3
 		add.w	d3,d0
 		bsr.w	sub_BF84
 		cmpi.w	#$FF80,d5
@@ -90,9 +90,9 @@ loc_A2F0:				; CODE XREF: ROM:0000A2DCj
 ; ---------------------------------------------------------------------------
 
 loc_A356:				; CODE XREF: ROM:0000A33Aj
-		move.b	#0,$20(a6)
+		move.b	#0,obVRAM(a6)
 		moveq	#0,d3
-		move.b	$22(a6),d3
+		move.b	obWidth(a6),d3
 		sub.w	d3,d0
 		bsr.w	sub_BF84
 		cmpi.w	#$FF80,d5
@@ -206,7 +206,7 @@ loc_A454:				; CODE XREF: ROM:0000A450j
 		moveq	#2,d2
 
 loc_A45A:				; CODE XREF: ROM:0000A448j
-		move.b	$2A(a6),d0
+		move.b	obFlags(a6),d0
 		btst	#3,$25(a6)
 		bne.s	loc_A488
 		subi.b	#$10,d0
@@ -218,7 +218,7 @@ loc_A45A:				; CODE XREF: ROM:0000A448j
 		add.w	d2,d0
 		move.w	d0,$26(a6)	;	handles sonic's movement animation when going right
 		andi.b	#$18,d1
-		move.b	d1,$20(a6)
+		move.b	d1,obVRAM(a6)
 		rts
 ; ---------------------------------------------------------------------------
 
@@ -235,7 +235,7 @@ loc_A488:				; CODE XREF: ROM:0000A464j
 		move.w	d0,$26(a6)	;	handles sonic's movement animation when going left
 		andi.b	#$18,d1
 		eori.b	#$10,d1
-		move.b	d1,$20(a6)
+		move.b	d1,obVRAM(a6)
 		rts
 ; ---------------------------------------------------------------------------
 
@@ -244,7 +244,7 @@ loc_A4B4:				; CODE XREF: ROM:0000A2B4j
 		sne	d0
 		not.b	d0
 		andi.b	#8,d0
-		move.b	d0,$20(a6)
+		move.b	d0,obVRAM(a6)
 		move.w	#$FF80,d0
 		move.w	$2C(a6),d1
 		beq.s	loc_A4E0
@@ -310,12 +310,12 @@ ObjSonic_SummonPartner:
 		
 		movea.w	($FFFFD862).w,a0			; load Sonic's ram address to a0
 		movea.w	($FFFFD864).w,a1			; load Tails's ram address to a1
-		move.w	$08(a0),d0				; load Sonic's X position to d0
-		move.w	$0C(a0),d1				; load Sonic's Y position to d1
-		move.w	$08(a1),d2				; load Tails's X position to d2
-		move.w	$0C(a1),d3				; load Tails's Y position to d3
-		move.w	d0,$08(a1)				; save to Tails's X position
-		move.w	d1,$0C(a1)				; save to Tails's Y position
+		move.w	obX(a0),d0				; load Sonic's X position to d0
+		move.w	obY(a0),d1				; load Sonic's Y position to d1
+		move.w	obX(a1),d2				; load Tails's X position to d2
+		move.w	obY(a1),d3				; load Tails's Y position to d3
+		move.w	d0,obX(a1)				; save to Tails's X position
+		move.w	d1,obY(a1)				; save to Tails's Y position
 		
 		
 SonicSummon_Return:
@@ -336,7 +336,7 @@ loc_A530:				; CODE XREF: ROM:0000A512j
 loc_A550:				; CODE XREF: ROM:0000A544j
 		bclr	#0,$25(a6)
 		move.b	#8,7(a6)
-		move.b	$2A(a6),d2
+		move.b	obFlags(a6),d2
 		btst	#3,$25(a6)
 		beq.s	loc_A56C
 		addi.b	#-$80,d2
@@ -349,7 +349,7 @@ loc_A56C:				; CODE XREF: ROM:0000A566j
 		asr.l	#6,d0
 		asr.l	#6,d1
 		move.l	d0,$18(a6)
-		move.l	d1,$1C(a6)
+		move.l	d1,obYVel(a6)
 		moveq	#0,d0
 		rts
 ; ---------------------------------------------------------------------------
@@ -357,11 +357,11 @@ loc_A588:
 		btst	#0,$25(a6)
 		bne.w	loc_A63E
 		pea	loc_A61A(pc)
-		addi.l	#$3800,$1C(a6)
+		addi.l	#$3800,obYVel(a6)
 		bclr	#0,$25(a6)
 		bset	#4,$25(a6)
 		move.w	#$12,$26(a6)
-		clr.b	$2A(a6)
+		clr.b	obFlags(a6)
 		clr.w	$2C(a6)
 		move.w	8(a5),d0
 		bne.s	loc_A5E4
@@ -402,9 +402,9 @@ loc_A5FC:				; CODE XREF: ROM:0000A5D4j
 		move.b	2(a5),d0
 		andi.b	#$70,d0	; 'p'
 		bne.s	locret_A618
-		cmpi.l	#$FFFC8000,$1C(a6)
+		cmpi.l	#$FFFC8000,obYVel(a6)
 		bge.s	locret_A618
-		move.l	#$FFFC8000,$1C(a6)
+		move.l	#$FFFC8000,obYVel(a6)
 
 locret_A618:				; CODE XREF: ROM:0000A604j
 					; ROM:0000A60Ej
@@ -421,9 +421,9 @@ loc_A61A:				; DATA XREF: ROM:0000A592o
 ; ---------------------------------------------------------------------------
 
 loc_A632:				; CODE XREF: ROM:0000A62Ej
-		tst.l	$1C(a6)
+		tst.l	obYVel(a6)
 		bpl.s	loc_A63E
-		clr.l	$1C(a6)
+		clr.l	obYVel(a6)
 		rts
 ; ---------------------------------------------------------------------------
 
@@ -458,11 +458,11 @@ loc_A66E:
 ; ---------------------------------------------------------------------------
 loc_A67C:
 		pea	loc_A6E8(pc)
-		addi.l	#$3800,$1C(a6)
+		addi.l	#$3800,obYVel(a6)
 		bclr	#0,$25(a6)
 		bset	#4,$25(a6)
 		move.w	#$12,$26(a6)	;	force roll anim when in air
-		clr.b	$2A(a6)
+		clr.b	obFlags(a6)
 		clr.w	$2C(a6)
 		move.w	8(a5),d0
 		bne.s	loc_A6CE
@@ -542,7 +542,7 @@ loc_A738:				; CODE XREF: ROM:0000A734j
 		move.w	$C(a6),d0
 		subi.w	#$20,d0	; ' '
 		move.w	d0,$C(a4)
-		clr.l	$1C(a4)
+		clr.l	obYVel(a4)
 		move.b	#$C,7(a4)
 		move.w	#$12,$26(a4)
 		pea	loc_A8D6(pc)
@@ -550,7 +550,7 @@ loc_A738:				; CODE XREF: ROM:0000A734j
 		btst	#0,$25(a6)
 		beq.s	loc_A778
 		clr.l	$18(a6)
-		clr.l	$1C(a6)
+		clr.l	obYVel(a6)
 
 loc_A778:				; CODE XREF: ROM:0000A76Ej
 		cmpi.w	#$1A,$26(a6)
@@ -573,7 +573,7 @@ loc_A7A6:				; CODE XREF: ROM:0000A792j
 		btst	#3,$25(a6)
 		sne	d0
 		andi.b	#8,d0
-		move.b	d0,$20(a6)
+		move.b	d0,obVRAM(a6)
 		move.l	#$1C0000,$26(a6)
 		move.w	$A(a5),d0
 		bpl.s	locret_A7CC
@@ -639,7 +639,7 @@ loc_A82A:				; CODE XREF: ROM:0000A826j
 		moveq	#$1E,d2
 
 loc_A830:				; CODE XREF: ROM:0000A81Ej
-		move.b	$2A(a6),d0
+		move.b	obFlags(a6),d0
 		btst	#3,$25(a6)
 		bne.s	loc_A85E
 		subi.b	#$10,d0
@@ -651,7 +651,7 @@ loc_A830:				; CODE XREF: ROM:0000A81Ej
 		add.w	d2,d0
 		move.w	d0,$26(a6)
 		andi.b	#$18,d1
-		move.b	d1,$20(a6)
+		move.b	d1,obVRAM(a6)
 		rts
 ; ---------------------------------------------------------------------------
 
@@ -668,7 +668,7 @@ loc_A85E:				; CODE XREF: ROM:0000A83Aj
 		move.w	d0,$26(a6)
 		andi.b	#$18,d1
 		eori.b	#$10,d1
-		move.b	d1,$20(a6)
+		move.b	d1,obVRAM(a6)
 		rts
 ; ---------------------------------------------------------------------------
 
@@ -677,7 +677,7 @@ loc_A88A:				; CODE XREF: ROM:0000A77Ej
 		sne	d0
 		not.b	d0
 		andi.b	#8,d0
-		move.b	d0,$20(a6)
+		move.b	d0,obVRAM(a6)
 		move.w	#$FF80,d0
 		move.w	$2C(a6),d1
 		beq.s	loc_A8B6
@@ -731,9 +731,9 @@ loc_A8F8:				; CODE XREF: ROM:0000A8EAj
 		add.l	d0,8(a4)
 		add.l	d1,$C(a4)
 		add.l	$18(a6),d0
-		add.l	$1C(a6),d1
+		add.l	obYVel(a6),d1
 		move.l	d0,$18(a4)
-		move.l	d1,$1C(a4)
+		move.l	d1,obYVel(a4)
 		move.b	#8,7(a4)
 		move.b	#2,7(a6)
 
@@ -753,7 +753,7 @@ loc_A94E:				; CODE XREF: ROM:0000A93Cj
 		bclr	#0,$25(a6)
 		beq.s	loc_A988
 		move.b	#8,7(a6)
-		move.b	$2A(a6),d2
+		move.b	obFlags(a6),d2
 		btst	#3,$25(a6)
 		beq.s	loc_A96C
 		addi.b	#-$80,d2
@@ -766,13 +766,13 @@ loc_A96C:				; CODE XREF: ROM:0000A966j
 		asr.l	#6,d0
 		asr.l	#6,d1
 		move.l	d0,$18(a6)
-		move.l	d1,$1C(a6)
+		move.l	d1,obYVel(a6)
 		moveq	#0,d0
 		rts
 ; ---------------------------------------------------------------------------
 
 loc_A988:				; CODE XREF: ROM:0000A954j
-		addi.l	#$3800,$1C(a6)
+		addi.l	#$3800,obYVel(a6)
 		rts
 ; ---------------------------------------------------------------------------
 locret_A992:
@@ -790,7 +790,7 @@ loc_B250_B:
 		move.w	d0,$2C(a6)
 		move.l	d0,$18(a6)
 		moveq	#$FFFFFFFF,d0
-		move.l	d0,$1C(a6)
+		move.l	d0,obYVel(a6)
 		rts
 ; ---------------------------------------------------------------------------
 
@@ -824,10 +824,10 @@ loc_A9C8:
 		move.w	#$100,$30(a6)
 		btst	#0,$25(a6)
 		bne.w	loc_AA08
-		addi.l	#$3800,$1C(a6)
+		addi.l	#$3800,obYVel(a6)
 		bclr	#0,$25(a6)
 		move.w	#$30,$26(a6) ; '0'
-		clr.b	$2A(a6)
+		clr.b	obFlags(a6)
 		clr.w	$2C(a6)
 		bsr.w	sub_CBC0
 		bsr.w	ObjSonic_ThrowPartner
@@ -869,11 +869,11 @@ loc_AA3E:				; CODE XREF: ROM:0000AA2Cj
 		rts
 ; ---------------------------------------------------------------------------
 loc_AA46:
-		andi.b	#8,$20(a6)
+		andi.b	#8,obVRAM(a6)
 		moveq	#0,d0
 		move.w	d0,$2C(a6)
 		move.l	d0,$18(a6)
-		move.l	d0,$1C(a6)
+		move.l	d0,obYVel(a6)
 		tst.w	$30(a6)
 		bne.s	loc_AA6E
 		move.w	#$10,$32(a6)
@@ -919,7 +919,7 @@ ObjSonic_Jump:				; CODE XREF: ROM:0000A518p
 		move.b	#4,7(a6)
 		clr.w	$28(a6)
 		bclr	#0,$25(a6)
-		move.b	$2A(a6),d2
+		move.b	obFlags(a6),d2
 		jsr	CalcSine
 		move.w	d0,d3
 		move.w	d1,d4
@@ -939,7 +939,7 @@ loc_AAD4:				; CODE XREF: ObjSonic_Jump+2Cj
 		asr.l	#6,d0
 		asr.l	#6,d1
 		move.l	d0,$18(a6)
-		move.l	d1,$1C(a6)
+		move.l	d1,obYVel(a6)
 		move.b	#$A0,d0
 		bsr.w	Play_Sound_2
 		rts
@@ -964,7 +964,7 @@ locret_AB00:				; CODE XREF: ROM:0000AB10j
 ; ---------------------------------------------------------------------------
 
 loc_AB02:				; CODE XREF: ROM:0000AAFEj
-		move.b	$2A(a6),d0
+		move.b	obFlags(a6),d0
 		move.b	d0,d2
 		subi.b	#$20,d0	; ' '
 		cmpi.b	#$C0,d0

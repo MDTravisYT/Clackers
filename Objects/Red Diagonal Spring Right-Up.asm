@@ -2,12 +2,12 @@ Obj_DiagRedSprng_RU:				; CODE XREF: ROM:0000D238j
 		moveq	#7,d0
 		bclr	d0,$28(a6)
 		beq.s	loc_D68E
-		move.l	#Map_SpringAngUp,$10(a6)
-		move.w	#$407,$20(a6)
+		move.l	#Map_SpringAngUp,obMap(a6)
+		move.w	#$407,obVRAM(a6)
 		move.w	#$8080,4(a6)
-		move.b	#$C,$22(a6)
-		move.b	#$C,$23(a6)
-		move.w	#0,$2A(a6)
+		move.b	#$C,obWidth(a6)
+		move.b	#$C,obHeight(a6)
+		move.w	#0,obFlags(a6)
 
 loc_D68E:				; CODE XREF: ROM:0000D666j
 		movea.w	($FFFFD862).w,a0
@@ -34,7 +34,7 @@ loc_D6CC:				; CODE XREF: ROM:0000D6B6j
 					; ROM:0000D6BCj ...
 		move.b	#$A8,d0
 		jsr		Play_Sound
-		ori.w	#1,$2A(a6)
+		ori.w	#1,obFlags(a6)
 		move.l	#$A8F98,d0
 		move.l	#$A8F98,d1
 		neg.l	d1
@@ -64,7 +64,7 @@ loc_D6E6:				; CODE XREF: ROM:0000D69Cj
 
 loc_D724:				; CODE XREF: ROM:0000D70Ej
 					; ROM:0000D714j ...
-		ori.w	#1,$2A(a6)
+		ori.w	#1,obFlags(a6)
 		move.l	#$A8F98,d0
 		move.l	#$A8F98,d1
 		neg.l	d1
@@ -72,7 +72,7 @@ loc_D724:				; CODE XREF: ROM:0000D70Ej
 
 loc_D73E:				; CODE XREF: ROM:0000D6F4j
 					; ROM:0000D722j
-		move.w	$2A(a6),d0
+		move.w	obFlags(a6),d0
 		btst	#0,d0
 		beq.s	loc_D764
 		lea	(unk_42364).l,a0
@@ -80,7 +80,7 @@ loc_D73E:				; CODE XREF: ROM:0000D6F4j
 		bsr.w	AnimateSprite
 		cmpi.b	#$FF,d0
 		bne.s	loc_D764
-		andi.w	#$FFFE,$2A(a6)
+		andi.w	#$FFFE,obFlags(a6)
 
 loc_D764:				; CODE XREF: ROM:0000D746j
 					; ROM:0000D75Cj

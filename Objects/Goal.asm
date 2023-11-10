@@ -2,11 +2,11 @@ ObjGoal:				; CODE XREF: ROM:0000D280j
 		moveq	#7,d0
 		bclr	d0,$28(a6)
 		beq.s	GoalRout1
-		move.l	#Map_SpikesLR,$10(a6)
-		move.w	#$430,$20(a6)
+		move.l	#Map_SpikesLR,obMap(a6)
+		move.w	#$430,obVRAM(a6)
 		move.w	#$8080,4(a6)
-		move.b	#$10,$22(a6)
-		move.b	#$10,$23(a6)
+		move.b	#$10,obWidth(a6)
+		move.b	#$10,obHeight(a6)
 
 GoalRout1:				; CODE XREF: ROM:0000E654j
 		movea.w	($FFFFD862).w,a0

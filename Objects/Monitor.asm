@@ -105,14 +105,14 @@ ObjMonitor:				; CODE XREF: ROM:0000D280j
 		moveq	#7,d0
 		bclr	d0,$28(a6)
 		beq.s	MonitorRout1
-		move.l	#Map_Monitor,$10(a6)
-		move.w	#$458,$20(a6)
+		move.l	#Map_Monitor,obMap(a6)
+		move.w	#$458,obVRAM(a6)
 		move.w	#$8080,4(a6)
-		move.b	#$10,$22(a6)
-		move.b	#$10,$23(a6)
+		move.b	#$10,obWidth(a6)
+		move.b	#$10,obHeight(a6)
 
 MonitorRout1:				; CODE XREF: ROM:0000E654j
-		move.w	$2A(a6),d0                      ; load flags to d0
+		move.w	obFlags(a6),d0                      ; load flags to d0
 		btst	#0,d0                           ; was the animation flag set?
 		bne.s	MonitorRout3                 ; if so, branch
 		movea.w	($FFFFD862).w,a0
@@ -132,14 +132,14 @@ MonitorRout1:				; CODE XREF: ROM:0000E654j
 ; ---------------------------------------------------------------------------
 
 MonitorRout2:
-		ori.w	#$01,$2A(a6)					;	set flag to animate
+		ori.w	#$01,obFlags(a6)					;	set flag to animate
 		bclr	#$00,$25(a0)
-		move.l	#$FFFB0000,$1C(a0)
+		move.l	#$FFFB0000,obYVel(a0)
 	;	jsr	(DeleteObject).l
 		rts
 
 MonitorRout3:
-		move.w	$2A(a6),d0                      ; load flags to d0
+		move.w	obFlags(a6),d0                      ; load flags to d0
 		btst	#0,d0                           ; was the animation flag set?
 		bne.s	Anim_Monitor                 ; if so, branch
 		movea.w	($FFFFD864).w,a0
@@ -159,14 +159,14 @@ MonitorRout3:
 ; ---------------------------------------------------------------------------
 
 MonitorRout4:
-		ori.w	#$01,$2A(a6)					;	set flag to animate
+		ori.w	#$01,obFlags(a6)					;	set flag to animate
 		bclr	#$00,$25(a0)
-		move.l	#$FFFB0000,$1C(a0)
+		move.l	#$FFFB0000,obYVel(a0)
 	;	jsr	(DeleteObject).l
 		rts
 		
 Anim_Monitor:
-		move.w	$2A(a6),d0                      ; load flags to d0
+		move.w	obFlags(a6),d0                      ; load flags to d0
 		btst	#0,d0                           ; was the animation flag set?
 		beq.s	MonitorRout5                 ; if not, branch
 		lea	(Def_Monitor).l,a0
