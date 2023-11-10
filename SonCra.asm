@@ -7908,6 +7908,9 @@ UZ02_Events:
 		
 UZ02_StartUp:
 		move	#$2700,sr				; set the status register (disable interrupts)
+		lea	(ArtnemFLRA_TitleCard).l,a0			; load compress "Horizontal Spikes" art address
+		move.l	#$42200000,($C00004).l			; set VDP V-Ram address and modes
+		jsr	NemDec					; decompress and dump
 		lea	($FFFFC9DE).w,a1			; load address of positions and sizes ram (FG)
 		lea	UZ02_FG_StartLocCam(pc),a0		; load level FG setup data address to a0
 		lea	($FFFFD816).w,a2			; load address of V-Ram plane A storage
@@ -15487,6 +15490,10 @@ ArtnemAPZ_TitleCard:
 ; ---------------------------------------------------------------------------
 ArtnemIIZ_TitleCard:
 	incbin	NemesisComp\ArtnemIIZ_TitleCard.bin		; Vertical Spikes
+	even
+; ---------------------------------------------------------------------------
+ArtnemFLRA_TitleCard:
+	incbin	NemesisComp\ArtnemFLRA_TitleCard.bin		; Vertical Spikes
 	even
 ; ===========================================================================
 ; ---------------------------------------------------------------------------
