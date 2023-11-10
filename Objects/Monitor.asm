@@ -1,9 +1,11 @@
+Map_Monitor:		dc.b	$0F,$F0,$00,$4E,$F0,$FF
+
 ObjMonitor:				; CODE XREF: ROM:0000D280j
 		moveq	#7,d0
 		bclr	d0,$28(a6)
 		beq.s	MonitorRout1
-		move.l	#Map_SpikesLR,$10(a6)
-		move.w	#$430,$20(a6)
+		move.l	#Map_Monitor,$10(a6)
+		move.w	#$458,$20(a6)
 		move.w	#$8080,4(a6)
 		move.b	#$10,$22(a6)
 		move.b	#$10,$23(a6)
