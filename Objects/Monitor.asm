@@ -10,13 +10,28 @@ Map_Monitor:
 	MapMon_Ex1:
 		dc.b	$05,$F8,$00,$46,$F8,$00
 		dc.b	$0F,$F0,$00,$4E,$F0,$FF
+	MapMon_Ex2:
+		dc.b	$05,$F8,$20,$00,$F8,$00
+		dc.b	$0F,$F0,$00,$4E,$F0,$FF
+	MapMon_Ex3:
+		dc.b	$0A,$F4,$20,$04,$F4,$00
+		dc.b	$0F,$F0,$00,$4E,$F0,$FF
+	MapMon_Ex4:
+		dc.b	$07,$F0,$20,$0D,$F0,$00
+		dc.b	$07,$F0,$38,$0D,$00,$00
+		dc.b	$0D,$00,$00,$5E,$F0,$00
+		dc.b	$05,$01,$00,$40,$E5,$00
+		dc.b	$05,$01,$08,$40,$0B,$FF
 	
 ANI_Monitor:
-	dc.w	$1000,$1001,$8080
+	dc.w	$1000,$1001,$1002,$1003,$7004,$8080
 	
 Def_Monitor:
-	dc.w	MapMon_Still-ANI_Monitor_2
-	dc.w	MapMon_Ex1-ANI_Monitor_2
+	dc.w	MapMon_Still-Def_Monitor
+	dc.w	MapMon_Ex1-Def_Monitor
+	dc.w	MapMon_Ex2-Def_Monitor
+	dc.w	MapMon_Ex3-Def_Monitor
+	dc.w	MapMon_Ex4-Def_Monitor
 
 ObjMonitor:				; CODE XREF: ROM:0000D280j
 		moveq	#7,d0
