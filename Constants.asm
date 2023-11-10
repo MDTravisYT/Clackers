@@ -1,6 +1,8 @@
+;???		=	$04
 obX			=	$08
 obY			=	$0C
 obMap		=	$10
+obXVel		=	$18
 obYVel		=	$1C
 obVRAM		=	$20
 obWidth		=	$22
