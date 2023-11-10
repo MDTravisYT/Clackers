@@ -7263,6 +7263,10 @@ SSZ01_Events:						; Offset: 00009670
 
 SSZ01_StartUp:						; Offset: 0000967C
 		move	#$2700,sr				; set the status register (disable interrupts)
+		lea	(ArtnemAPZ_TitleCard).l,a0			; load compress "Horizontal Spikes" art address
+		move.l	#$42200000,($C00004).l			; set VDP V-Ram address and modes
+		jsr	NemDec					; decompress and dump
+		move	#$2700,sr				; set the status register (disable interrupts)
 		lea	($FFFFC9DE).w,a1			; load address of positions and sizes ram (FG)
 		move.w	#$0104,$1E(a1)
 		lea	PAL_SpeedSliderZone(pc),a0		; load SSZ palette
@@ -15473,6 +15477,10 @@ ARTNEM_Monitor:
 ; ---------------------------------------------------------------------------
 ArtnemRHZ_TitleCard:
 	incbin	NemesisComp\ArtnemRHZ_TitleCard.bin		; Vertical Spikes
+	even
+; ---------------------------------------------------------------------------
+ArtnemAPZ_TitleCard:
+	incbin	NemesisComp\ArtnemAPZ_TitleCard.bin		; Vertical Spikes
 	even
 ; ===========================================================================
 ; ---------------------------------------------------------------------------
