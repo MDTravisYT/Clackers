@@ -6089,8 +6089,8 @@ LV_DumpPalette:						; Offset: 000088D2
 		dbf	d1,LV_DumpPalette			; repeat til all colours are dumped
 		move.w	#$0000,(a0)				; clear the first colour in palette line 3
 		move	#$2700,sr				; set the status register (disable interrupts)
-		lea	(ArtnemMainMenusText2).l,a0			; load compress "Horizontal Spikes" art address
-		move.l	#$40000000,($C00004).l			; set VDP V-Ram address and modes
+		lea	(ARTNEM_Monitor).l,a0			; load compress "Horizontal Spikes" art address
+		move.l	#$42000000,($C00004).l			; set VDP V-Ram address and modes
 		jsr	NemDec					; decompress and dump
 		bsr.w	DMA_LoadTitleCardArt			; load title card art to V-Ram
 		bsr.w	DMA_LoadHudArt				; load HUD art to V-Ram
@@ -6435,6 +6435,10 @@ Levels_LoadEssentialArt:				; Offset: 00008C30
 		move	#$2700,sr				; set the status register (disable interrupts)
 		lea	(ARTNEM_Goal).l,a0			; load compress "Horizontal Spikes" art address
 		move.l	#$49000002,($C00004).l			; set VDP V-Ram address and modes
+		jsr	NemDec					; decompress and dump
+		move	#$2700,sr				; set the status register (disable interrupts)
+		lea	(ARTNEM_Monitor).l,a0			; load compress "Horizontal Spikes" art address
+		move.l	#$4B000002,($C00004).l			; set VDP V-Ram address and modes
 		jsr	NemDec					; decompress and dump
 
 LLEA_NotForSSZ:						; Offset: 00008C7E
@@ -14780,7 +14784,7 @@ SIR_RedBoard:						; Offset: 0000F884
 		addq.w	#$04,($FFFFFDC4).w			; increase title card counter
 
 SIR_RB_NoFinish:					; Offset: 0000F8B0
-		move.l	#$44100003,d0				; set V-Ram location to dump to
+		move.l	#$43900003,d0				; set V-Ram location to dump to
 		
 		cmpi.w	#$0000,($FFFFD834).w	;	i need to find a better way to do this
 		beq.s	@LoadSS_Text		
@@ -14795,7 +14799,7 @@ SIR_RB_NoFinish:					; Offset: 0000F8B0
 		
 	@cont:
 		moveq	#$0F,d1					; set number of columns to dump (maximum 16)
-		moveq	#$00,d2					; set number of rows to dump
+		moveq	#$01,d2					; set number of rows to dump
 		move.w	#$0000,d3				; set to use palette line 0 (and to map behind object plane)
 		jsr	MapScreen				; map to screen planes
 		rts						; return
@@ -15529,6 +15533,10 @@ ARTNEM_SpikesVer:
 ; ---------------------------------------------------------------------------
 ARTNEM_Goal:
 	incbin	NemesisComp\ArtnemGoal.bin		; Vertical Spikes
+	even
+; ---------------------------------------------------------------------------
+ARTNEM_Monitor:
+	incbin	NemesisComp\ArtnemMonitors.bin		; Vertical Spikes
 	even
 ; ---------------------------------------------------------------------------
 ArtnemMainMenusText2:
