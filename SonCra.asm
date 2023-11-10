@@ -14785,17 +14785,7 @@ SIR_RedBoard:						; Offset: 0000F884
 
 SIR_RB_NoFinish:					; Offset: 0000F8B0
 		move.l	#$43900003,d0				; set V-Ram location to dump to
-		
-		cmpi.w	#$0000,($FFFFD834).w	;	i need to find a better way to do this
-		beq.s	@LoadSS_Text		
-		cmpi.w	#$0001,($FFFFD834).w
-		beq.s	@LoadTT_Text		
-		cmpi.w	#$0002,($FFFFD834).w
-		beq.s	@LoadII_Text	
-		cmpi.w	#$0003,($FFFFD834).w
-		beq.s	@LoadFLRA_Text
-		
-		lea	SorryNothing(pc),a1			; fallback if nothing's valid
+		lea	TT_Text(pc),a1			; load location of "OPTION" letter to a1
 		
 	@cont:
 		moveq	#$0F,d1					; set number of columns to dump (maximum 16)
@@ -14804,96 +14794,39 @@ SIR_RB_NoFinish:					; Offset: 0000F8B0
 		jsr	MapScreen				; map to screen planes
 		rts						; return
 		
-	@LoadTT_Text:
-		lea	TT_Text(pc),a1			; load location of "OPTION" letter to a1
-		bra.s	@cont
-	@LoadSS_Text:
-		lea	SS_Text(pc),a1			; load location of "OPTION" letter to a1
-		bra.s	@cont
-	@LoadII_Text:
-		lea	II_Text(pc),a1			; load location of "OPTION" letter to a1
-		bra.s	@cont
-	@LoadFLRA_Text:
-		lea	FLRA_Text(pc),a1			; load location of "OPTION" letter to a1
-		bra.s	@cont
-		
 TT_Text:						; Offset: 00009440
-		dc.w	$0032
-		dc.w	$0025
-		dc.w	$0033
-		dc.w	$002F
-		dc.w	$0032
-		dc.w	$0034
-		dc.w	$800A
-		dc.w	$0028
-		dc.w	$002F
-		dc.w	$0034
-		dc.w	$0025
-		dc.w	$002C
-		dc.w	$800A
-		dc.w	$800A
-		dc.w	$800A
-		dc.w	$800A
-		even
-		rts						; return
-
-SS_Text:						; Offset: 00009440
+		dc.w	$0011
+		dc.w	$0012
+		dc.w	$0013
+		dc.w	$0014
+		dc.w	$0015
+		dc.w	$0016
+		dc.w	$0017
+		dc.w	$0018
+		dc.w	$0019
+		dc.w	$001A
+		dc.w	$001B
+		dc.w	$001C
+		dc.w	$001D
+		dc.w	$001E
+		dc.w	$001F
+		dc.w	$0020
 		dc.w	$0021
-		dc.w	$002D
-		dc.w	$0035
-		dc.w	$0033
-		dc.w	$0025
-		dc.w	$002D
-		dc.w	$0025
-		dc.w	$002E
-		dc.w	$0034
-		dc.w	$800A
-		dc.w	$0030
-		dc.w	$0021
-		dc.w	$0032
-		dc.w	$002B
-		dc.w	$800A
-		dc.w	$800A
-		even
-		rts						; return
-		
-II_Text:						; Offset: 800A9440
-		dc.w	$0029
-		dc.w	$0033
-		dc.w	$002F
-		dc.w	$002C
-		dc.w	$0021
-		dc.w	$0034
-		dc.w	$0025
+		dc.w	$0022
+		dc.w	$0023
 		dc.w	$0024
-		dc.w	$800A
-		dc.w	$0029
-		dc.w	$0033
-		dc.w	$002C
-		dc.w	$0021
-		dc.w	$002E
-		dc.w	$0024
-		dc.w	$800A
-		even
-		rts						; return	
-		
-FLRA_Text:						; Offset: 800A9440
-		dc.w	$0030
-		dc.w	$002C
-		dc.w	$0021
-		dc.w	$002E
 		dc.w	$0025
-		dc.w	$0034
-		dc.w	$800A
 		dc.w	$0026
+		dc.w	$0027
+		dc.w	$0028
+		dc.w	$0029
+		dc.w	$002A
+		dc.w	$002B
 		dc.w	$002C
+		dc.w	$002D
+		dc.w	$002E
 		dc.w	$002F
-		dc.w	$0032
-		dc.w	$0021
-		dc.w	$800A
-		dc.w	$800A
-		dc.w	$800A
-		dc.w	$800A
+		dc.w	$0030
 		even
 		rts						; return
 
