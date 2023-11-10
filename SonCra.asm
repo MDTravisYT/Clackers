@@ -6088,10 +6088,6 @@ LV_DumpPalette:						; Offset: 000088D2
 		move.l	(a1)+,(a0)+				; dump two colours to buffer
 		dbf	d1,LV_DumpPalette			; repeat til all colours are dumped
 		move.w	#$0000,(a0)				; clear the first colour in palette line 3
-		move	#$2700,sr				; set the status register (disable interrupts)
-		lea	(ArtnemRHZ_TitleCard).l,a0			; load compress "Horizontal Spikes" art address
-		move.l	#$42200000,($C00004).l			; set VDP V-Ram address and modes
-		jsr	NemDec					; decompress and dump
 		bsr.w	DMA_LoadTitleCardArt			; load title card art to V-Ram
 		bsr.w	DMA_LoadHudArt				; load HUD art to V-Ram
 		andi.w	#$81BC,($FFFFC9BA).w			; Turn Display off in VDP register 01's data
@@ -7512,6 +7508,9 @@ TTZ01_Events:						; Offset: 0000988C
 
 TTZ01_StartUp:						; Offset: 00009898
 		move	#$2700,sr				; set the status register (disable interrupts)
+		lea	(ArtnemRHZ_TitleCard).l,a0			; load compress "Horizontal Spikes" art address
+		move.l	#$42200000,($C00004).l			; set VDP V-Ram address and modes
+		jsr	NemDec					; decompress and dump
 		lea	($FFFFC9DE).w,a1			; load address of positions and sizes ram (FG)
 		lea	TTZ_FG_StartLocCam(pc),a0		; load level FG setup data address to a0
 		lea	($FFFFD816).w,a2			; load address of V-Ram plane A storage
