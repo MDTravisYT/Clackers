@@ -13,10 +13,10 @@ GoalRout1:				; CODE XREF: ROM:0000E654j
 		move.w	#$F,d0
 		jsr	(SolidObject).l
 		beq.s	GoalRout3
-		move.w	8(a6),d0
-		move.w	$C(a6),d1
-		move.w	8(a0),d2
-		move.w	$C(a0),d3
+		move.w	obX(a6),d0
+		move.w	obY(a6),d1
+		move.w	obX(a0),d2
+		move.w	obY(a0),d3
 		bsr.w	Distance_GetSet
 		cmpi.w	#8,d4
 		blo.s	GoalRout2
@@ -34,10 +34,10 @@ GoalRout3:				; CODE XREF: ROM:0000E684j
 		move.w	#$F,d0
 		jsr	(SolidObject).l
 		beq.s	GoalRout5
-		move.w	8(a6),d0
-		move.w	$C(a6),d1
-		move.w	8(a0),d2
-		move.w	$C(a0),d3
+		move.w	obX(a6),d0
+		move.w	obY(a6),d1
+		move.w	obX(a0),d2
+		move.w	obY(a0),d3
 		bsr.w	Distance_GetSet
 		cmpi.w	#8,d4
 		blo.s	GoalRout4

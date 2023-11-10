@@ -14,10 +14,10 @@ loc_D9BE:				; CODE XREF: ROM:0000D996j
 		move.w	#$F,d0
 		jsr	(SolidObject).l
 		beq.s	loc_DA16
-		move.w	8(a6),d0
-		move.w	$C(a6),d1
-		move.w	8(a0),d2
-		move.w	$C(a0),d3
+		move.w	obX(a6),d0
+		move.w	obY(a6),d1
+		move.w	obX(a0),d2
+		move.w	obY(a0),d3
 		bsr.w	Distance_GetSet
 		cmpi.w	#1,d4
 		beq.s	loc_D9FC
@@ -46,10 +46,10 @@ loc_DA16:				; CODE XREF: ROM:0000D9CCj
 		move.w	#$F,d0
 		jsr	(SolidObject).l
 		beq.s	loc_DA6E
-		move.w	8(a6),d0
-		move.w	$C(a6),d1
-		move.w	8(a0),d2
-		move.w	$C(a0),d3
+		move.w	obX(a6),d0
+		move.w	obY(a6),d1
+		move.w	obX(a0),d2
+		move.w	obY(a0),d3
 		bsr.w	Distance_GetSet
 		cmpi.w	#1,d4
 		beq.s	loc_DA54

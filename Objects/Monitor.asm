@@ -119,10 +119,10 @@ MonitorRout1:				; CODE XREF: ROM:0000E654j
 		move.w	#$F,d0
 		jsr	(SolidObject).l
 		beq.s	MonitorRout3
-		move.w	8(a6),d0
-		move.w	$C(a6),d1
-		move.w	8(a0),d2
-		move.w	$C(a0),d3
+		move.w	obX(a6),d0
+		move.w	obY(a6),d1
+		move.w	obX(a0),d2
+		move.w	obY(a0),d3
 		bsr.w	Distance_GetSet
 		cmpi.w	#$07,d4							;	is object on top side, above and closer to character on X?
 		beq.s	MonitorRout2					;	if so, branch
@@ -146,10 +146,10 @@ MonitorRout3:
 		move.w	#$F,d0
 		jsr	(SolidObject).l
 		beq.s	Anim_Monitor
-		move.w	8(a6),d0
-		move.w	$C(a6),d1
-		move.w	8(a0),d2
-		move.w	$C(a0),d3
+		move.w	obX(a6),d0
+		move.w	obY(a6),d1
+		move.w	obX(a0),d2
+		move.w	obY(a0),d3
 		bsr.w	Distance_GetSet
 		cmpi.w	#$07,d4							;	is object on top side, above and closer to character on X?
 		beq.s	MonitorRout4					;	if so, branch

@@ -39,7 +39,7 @@ loc_AB5C:                               ; DATA XREF: ROM:0000AB4A↑o
 
 loc_AB92:				; CODE XREF: ROM:0000AB80j
 					; ROM:0000AB8Aj
-		move.w	8(a5),d0
+		move.w	obX(a5),d0
 		bne.w	loc_AC98
 
 loc_AB9A:				; CODE XREF: ROM:0000AB90j
@@ -66,10 +66,10 @@ loc_ABB6:				; CODE XREF: ROM:0000ABA2j
 		addi.b	#$10,d0
 		cmpi.b	#$20,d0	; ' '
 		bcc.s	loc_AC50
-		move.w	8(a6),d0
+		move.w	obX(a6),d0
 		moveq	#0,d1
 		move.b	obHeight(a6),d1
-		add.w	$C(a6),d1
+		add.w	obY(a6),d1
 		move.w	$24(a6),d4
 		andi.w	#2,d4
 		bsr.w	sub_BF84
@@ -332,7 +332,7 @@ loc_AE3A:
 		move.w	#$12,$26(a6)
 		clr.b	obFlags(a6)
 		clr.w	$2C(a6)
-		move.w	8(a5),d0
+		move.w	obX(a5),d0
 		bne.s	loc_AE96
 		move.l	$18(a6),d0
 		move.l	d0,d1
@@ -433,7 +433,7 @@ loc_AF2E:
 		move.w	#$12,$26(a6)
 		clr.b	obFlags(a6)
 		clr.w	$2C(a6)
-		move.w	8(a5),d0
+		move.w	obX(a5),d0
 		bne.s	loc_AF80
 		move.l	$18(a6),d0
 		move.l	d0,d1
@@ -507,10 +507,10 @@ loc_AFE0:
 ; ---------------------------------------------------------------------------
 
 loc_AFEA:				; CODE XREF: ROM:0000AFE6j
-		move.w	8(a6),8(a4)
-		move.w	$C(a6),d0
+		move.w	obX(a6),8(a4)
+		move.w	obY(a6),d0
 		subi.w	#$20,d0	; ' '
-		move.w	d0,$C(a4)
+		move.w	d0,obY(a4)
 		clr.l	obYVel(a4)
 		move.b	#$C,7(a4)
 		move.w	#$12,$26(a4)
@@ -524,7 +524,7 @@ loc_AFEA:				; CODE XREF: ROM:0000AFE6j
 loc_B026:				; CODE XREF: ROM:0000B01Cj
 		cmpi.w	#$1A,$26(a6)
 		beq.w	loc_B138
-		move.w	8(a5),d0
+		move.w	obX(a5),d0
 		bne.w	loc_B07C
 		move.w	#$FFF0,d0
 		move.w	$2C(a6),d1
@@ -698,7 +698,7 @@ loc_B1A6:				; CODE XREF: ROM:0000B198j
 		asl.l	#5,d0
 		asl.l	#5,d1
 		add.l	d0,8(a4)
-		add.l	d1,$C(a4)
+		add.l	d1,obY(a4)
 		add.l	$18(a6),d0
 		add.l	obYVel(a6),d1
 		move.l	d0,$18(a4)

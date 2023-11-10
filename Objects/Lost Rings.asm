@@ -5,8 +5,8 @@ Obj_LostRings:				; CODE XREF: ROM:0000D24Cj
 ; ---------------------------------------------------------------------------
 
 loc_E2C8:				; CODE XREF: ROM:0000E2C2j
-		move.w	8(a6),d0
-		move.w	$C(a6),d1
+		move.w	obX(a6),d0
+		move.w	obY(a6),d1
 		jsr	sub_1DA8
 		beq.s	loc_E2E6
 		move.l	obYVel(a6),d6
@@ -18,13 +18,13 @@ loc_E2C8:				; CODE XREF: ROM:0000E2C2j
 
 loc_E2E6:				; CODE XREF: ROM:0000E2D4j
 		move.w	d0,8(a6)
-		move.w	d1,$C(a6)
+		move.w	d1,obY(a6)
 		move.l	$18(a6),d0
 		add.l	d0,8(a6)
 		move.l	obYVel(a6),d0
 		addi.l	#$1800,d0
 		move.l	d0,obYVel(a6)
-		add.l	d0,$C(a6)
+		add.l	d0,obY(a6)
 		move.w	($FFFFF000).l,d0
 		andi.w	#$C,d0
 		add.w	d0,d0
@@ -106,10 +106,10 @@ locret_E3A6:				; CODE XREF: ROM:0000E3A2j
 
 sub_E3A8:				; CODE XREF: ROM:0000E396p
 					; ROM:0000E3A4p
-		move.w	8(a0),d0
-		sub.w	8(a6),d0
-		move.w	$C(a0),d1
-		sub.w	$C(a6),d1
+		move.w	obX(a0),d0
+		sub.w	obX(a6),d0
+		move.w	obY(a0),d1
+		sub.w	obY(a6),d1
 		moveq	#0,d2
 		move.b	$29(a6),d2
 		jmp	loc_E3DE(pc,d2.w)

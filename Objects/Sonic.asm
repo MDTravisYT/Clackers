@@ -41,7 +41,7 @@ loc_A296:                               ; DATA XREF: ROM:0000A284↑o
 
 loc_A2CC:				; CODE XREF: ROM:0000A2BAj
 					; ROM:0000A2C4j
-		move.w	8(a5),d0
+		move.w	obX(a5),d0
 		bne.w	loc_A3D2
 
 loc_A2D4:				; CODE XREF: ROM:0000A2CAj
@@ -68,10 +68,10 @@ loc_A2F0:				; CODE XREF: ROM:0000A2DCj
 		addi.b	#$10,d0
 		cmpi.b	#$20,d0	; ' '
 		bcc.s	loc_A38A
-		move.w	8(a6),d0
+		move.w	obX(a6),d0
 		moveq	#0,d1
 		move.b	obHeight(a6),d1
-		add.w	$C(a6),d1
+		add.w	obY(a6),d1
 		move.w	$24(a6),d4
 		andi.w	#2,d4
 		bsr.w	sub_BF84
@@ -363,7 +363,7 @@ loc_A588:
 		move.w	#$12,$26(a6)
 		clr.b	obFlags(a6)
 		clr.w	$2C(a6)
-		move.w	8(a5),d0
+		move.w	obX(a5),d0
 		bne.s	loc_A5E4
 		move.l	$18(a6),d0
 		move.l	d0,d1
@@ -464,7 +464,7 @@ loc_A67C:
 		move.w	#$12,$26(a6)	;	force roll anim when in air
 		clr.b	obFlags(a6)
 		clr.w	$2C(a6)
-		move.w	8(a5),d0
+		move.w	obX(a5),d0
 		bne.s	loc_A6CE
 		move.l	$18(a6),d0
 		move.l	d0,d1
@@ -538,10 +538,10 @@ loc_A72E:
 ; ---------------------------------------------------------------------------
 
 loc_A738:				; CODE XREF: ROM:0000A734j
-		move.w	8(a6),8(a4)
-		move.w	$C(a6),d0
+		move.w	obX(a6),8(a4)
+		move.w	obY(a6),d0
 		subi.w	#$20,d0	; ' '
-		move.w	d0,$C(a4)
+		move.w	d0,obY(a4)
 		clr.l	obYVel(a4)
 		move.b	#$C,7(a4)
 		move.w	#$12,$26(a4)
@@ -555,7 +555,7 @@ loc_A738:				; CODE XREF: ROM:0000A734j
 loc_A778:				; CODE XREF: ROM:0000A76Ej
 		cmpi.w	#$1A,$26(a6)
 		beq.w	loc_A88A
-		move.w	8(a5),d0
+		move.w	obX(a5),d0
 		bne.w	loc_A7CE
 		move.w	#$FFF4,d0
 		move.w	$2C(a6),d1
@@ -729,7 +729,7 @@ loc_A8F8:				; CODE XREF: ROM:0000A8EAj
 		asl.l	#5,d0
 		asl.l	#5,d1
 		add.l	d0,8(a4)
-		add.l	d1,$C(a4)
+		add.l	d1,obY(a4)
 		add.l	$18(a6),d0
 		add.l	obYVel(a6),d1
 		move.l	d0,$18(a4)

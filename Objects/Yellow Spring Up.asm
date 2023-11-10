@@ -14,10 +14,10 @@ loc_DCAA:				; CODE XREF: ROM:0000DC82j
 		move.w	#$F,d0
 		jsr	(SolidObject).l
 		beq.s	loc_DCF2
-		move.w	8(a6),d0
-		move.w	$C(a6),d1
-		move.w	8(a0),d2
-		move.w	$C(a0),d3
+		move.w	obX(a6),d0
+		move.w	obY(a6),d1
+		move.w	obX(a0),d2
+		move.w	obY(a0),d3
 		bsr.w	Distance_GetSet
 		cmpi.w	#7,d4
 		beq.s	loc_DCDC
@@ -40,10 +40,10 @@ loc_DCF2:				; CODE XREF: ROM:0000DCB8j
 		move.w	#$F,d0
 		jsr	(SolidObject).l
 		beq.s	loc_DD3A
-		move.w	8(a6),d0
-		move.w	$C(a6),d1
-		move.w	8(a0),d2
-		move.w	$C(a0),d3
+		move.w	obX(a6),d0
+		move.w	obY(a6),d1
+		move.w	obX(a0),d2
+		move.w	obY(a0),d3
 		bsr.w	Distance_GetSet
 		cmpi.w	#7,d4
 		beq.s	loc_DD24
