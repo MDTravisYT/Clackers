@@ -22,9 +22,65 @@ Map_Monitor:
 		dc.b	$0D,$00,$00,$5E,$F0,$00
 		dc.b	$05,$01,$00,$40,$E5,$00
 		dc.b	$05,$01,$08,$40,$0B,$FF
+	MapMon_Ex5:
+		dc.b	$09,$EC,$00,$15,$EC,$00
+		dc.b	$06,$FC,$00,$1B,$EC,$00
+		dc.b	$00,$FC,$00,$21,$FC,$00
+		dc.b	$09,$04,$18,$15,$FC,$00
+		dc.b	$06,$EC,$18,$1B,$04,$00
+		dc.b	$0D,$00,$00,$5E,$F0,$00
+		dc.b	$05,$01,$00,$40,$E1,$00
+		dc.b	$05,$01,$08,$40,$0F,$FF
+	MapMon_Ex6:
+		dc.b	$09,$EC,$00,$22,$EC,$00
+		dc.b	$06,$FC,$00,$28,$EC,$00
+		dc.b	$00,$FC,$00,$2E,$FC,$00
+		dc.b	$09,$04,$18,$22,$FC,$00
+		dc.b	$06,$EC,$18,$28,$04,$00
+		dc.b	$0D,$00,$00,$5E,$F0,$00
+		dc.b	$05,$01,$00,$40,$DF,$00
+		dc.b	$05,$01,$08,$40,$11,$FF
+	MapMon_Ex7:
+		dc.b	$0D,$00,$00,$5E,$F0,$00
+		dc.b	$05,$01,$00,$40,$DD,$00
+		dc.b	$05,$01,$08,$40,$13,$FF
+	MapMon_Ex8:
+		dc.b	$0D,$00,$00,$5E,$F0,$00
+		dc.b	$04,$09,$00,$44,$D9,$00
+		dc.b	$04,$09,$08,$44,$17,$FF
+	MapMon_Ex9:
+		dc.b	$0D,$00,$00,$5E,$F0,$00
+		dc.b	$04,$09,$00,$44,$D8,$00
+		dc.b	$04,$09,$08,$44,$18,$FF
+	MapMon_ExA:
+		dc.b	$0D,$00,$00,$5E,$F0,$00
+		dc.b	$04,$09,$00,$44,$D7,$00
+		dc.b	$04,$09,$08,$44,$19,$FF
+	MapMon_ExB:
+		dc.b	$0D,$00,$00,$5E,$F0,$00
+		dc.b	$04,$09,$00,$44,$D6,$00
+		dc.b	$04,$09,$08,$44,$1A,$FF
+	MapMon_ExC:
+		dc.b	$0D,$00,$00,$5E,$F0,$00
+		dc.b	$00,$08,$00,$4A,$DC,$00
+		dc.b	$00,$08,$08,$4A,$1C,$FF
+	MapMon_ExD:
+		dc.b	$0D,$00,$00,$5E,$F0,$00
+		dc.b	$00,$08,$00,$4B,$DB,$00
+		dc.b	$00,$08,$08,$4B,$1D,$FF
+	MapMon_ExE:
+		dc.b	$0D,$00,$00,$5E,$F0,$00
+		dc.b	$00,$07,$00,$4C,$DB,$00
+		dc.b	$00,$07,$08,$4C,$1D,$FF
+	MapMon_ExF:
+		dc.b	$0D,$00,$00,$5E,$F0,$00
+		dc.b	$00,$07,$00,$4D,$DA,$00
+		dc.b	$00,$07,$08,$4D,$1E,$FF
+	MapMon_Dead:
+		dc.b	$0D,$00,$00,$5E,$F0,$FF
 	
 ANI_Monitor:
-	dc.w	$1000,$1001,$1002,$1003,$7004,$8080
+	dc.w	$7000,$0201,$0202,$0203,$0204,$0205,$0206,$0207,$0208,$0209,$020A,$020B,$020C,$020D,$020E,$020F,$7010,$8080
 	
 Def_Monitor:
 	dc.w	MapMon_Still-Def_Monitor
@@ -32,6 +88,18 @@ Def_Monitor:
 	dc.w	MapMon_Ex2-Def_Monitor
 	dc.w	MapMon_Ex3-Def_Monitor
 	dc.w	MapMon_Ex4-Def_Monitor
+	dc.w	MapMon_Ex5-Def_Monitor
+	dc.w	MapMon_Ex6-Def_Monitor
+	dc.w	MapMon_Ex7-Def_Monitor
+	dc.w	MapMon_Ex8-Def_Monitor
+	dc.w	MapMon_Ex9-Def_Monitor
+	dc.w	MapMon_ExA-Def_Monitor
+	dc.w	MapMon_ExB-Def_Monitor
+	dc.w	MapMon_ExC-Def_Monitor
+	dc.w	MapMon_ExD-Def_Monitor
+	dc.w	MapMon_ExE-Def_Monitor
+	dc.w	MapMon_ExF-Def_Monitor
+	dc.w	MapMon_Dead-Def_Monitor
 
 ObjMonitor:				; CODE XREF: ROM:0000D280j
 		moveq	#7,d0
