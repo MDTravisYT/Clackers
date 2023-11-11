@@ -132,6 +132,8 @@ MonitorRout1:				; CODE XREF: ROM:0000E654j
 ; ---------------------------------------------------------------------------
 
 MonitorRout2:
+		move.b	#$A3,d0
+		jsr		Play_Sound
 		ori.w	#$01,obFlags(a6)					;	set flag to animate
 		bclr	#$00,$25(a0)
 		move.l	#$FFFB0000,obYVel(a0)
@@ -159,6 +161,8 @@ MonitorRout3:
 ; ---------------------------------------------------------------------------
 
 MonitorRout4:
+		move.b	#$A3,d0
+		jsr		Play_Sound
 		ori.w	#$01,obFlags(a6)					;	set flag to animate
 		bclr	#$00,$25(a0)
 		move.l	#$FFFB0000,obYVel(a0)
