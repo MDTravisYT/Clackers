@@ -13310,12 +13310,11 @@ GTO_UpdateTime:						; Offset: 0000EC62
 		move.w	d6,($FFFFDA3E).w			; put result into 0:00:0X (second digit of centi-seconds)
 		
 		clr.w	d0
-		move.b	$FFFFD89E,d0
+		move.b	$FFFFA000,d0
 		mulu.w	#2,d0
 		addi.w	#$A500,d0
 		move.w	d0,($FFFFDA56).w
 
-	@cont:
 		move.w	$24(a6),d0				; reload time into d0
 		cmpi.w	#$2580,d0				; is timer at or over 2:30:00?
 		bcc.s	GTO_RedBlinking				; if yes, branch

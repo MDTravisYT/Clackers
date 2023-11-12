@@ -139,6 +139,7 @@ MonitorRout2:
 		move.l	#$FFFB0000,obYVel(a0)
 		moveq	#$0,d7
 		jsr		SpawnBouncingRings
+		add.b	#1,$FFFFA000
 	;	jsr	(DeleteObject).l
 		rts
 
@@ -170,6 +171,7 @@ MonitorRout4:
 		move.l	#$FFFB0000,obYVel(a0)
 		moveq	#$0,d7
 		jsr		SpawnBouncingRings
+		add.b	#1,$FFFFA000
 	;	jsr	(DeleteObject).l
 		rts
 		
