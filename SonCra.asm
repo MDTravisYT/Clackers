@@ -12422,7 +12422,6 @@ loc_E558:				; CODE XREF: ROM:0000E54Ej
 					; ROM:0000E554j
 		moveq	#1,d0
 		jsr	(HurtPlayer).l
-		add.b	#1,$FFFFA000
 
 loc_E560:				; CODE XREF: ROM:0000E534j
 					; ROM:0000E556j
@@ -12446,7 +12445,6 @@ loc_E592:				; CODE XREF: ROM:0000E588j
 					; ROM:0000E58Ej
 		moveq	#1,d0
 		jsr	(HurtPlayer).l
-		add.b	#1,$FFFFA000
 
 loc_E59A:				; CODE XREF: ROM:0000E56Ej
 					; ROM:0000E590j
@@ -12489,6 +12487,7 @@ loc_E600:				; CODE XREF: ROM:0000E5F6j
 					; ROM:0000E5FCj
 		moveq	#1,d0
 		jsr	(HurtPlayer).l
+		add.b	#1,$FFFFA000
 
 loc_E608:				; CODE XREF: ROM:0000E5DCj
 					; ROM:0000E5FEj
@@ -12512,6 +12511,7 @@ loc_E63A:				; CODE XREF: ROM:0000E630j
 					; ROM:0000E636j
 		moveq	#1,d0
 		jsr	(HurtPlayer).l
+		add.b	#1,$FFFFA000
 
 loc_E642:				; CODE XREF: ROM:0000E616j
 					; ROM:0000E638j
@@ -13310,6 +13310,8 @@ GTO_UpdateTime:						; Offset: 0000EC62
 		andi.b	#$F,d6					; make sure only the second digit is being used
 		add.b	d6,d6					; go 2 tiles forward instead of just 1
 		move.w	d6,($FFFFDA3E).w			; put result into 0:00:0X (second digit of centi-seconds)
+		
+		move.b	$FFFFA000,$FFFFA001
 		
 		clr.w	d0			;	ring counter
 		move.b	$FFFFA000,d0
@@ -15575,6 +15577,8 @@ DiagSpik_RU			=	$64
 DiagSpik_LU			=	$68
 DiagSpik_RD			=	$6C
 DiagSpik_LD			=	$70
+Swapper1			=	$74
+Swapper2			=	$78
 ;
 ; AAAA -> 72 or Higher=	These are either pathswappers, blank, invalid, gliches of previous objects, lag the engine, or crash (as far as I've seen)
 ;			note: some pathswappers crash on TTZ (Not sure why though)
