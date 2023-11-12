@@ -12,7 +12,6 @@ RingsRout1:
 		movea.w	($FFFFD862).w,a0
 		move.w	obFlags(a6),d0                      ; load flags to d0
 		move.w	#$F,d0
-		move.b	#1,	$FFFFA004
 		jsr	(SolidObject).l
 		beq.s	RingsRout5
 		move.w	obX(a6),d0
@@ -29,7 +28,6 @@ RingsRout2:
 		move.b	#$A6,d0
 		jsr		Play_Sound_2
 		add.b	#1,$FFFFA000
-		clr.b	$FFFFA004
 		jsr	(DeleteObject).l
 		rts
 	
@@ -42,6 +40,5 @@ RingsRout5:
 		bsr.w	DeleteSprite
 
 RingsRout6:				; CODE XREF: ROM:0000E6EEj
-		clr.b	$FFFFA004
 		rts
 ; ---------------------------------------------------------------------------

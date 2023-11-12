@@ -11605,28 +11605,25 @@ SolidObject:
 		movem.l	d0-d7,-(sp)				; store register data in the stack
 		jsr	SolidCheck				; check the solidness status of character/object
 		cmp.w	$08(a0),d0				; does character's X position match the new position returned?
-		bne.s	loc_CAEA				; if not, branch
+		bne.s	@loc_CAEA				; if not, branch
 		cmp.w	$C(a0),d1				; does character's Y position match the new position returned?
-		beq.s	loc_CB14				; if so, branch
+		beq.s	@loc_CB14				; if so, branch
 
-loc_CAEA:
+@loc_CAEA:
 		tst.w	-$20(sp)				; did the character touch the object within any distances?
-		beq.s	loc_CB14				; if not, branch
+		beq.s	@loc_CB14				; if not, branch
 		move.w	d0,$08(a0)				; save new X position to character
 		move.w	d1,$0C(a0)				; save new Y position to character
 		moveq	#$00,d0					; clear d0
-		cmpi.b	#1,$FFFFA004
-		beq.s	@skipspd
 		move.w	d0,$2C(a0)				; stop ground speed
 		move.l	d0,$18(a0)				; stop X speed
 		move.l	d0,$1C(a0)				; stop Y speed
-	@skipspd:
 		bset	#$00,$25(a0)				; set object as touched
 		moveq	#$FFFFFFFF,d0				; move negative value to d0 (setting object as touched by character)
 		movem.l	(sp)+,d0-d7				; reload register data from the stack
 		rts						; return
 
-loc_CB14:
+@loc_CB14:
 		moveq	#$00,d0					; move null value to d0 (setting object as untouched by character)
 		movem.l	(sp)+,d0-d7				; reload register data from the stack
 		rts						; return
@@ -15932,7 +15929,9 @@ Objpos_TTZ:
 	ObjLayout	$00B0,	$0B78,	SpringYel_Up,    $FFFF
 	ObjLayout	$0034,	$06ED,	DiagRedSprngRU,  $FFFF
 	ObjLayout	$0400,	$0060,	Goal,			 $FFFF
-	ObjLayout	$0140, 	$0E50,	Ring,		 $FFFF
+	ObjLayout	$0258, 	$0E18,	Ring,		 $FFFF
+	ObjLayout	$0240, 	$0E18,	Ring,		 $FFFF
+	ObjLayout	$0228, 	$0E18,	Ring,		 $FFFF
 	ObjLayout	$0160, 	$0E50,	Monitor,		 $FFFF
 	ObjLayout	$0180, 	$0E50,	Monitor,		 $FFFF
 	ObjLayout	$01A0, 	$0E50,	Monitor,		 $FFFF
