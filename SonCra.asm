@@ -13309,10 +13309,11 @@ GTO_UpdateTime:						; Offset: 0000EC62
 		add.b	d6,d6					; go 2 tiles forward instead of just 1
 		move.w	d6,($FFFFDA3E).w			; put result into 0:00:0X (second digit of centi-seconds)
 		
-		add.w	#2,($FFFFDA56).w
-		cmpi.w	#$A512,($FFFFDA56).w
-		blo.s	@cont
-		move.w	#$A500,($FFFFDA56).w
+		clr.w	d0
+		move.b	$FFFFD89E,d0
+		mulu.w	#2,d0
+		addi.w	#$A500,d0
+		move.w	d0,($FFFFDA56).w
 
 	@cont:
 		move.w	$24(a6),d0				; reload time into d0
