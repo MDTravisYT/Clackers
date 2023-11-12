@@ -15,7 +15,7 @@
 ; Includes
 ; ---------------------------------------------------------------------------
 
-Combi	=	1
+Combi	=	0
 
 		include	"Debugger.asm"
 		include	"SonCraMacro.asm"
@@ -11615,9 +11615,12 @@ loc_CAEA:
 		move.w	d0,$08(a0)				; save new X position to character
 		move.w	d1,$0C(a0)				; save new Y position to character
 		moveq	#$00,d0					; clear d0
+		cmpi.b	#1,$FFFFA004
+		beq.s	@skipspd
 		move.w	d0,$2C(a0)				; stop ground speed
 		move.l	d0,$18(a0)				; stop X speed
 		move.l	d0,$1C(a0)				; stop Y speed
+	@skipspd:
 		bset	#$00,$25(a0)				; set object as touched
 		moveq	#$FFFFFFFF,d0				; move negative value to d0 (setting object as touched by character)
 		movem.l	(sp)+,d0-d7				; reload register data from the stack
