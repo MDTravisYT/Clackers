@@ -13353,6 +13353,22 @@ GTO_UpdateTime:						; Offset: 0000EC62
 		sub.b	d1,$FFFFA002
 
 	@cont:
+		clr.w	d0
+		clr.w	d1
+		clr.w	d2
+		move.b	$FFFFA001,	d0
+		mulu.w	#2,	d0
+		add.w	#$A500,d0
+		move.w	d0,($FFFFDA66).w
+		move.b	$FFFFA002,	d1
+		mulu.w	#2,	d1
+		add.w	#$A500,d1
+		move.w	d1,($FFFFDA6E).w
+		move.b	$FFFFA003,	d2
+		mulu.w	#2,	d2
+		add.w	#$A500,d2
+		move.w	d2,($FFFFDA76).w
+	
 		move.w	$24(a6),d0				; reload time into d0
 		cmpi.w	#$2580,d0				; is timer at or over 2:30:00?
 		bcc.s	GTO_RedBlinking				; if yes, branch
