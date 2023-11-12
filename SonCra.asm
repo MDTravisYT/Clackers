@@ -4785,6 +4785,9 @@ VB_SegaScreen:						; Offset: 00006EB4
 PAL_Segalogo:						; Offset: 00006F62
 		incbin	Palettes\PalSegaLogo.bin		; palettes used in the Sega logo
 		even
+PAL_SegalogoCycle:						; Offset: 00006F62
+		incbin	Palettes\PalSegaLogoCycle.bin		; palettes used in the Sega logo
+		even
 ARTNEM_SegaLogo:					; Offset: 00006FA2
 		incbin	NemesisComp\SegaLogo.bin		; compressed Sega patterns
 		even
