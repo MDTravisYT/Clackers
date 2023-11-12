@@ -13322,13 +13322,13 @@ GTO_UpdateTime:						; Offset: 0000EC62
 		clr.b	$FFFFA003
 
 		move.b	$FFFFA000,d0
-		cmpi.b	#9,d0                   ;	d0 is checked if it is 9...
+		cmpi.w	#9,d0                   ;	d0 is checked if it is 9...
 		ble.s	@cont100                  ;	...and the rest of the code is skipped if it is equal or lower than 9
 		
 	@loop:
 		add.b	#1,	d1					;	2 is added to d1
 		subi.b	#10,d0					;	subtract decimal 10 from d0
-		cmpi.b	#9,d0					;	d0 is checked if it is below 9...
+		cmpi.w	#9,d0					;	d0 is checked if it is below 9...
 		bhi.s	@loop					;	and if it isn't, loop this subtraction code again
 
 		move.b	d0,$FFFFA003
@@ -13339,13 +13339,13 @@ GTO_UpdateTime:						; Offset: 0000EC62
 		clr.b	d1
 
 		move.b	$FFFFA000,d0
-		cmpi.b	#99,d0   
+		cmpi.w	#99,d0   
 		ble.s	@cont
 		
 	@loop2:
 		add.b	#1,	d1					;	2 is added to d1
 		subi.b	#100,d0					;	subtract decimal 100 from d0
-		cmpi.b	#99,d0					;	d0 is checked if it is below 99...
+		cmpi.w	#99,d0					;	d0 is checked if it is below 99...
 		bhi.s	@loop2					;	and if it isn't, loop this subtraction code again
 		sub.b	#10,$FFFFA002
 		move.b	d1,$FFFFA001
