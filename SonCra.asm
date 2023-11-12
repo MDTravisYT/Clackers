@@ -12422,6 +12422,7 @@ loc_E558:				; CODE XREF: ROM:0000E54Ej
 					; ROM:0000E554j
 		moveq	#1,d0
 		jsr	(HurtPlayer).l
+		add.b	#1,$FFFFA000
 
 loc_E560:				; CODE XREF: ROM:0000E534j
 					; ROM:0000E556j
@@ -12445,6 +12446,7 @@ loc_E592:				; CODE XREF: ROM:0000E588j
 					; ROM:0000E58Ej
 		moveq	#1,d0
 		jsr	(HurtPlayer).l
+		add.b	#1,$FFFFA000
 
 loc_E59A:				; CODE XREF: ROM:0000E56Ej
 					; ROM:0000E590j
@@ -13309,12 +13311,19 @@ GTO_UpdateTime:						; Offset: 0000EC62
 		add.b	d6,d6					; go 2 tiles forward instead of just 1
 		move.w	d6,($FFFFDA3E).w			; put result into 0:00:0X (second digit of centi-seconds)
 		
-		clr.w	d0
+		clr.w	d0			;	ring counter
 		move.b	$FFFFA000,d0
 		mulu.w	#2,d0
 		addi.w	#$A500,d0
-		move.w	d0,($FFFFDA56).w
-
+		move.w	d0,($FFFFDA76).w
+		
+		cmpi.b	#9,$FFFFA000
+		ble.s	@cont
+		move.w	#$A500,($FFFFDA76).w
+		addi.w	#2,($FFFFDA6E).w
+		clr.b	$FFFFA000
+	
+	@cont:
 		move.w	$24(a6),d0				; reload time into d0
 		cmpi.w	#$2580,d0				; is timer at or over 2:30:00?
 		bcc.s	GTO_RedBlinking				; if yes, branch
@@ -13761,9 +13770,9 @@ loc_F00E:						; Offset: 0000F00E
 		dc.w	$00A0,$010A,$A500,$0128-40		; "0" 01 Centi-seconds Digit ;	FFFFDA3E
 		dc.w	$00B0,$0D0B,$A534,$0098			; "RING"                     ;	FFFFDA46
 		dc.w	$00B0,$010C,$A53C,$00B8			; "S"                        ;	FFFFDA4E
-		dc.w	$00B0,$010D,$A500,$00D8			; "0"                        ;	FFFFDA56
-		dc.w	$00B0,$010E,$A570,$00E4			; "/"                        ;	FFFFDA5E
-		dc.w	$00B0,$010F,$A502,$00F0			; "1"                        ;	FFFFDA66
+		dc.w	$FFFF,$010D,$A500,$FFFF			; "0"                        ;	FFFFDA56
+		dc.w	$FFFF,$010E,$A500,$FFFF			; "0"                        ;	FFFFDA5E
+		dc.w	$00B0,$010F,$A500,$00F0			; "0"                        ;	FFFFDA66
 		dc.w	$00B0,$0110,$A500,$00F8			; "0"                        ;	FFFFDA6E
 		dc.w	$00B0,$0100,$A500,$0100			; "0"                           FFFFDA76
 
