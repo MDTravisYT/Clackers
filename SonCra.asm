@@ -13308,7 +13308,13 @@ GTO_UpdateTime:						; Offset: 0000EC62
 		andi.b	#$F,d6					; make sure only the second digit is being used
 		add.b	d6,d6					; go 2 tiles forward instead of just 1
 		move.w	d6,($FFFFDA3E).w			; put result into 0:00:0X (second digit of centi-seconds)
+		
+		add.w	#2,($FFFFDA56).w
+		cmpi.w	#$A512,($FFFFDA56).w
+		blo.s	@cont
+		move.w	#$A500,($FFFFDA56).w
 
+	@cont:
 		move.w	$24(a6),d0				; reload time into d0
 		cmpi.w	#$2580,d0				; is timer at or over 2:30:00?
 		bcc.s	GTO_RedBlinking				; if yes, branch
@@ -13742,24 +13748,24 @@ loc_F00A:						; Offset: 0000F00A
 ; ---------------------------------------------------------------------------
 
 loc_F00E:						; Offset: 0000F00E
-		;		 YYYY  SSPP  VVVV  XXXX
-		dc.w	$00A0,$0D01,$A514,$0098			; "TIME"
-		dc.w	$0090,$0D02,$A53E,$0098			; "ATTA"
-		dc.w	$0090,$0503,$A546,$00B8			; "CK"
-		dc.w	$00A0,$0104,$A500,$00F8-40		; "0" 01 Minute Digit
-		dc.w	$00A0,$0005,$A54A,$0100-40		; "'"
-		dc.w	$00A0,$0106,$A500,$0108-40		; "0" 10 Second Digit
-		dc.w	$00A0,$0107,$A500,$0110-40		; "0" 01 Second Digit
-		dc.w	$00A0,$0008,$A54B,$0118-40		; "''"
-		dc.w	$00A0,$0109,$A500,$0120-40		; "0" 10 Centi-seconds Digit
-		dc.w	$00A0,$010A,$A500,$0128-40		; "0" 01 Centi-seconds Digit
-		dc.w	$00B0,$0D0B,$A534,$0098			; "RING"
-		dc.w	$00B0,$010C,$A53C,$00B8			; "S"
-		dc.w	$00B0,$010D,$A500,$00D8			; "0"
-		dc.w	$00B0,$010E,$A570,$00E4			; "/"
-		dc.w	$00B0,$010F,$A502,$00F0			; "1"
-		dc.w	$00B0,$0110,$A500,$00F8			; "0"
-		dc.w	$00B0,$0100,$A500,$0100			; "0"
+		;		 YYYY  SSPP  VVVV  XXXX                                      ;	FFFFD9EE
+		dc.w	$00A0,$0D01,$A514,$0098			; "TIME"                     ;	FFFFD9F6
+		dc.w	$0090,$0D02,$A53E,$0098			; "ATTA"                     ;	FFFFD9FE
+		dc.w	$0090,$0503,$A546,$00B8			; "CK"                       ;	FFFFD906
+		dc.w	$00A0,$0104,$A500,$00F8-40		; "0" 01 Minute Digit        ;	FFFFDA0E
+		dc.w	$00A0,$0005,$A54A,$0100-40		; "'"                        ;	FFFFDA16
+		dc.w	$00A0,$0106,$A500,$0108-40		; "0" 10 Second Digit        ;	FFFFDA1E
+		dc.w	$00A0,$0107,$A500,$0110-40		; "0" 01 Second Digit        ;	FFFFDA26
+		dc.w	$00A0,$0008,$A54B,$0118-40		; "''"                       ;	FFFFDA2E
+		dc.w	$00A0,$0109,$A500,$0120-40		; "0" 10 Centi-seconds Digit ;	FFFFDA36
+		dc.w	$00A0,$010A,$A500,$0128-40		; "0" 01 Centi-seconds Digit ;	FFFFDA3E
+		dc.w	$00B0,$0D0B,$A534,$0098			; "RING"                     ;	FFFFDA46
+		dc.w	$00B0,$010C,$A53C,$00B8			; "S"                        ;	FFFFDA4E
+		dc.w	$00B0,$010D,$A500,$00D8			; "0"                        ;	FFFFDA56
+		dc.w	$00B0,$010E,$A570,$00E4			; "/"                        ;	FFFFDA5E
+		dc.w	$00B0,$010F,$A502,$00F0			; "1"                        ;	FFFFDA66
+		dc.w	$00B0,$0110,$A500,$00F8			; "0"                        ;	FFFFDA6E
+		dc.w	$00B0,$0100,$A500,$0100			; "0"                           FFFFDA76
 
 	; The last sprite priority above is set to 00, setting the VDP to NOT
 	; display the sprites below, unless it's set to 11 (which it might do
