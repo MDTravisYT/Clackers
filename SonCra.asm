@@ -4636,7 +4636,7 @@ SS_WaitVB:						; Offset: 000064FE
 ; ---------------------------------------------------------------------------
 SS_Routines:						; Offset: 0000650C
 		bra.w	SegaScreen				; Sega Screen loop
-	;	bra.w	SDKSega
+		bra.w	SDKSega
 	;	bra.w	SegaEffects				; Sega Screen effect to use (Main/Scroll)
 	;	bra.w	SegaPaletteStart			; Sega Screen palette cycling startup routine
 	;	bra.w	SegaPaletteCycle			; Sega Screen palette cycling routine
@@ -4684,23 +4684,30 @@ SDKSega:
 		move.w	#$28,($FFFFF632).w
 		move.w	#0,($FFFFF650+$12).w
 		move.w	#0,($FFFFF650+$10).w
-	;	move.w	#$60,($FFFFF614).w
+		move.w	#$60,($FFFFF614).w
 		move.w	($FFFFF60C).w,d0
 		ori.b	#$40,d0
 		move.w	d0,($C00004).l
 ;
 loc_2528:
-		bclr	#7,($FFFFFFC9).w			; set to not run this routine til V-Blank has run
+        move.w    #$100,($A11100).l    ; Halt Z80
+
+.WaitZ80:                        
+        btst    #0,($A11100).l                
+        bne.s    .WaitZ80                
+
+        bclr    #7,($FFFFFFC9).w     ; set to not run this routine til V-Blank has run
+
 
 SSCyc_WaitVB:						; Offset: 000064FE
 		tst.b	($FFFFFFC9).w				; is the routine ready to continue?
 		bpl.s	SSCyc_WaitVB				; if not, loop and recheck
 		subi	#$1,($FFFFF614).w
 ;		jsr	GetControls
-;		bsr.w	PalCycSega
-	;	cmpi.w	#$1,($FFFFF614).w
-	;	bge.s	loc_2544
-	;	bra.s	loc_2528
+		bsr.w	PalCycSega
+		cmpi.w	#$1,($FFFFF614).w
+		beq.s	loc_2544
+		bra.s	loc_2528
 ;		andi.b	#$80,($FFFFF605).w
 ;		beq.s	loc_2544
 
