@@ -13770,11 +13770,11 @@ loc_F00E:						; Offset: 0000F00E
 		dc.w	$00A0,$010A,$A500,$0128-40		; "0" 01 Centi-seconds Digit ;	FFFFDA3E
 		dc.w	$00B0,$0D0B,$A534,$0098			; "RING"                     ;	FFFFDA46
 		dc.w	$00B0,$010C,$A53C,$00B8			; "S"                        ;	FFFFDA4E
-		dc.w	$FFFF,$010D,$A500,$FFFF			; "0"                        ;	FFFFDA56
-		dc.w	$FFFF,$010E,$A500,$FFFF			; "0"                        ;	FFFFDA5E
-		dc.w	$00B0,$010F,$A500,$00F0			; "0"                        ;	FFFFDA66
-		dc.w	$00B0,$0110,$A500,$00F8			; "0"                        ;	FFFFDA6E
-		dc.w	$00B0,$0100,$A500,$0100			; "0"                           FFFFDA76
+		dc.w	$FFFF,$010D,$A500,$FFFF			; Not used                   ;	FFFFDA56
+		dc.w	$FFFF,$010E,$A500,$FFFF			; Not used                   ;	FFFFDA5E
+		dc.w	$00B0,$010F,$A500,$00D8			; "0"                        ;	FFFFDA66
+		dc.w	$00B0,$0110,$A500,$00E0			; "0"                        ;	FFFFDA6E
+		dc.w	$00B0,$0100,$A500,$00E8			; "0"                           FFFFDA76
 
 	; The last sprite priority above is set to 00, setting the VDP to NOT
 	; display the sprites below, unless it's set to 11 (which it might do
