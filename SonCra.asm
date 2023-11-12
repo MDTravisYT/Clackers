@@ -4705,7 +4705,7 @@ SSCyc_WaitVB:						; Offset: 000064FE
 		subi	#$1,($FFFFF614).w
 ;		jsr	GetControls
 		bsr.w	PalCycSega
-		cmpi.w	#$1,($FFFFF614).w
+		tst.w	($FFFFF614).w
 		beq.s	loc_2544
 		bra.s	loc_2528
 ;		andi.b	#$80,($FFFFF605).w
@@ -4724,8 +4724,8 @@ PalCycSega:
 		move.w	($FFFFF632).w,d0
 		bmi.s	.locret
 		subq.w	#2,($FFFFF632).w
-		lea	(PAL_Segalogo).l,a0
-		lea	($FFFFFB00+4).w,a1
+		lea	(PAL_SegalogoCycle).l,a0
+		lea	($FFFFD3E4+4).w,a1
 		adda.w	d0,a0
 		move.l	(a0)+,(a1)+
 		move.l	(a0)+,(a1)+
@@ -9037,7 +9037,7 @@ word_B448:	dc.w	$34
 		dc.w	$358
 		dc.w	$360
 ; ---------------------------------------------------------------------------
-		ori.w	#$80,4(a6) ; '€'
+		ori.w	#$80,4(a6) ; 'ï¿½'
 		cmpi.b	#2,$28(a5)
 		bne.s	loc_B492
 		andi.w	#$FF7F,4(a6)
@@ -9056,7 +9056,7 @@ loc_B4A2:				; CODE XREF: ROM:0000B516j
 					; ROM:0000B5BCj
 		tst.w	$2E(a5)
 		beq.s	sub_B4EC
-		ori.w	#$80,4(a6) ; '€'
+		ori.w	#$80,4(a6) ; 'ï¿½'
 		move.b	$2B(a5),d0
 		addq.b	#8,d0
 		lsr.w	#3,d0
@@ -9089,7 +9089,7 @@ word_B4CC:	dc.w	$9C
 
 sub_B4EC:				; CODE XREF: ROM:0000B4A6j
 					; ROM:0000B6D0p
-		ori.w	#$80,4(a6) ; '€'
+		ori.w	#$80,4(a6) ; 'ï¿½'
 		moveq	#0,d4
 		move.b	$28(a5),d4
 		add.w	d4,d4
@@ -9215,7 +9215,7 @@ loc_B5C0:	dc.w	$5C		; DATA XREF: ROM:0000B5B8o
 		dc.w	$FFEF
 		dc.w	0
 ; ---------------------------------------------------------------------------
-		ori.w	#$80,4(a6) ; '€'
+		ori.w	#$80,4(a6) ; 'ï¿½'
 		moveq	#$FFFFFFF2,d0
 		moveq	#$FFFFFFF3,d1
 		btst	#0,$28(a5)
@@ -9227,7 +9227,7 @@ loc_B604:				; CODE XREF: ROM:0000B600j
 		move.w	#$6C,$26(a6) ; 'l'
 		rts
 ; ---------------------------------------------------------------------------
-		ori.w	#$80,4(a6) ; '€'
+		ori.w	#$80,4(a6) ; 'ï¿½'
 		moveq	#$FFFFFFFE,d0
 		moveq	#$FFFFFFF6,d1
 		btst	#0,$28(a5)
@@ -9240,7 +9240,7 @@ loc_B626:				; CODE XREF: ROM:0000B620j
 		move.w	#$70,$26(a6) ; 'p'
 		rts
 ; ---------------------------------------------------------------------------
-		ori.w	#$80,4(a6) ; '€'
+		ori.w	#$80,4(a6) ; 'ï¿½'
 		moveq	#$FFFFFFF3,d0
 		moveq	#$FFFFFFF8,d1
 		btst	#0,$28(a5)
@@ -9252,7 +9252,7 @@ loc_B646:				; CODE XREF: ROM:0000B642j
 		move.w	#$74,$26(a6) ; 't'
 		rts
 ; ---------------------------------------------------------------------------
-		ori.w	#$80,4(a6) ; '€'
+		ori.w	#$80,4(a6) ; 'ï¿½'
 		moveq	#$FFFFFFFD,d0
 		moveq	#$FFFFFFF4,d1
 		btst	#0,$28(a5)
@@ -9268,7 +9268,7 @@ loc_B668:				; CODE XREF: ROM:0000B662j
 		andi.w	#$FF7F,4(a6)
 		rts
 ; ---------------------------------------------------------------------------
-		ori.w	#$80,4(a6) ; '€'
+		ori.w	#$80,4(a6) ; 'ï¿½'
 		moveq	#$FFFFFFEA,d0
 		moveq	#$FFFFFFF4,d1
 		bsr.w	sub_CA82
@@ -9329,14 +9329,14 @@ loc_B6D6:	dc.w	$100		; DATA XREF: ROM:0000B6CCo
 		andi.w	#$FF7F,4(a6)
 		rts
 ; ---------------------------------------------------------------------------
-		ori.w	#$80,4(a6) ; '€'
+		ori.w	#$80,4(a6) ; 'ï¿½'
 		moveq	#$FFFFFFFD,d0
 		moveq	#$FFFFFFF3,d1
 		bsr.w	sub_CA82
-		move.w	#$BC,$26(a6) ; '¼'
+		move.w	#$BC,$26(a6) ; 'ï¿½'
 		rts
 ; ---------------------------------------------------------------------------
-		ori.w	#$80,4(a6) ; '€'
+		ori.w	#$80,4(a6) ; 'ï¿½'
 		moveq	#0,d0
 		moveq	#$FFFFFFF3,d1
 		btst	#0,$28(a5)
@@ -9345,10 +9345,10 @@ loc_B6D6:	dc.w	$100		; DATA XREF: ROM:0000B6CCo
 
 loc_B728:				; CODE XREF: ROM:0000B724j
 		bsr.w	sub_CA82
-		move.w	#$BC,$26(a6) ; '¼'
+		move.w	#$BC,$26(a6) ; 'ï¿½'
 		rts
 ; ---------------------------------------------------------------------------
-		ori.w	#$80,4(a6) ; '€'
+		ori.w	#$80,4(a6) ; 'ï¿½'
 		moveq	#4,d0
 		moveq	#$FFFFFFE7,d1
 		btst	#0,$28(a5)
@@ -9358,10 +9358,10 @@ loc_B728:				; CODE XREF: ROM:0000B724j
 
 loc_B74A:				; CODE XREF: ROM:0000B744j
 		bsr.w	sub_CA82
-		move.w	#$C0,$26(a6) ; 'À'
+		move.w	#$C0,$26(a6) ; 'ï¿½'
 		rts
 ; ---------------------------------------------------------------------------
-		ori.w	#$80,4(a6) ; '€'
+		ori.w	#$80,4(a6) ; 'ï¿½'
 		moveq	#$FFFFFFFB,d0
 		moveq	#$FFFFFFE9,d1
 		btst	#0,$28(a5)
@@ -9370,10 +9370,10 @@ loc_B74A:				; CODE XREF: ROM:0000B744j
 
 loc_B76A:				; CODE XREF: ROM:0000B766j
 		bsr.w	sub_CA82
-		move.w	#$C4,$26(a6) ; 'Ä'
+		move.w	#$C4,$26(a6) ; 'ï¿½'
 		rts
 ; ---------------------------------------------------------------------------
-		ori.w	#$80,4(a6) ; '€'
+		ori.w	#$80,4(a6) ; 'ï¿½'
 		moveq	#$FFFFFFEE,d0
 		moveq	#$FFFFFFF6,d1
 		btst	#0,$28(a5)
@@ -9383,7 +9383,7 @@ loc_B76A:				; CODE XREF: ROM:0000B766j
 
 loc_B78C:				; CODE XREF: ROM:0000B786j
 		bsr.w	sub_CA82
-		move.w	#$C8,$26(a6) ; 'È'
+		move.w	#$C8,$26(a6) ; 'ï¿½'
 		rts
 ; ---------------------------------------------------------------------------
 		andi.w	#$FF7F,4(a6)
@@ -9392,7 +9392,7 @@ loc_B78C:				; CODE XREF: ROM:0000B786j
 		andi.w	#$FF7F,4(a6)
 		rts
 ; ---------------------------------------------------------------------------
-		ori.w	#$80,4(a6) ; '€'
+		ori.w	#$80,4(a6) ; 'ï¿½'
 		moveq	#$FFFFFFF0,d0
 		moveq	#$FFFFFFE9,d1
 		bsr.w	sub_CA82
@@ -9479,7 +9479,7 @@ word_B840:	dc.w	$34
 		dc.w	$372
 		dc.w	$37A
 ; ---------------------------------------------------------------------------
-		ori.w	#$80,4(a6) ; '€'
+		ori.w	#$80,4(a6) ; 'ï¿½'
 		cmpi.b	#2,$28(a5)
 		bne.s	loc_B892
 		moveq	#$FFFFFFF9,d0
@@ -9501,7 +9501,7 @@ loc_B8A2:				; CODE XREF: ROM:0000B91Aj
 					; ROM:0000B960j ...
 		tst.w	$2E(a5)
 		beq.s	sub_B8F0
-		ori.w	#$80,4(a6) ; '€'
+		ori.w	#$80,4(a6) ; 'ï¿½'
 		move.b	$2B(a5),d0
 		addq.b	#8,d0
 		lsr.w	#3,d0
@@ -9535,7 +9535,7 @@ word_B8D0:	dc.w	$20
 
 sub_B8F0:				; CODE XREF: ROM:0000B8A6j
 					; ROM:0000BAB8p ...
-		ori.w	#$80,4(a6) ; '€'
+		ori.w	#$80,4(a6) ; 'ï¿½'
 		moveq	#0,d4
 		move.b	$28(a5),d4
 		add.w	d4,d4
@@ -9696,34 +9696,34 @@ loc_B9F4:	dc.w	$80		; DATA XREF: ROM:0000B9ECo
 		ori.l	#$470F0,d0
 		moveq	#$FFFFFFEE,d1
 		bsr.w	sub_CA82
-		move.w	#$A8,$26(a6) ; '¨'
+		move.w	#$A8,$26(a6) ; 'ï¿½'
 		rts
 ; ---------------------------------------------------------------------------
-		ori.w	#$80,4(a6) ; '€'
+		ori.w	#$80,4(a6) ; 'ï¿½'
 		moveq	#$FFFFFFF0,d0
 		moveq	#$FFFFFFE9,d1
 		bsr.w	sub_CA82
-		move.w	#$AC,$26(a6) ; '¬'
+		move.w	#$AC,$26(a6) ; 'ï¿½'
 		rts
 ; ---------------------------------------------------------------------------
-		ori.w	#$80,4(a6) ; '€'
+		ori.w	#$80,4(a6) ; 'ï¿½'
 		moveq	#$FFFFFFEE,d0
 		moveq	#$FFFFFFF0,d1
 		bsr.w	sub_CA82
-		move.w	#$B0,$26(a6) ; '°'
+		move.w	#$B0,$26(a6) ; 'ï¿½'
 		rts
 ; ---------------------------------------------------------------------------
-		ori.w	#$80,4(a6) ; '€'
+		ori.w	#$80,4(a6) ; 'ï¿½'
 		moveq	#$FFFFFFF0,d0
 		moveq	#$FFFFFFE8,d1
 		bsr.w	sub_CA82
-		move.w	#$B4,$26(a6) ; '´'
+		move.w	#$B4,$26(a6) ; 'ï¿½'
 		rts
 ; ---------------------------------------------------------------------------
 		andi.w	#$FF7F,4(a6)
 		rts
 ; ---------------------------------------------------------------------------
-		ori.w	#$80,4(a6) ; '€'
+		ori.w	#$80,4(a6) ; 'ï¿½'
 		moveq	#$FFFFFFF4,d0
 		cmpi.b	#$14,$28(a5)
 		bcs.s	loc_BAA6
@@ -9780,14 +9780,14 @@ loc_BAE8:	dc.w	$4C		; DATA XREF: ROM:0000BADEo
 		andi.w	#$FF7F,4(a6)
 		rts
 ; ---------------------------------------------------------------------------
-		ori.w	#$80,4(a6) ; '€'
+		ori.w	#$80,4(a6) ; 'ï¿½'
 		moveq	#$FFFFFFFD,d0
 		moveq	#$FFFFFFFB,d1
 		bsr.w	sub_CA82
-		move.w	#$BC,$26(a6) ; '¼'
+		move.w	#$BC,$26(a6) ; 'ï¿½'
 		rts
 ; ---------------------------------------------------------------------------
-		ori.w	#$80,4(a6) ; '€'
+		ori.w	#$80,4(a6) ; 'ï¿½'
 		moveq	#0,d0
 		moveq	#$FFFFFFFB,d1
 		btst	#0,$28(a5)
@@ -9796,10 +9796,10 @@ loc_BAE8:	dc.w	$4C		; DATA XREF: ROM:0000BADEo
 
 loc_BB3A:				; CODE XREF: ROM:0000BB36j
 		bsr.w	sub_CA82
-		move.w	#$BC,$26(a6) ; '¼'
+		move.w	#$BC,$26(a6) ; 'ï¿½'
 		rts
 ; ---------------------------------------------------------------------------
-		ori.w	#$80,4(a6) ; '€'
+		ori.w	#$80,4(a6) ; 'ï¿½'
 		moveq	#4,d0
 		moveq	#$FFFFFFE7,d1
 		btst	#0,$28(a5)
@@ -9809,10 +9809,10 @@ loc_BB3A:				; CODE XREF: ROM:0000BB36j
 
 loc_BB5C:				; CODE XREF: ROM:0000BB56j
 		bsr.w	sub_CA82
-		move.w	#$C0,$26(a6) ; 'À'
+		move.w	#$C0,$26(a6) ; 'ï¿½'
 		rts
 ; ---------------------------------------------------------------------------
-		ori.w	#$80,4(a6) ; '€'
+		ori.w	#$80,4(a6) ; 'ï¿½'
 		moveq	#$FFFFFFFB,d0
 		moveq	#$FFFFFFE9,d1
 		btst	#0,$28(a5)
@@ -9821,10 +9821,10 @@ loc_BB5C:				; CODE XREF: ROM:0000BB56j
 
 loc_BB7C:				; CODE XREF: ROM:0000BB78j
 		bsr.w	sub_CA82
-		move.w	#$C4,$26(a6) ; 'Ä'
+		move.w	#$C4,$26(a6) ; 'ï¿½'
 		rts
 ; ---------------------------------------------------------------------------
-		ori.w	#$80,4(a6) ; '€'
+		ori.w	#$80,4(a6) ; 'ï¿½'
 		moveq	#$FFFFFFEE,d0
 		moveq	#$FFFFFFF6,d1
 		btst	#0,$28(a5)
@@ -9834,7 +9834,7 @@ loc_BB7C:				; CODE XREF: ROM:0000BB78j
 
 loc_BB9E:				; CODE XREF: ROM:0000BB98j
 		bsr.w	sub_CA82
-		move.w	#$C8,$26(a6) ; 'È'
+		move.w	#$C8,$26(a6) ; 'ï¿½'
 		rts
 ; ---------------------------------------------------------------------------
 		andi.w	#$FF7F,4(a6)
@@ -9843,7 +9843,7 @@ loc_BB9E:				; CODE XREF: ROM:0000BB98j
 		andi.w	#$FF7F,4(a6)
 		rts
 ; ---------------------------------------------------------------------------
-		ori.w	#$80,4(a6) ; '€'
+		ori.w	#$80,4(a6) ; 'ï¿½'
 		moveq	#$FFFFFFF4,d0
 		moveq	#$FFFFFFEE,d1
 		bsr.w	sub_CA82
@@ -9951,7 +9951,7 @@ loc_BCA0:				; CODE XREF: ROM:0000BC9Cj
 		andi.w	#$FF7F,4(a6)
 		rts
 ; ---------------------------------------------------------------------------
-		ori.w	#$80,4(a6) ; '€'
+		ori.w	#$80,4(a6) ; 'ï¿½'
 		move.w	#$67,$26(a6) ; 'g'
 		moveq	#$FFFFFFF0,d0
 		moveq	#0,d1
@@ -9965,12 +9965,12 @@ loc_BCE6:				; CODE XREF: ROM:0000BCDEj
 		bsr.w	loc_CA8A
 		rts
 ; ---------------------------------------------------------------------------
-		ori.w	#$80,4(a6) ; '€'
+		ori.w	#$80,4(a6) ; 'ï¿½'
 		move.w	$18(a5),d0
 		move.w	$1C(a5),d1
 		jsr	sub_42CE
 		addi.w	#$10,d2
-		andi.w	#$E0,d2	; 'à'
+		andi.w	#$E0,d2	; 'ï¿½'
 		lsr.w	#2,d2
 		move.w	word_BD3A(pc,d2.w),d0
 		move.b	$28(a5),d1
@@ -10068,7 +10068,7 @@ word_BD76:	dc.w	$54
 		andi.w	#$FF7F,4(a6)
 		rts
 ; ---------------------------------------------------------------------------
-		ori.w	#$80,4(a6) ; '€'
+		ori.w	#$80,4(a6) ; 'ï¿½'
 		moveq	#0,d0
 		move.b	$28(a5),d0
 		add.w	d0,d0
@@ -10716,7 +10716,7 @@ sub_C29E:				; CODE XREF: ROM:0000A53Ep
 		move.b	#$A,($FFFFFAE8).w
 		move.b	$2A(a6),d0
 		addi.b	#$20,d0	; ' '
-		andi.w	#$C0,d0	; 'À'
+		andi.w	#$C0,d0	; 'ï¿½'
 		lsr.w	#4,d0
 		jmp	loc_C2BE(pc,d0.w)
 ; End of function sub_C29E
@@ -11256,7 +11256,7 @@ locret_C744:				; CODE XREF: sub_C6D4+5Aj sub_C6D4+68j
 loc_C746:				; DATA XREF: ROM:0000A276o
 					; ROM:0000AB3Co
 		move.w	4(a6),d7
-		ori.w	#$80,d7	; '€'
+		ori.w	#$80,d7	; 'ï¿½'
 		btst	#6,5(a6)
 		beq.s	loc_C75A
 		andi.w	#$FF7F,d7
@@ -14077,7 +14077,7 @@ DeleteSprite:				; CODE XREF: ROM:0000D38Ep
 
 loc_F29A:				; CODE XREF: ROM:0000F318p
 		move.w	4(a6),d0
-		ori.w	#$80,d0	; '€'
+		ori.w	#$80,d0	; 'ï¿½'
 		move.w	d0,4(a6)
 		rts
 ; End of function loc_F29A
