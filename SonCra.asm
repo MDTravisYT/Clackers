@@ -4687,7 +4687,7 @@ SDKSega:
 		move.w	#$90,($FFFFF614).w
 		move.w	($FFFFF60C).w,d0
 		ori.b	#$40,d0
-		move.w	d0,($C00004).l
+;		move.w	d0,($C00004).l
 ;
 loc_2528:
         move.w    #$100,($A11100).l    ; Halt Z80
