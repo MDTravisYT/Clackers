@@ -60,4 +60,4 @@ Def_Rings:
 		dc.w	Map_Ring4-Def_Rings
 		
 Ani_Rings:
-	dc.w	$1000,$1001,$1002,$1003,$8080
+	dc.w	$0800,$0801,$0802,$0803,$8080
