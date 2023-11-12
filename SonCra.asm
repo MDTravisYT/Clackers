@@ -4684,7 +4684,7 @@ SDKSega:
 		move.w	#$28,($FFFFF632).w
 		move.w	#0,($FFFFF650+$12).w
 		move.w	#0,($FFFFF650+$10).w
-		move.w	#$60,($FFFFF614).w
+		move.w	#$90,($FFFFF614).w
 		move.w	($FFFFF60C).w,d0
 		ori.b	#$40,d0
 		move.w	d0,($C00004).l
