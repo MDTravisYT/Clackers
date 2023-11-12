@@ -90,9 +90,9 @@ RomStart:	dc.l	$00FF0200,	EntryPoint
 	dc.l ErrorExcept	; Unused (reserved)
 	dc.l ErrorExcept	; Unused (reserved) (64)
 ConsoleName:	dc.b	'SEGA MEGA DRIVE '
-ProductDate:	dc.b	'MDTRAVIS AUG2023'
-LocalTitle:	dc.b	'SONIC WITHOUT CLACKERS                          '
-InterTitle:	dc.b	'SONIC WITHOUT CLACKERS                          '
+ProductDate:	dc.b	'MDTRAVIS NOV2023'
+LocalTitle:	dc.b	'CLACKERS                                        '
+InterTitle:	dc.b	'CLACKERS                                        '
 SerialNo:	dc.b	'GM XXXXXXXX-XX'
 Checksum:	dc.w	$0000
 IOS:		dc.b	'J               '
@@ -103,7 +103,7 @@ RAM_Finish:	dc.l	$00FFFFFF
 SRAMSupport:	dc.b	'  ',%00100000,%00100000
 SRAM_Start:	dc.l	$20202020
 SRAM_Finish:	dc.l	$20202020
-ProductNotes:	dc.b	'Sonic', $27, 's clacker privilege has been revoked.         '
+ProductNotes:	dc.b	'Sonic', $27, 's clacker privilege has been enhanced.        '
 RegionsFor:	dc.b	'JUE             '
 
 ; ===========================================================================
@@ -4694,8 +4694,8 @@ loc_2528:
 
 SSCyc_WaitVB:						; Offset: 000064FE
 		tst.b	($FFFFFFC9).w				; is the routine ready to continue?
+		bpl.s	SSCyc_WaitVB				; if not, loop and recheck
 		subi	#$1,($FFFFF614).w
-;		bpl.s	SSCyc_WaitVB				; if not, loop and recheck
 ;		jsr	GetControls
 ;		bsr.w	PalCycSega
 	;	cmpi.w	#$1,($FFFFF614).w
