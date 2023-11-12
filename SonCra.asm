@@ -11796,8 +11796,8 @@ SBR_Loop:						; Offset: 0000CC62
 		jsr	Objects_FindFreeSlot			; check if there's any free space for the object
 		bmi.s	SBR_Return				; if not, branch
 		move.w	#$0080,$04(a0)
-		move.w	#$0028,$06(a0)
-		move.w	#$0028,$06(a0)
+		move.w	#$0028,$06(a0)				;	Move ring object ID
+		move.w	#$0028,$06(a0)				;	Do it again?
 		move.w	#$00FF,$26(a0)				; set time until rings get deleted to $FF frames
 		move.w	$08(a6),$08(a0)				; move ring to character on the X axis
 		move.w	$0C(a6),$0C(a0)				; move ring to character on the Y axis
@@ -12354,9 +12354,9 @@ RO_Routines:
 		bra.w	Obj_DiagRedSprng_LU		; Object 18 - Diagonal Red Spring Left Up
 		bra.w	Obj_DiagRedSprng_RD		; Object 1C - Diagonal Red Spring Right Down
 		bra.w	Obj_DiagRedSprng_LD		; Object 20 - Diagonal Red Spring Left Up
-		bra.w	ObjMonitor					; Object 24 - Nothing
+		bra.w	ObjMonitor				; Object 24 - Nothing
 		bra.w	Obj_LostRings			; Object 28 - Lost Rings
-		bra.w	NullObj					; Object 2C - Nothing
+		bra.w	Obj_Rings				; Object 2C - Nothing
 		bra.w	NullObj					; Object 30 - Nothing
 		bra.w	Obj_YelSpring_Right		; Object 34 - Yellow Spring Right
 		bra.w	Obj_YelSpring_Left		; Object 38 - Yellow Spring Left
@@ -12405,7 +12405,254 @@ NullObj:
 
 	include		"PLCMAPANI/ANI_Springs.asm"
 
+	include		"Objects/Rings.asm"
 	include		"Objects/Lost Rings.asm"
+	
+loc_E356:				; CODE XREF: ROM:0000D298j
+		tst.b	$28(a6)
+		bne.s	loc_E37C
+		move.w	#0,4(a6)
+		move.w	#$2020,obWidth(a6)
+		move.l	#$E376,obMap(a6)
+		addq.b	#1,$28(a6)
+		bra.s	loc_E37C
+; ---------------------------------------------------------------------------
+		dc.w	$FF0
+		dc.w	$8001
+		dc.w	$F0FF
+; ---------------------------------------------------------------------------
+
+loc_E37C:				; CODE XREF: ROM:0000E35Aj
+					; ROM:0000E374j
+		jsr	SpriteScreenCheck
+		bcc.s	loc_E38A
+		jmp	DeleteSprite
+; ---------------------------------------------------------------------------
+
+loc_E38A:				; CODE XREF: ROM:0000E382j
+		movea.w	($FFFFD862).w,a0
+		jsr	sub_EAA0
+		bcc.s	loc_E398
+		bsr.s	sub_E3A8
+
+loc_E398:				; CODE XREF: ROM:0000E394j
+		movea.w	($FFFFD864).w,a0
+		jsr	sub_EAA0
+		bcc.s	locret_E3A6
+		bsr.s	sub_E3A8
+
+locret_E3A6:				; CODE XREF: ROM:0000E3A2j
+		rts
+
+; =============== S U B	R O U T	I N E =======================================
+
+
+sub_E3A8:				; CODE XREF: ROM:0000E396p
+					; ROM:0000E3A4p
+		move.w	obX(a0),d0
+		sub.w	obX(a6),d0
+		move.w	obY(a0),d1
+		sub.w	obY(a6),d1
+		moveq	#0,d2
+		move.b	$29(a6),d2
+		jmp	loc_E3DE(pc,d2.w)
+; End of function sub_E3A8
+
+; ---------------------------------------------------------------------------
+
+loc_E3C2:				; CODE XREF: ROM:0000E400j
+					; ROM:0000E410j ...
+		bclr	#7,$25(a0)
+
+loc_E3C8:				; CODE XREF: ROM:0000E3E0j
+					; ROM:0000E3EAj ...
+		bclr	#1,$25(a0)
+		rts
+; ---------------------------------------------------------------------------
+
+loc_E3D0:				; CODE XREF: ROM:0000E408j
+					; ROM:0000E418j ...
+		bclr	#7,$25(a0)
+
+loc_E3D6:				; CODE XREF: ROM:0000E3E2j
+					; ROM:0000E3E8j ...
+		bset	#1,$25(a0)
+		rts
+; ---------------------------------------------------------------------------
+
+loc_E3DE:
+		tst.w	d0
+		bpl.s	loc_E3C8
+		bra.s	loc_E3D6
+; ---------------------------------------------------------------------------
+		nop
+		tst.w	d0
+		bpl.s	loc_E3D6
+		bra.s	loc_E3C8
+; ---------------------------------------------------------------------------
+		nop
+		tst.w	d1
+		bpl.s	loc_E3C8
+		bra.s	loc_E3D6
+; ---------------------------------------------------------------------------
+		nop
+		tst.w	d1
+		bpl.s	loc_E3D6
+		bra.s	loc_E3C8
+; ---------------------------------------------------------------------------
+		nop
+		tst.w	d0
+		bpl.s	loc_E3C2
+		bra.s	loc_E44C
+; ---------------------------------------------------------------------------
+		nop
+		tst.w	d0
+		bpl.s	loc_E3D0
+		bra.s	loc_E43E
+; ---------------------------------------------------------------------------
+		nop
+		tst.w	d1
+		bpl.s	loc_E3C2
+		bra.s	loc_E44C
+; ---------------------------------------------------------------------------
+		nop
+		tst.w	d1
+		bpl.s	loc_E3D0
+		bra.s	loc_E43E
+; ---------------------------------------------------------------------------
+		nop
+		tst.w	d0
+		bpl.s	loc_E43E
+		bra.s	loc_E3D0
+; ---------------------------------------------------------------------------
+		nop
+		tst.w	d0
+		bpl.s	loc_E44C
+		bra.s	loc_E3C2
+; ---------------------------------------------------------------------------
+		nop
+		tst.w	d1
+		bpl.s	loc_E43E
+		bra.s	loc_E3D0
+; ---------------------------------------------------------------------------
+		nop
+		tst.w	d1
+		bpl.s	loc_E44C
+		bra.s	loc_E3C2
+; ---------------------------------------------------------------------------
+		nop
+
+loc_E43E:				; CODE XREF: ROM:0000E40Aj
+					; ROM:0000E41Aj ...
+		bset	#7,$25(a0)
+		bclr	#1,$25(a0)
+		rts
+; ---------------------------------------------------------------------------
+
+loc_E44C:				; CODE XREF: ROM:0000E402j
+					; ROM:0000E412j ...
+		bset	#7,$25(a0)
+		bset	#1,$25(a0)
+		rts
+; ---------------------------------------------------------------------------
+
+loc_E45A:				; CODE XREF: ROM:0000D29Cj
+		tst.b	$28(a6)
+		bne.s	loc_E480
+		move.w	#0,4(a6)
+		move.w	#$2020,obWidth(a6)
+		move.l	#$E47A,obMap(a6)
+		addq.b	#1,$28(a6)
+		bra.s	loc_E480
+; ---------------------------------------------------------------------------
+		dc.w	$FF0
+		dc.w	$8001
+		dc.w	$F0FF
+; ---------------------------------------------------------------------------
+
+loc_E480:				; CODE XREF: ROM:0000E45Ej
+					; ROM:0000E478j
+		jsr	SpriteScreenCheck
+		bcc.s	loc_E48E
+		jmp	DeleteSprite
+; ---------------------------------------------------------------------------
+
+loc_E48E:				; CODE XREF: ROM:0000E486j
+		movea.w	($FFFFD862).w,a0
+		jsr	sub_EAA0
+		bcc.s	loc_E49C
+		bsr.s	sub_E4AC
+
+loc_E49C:				; CODE XREF: ROM:0000E498j
+		movea.w	($FFFFD864).w,a0
+		jsr	sub_EAA0
+		bcc.s	locret_E4AA
+		bsr.s	sub_E4AC
+
+locret_E4AA:				; CODE XREF: ROM:0000E4A6j
+		rts
+
+; =============== S U B	R O U T	I N E =======================================
+
+
+sub_E4AC:				; CODE XREF: ROM:0000E49Ap
+					; ROM:0000E4A8p
+		moveq	#0,d0
+		move.b	$29(a6),d0
+		jmp	loc_E4B6(pc,d0.w)
+; End of function sub_E4AC
+
+; ---------------------------------------------------------------------------
+
+loc_E4B6:
+		bra.s	loc_E4C8
+; ---------------------------------------------------------------------------
+		bra.s	loc_E4D6
+; ---------------------------------------------------------------------------
+		bra.s	loc_E4C2
+; ---------------------------------------------------------------------------
+		bra.s	loc_E4D0
+; ---------------------------------------------------------------------------
+		bra.s	loc_E4DE
+; ---------------------------------------------------------------------------
+		bra.s	loc_E4EC
+; ---------------------------------------------------------------------------
+
+loc_E4C2:				; CODE XREF: ROM:0000E4BAj
+		bclr	#7,$25(a0)
+
+loc_E4C8:				; CODE XREF: ROM:loc_E4B6j
+		bclr	#1,$25(a0)
+		rts
+; ---------------------------------------------------------------------------
+
+loc_E4D0:				; CODE XREF: ROM:0000E4BCj
+		bclr	#7,$25(a0)
+
+loc_E4D6:				; CODE XREF: ROM:0000E4B8j
+		bset	#1,$25(a0)
+		rts
+; ---------------------------------------------------------------------------
+
+loc_E4DE:				; CODE XREF: ROM:0000E4BEj
+		bset	#7,$25(a0)
+		bclr	#1,$25(a0)
+		rts
+; ---------------------------------------------------------------------------
+
+loc_E4EC:				; CODE XREF: ROM:0000E4C0j
+		bset	#7,$25(a0)
+		bset	#1,$25(a0)
+		rts
+; ---------------------------------------------------------------------------
+
+locret_E4FA:				; CODE XREF: ROM:0000D2A0j
+		rts
+; ---------------------------------------------------------------------------
+
+locret_E4FC:				; CODE XREF: ROM:0000D2A4j
+		rts
+; ---------------------------------------------------------------------------
 
 Obj_SpikesUp:				; CODE XREF: ROM:0000D278j
 		moveq	#7,d0
@@ -15616,7 +15863,7 @@ DiagRedSprngRD		=	$1C
 DiagRedSprngLD		=	$20
 Monitor				=	$24
 LostRing			=	$28
-;					=	$2C
+Ring				=	$2C
 ;					=	$30
 SpringYel_Right		=	$34
 SpringYel_Left		=	$38
@@ -15682,7 +15929,7 @@ Objpos_TTZ:
 	ObjLayout	$00B0,	$0B78,	SpringYel_Up,    $FFFF
 	ObjLayout	$0034,	$06ED,	DiagRedSprngRU,  $FFFF
 	ObjLayout	$0400,	$0060,	Goal,			 $FFFF
-	ObjLayout	$0140, 	$0E50,	Monitor,		 $FFFF
+	ObjLayout	$0140, 	$0E50,	Ring,		 $FFFF
 	ObjLayout	$0160, 	$0E50,	Monitor,		 $FFFF
 	ObjLayout	$0180, 	$0E50,	Monitor,		 $FFFF
 	ObjLayout	$01A0, 	$0E50,	Monitor,		 $FFFF
