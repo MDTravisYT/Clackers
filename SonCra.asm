@@ -15,7 +15,7 @@
 ; Includes
 ; ---------------------------------------------------------------------------
 
-Combi	=	1
+Combi	=	0
 
 		include	"Debugger.asm"
 		include	"SonCraMacro.asm"
@@ -11700,7 +11700,9 @@ HurtPlayer:						; Offset: 0000CB90
 		move.l	#$FFFB0000,$1C(a0)			; set the character's Y speed (FFFB upwards)
 		movem.l	d0-a6,-(sp)				; store register data to the stack
 		movea.l	a0,a6					; get character's RAM and move it to a6
-		moveq	#$1F,d7				;	set lost ring count to 32
+		move.b	$FFFFA000,d7				;	set lost ring count to set rings
+		subi.b	#1,d7
+		clr.b	$FFFFA000
 		bsr.w	SpawnBouncingRings			; create spawn bouncing rings
 		movem.l	(sp)+,d0-a6				; restore register data from stack
 		move.b	#$A5,d0
@@ -11786,7 +11788,8 @@ loc_CC52:				; CODE XREF: sub_CBC0+7Aj sub_CBC0+82j ...
 
 SpawnBouncingRings:					; Offset: 0000CC5C
 		move.w	#$0288,d6				; set starting sinewave position (top)
-	;	moveq	#$1F,d7					; set number of rings to be spawned to $20 ($1F + 1 for first run) [32 rings]
+		cmpi.b	#-1,d7
+		beq.s	SonicDeath
 
 SBR_Loop:						; Offset: 0000CC62
 		moveq	#$0C,d0					; set to read the 3rd Object Ram section
@@ -11825,6 +11828,9 @@ SBR_MultiSkip:						; Offset: 0000CCB8
 
 SBR_Return:						; Offset: 0000CCC8
 		rts						; return
+		
+SonicDeath:
+		RaiseError	"Sonic has died."
 
 ; ===========================================================================
 ; ---------------------------------------------------------------------------
@@ -12432,7 +12438,6 @@ loc_E558:				; CODE XREF: ROM:0000E54Ej
 					; ROM:0000E554j
 		moveq	#1,d0
 		jsr	(HurtPlayer).l
-		add.b	#1,$FFFFA000
 
 loc_E560:				; CODE XREF: ROM:0000E534j
 					; ROM:0000E556j
@@ -12456,7 +12461,6 @@ loc_E592:				; CODE XREF: ROM:0000E588j
 					; ROM:0000E58Ej
 		moveq	#1,d0
 		jsr	(HurtPlayer).l
-		add.b	#1,$FFFFA000
 
 loc_E59A:				; CODE XREF: ROM:0000E56Ej
 					; ROM:0000E590j
@@ -12499,7 +12503,6 @@ loc_E600:				; CODE XREF: ROM:0000E5F6j
 					; ROM:0000E5FCj
 		moveq	#1,d0
 		jsr	(HurtPlayer).l
-		add.b	#1,$FFFFA000
 
 loc_E608:				; CODE XREF: ROM:0000E5DCj
 					; ROM:0000E5FEj
@@ -12523,7 +12526,6 @@ loc_E63A:				; CODE XREF: ROM:0000E630j
 					; ROM:0000E636j
 		moveq	#1,d0
 		jsr	(HurtPlayer).l
-		add.b	#1,$FFFFA000
 
 loc_E642:				; CODE XREF: ROM:0000E616j
 					; ROM:0000E638j
@@ -13214,6 +13216,7 @@ loc_EBC8:
 ; ---------------------------------------------------------------------------
 
 JumpToTitle:	
+		jsr		Pal_FadeBlack
 		move.w	#$0008,($FFFFD822).w			; set Screen/Game mode to title screen
 		movea.l	($00000000).w,sp			; set stack pointer to location 00000000			; do...
 		jmp	MainProg_Loop				; jump to Main game array
