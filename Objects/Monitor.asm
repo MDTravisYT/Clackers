@@ -137,6 +137,8 @@ MonitorRout2:
 		ori.w	#$01,obFlags(a6)					;	set flag to animate
 		bclr	#$00,$25(a0)
 		move.l	#$FFFB0000,obYVel(a0)
+		moveq	#$1,d7
+		jsr		SpawnBouncingRings
 	;	jsr	(DeleteObject).l
 		rts
 
@@ -166,6 +168,8 @@ MonitorRout4:
 		ori.w	#$01,obFlags(a6)					;	set flag to animate
 		bclr	#$00,$25(a0)
 		move.l	#$FFFB0000,obYVel(a0)
+		moveq	#$1,d7
+		jsr		SpawnBouncingRings
 	;	jsr	(DeleteObject).l
 		rts
 		

@@ -11690,8 +11690,11 @@ HurtPlayer:						; Offset: 0000CB90
 		move.l	#$FFFB0000,$1C(a0)			; set the character's Y speed (FFFB upwards)
 		movem.l	d0-a6,-(sp)				; store register data to the stack
 		movea.l	a0,a6					; get character's RAM and move it to a6
+		moveq	#$1F,d7				;	set lost ring count to 32
 		bsr.w	SpawnBouncingRings			; create spawn bouncing rings
 		movem.l	(sp)+,d0-a6				; restore register data from stack
+		move.b	#$A5,d0
+		jsr		Play_Sound
 		rts						; return
 
 ; ===========================================================================
@@ -11773,7 +11776,7 @@ loc_CC52:				; CODE XREF: sub_CBC0+7Aj sub_CBC0+82j ...
 
 SpawnBouncingRings:					; Offset: 0000CC5C
 		move.w	#$0288,d6				; set starting sinewave position (top)
-		moveq	#$1F,d7					; set number of rings to be spawned to $20 ($1F + 1 for first run) [32 rings]
+	;	moveq	#$1F,d7					; set number of rings to be spawned to $20 ($1F + 1 for first run) [32 rings]
 
 SBR_Loop:						; Offset: 0000CC62
 		moveq	#$0C,d0					; set to read the 3rd Object Ram section
@@ -11811,8 +11814,6 @@ SBR_MultiSkip:						; Offset: 0000CCB8
 		dbf	d7,SBR_Loop				; repeat for all 20 rings
 
 SBR_Return:						; Offset: 0000CCC8
-		move.b	#$A5,d0
-		jsr		Play_Sound
 		rts						; return
 
 ; ===========================================================================
