@@ -13303,7 +13303,8 @@ GTO_UpdateTime:						; Offset: 0000EC62
 		move.w	d6,($FFFFDA1E).w			; put result into 0:X0:00 (first digit of seconds)
 		move.w	d7,d0					; reload "real" time into d0
 		andi.w	#$3F,d0					; make sure it's not loading anything past the 64th entry
-	;	move.b	GTO_CentiArray(pc,d0.w),d0		; get number to be displayed for centi-seconds
+		lea		GTO_CentiArray,a0
+		move.b	(a0,d0.w),d0		; get number to be displayed for centi-seconds
 		move.b	d0,d6					; put recieved number and layout together
 		lsr.b	#4,d6					; slow down first digit of centi-seconds
 		add.b	d6,d6					; go 2 tiles forward instead of just 1
