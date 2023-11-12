@@ -12422,6 +12422,7 @@ loc_E558:				; CODE XREF: ROM:0000E54Ej
 					; ROM:0000E554j
 		moveq	#1,d0
 		jsr	(HurtPlayer).l
+		add.b	#1,$FFFFA000
 
 loc_E560:				; CODE XREF: ROM:0000E534j
 					; ROM:0000E556j
@@ -12445,6 +12446,7 @@ loc_E592:				; CODE XREF: ROM:0000E588j
 					; ROM:0000E58Ej
 		moveq	#1,d0
 		jsr	(HurtPlayer).l
+		add.b	#1,$FFFFA000
 
 loc_E59A:				; CODE XREF: ROM:0000E56Ej
 					; ROM:0000E590j
@@ -13301,7 +13303,7 @@ GTO_UpdateTime:						; Offset: 0000EC62
 		move.w	d6,($FFFFDA1E).w			; put result into 0:X0:00 (first digit of seconds)
 		move.w	d7,d0					; reload "real" time into d0
 		andi.w	#$3F,d0					; make sure it's not loading anything past the 64th entry
-		move.b	GTO_CentiArray(pc,d0.w),d0		; get number to be displayed for centi-seconds
+	;	move.b	GTO_CentiArray(pc,d0.w),d0		; get number to be displayed for centi-seconds
 		move.b	d0,d6					; put recieved number and layout together
 		lsr.b	#4,d6					; slow down first digit of centi-seconds
 		add.b	d6,d6					; go 2 tiles forward instead of just 1
@@ -13311,21 +13313,59 @@ GTO_UpdateTime:						; Offset: 0000EC62
 		add.b	d6,d6					; go 2 tiles forward instead of just 1
 		move.w	d6,($FFFFDA3E).w			; put result into 0:00:0X (second digit of centi-seconds)
 		
-		move.b	$FFFFA000,$FFFFA001
-		
-		clr.w	d0			;	ring counter
-		move.b	$FFFFA000,d0
-		mulu.w	#2,d0
-		addi.w	#$A500,d0
-		move.w	d0,($FFFFDA76).w
-		
-		cmpi.b	#9,$FFFFA000
-		ble.s	@cont
-		move.w	#$A500,($FFFFDA76).w
-		addi.w	#2,($FFFFDA6E).w
-		clr.b	$FFFFA000
+	;	move.b	$FFFFA000,$FFFFA001
 	
+;		Let's say our current ring number is 25.
+;		In hex, our counter is $19. In dec, it is 25.
+		clr.b	d1
+;		Let's start with the ones.
+;		We'll move our current ring count to d0.
+		move.b	$FFFFA000,d0
+;		And we'll subtract the 10's from here until we get a ones value.
+		cmpi.b	#9,d0                   ;	d0 is checked if it is 9...
+		ble.s	@cont                   ;	...and the rest of the code is skipped if it is equal or lower than 9
+		
+	@loop:
+		add.b	#1,	d1					;	2 is added to d1
+	@checkten:
+		subi.b	#10,d0					;	subtract decimal 10 from d0 (d0 is now decimal 11)
+		cmpi.b	#9,d0					;	d0 is checked if it is below 9...
+		bhi.s	@loop					;	and if it isn't, loop this subtraction code again
+;		By this point, our decimal value should be 5. We'll move this to our ones RAM address.
+		move.b	d0,$FFFFA002
+		move.b	d1,$FFFFA001
+		
 	@cont:
+		move.b	d0,$FFFFA002
+		
+;		clr.w	d0			;	ring counter, let's say ring counter is 21 for the example guide
+;		move.b	$FFFFA000,d0			;	move our $15 to d0 (d0 is $15)
+;		mulu.w	#2,d0                   ;	d0 is multiplied by 2 (d0 is now $0042)
+;		addi.w	#$A500,d0               ;	$A500 is added to d0 (d0 is now $A542)
+;		move.w	d0,($FFFFDA76).w        ;	d0 (now $A542) is moved to the ones counter
+;
+;		subi.w	#$A500,d0				;	$A500 is removed from d0 (d0 is now $0018)
+;		divu.w	#2,d0                   ;	d0 is divided by 2 (d0 is back to $15)
+;
+;		cmpi.b	#9,d0                   ;	d0 is checked if it is 9...
+;		ble.s	@cont                   ;	...and the rest of the code is skipped if it is equal or lower than 9
+;		bra.s	@checkten				;	branch to check for tens
+;		
+;	@loop:
+;		add.b	#2,	d1					;	2 is added to d1
+;	@checkten:
+;		subi.w	#10,d0					;	subtract decimal 10 from d0 (d0 is now decimal 11)
+;		cmpi.w	#9,d0					;	d0 is checked if it is below 9...
+;		blo.s	@loop					;	and if it isn't, loop this subtraction code again
+;		
+;		;	d1 is now 1,	d0 is now 11
+;		;	subtracted 10 from d0 (15), d0 is now 1
+;		;	compared if 9 is lower than 1... and it is! move on!
+;		
+;		move.w	#$A500,($FFFFDA76).w    ;	the ones counter is now 0
+;		addi.w	#$A500,d1				;	$A500 is added to d1 (d1 is now $A502)
+;		move.w	d1,($FFFFDA6E).w        ;	add d1 (1) to the tens counter
+	
 		move.w	$24(a6),d0				; reload time into d0
 		cmpi.w	#$2580,d0				; is timer at or over 2:30:00?
 		bcc.s	GTO_RedBlinking				; if yes, branch
