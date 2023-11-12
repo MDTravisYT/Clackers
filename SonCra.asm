@@ -15,7 +15,7 @@
 ; Includes
 ; ---------------------------------------------------------------------------
 
-Combi	=	0
+Combi	=	1
 
 		include	"Debugger.asm"
 		include	"SonCraMacro.asm"

@@ -28,7 +28,7 @@ loc_E2E6:				; CODE XREF: ROM:0000E2D4j
 		move.w	($FFFFF000).l,d0
 		andi.w	#$C,d0
 		add.w	d0,d0
-		lea	word_E334(pc,d0.w),a0
+		lea	Map_Rings(pc,d0.w),a0
 		move.l	a0,obMap(a6)
 		btst	#6,5(a6)
 		beq.s	loc_E32C
@@ -40,21 +40,14 @@ loc_E32C:				; CODE XREF: ROM:0000E322j
 		bset	#7,5(a6)
 		rts
 ; ---------------------------------------------------------------------------
-word_E334:	dc.w	$5F8
-		dc.w	$25F0
-		dc.w	$F8FF
-		dc.w	$4E71
-		dc.w	$5F8
-		dc.w	$25F4
-		dc.w	$F8FF
-		dc.w	$4E71
-		dc.w	$1F8
-		dc.w	$25B4
-		dc.w	$FCFF
-		dc.w	$4E71
-		dc.w	$5F8
-		dc.w	$2DF4
-		dc.w	$F8FF
+Map_Rings:	
+		dc.b	$05,$F8,$25,$F0,$F8,$FF
+		nop
+		dc.b	$05,$F8,$25,$F4,$F8,$FF
+		nop
+		dc.b	$01,$F8,$25,$B4,$FC,$FF
+		nop
+		dc.b	$05,$F8,$2D,$F4,$F8,$FF
 ; ---------------------------------------------------------------------------
 
 locret_E352:				; CODE XREF: ROM:0000D250j
