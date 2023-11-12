@@ -13315,57 +13315,42 @@ GTO_UpdateTime:						; Offset: 0000EC62
 		
 	;	move.b	$FFFFA000,$FFFFA001
 	
-;		Let's say our current ring number is 25.
-;		In hex, our counter is $19. In dec, it is 25.
+
 		clr.b	d1
-;		Let's start with the ones.
-;		We'll move our current ring count to d0.
+		clr.b	$FFFFA001
+		clr.b	$FFFFA002
+		clr.b	$FFFFA003
+
 		move.b	$FFFFA000,d0
-;		And we'll subtract the 10's from here until we get a ones value.
 		cmpi.b	#9,d0                   ;	d0 is checked if it is 9...
-		ble.s	@cont                   ;	...and the rest of the code is skipped if it is equal or lower than 9
+		ble.s	@cont100                  ;	...and the rest of the code is skipped if it is equal or lower than 9
 		
 	@loop:
 		add.b	#1,	d1					;	2 is added to d1
-	@checkten:
-		subi.b	#10,d0					;	subtract decimal 10 from d0 (d0 is now decimal 11)
+		subi.b	#10,d0					;	subtract decimal 10 from d0
 		cmpi.b	#9,d0					;	d0 is checked if it is below 9...
 		bhi.s	@loop					;	and if it isn't, loop this subtraction code again
-;		By this point, our decimal value should be 5. We'll move this to our ones RAM address.
-		move.b	d0,$FFFFA002
+
+		move.b	d0,$FFFFA003
+		move.b	d1,$FFFFA002
+		
+	@cont100:
+		move.b	d0,$FFFFA003
+		clr.b	d1
+
+		move.b	$FFFFA000,d0
+		cmpi.b	#99,d0   
+		ble.s	@cont
+		
+	@loop2:
+		add.b	#1,	d1					;	2 is added to d1
+		subi.b	#100,d0					;	subtract decimal 100 from d0
+		cmpi.b	#99,d0					;	d0 is checked if it is below 99...
+		bhi.s	@loop2					;	and if it isn't, loop this subtraction code again
+		sub.b	#10,$FFFFA002
 		move.b	d1,$FFFFA001
-		
+
 	@cont:
-		move.b	d0,$FFFFA002
-		
-;		clr.w	d0			;	ring counter, let's say ring counter is 21 for the example guide
-;		move.b	$FFFFA000,d0			;	move our $15 to d0 (d0 is $15)
-;		mulu.w	#2,d0                   ;	d0 is multiplied by 2 (d0 is now $0042)
-;		addi.w	#$A500,d0               ;	$A500 is added to d0 (d0 is now $A542)
-;		move.w	d0,($FFFFDA76).w        ;	d0 (now $A542) is moved to the ones counter
-;
-;		subi.w	#$A500,d0				;	$A500 is removed from d0 (d0 is now $0018)
-;		divu.w	#2,d0                   ;	d0 is divided by 2 (d0 is back to $15)
-;
-;		cmpi.b	#9,d0                   ;	d0 is checked if it is 9...
-;		ble.s	@cont                   ;	...and the rest of the code is skipped if it is equal or lower than 9
-;		bra.s	@checkten				;	branch to check for tens
-;		
-;	@loop:
-;		add.b	#2,	d1					;	2 is added to d1
-;	@checkten:
-;		subi.w	#10,d0					;	subtract decimal 10 from d0 (d0 is now decimal 11)
-;		cmpi.w	#9,d0					;	d0 is checked if it is below 9...
-;		blo.s	@loop					;	and if it isn't, loop this subtraction code again
-;		
-;		;	d1 is now 1,	d0 is now 11
-;		;	subtracted 10 from d0 (15), d0 is now 1
-;		;	compared if 9 is lower than 1... and it is! move on!
-;		
-;		move.w	#$A500,($FFFFDA76).w    ;	the ones counter is now 0
-;		addi.w	#$A500,d1				;	$A500 is added to d1 (d1 is now $A502)
-;		move.w	d1,($FFFFDA6E).w        ;	add d1 (1) to the tens counter
-	
 		move.w	$24(a6),d0				; reload time into d0
 		cmpi.w	#$2580,d0				; is timer at or over 2:30:00?
 		bcc.s	GTO_RedBlinking				; if yes, branch
