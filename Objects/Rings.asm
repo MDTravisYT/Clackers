@@ -9,6 +9,9 @@ Obj_Rings:				; CODE XREF: ROM:0000D280j
 		move.b	#$8,obHeight(a6)
 
 RingsRout5:			
+		lea	(Def_Rings).l,a0
+		lea	(Ani_Rings).l,a1			; load spring's Animation script
+		bsr.w	AnimateSprite				; animate the spring
 		bsr.w	SpriteScreenCheck
 		bcc.s	RingsRout6
 		bsr.w	DeleteSprite

@@ -43,18 +43,21 @@ loc_E32C:				; CODE XREF: ROM:0000E322j
 Map_Rings:	
 		dc.b	$05,$F8,$25,$F0,$F8,$FF
 		nop
+	Map_Ring2:
 		dc.b	$05,$F8,$25,$F4,$F8,$FF
 		nop
+	Map_Ring3:
 		dc.b	$01,$F8,$25,$B4,$FC,$FF
 		nop
+	Map_Ring4:
 		dc.b	$05,$F8,$2D,$F4,$F8,$FF
 ; ---------------------------------------------------------------------------
 
-locret_E352:				; CODE XREF: ROM:0000D250j
-		rts
-; ---------------------------------------------------------------------------
-
-locret_E354:				; CODE XREF: ROM:0000D254j
-		rts
-; ---------------------------------------------------------------------------
-
+Def_Rings:
+		dc.w	Map_Rings-Def_Rings
+		dc.w	Map_Ring2-Def_Rings
+		dc.w	Map_Ring3-Def_Rings
+		dc.w	Map_Ring4-Def_Rings
+		
+Ani_Rings:
+	dc.w	$1000,$1001,$1002,$1003,$8080
