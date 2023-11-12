@@ -13347,8 +13347,10 @@ GTO_UpdateTime:						; Offset: 0000EC62
 		subi.b	#100,d0					;	subtract decimal 100 from d0
 		cmpi.w	#99,d0					;	d0 is checked if it is below 99...
 		bhi.s	@loop2					;	and if it isn't, loop this subtraction code again
-		sub.b	#10,$FFFFA002
 		move.b	d1,$FFFFA001
+
+		mulu.w	#10,d1
+		sub.b	d1,$FFFFA002
 
 	@cont:
 		move.w	$24(a6),d0				; reload time into d0
