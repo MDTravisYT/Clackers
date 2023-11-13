@@ -926,6 +926,7 @@ ObjSonic_Jump:				; CODE XREF: ROM:0000A518p
 		btst	#3,$25(a6)
 		beq.s	loc_AAD4
 		neg.w	d0
+		neg.w	d1
 
 loc_AAD4:				; CODE XREF: ObjSonic_Jump+2Cj
 		move.w	$2C(a6),d2

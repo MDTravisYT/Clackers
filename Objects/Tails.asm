@@ -896,6 +896,7 @@ ObjTails_Jump:				; CODE XREF: ROM:0000ADCAp
 		btst	#3,$25(a6)
 		beq.s	loc_B3B8
 		neg.w	d0
+		neg.w	d1
 
 loc_B3B8:				; CODE XREF: ObjTails_Jump+2Cj
 		move.w	$2C(a6),d2
