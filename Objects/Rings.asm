@@ -57,6 +57,7 @@ RingsRout3:
 		bsr.w	AnimateSprite				; animate the spring
 		subq.w	#1,obWidth(a6)
 		bne.s	RingsRout7
+		clr.w	obFlags(a6)
 		jmp	DeleteObject
 	
 RingsRout5:			
