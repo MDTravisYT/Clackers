@@ -64,8 +64,7 @@ RingsRout5:
 	;	lea	(Ani_Rings).l,a1			; load spring's Animation script
 	;	bsr.w	AnimateSprite				; animate the spring
 		move.w	($FFFFF000).l,d0
-		andi.w	#$C,d0
-		add.w	d0,d0
+		andi.w	#$18,d0
 		lea		Map_Rings,a0
 		lea	(a0,d0.w),a0
 		move.l	a0,obMap(a6)
