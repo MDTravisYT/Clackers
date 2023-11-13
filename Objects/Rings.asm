@@ -9,8 +9,10 @@ Obj_Rings:				; CODE XREF: ROM:0000D280j
 		move.b	#$8,obHeight(a6)
 
 RingsRout1:		
-		movea.w	($FFFFD862).w,a0					;	load Sonic's object RAM to a0
 		move.w	obFlags(a6),d0                      ; load flags to d0
+		btst	#0,d0                           ; was the touched flag set?
+		bne.s	RingsRout3                 ; if so, branch
+		movea.w	($FFFFD862).w,a0					;	load Sonic's object RAM to a0
 		move.w	#$F,d0
 	;	jsr	(SolidObject).l
 		beq.s	RingsRout5
@@ -44,16 +46,24 @@ RingsRout1:
 		blo.s	RingsRout5
 		
 RingsRout2:	
+		move.l	#Map_Monitor,obMap(a6)
 		move.b	#$A6,d0
 		jsr		Play_Sound_2
 		add.b	#1,$FFFFA000
-		jsr	(DeleteObject).l
+		ori.w	#$01,obFlags(a6)	;	set touched flag
+		move.w	#$0020,obAnim(a6)
 		rts
+	
+RingsRout3:
+		subq.w	#1,obAnim(a6)
+		bne.s	RingsRout7
+		jmp	DeleteObject
 	
 RingsRout5:			
 		lea	(Def_Rings).l,a0
 		lea	(Ani_Rings).l,a1			; load spring's Animation script
 		bsr.w	AnimateSprite				; animate the spring
+RingsRout7:
 		bsr.w	SpriteScreenCheck
 		bcc.s	RingsRout6
 		bsr.w	DeleteSprite
