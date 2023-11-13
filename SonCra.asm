@@ -15929,12 +15929,12 @@ Objpos_TTZ:
 	ObjLayout	$00B0,	$0B78,	SpringYel_Up,    $FFFF
 	ObjLayout	$0034,	$06ED,	DiagRedSprngRU,  $FFFF
 	ObjLayout	$0400,	$0060,	Goal,			 $FFFF
-	ObjLayout	$0258, 	$0E18,	Ring,		 $FFFF
-	ObjLayout	$0240, 	$0E18,	Ring,		 $FFFF
-	ObjLayout	$0228, 	$0E18,	Ring,		 $FFFF
 	ObjLayout	$0160, 	$0E50,	Monitor,		 $FFFF
 	ObjLayout	$0180, 	$0E50,	Monitor,		 $FFFF
 	ObjLayout	$01A0, 	$0E50,	Monitor,		 $FFFF
+	
+	incbin	Uncompressed\Objpos_TTZ.bin	;	rings
+	
 	ObjLayout_End
 	even
 	
