@@ -100,14 +100,14 @@ loc_A356:				; CODE XREF: ROM:0000A33Aj
 
 loc_A36E:				; CODE XREF: ROM:0000A354j
 		move.w	#$18,obAnim(a6)
-		andi.b	#3,$28(a6)
+		andi.b	#3,obFrame(a6)
 		rts
 ; ---------------------------------------------------------------------------
 
 loc_A37C:				; CODE XREF: ROM:0000A352j
 					; ROM:0000A36Cj
 		move.w	#$16,obAnim(a6)
-		andi.b	#3,$28(a6)
+		andi.b	#3,obFrame(a6)
 		rts
 ; ---------------------------------------------------------------------------
 
@@ -129,7 +129,7 @@ loc_A3A6:				; CODE XREF: ROM:0000A38Ej
 		beq.s	locret_A3D0
 		tst.w	obAnim(a6)
 		beq.s	loc_A3B8
-		clr.w	$28(a6)
+		clr.w	obFrame(a6)
 
 loc_A3B8:				; CODE XREF: ROM:0000A3B2j
 		move.w	#0,obAnim(a6)
@@ -138,7 +138,7 @@ loc_A3B8:				; CODE XREF: ROM:0000A3B2j
 		move.w	#$14,obAnim(a6)
 
 loc_A3CA:				; CODE XREF: ROM:0000A3C2j
-		move.b	#0,$28(a6)
+		move.b	#0,obFrame(a6)
 
 locret_A3D0:				; CODE XREF: ROM:0000A3ACj
 		rts
@@ -148,7 +148,7 @@ loc_A3D2:				; CODE XREF: ROM:0000A2D0j
 		move.b	3(a5),d1
 		andi.b	#$C,d1
 		beq.s	loc_A3E0
-		clr.w	$28(a6)
+		clr.w	obFrame(a6)
 
 loc_A3E0:				; CODE XREF: ROM:0000A3DAj
 		move.w	$24(a6),d1
@@ -191,7 +191,7 @@ loc_A43A:				; CODE XREF: ROM:0000A436j
 		cmpi.w	#$400,d0
 		bcs.s	loc_A44A
 		moveq	#$A,d2
-		andi.w	#$1FF,$28(a6)
+		andi.w	#$1FF,obFrame(a6)
 		bra.s	loc_A45A
 ; ---------------------------------------------------------------------------
 
@@ -202,7 +202,7 @@ loc_A44A:				; CODE XREF: ROM:0000A43Ej
 		moveq	#$10,d0
 
 loc_A454:				; CODE XREF: ROM:0000A450j
-		add.w	d0,$28(a6)
+		add.w	d0,obFrame(a6)
 		moveq	#2,d2
 
 loc_A45A:				; CODE XREF: ROM:0000A448j
@@ -267,7 +267,7 @@ loc_A4F0:				; CODE XREF: ROM:0000A4DAj
 		add.w	$2C(a6),d0
 		move.w	d0,$2C(a6)
 		move.w	#$1A,obAnim(a6)
-		andi.b	#3,$28(a6)
+		andi.b	#3,obFrame(a6)
 		move.b	#$A4,d0
 		bsr.w	Play_Sound_2
 		rts
@@ -624,7 +624,7 @@ loc_A810:				; CODE XREF: ROM:0000A80Cj
 		cmpi.w	#$400,d0
 		bcs.s	loc_A820
 		moveq	#$26,d2	; '&'
-		andi.w	#$3FF,$28(a6)
+		andi.w	#$3FF,obFrame(a6)
 		bra.s	loc_A830
 ; ---------------------------------------------------------------------------
 
@@ -635,7 +635,7 @@ loc_A820:				; CODE XREF: ROM:0000A814j
 		moveq	#$10,d0
 
 loc_A82A:				; CODE XREF: ROM:0000A826j
-		add.w	d0,$28(a6)
+		add.w	d0,obFrame(a6)
 		moveq	#$1E,d2
 
 loc_A830:				; CODE XREF: ROM:0000A81Ej
@@ -699,7 +699,7 @@ loc_A8B6:				; CODE XREF: ROM:0000A8A4j
 loc_A8C6:				; CODE XREF: ROM:0000A8B0j
 		add.w	$2C(a6),d0
 		move.w	d0,$2C(a6)
-		andi.b	#3,$28(a6)
+		andi.b	#3,obFrame(a6)
 		rts
 ; ---------------------------------------------------------------------------
 
@@ -802,7 +802,7 @@ ObjSonic_Spindash:
 	@cont:
 		bclr	#4,$25(a6)
 		move.w	#$2E,obAnim(a6) ; '.'
-		addq.b	#1,$28(a6)
+		addq.b	#1,obFrame(a6)
 		move.b	#1,($FFFFFFFF)
 		tst.l	$2C(a6)
 		bne.s	loc_A9B2
@@ -917,7 +917,7 @@ ObjSonic_Jump:				; CODE XREF: ROM:0000A518p
 		andi.b	#$20,d0	; 'p'
 		beq.s	locret_AAF6
 		move.b	#4,7(a6)
-		clr.w	$28(a6)
+		clr.w	obFrame(a6)
 		bclr	#0,$25(a6)
 		move.b	obFlags(a6),d2
 		jsr	CalcSine

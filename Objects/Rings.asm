@@ -1,6 +1,6 @@
 Obj_Rings:				; CODE XREF: ROM:0000D280j
 		moveq	#7,d0
-		bclr	d0,$28(a6)
+		bclr	d0,obFrame(a6)
 		beq.s	RingsRout1
 		move.l	#Map_Rings,obMap(a6)
 		move.w	#$0000,obVRAM(a6)

@@ -8,4 +8,5 @@ obVRAM		=	$20
 obWidth		=	$22
 obHeight	=	$23
 obAnim		=	$26
+obFrame		=	$28
 obFlags		=	$2A
