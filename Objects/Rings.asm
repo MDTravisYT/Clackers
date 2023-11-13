@@ -20,10 +20,10 @@ RingsRout1:
 		move.w	obX(a6),d3						;	...and d3
 		move.w	obY(a6),d4						;	load object's Y position to d4...
 		move.w	obY(a6),d5						;	...and d5
-		sub.b	#8,	d3	;	X	LEFT
-		add.b	#8,	d2	;	X	RIGHT
-		sub.b	#8,	d5	;	Y	TOP
-		add.b	#8,	d4	;	Y	BOTTOM		
+		sub.b	#15,	d3	;	X	LEFT
+		add.b	#15,	d2	;	X	RIGHT
+		sub.b	#15,	d5	;	Y	TOP
+		add.b	#15,	d4	;	Y	BOTTOM		
 		
 		cmp.w	d0,	d3	;	compare player X to left of obj
 		blo.s	@chkRight
