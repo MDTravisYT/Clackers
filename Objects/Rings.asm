@@ -60,9 +60,19 @@ RingsRout3:
 		jmp	DeleteObject
 	
 RingsRout5:			
-		lea	(Def_Rings).l,a0
-		lea	(Ani_Rings).l,a1			; load spring's Animation script
-		bsr.w	AnimateSprite				; animate the spring
+	;	lea	(Def_Rings).l,a0
+	;	lea	(Ani_Rings).l,a1			; load spring's Animation script
+	;	bsr.w	AnimateSprite				; animate the spring
+		move.w	($FFFFF000).l,d0
+		andi.w	#$C,d0
+		add.w	d0,d0
+		lea		Map_Rings,a0
+		lea	(a0,d0.w),a0
+		move.l	a0,obMap(a6)
+	;	btst	#6,5(a6)
+	;	beq.s	loc_E32C
+	;	bclr	#7,5(a6)
+		rts
 RingsRout7:
 		bsr.w	SpriteScreenCheck
 		bcc.s	RingsRout6
