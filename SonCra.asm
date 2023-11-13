@@ -13464,7 +13464,7 @@ loc_EBC8:
 
 JumpToTitle:	
 		jsr		Pal_FadeBlack
-		move.w	#$0008,($FFFFD822).w			; set Screen/Game mode to title screen
+		move.w	#$0000,($FFFFD822).w			; set Screen/Game mode to sega
 		movea.l	($00000000).w,sp			; set stack pointer to location 00000000			; do...
 		jmp	MainProg_Loop				; jump to Main game array
 

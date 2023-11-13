@@ -5,6 +5,8 @@ Obj_Rings:				; CODE XREF: ROM:0000D280j
 		move.l	#Map_Rings,obMap(a6)
 		move.w	#$0000,obVRAM(a6)
 		move.w	#$8080,4(a6)
+		move.w	#$0020,obWidth(a6)
+		clr.w	obFlags(a6)
 
 RingsRout1:		
 		move.w	obFlags(a6),d0                      ; load flags to d0
@@ -72,11 +74,11 @@ RingsRout5:
 	;	btst	#6,5(a6)
 	;	beq.s	loc_E32C
 	;	bclr	#7,5(a6)
-		rts
+	;	rts
 RingsRout7:
 		bsr.w	SpriteScreenCheck
 		bcc.s	RingsRout6
-		bsr.w	DeleteSprite
+		jsr		DeleteSprite
 
 RingsRout6:				; CODE XREF: ROM:0000E6EEj
 		rts
