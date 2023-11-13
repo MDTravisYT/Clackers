@@ -5,8 +5,6 @@ Obj_Rings:				; CODE XREF: ROM:0000D280j
 		move.l	#Map_Rings,obMap(a6)
 		move.w	#$0000,obVRAM(a6)
 		move.w	#$8080,4(a6)
-		move.b	#$8,obWidth(a6)
-		move.b	#$8,obHeight(a6)
 
 RingsRout1:		
 		move.w	obFlags(a6),d0                      ; load flags to d0
@@ -46,16 +44,18 @@ RingsRout1:
 		blo.s	RingsRout5
 		
 RingsRout2:	
-		move.l	#Map_Monitor,obMap(a6)
 		move.b	#$A6,d0
 		jsr		Play_Sound_2
 		add.b	#1,$FFFFA000
 		ori.w	#$01,obFlags(a6)	;	set touched flag
-		move.w	#$0020,obAnim(a6)
+		move.w	#$0020,obWidth(a6)
 		rts
 	
 RingsRout3:
-		subq.w	#1,obAnim(a6)
+		lea	(Def_Rings).l,a0
+		lea	(Ani_RingsCollect).l,a1			; load spring's Animation script
+		bsr.w	AnimateSprite				; animate the spring
+		subq.w	#1,obWidth(a6)
 		bne.s	RingsRout7
 		jmp	DeleteObject
 	
