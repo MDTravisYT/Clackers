@@ -57,6 +57,12 @@ Map_Rings:
 		nop
 	Map_Ring6:
 		dc.b	$05,$F8,$2D,$F8,$F8,$FF
+		nop
+	Map_Ring7:
+		dc.b	$05,$F8,$3D,$F8,$F8,$FF
+		nop
+	Map_Ring8:
+		dc.b	$05,$F8,$3D,$F8,$F8,$FF
 ; ---------------------------------------------------------------------------
 
 Def_Rings:
@@ -66,9 +72,11 @@ Def_Rings:
 		dc.w	Map_Ring4-Def_Rings
 		dc.w	Map_Ring5-Def_Rings
 		dc.w	Map_Ring6-Def_Rings
+		dc.w	Map_Ring7-Def_Rings
+		dc.w	Map_Ring8-Def_Rings
 		
 Ani_Rings:
 	dc.w	$0800,$0801,$0802,$0803,$8080
 	
 Ani_RingsCollect:
-	dc.w	$0304,$0305,$0304,$0305,$8080
+	dc.w	$0504,$0505,$0506,$0507,$8080
