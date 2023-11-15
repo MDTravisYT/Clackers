@@ -15,7 +15,7 @@
 ; Includes
 ; ---------------------------------------------------------------------------
 
-Combi	=	0
+Combi	=	1
 
 		include	"Debugger.asm"
 		include	"SonCraMacro.asm"
@@ -8906,7 +8906,7 @@ loc_A1BC:				; CODE XREF: ROM:0000A196j
 ; ---------------------------------------------------------------------------
 off_A1CE:	dc.l	SonicMain			; something to do with stopping reflexes
 		dc.l	TailsMain
-		dc.l	TailsMain
+		dc.l	SonicMain
 		dc.l	locret_B416
 		dc.l	locret_B418
 		dc.l	locret_B41A
@@ -11356,7 +11356,7 @@ loc_C832:				; CODE XREF: ROM:0000C826j
 ; ---------------------------------------------------------------------------
 off_C84A:	dc.l	ANI_Sonic
 		dc.l	ANI_Tails
-		dc.l	ANI_Sonic
+		dc.l	ANI_Ray
 		dc.l	0
 		dc.l	0
 		dc.l	0
@@ -11364,7 +11364,7 @@ off_C84A:	dc.l	ANI_Sonic
 		dc.l	0
 		dc.l	PLCMAP_Sonic_MainIndex
 		dc.l	PLCMAP_Tails_MainIndex
-		dc.l	PLCMAP_Sonic2_MainIndex
+		dc.l	PLCMAP_Ray_MainIndex
 		dc.l	0
 		dc.l	0
 		dc.l	0
@@ -11372,7 +11372,7 @@ off_C84A:	dc.l	ANI_Sonic
 		dc.l	0
 		dc.l	PLC_Sonic
 		dc.l	PLC_Tails
-		dc.l	PLC_Sonic
+		dc.l	PLC_Ray
 		dc.l	0
 		dc.l	0
 		dc.l	0
@@ -11380,7 +11380,7 @@ off_C84A:	dc.l	ANI_Sonic
 		dc.l	0
 		dc.l	MAP_Sonic
 		dc.l	MAP_Tails
-		dc.l	MAP_Sonic2
+		dc.l	MAP_Ray
 		dc.l	0
 		dc.l	0
 		dc.l	0
@@ -16202,8 +16202,8 @@ ANI_Sonic:
 PLCMAP_Sonic_MainIndex:
 	include	"PLCMAPANI\PLCMAP_IndxBlck_Sonic.asm"
 ; ---------------------------------------------------------------------------
-PLCMAP_Sonic2_MainIndex:
-	include	"PLCMAPANI\PLCMAP_IndxBlck_Sonic2.asm"
+PLCMAP_Ray_MainIndex:
+	include	"PLCMAPANI\PLCMAP_IndxBlck_Ray.asm"
 ; ---------------------------------------------------------------------------
 PLC_Sonic:
 	include	"PLCMAPANI\PLC_Sonic.asm"
@@ -16211,8 +16211,12 @@ PLC_Sonic:
 MAP_Sonic:
 	include	"PLCMAPANI\MAP_Sonic.asm"
 ; ---------------------------------------------------------------------------
-MAP_Sonic2:
-	include	"PLCMAPANI\MAP_Sonic2.asm"
+MAP_Ray:
+	include	"PLCMAPANI\MAP_Ray.asm"
+PLC_Ray:
+	include	"PLCMAPANI\PLC_Ray.asm"
+ANI_Ray:
+	include	"PLCMAPANI\ANI_Ray.asm"
 ; ---------------------------------------------------------------------------
 ; ===========================================================================
 ; ---------------------------------------------------------------------------
@@ -16339,6 +16343,9 @@ COL_FLRAPrimary:
 COL_FLRASecondary:
 	incbin	 Collision\ColFLRASecondary.bin			; Secondary Collisions for TTZ
 	even
+	
+ARTUNC_Ray:	incbin	Uncompressed\ArtuncRay.bin
+		even
 	
 ; ==============================================================
 ; --------------------------------------------------------------
