@@ -15,7 +15,7 @@
 ; Includes
 ; ---------------------------------------------------------------------------
 
-Combi	=	0
+Combi	=	1
 
 		include	"Debugger.asm"
 		include	"SonCraMacro.asm"
@@ -10150,7 +10150,7 @@ Levels_LoadPlayersTail:					; Offset: 0000BE72
 	
 	endif
 		
-		move.w	#$0008,($FFFFD868).w			; set Player 2's character as Tails
+		move.w	#$0004,($FFFFD868).w			; set Player 2's character as Tails
 		jmp		LLLLLCont
 
 ; ---------------------------------------------------------------------------
@@ -15132,6 +15132,17 @@ SIR_RB_NoFinish:					; Offset: 0000F8B0
 		mulu.w	#2,d0
 		add.w	d0,a1
 		move.l	#$43B00003,d0				; set V-Ram location to dump to
+		moveq	#$01,d1					; set number of columns to dump (maximum 16)
+		moveq	#$01,d2					; set number of rows to dump
+		move.w	#$0000,d3				; set to use palette line 0 (and to map behind object plane)
+		jsr	MapScreen				; map to screen planes
+		
+	;	set partner icon
+		lea	TT_PlayerIcon(pc),a1			; load location of "OPTION" letter to a1
+		move.w	($FFFFD868).w,d0			; load current partner to d0
+		mulu.w	#2,d0
+		add.w	d0,a1
+		move.l	#$43B40003,d0				; set V-Ram location to dump to
 		moveq	#$01,d1					; set number of columns to dump (maximum 16)
 		moveq	#$01,d2					; set number of rows to dump
 		move.w	#$0000,d3				; set to use palette line 0 (and to map behind object plane)
