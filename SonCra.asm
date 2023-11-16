@@ -15,7 +15,7 @@
 ; Includes
 ; ---------------------------------------------------------------------------
 
-Combi	=	1
+Combi	=	0
 
 		include	"Debugger.asm"
 		include	"SonCraMacro.asm"
@@ -15124,6 +15124,18 @@ SIR_RB_NoFinish:					; Offset: 0000F8B0
 		moveq	#$01,d2					; set number of rows to dump
 		move.w	#$0000,d3				; set to use palette line 0 (and to map behind object plane)
 		jsr	MapScreen				; map to screen planes
+		
+		
+	;	set player icon
+		lea	TT_PlayerIcon(pc),a1			; load location of "OPTION" letter to a1
+		move.w	($FFFFD866).w,d0			; load current character to d0
+		mulu.w	#2,d0
+		add.w	d0,a1
+		move.l	#$43B00003,d0				; set V-Ram location to dump to
+		moveq	#$01,d1					; set number of columns to dump (maximum 16)
+		moveq	#$01,d2					; set number of rows to dump
+		move.w	#$0000,d3				; set to use palette line 0 (and to map behind object plane)
+		jsr	MapScreen				; map to screen planes
 		rts						; return
 		
 TT_Text:						; Offset: 00009440
@@ -15160,6 +15172,21 @@ TT_Text:						; Offset: 00009440
 		dc.w	$002F
 		dc.w	$0030
 		even
+		
+TT_PlayerIcon:
+		dc.w	$04E2
+		dc.w	$04E4
+		dc.w	$04E3
+		dc.w	$04E5
+		dc.w	$04E6
+		dc.w	$04E8
+		dc.w	$04E7
+		dc.w	$04E9
+		dc.w	$04EA
+		dc.w	$04EC
+		dc.w	$04EB
+		dc.w	$04ED
+		
 		rts						; return
 
 ; ===========================================================================
