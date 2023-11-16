@@ -23,4 +23,14 @@ copyTilemap:	macro source,loc,width,height
 		bsr.w	MapScreenSingle
 		endm
 
+ObjLayout:	macro	x,	y,	o,	s
+		dc.w	x,	y
+		dc.b	$00,	o
+		dc.w	s
+		endm
+
+ObjLayout_End:	macro	
+		dc.w	$FFFF
+		endm
+
 ; ===========================================================================

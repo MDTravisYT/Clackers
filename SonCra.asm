@@ -10150,7 +10150,7 @@ Levels_LoadPlayersTail:					; Offset: 0000BE72
 	
 	endif
 		
-		move.w	#$0004,($FFFFD868).w			; set Player 2's character as Tails
+		move.w	#$0008,($FFFFD868).w			; set Player 2's character as Tails
 		jmp		LLLLLCont
 
 ; ---------------------------------------------------------------------------
@@ -15888,14 +15888,6 @@ Swapper2			=	$78
 ;			note: some pathswappers crash on TTZ (Not sure why though)
 ; ---------------------------------------------------------------------------
 ; ===========================================================================
-ObjLayout:	macro	x,	y,	o,	s
-		dc.w	x,	y
-		dc.b	$00,	o
-		dc.w	s
-		endm
-ObjLayout_End:	macro	
-		dc.w	$FFFF
-		endm
 ; --------------------------------------------------------------------------
 Objpos_SSZ:
 	incbin	Uncompressed\Objpos_SSZ.bin			; Speed Slider Zone's Object Position
